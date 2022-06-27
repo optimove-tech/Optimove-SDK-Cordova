@@ -27,24 +27,69 @@ function onDeviceReady() {
 
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
+    
+    optimobileswift.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd")
+    
+    alert('device ready')
+}
 
-    optimobileswift.initialize()
+document.getElementById("Initialize").addEventListener("click", initialize);
+
+function initialize() {
+    optimobileswift.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd")
 }
 
 document.getElementById("Set Install ID").addEventListener("click", setInstallID);
 
 function setInstallID() {
-    optimobileswift.setInstallId("123456")
+    optimobileswift.setInstallId("Cordova_Install_ID")
 }
 
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
 function campaignsIsEnabled() {
-    optimobileswift.pushCampaignsIsEnabled()
+    optimobileswift.pushCampaignsIsEnabled(true)
 }
+
 document.getElementById("get Inbox Items").addEventListener("click", getInbox);
 
 function getInbox() {
     optimobileswift.getInboxItems()
+}
+
+document.getElementById("Report Event").addEventListener("click", reportEvent);
+
+function reportEvent() {
+    optimobileswift.reportEvent("Event Cordova")
+}
+
+document.getElementById("Report Screen Visit").addEventListener("click", reportScreenVisit);
+
+function reportScreenVisit() {
+    optimobileswift.reportScreenVisit("screenTitle", "screenCategory")
+}
+
+document.getElementById("Register User").addEventListener("click", registerUser);
+
+function registerUser() {
+    optimobileswift.registerUser("user id", "email@gmail.com")
+}
+
+document.getElementById("Set User Id").addEventListener("click", setUserId);
+
+function setUserId() {
+    optimobileswift.setUserId("user id")
+}
+
+document.getElementById("Set User Email").addEventListener("click", setUserEmail);
+
+function setUserEmail() {
+    optimobileswift.setUserEmail("email@gmail.com")
+}
+
+document.getElementById("Get Visitor ID").addEventListener("click", getVisitorID);
+
+function getVisitorID() {
+    optimobileswift.getVisitorID()
 }
 
