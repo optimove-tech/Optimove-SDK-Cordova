@@ -42,7 +42,8 @@ function initialize() {
 document.getElementById("Set Install ID").addEventListener("click", setInstallID);
 
 function setInstallID() {
-    optimobileswift.setInstallId("Cordova_Install_ID")
+    optimobileswift.setInstallId(document.getElementById("textareainstallid").value)
+    document.getElementById("textareainstallid").value = ""
 }
 
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
@@ -60,7 +61,8 @@ function getInbox() {
 document.getElementById("Report Event").addEventListener("click", reportEvent);
 
 function reportEvent() {
-    optimobileswift.reportEvent("Event Cordova")
+    optimobileswift.reportEvent( document.getElementById("textareaevent").value)
+    document.getElementById("textareaevent").value = ""
 }
 
 document.getElementById("Report Screen Visit").addEventListener("click", reportScreenVisit);
@@ -72,19 +74,24 @@ function reportScreenVisit() {
 document.getElementById("Register User").addEventListener("click", registerUser);
 
 function registerUser() {
-    optimobileswift.registerUser("user id", "email@gmail.com")
+    optimobileswift.registerUser(document.getElementById("textareauserid").value,  document.getElementById("textareauseremail").value)
+    
+    document.getElementById("textareauserid").value = ""
+    document.getElementById("textareauseremail").value = ""
 }
 
 document.getElementById("Set User Id").addEventListener("click", setUserId);
 
 function setUserId() {
-    optimobileswift.setUserId("user id")
+    optimobileswift.setUserId(document.getElementById("textareauserid").value)
+    document.getElementById("textareauserid").value = ""
 }
 
 document.getElementById("Set User Email").addEventListener("click", setUserEmail);
 
 function setUserEmail() {
-    optimobileswift.setUserEmail("email@gmail.com")
+    optimobileswift.setUserEmail(document.getElementById("textareauseremail").value)
+    document.getElementById("textareauseremail").value = ""
 }
 
 document.getElementById("Get Visitor ID").addEventListener("click", getVisitorID);

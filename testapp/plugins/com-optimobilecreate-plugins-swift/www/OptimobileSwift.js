@@ -18,7 +18,7 @@ cordova.define("com-optimobilecreate-plugins-swift.OptimobileSwift", function(re
   };
   
   exports.setInstallIdjs = function(arg0, arg1, success, error) {
-    if (arg0 && typeof(arg0) === 'string' && arg0.length > 0) {
+      if (arg0 && typeof(arg0) === 'string' && arg0.length > 0 && arg1 && typeof(arg1) === 'string' && arg1.length > 0) {
         success(arg0);
       } else {
         error('Empty message!');
@@ -26,7 +26,7 @@ cordova.define("com-optimobilecreate-plugins-swift.OptimobileSwift", function(re
     };
   
     exports.initializejs = function(arg0, success, error) {
-      if (arg0 && typeof(arg0) === 'string' && arg0.length > 0 && arg1 && typeof(arg1) === 'string' && arg1.length > 0) {
+      if (arg0 && typeof(arg0) === 'string' && arg0.length > 0) {
         success(arg0);
       } else {
         error('Empty message!');
