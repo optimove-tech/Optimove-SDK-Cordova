@@ -46,9 +46,12 @@ import OptimoveSDK
         Optimove.shared.setUserId(command.arguments.first as! String)
     }
     
-    @objc(getVisitorID)
-    func getVisitorID() -> String? {
-        return Optimove.getVisitorID()
+    @objc(getVisitorID:)
+    func getVisitorID(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run {
+            let pluginResult = CDVPluginResult(status: .ok, messageAs: Optimove.getVisitorID())
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
     }
     
     @objc(setUserEmail:)
