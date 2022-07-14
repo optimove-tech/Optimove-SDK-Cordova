@@ -12,8 +12,8 @@ import OptimoveSDK
         Optimove.shared.setUserId(command.arguments[0] as? String ?? "")
     }
     
-    @objc(pushCampaignsIsEnabled:)
-    func pushCampaignsIsEnabled(command: CDVInvokedUrlCommand) {
+    @objc(updateConsent:)
+    func updateConsent(command: CDVInvokedUrlCommand) {
         OptimoveInApp.updateConsent(forUser: command.arguments[0] as? Bool ?? false)
     }
     

@@ -1,1 +1,0 @@
-# Optimobile-SDK-iOS

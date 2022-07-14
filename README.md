@@ -1,1 +1,0 @@
-# Optimove-SDK-Cordova

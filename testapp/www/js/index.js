@@ -49,7 +49,7 @@ function setInstallID() {
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
 function campaignsIsEnabled() {
-    optimobileswift.pushCampaignsIsEnabled(true)
+    optimobileswift.updateConsent(true)
 }
 
 document.getElementById("get Inbox Items").addEventListener("click", getInbox);
