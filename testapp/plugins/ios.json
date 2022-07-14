@@ -1,0 +1,18 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "com.optimobilecreate.testapp"
+    },
+    "com-optimobilecreate-plugins-swift": {
+      "PACKAGE_NAME": "com.optimobilecreate.testapp"
+    }
+  },
+  "dependent_plugins": {}
+}
