@@ -1,5 +1,6 @@
 import OptimoveSDK
 @objc(Optimobile_Cordova) class OptimobileSwift : CDVPlugin {
+   
     @objc(initialize:)
     func initialize(command: CDVInvokedUrlCommand) {
         let args = command.arguments
