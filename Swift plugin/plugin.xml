@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="com-optimobilecreate-plugins-swift" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>OptimobileSwift</name>
+<plugin id="com-optimobilecreate-plugins" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>OptimobileSDKPlugin</name>
     <js-module name="Optimobile" src="www/optimobile-sdk-plugin.js">
         <clobbers target="optimobile" />
     </js-module>
@@ -20,5 +20,20 @@
                       <pod name="OptimoveSDK" spec="5.0.0" />
                   </pods>
               </podspec>
+    </platform>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="OptimobileSDKPlugin">
+                <param name="android-package" value="com.optimove.android.cordova.OptimobileSDKPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <provider android:authorities="${applicationId}.optimobileinitprovider" android:name="com.optimove.android.cordova.OptimobileInitProvider" android:exported="false" />
+            
+        </config-file>
+        <source-file src="src/android/OptimobileSDKPlugin.java" target-dir="src/com/optimove/android/cordova/OptimobileSDKPlugin" />
+        <source-file src="src/android/com/optimove/android/cordova/OptimobileInitProvider.java" target-dir="src/com/optimove/android/cordova/OptimobileInitProvider" />
+        <framework src="src/android/optimove.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
