@@ -5,20 +5,20 @@
         <clobbers target="optimobile" />
     </js-module>
     <platform name="ios">
-      <config-file target="config.xml" parent="/*">
-        <feature name="OptimobileSwift">
-          <param name="ios-package" value="Optimobile" />
-        </feature>
-      </config-file>
-      <source-file src="src/Optimobile.swift" />
-      <podspec>
-                  <config>
-                      <source url="https://github.com/CocoaPods/Specs.git"/>
-                  </config>
-                  <pods>
-                      <pod name="OptimoveCore" spec="5.0.0" />
-                      <pod name="OptimoveSDK" spec="5.0.0" />
-                  </pods>
-              </podspec>
+        <config-file target="config.xml" parent="/*">
+            <feature name="OptimobileSwift">
+                <param name="ios-package" value="Optimobile" />
+            </feature>
+        </config-file>
+        <source-file src="src/Optimobile.swift" />
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git"/>
+            </config>
+            <pods>
+                <pod name="OptimoveCore" spec="5.0.0" />
+                <pod name="OptimoveSDK" spec="5.0.0" />
+            </pods>
+        </podspec>
     </platform>
 </plugin>

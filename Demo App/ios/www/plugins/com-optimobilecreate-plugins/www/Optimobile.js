@@ -1,5 +1,5 @@
 
-cordova.define("com-optimobilecreate-plugins.OptimobileSwift", function(require, exports, module) {
+cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, exports, module) {
     var exec = require('cordova/exec');
     
     exports.setInstallId = function (arg0, success, error) {
