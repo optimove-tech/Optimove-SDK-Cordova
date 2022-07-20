@@ -1,9 +1,9 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
   module.exports = [
     {
-      "id": "com-optimobilecreate-plugins-swift.OptimobileSwift",
-      "file": "plugins/com-optimobilecreate-plugins-swift/www/OptimobileSwift.js",
-      "pluginId": "com-optimobilecreate-plugins-swift",
+      "id": "com-optimobilecreate-plugins.OptimobileSwift",
+      "file": "plugins/com-optimobilecreate-plugins/www/OptimobileSwift.js",
+      "pluginId": "com-optimobilecreate-plugins",
       "clobbers": [
         "optimobileswift"
       ]
