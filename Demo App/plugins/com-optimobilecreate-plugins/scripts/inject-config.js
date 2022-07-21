@@ -91,7 +91,6 @@ function isValidConfig(config) {
         console.error('Optimove: optimove.json not a valid JSON object');
         return false;
     }
-
     if (
         isEmpty(config.optimove_credentials) ||
         isEmpty(config.optimove_mobile_credentials) ||

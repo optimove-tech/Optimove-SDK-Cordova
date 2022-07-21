@@ -4,7 +4,7 @@
     <js-module name="Optimobile" src="www/optimobile-sdk-plugin.js">
         <clobbers target="optimobile" />
     </js-module>
-    <hook type="before_prepare" src="scripts/inject-config.js" />
+     <hook type="before_prepare" src="scripts/inject-config.js" />
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="OptimobileSDKPlugin">
@@ -33,8 +33,8 @@
             <provider android:authorities="${applicationId}.optimobileinitprovider" android:name="com.optimove.android.cordova.OptimobileInitProvider" android:exported="false" />
             
         </config-file>
-        <source-file src="src/android/OptimobileSDKPlugin.java" target-dir="src/com/optimove/android/cordova/OptimobileSDKPlugin" />
-        <source-file src="src/android/OptimobileInitProvider.java" target-dir="src/com/optimove/android/cordova/OptimobileInitProvider" />
+        <source-file src="src/android/OptimobileSDKPlugin.java" target-dir="src/com/optimove/android/cordova" />
+        <source-file src="src/android/OptimobileInitProvider.java" target-dir="src/com/optimove/android/cordova" />
         <framework src="src/android/optimove.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
