@@ -11,6 +11,10 @@
             {
               "xml": "<feature name=\"OptimobileSwift\"><param name=\"ios-package\" value=\"OptimobileSwift\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"OptimobileSwift\"><param name=\"ios-package\" value=\"Optimobile\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -23,6 +27,9 @@
     },
     "com-optimobilecreate-plugins-swift": {
       "PACKAGE_NAME": "com.optimobilecreate.testapp"
+    },
+    "com-optimobilecreate-plugins": {
+      "PACKAGE_NAME": "com.optimobilecreate.testapp"
     }
   },
   "dependent_plugins": {},
@@ -34,10 +41,19 @@
       "clobbers": [
         "optimobileswift"
       ]
+    },
+    {
+      "id": "com-optimobilecreate-plugins.Optimobile",
+      "file": "plugins/com-optimobilecreate-plugins/www/optimobile-sdk-plugin.js",
+      "pluginId": "com-optimobilecreate-plugins",
+      "clobbers": [
+        "optimobile"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-add-swift-support": "2.0.2",
-    "com-optimobilecreate-plugins-swift": "0.0.1"
+    "com-optimobilecreate-plugins-swift": "0.0.1",
+    "com-optimobilecreate-plugins": "0.0.1"
   }
 }
