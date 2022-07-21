@@ -4,7 +4,7 @@
     <js-module name="Optimobile" src="www/optimobile-sdk-plugin.js">
         <clobbers target="optimobile" />
     </js-module>
-   
+    <hook type="before_prepare" src="scripts/inject-config.js" />
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="OptimobileSDKPlugin">
