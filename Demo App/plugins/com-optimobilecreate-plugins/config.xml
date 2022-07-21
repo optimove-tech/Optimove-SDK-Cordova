@@ -8,5 +8,8 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <feature name="Optimobile"></feature>
+    <feature name="OptimobileSDKPlugin">
+    <param name="android-package" value="com.optimove.android.cordova"/>
+    <param name="onload" value="true"/>
+    </feature>
 </widget>

@@ -3,45 +3,45 @@ cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, expo
     var exec = require('cordova/exec');
     
     exports.setInstallId = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'setInstallId', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'setInstallId', [arg0]);
     };
     
     exports.initialize = function (arg0, arg1, success, error) {
-        exec(success, error, 'OptimobileSwift', 'initialize', [arg0, arg1]);
+        exec(success, error, 'OptimobileSDKPlugin', 'initialize', [arg0, arg1]);
     };
     
     exports.updateConsent = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'updateConsent', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'updateConsent', [arg0]);
     };
     
     exports.reportEvent = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'reportEvent', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'reportEvent', [arg0]);
     };
     
     exports.reportScreenVisit = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'reportScreenVisit', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'reportScreenVisit', [arg0]);
     };
     
     exports.setUserId = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'setUserId', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'setUserId', [arg0]);
     };
     
     exports.registerUser = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'registerUser', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'registerUser', [arg0]);
     };
     
     exports.getVisitorID = function() {
         return new Promise(function (resolve, reject){
-            exec(resolve, reject, 'OptimobileSwift', 'getVisitorID');
+            exec(resolve, reject, 'OptimobileSDKPlugin', 'getVisitorID');
         })
     };
     
     exports.setUserEmail = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'setUserEmail', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'setUserEmail', [arg0]);
     };
     
     exports.getInboxItems = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSwift', 'getInboxItems', [arg0]);
+        exec(success, error, 'OptimobileSDKPlugin', 'getInboxItems', [arg0]);
     };
 });
 

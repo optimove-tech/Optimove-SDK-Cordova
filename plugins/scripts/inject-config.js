@@ -76,7 +76,6 @@ function prepareAndroid(context, optimoveConifg) {
 }
 module.exports = function injectOptimoveConfig(context) {
     const optimoveConfig = readOptimoveSettings(context);
-
     if (!optimoveConfig) {
         return;
     }

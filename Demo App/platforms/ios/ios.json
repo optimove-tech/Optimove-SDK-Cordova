@@ -13,7 +13,7 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"OptimobileSwift\"><param name=\"ios-package\" value=\"Optimobile\" /></feature>",
+              "xml": "<feature name=\"OptimobileSDKPlugin\"><param name=\"ios-package\" value=\"Optimobile\" /></feature>",
               "count": 1
             }
           ]

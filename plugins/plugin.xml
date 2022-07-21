@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="com-optimobilecreate-plugins" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="com-optimobilecreate-plugins" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>OptimobileSDKPlugin</name>
     <js-module name="Optimobile" src="www/optimobile-sdk-plugin.js">
         <clobbers target="optimobile" />
     </js-module>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="OptimobileSwift">
+            <feature name="OptimobileSDKPlugin">
                 <param name="ios-package" value="Optimobile" />
             </feature>
         </config-file>
-        <source-file src="src/ios/Optimobile.swift" />
+        <source-file src="src/ios/OptimobileSDKPlugin.swift" />
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git"/>

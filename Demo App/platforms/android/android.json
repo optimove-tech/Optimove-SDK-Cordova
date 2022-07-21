@@ -28,10 +28,10 @@
     }
   },
   "installed_plugins": {
-    "com-optimobilecreate-plugins": {
+    "cordova-plugin-add-swift-support": {
       "PACKAGE_NAME": "com.Optimobile.Cordova"
     },
-    "cordova-plugin-add-swift-support": {
+    "com-optimobilecreate-plugins": {
       "PACKAGE_NAME": "com.Optimobile.Cordova"
     }
   },
@@ -47,7 +47,7 @@
     }
   ],
   "plugin_metadata": {
-    "com-optimobilecreate-plugins": "0.0.1",
-    "cordova-plugin-add-swift-support": "2.0.2"
+    "cordova-plugin-add-swift-support": "2.0.2",
+    "com-optimobilecreate-plugins": "0.0.1"
   }
 }
