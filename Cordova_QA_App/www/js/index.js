@@ -24,20 +24,19 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-    const Optimobile = require('../../plugins/com-optimobilecreate-plugins/www/Optimobile')
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
     
-  //  Optimobile.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd")
+   Optimobile.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd")
     
     alert('device ready')
 }
 
 document.getElementById("Initialize").addEventListener("click", initialize);
 
-/*function initialize() {
+function initialize() {
     Optimobile.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd")
-}*/
+}
 
 document.getElementById("Set Install ID").addEventListener("click", setInstallID);
 
@@ -74,19 +73,24 @@ function reportScreenVisit() {
 document.getElementById("Register User").addEventListener("click", registerUser);
 
 function registerUser() {
-    Optimobile.registerUser(document.getElementById("textareauserid").value,  document.getElementById("textareauseremail").value)
+    Optimobile.registerUser(document.getElementById("text-area-user-id").value,  document.getElementById("textareauseremail").value)
     
-    document.getElementById("textareauserid").value = "";
+    document.getElementById("text-area-user-id").value = "";
     document.getElementById("textareauseremail").value = "";
 }
 
-document.getElementById("Set User Id").addEventListener("click", setUserId);
 
 function setUserId() {
-    alert("set user id!!!");
-    Optimobile.setUserId(document.getElementById("textareauserid").value);
-    document.getElementById("textareauserid").value = "";
+    window.setUserId(document.getElementById("text-area-user-id").value,(success)=>{
+        console.log(success);
+    },(error) => {
+        console.log(error);
+    });
+    document.getElementById("text-area-user-id").value = "";
 }
+
+document.getElementById("set-user-id-button").addEventListener("click", setUserId);
+
 
 document.getElementById("Set User Email").addEventListener("click", setUserEmail);
 
