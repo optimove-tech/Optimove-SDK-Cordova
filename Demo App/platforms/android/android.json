@@ -7,22 +7,12 @@
     "files": {
       "res/xml/config.xml": {
         "parents": {
-          "/*": [
-            {
-              "xml": "<feature name=\"OptimobileSDKPlugin\"><param name=\"android-package\" value=\"com.optimove.android.cordova.OptimobileSDKPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            }
-          ]
+          "/*": []
         }
       },
       "AndroidManifest.xml": {
         "parents": {
-          "/manifest/application": [
-            {
-              "xml": "<provider android:authorities=\"${applicationId}.optimobileinitprovider\" android:exported=\"false\" android:name=\"com.optimove.android.cordova.OptimobileInitProvider\" />",
-              "count": 1
-            }
-          ]
+          "/manifest/application": []
         }
       }
     }
@@ -30,24 +20,11 @@
   "installed_plugins": {
     "cordova-plugin-add-swift-support": {
       "PACKAGE_NAME": "com.Optimobile.Cordova"
-    },
-    "com-optimobilecreate-plugins": {
-      "PACKAGE_NAME": "com.Optimobile.Cordova"
     }
   },
   "dependent_plugins": {},
-  "modules": [
-    {
-      "id": "com-optimobilecreate-plugins.Optimobile",
-      "file": "plugins/com-optimobilecreate-plugins/www/optimobile-sdk-plugin.js",
-      "pluginId": "com-optimobilecreate-plugins",
-      "clobbers": [
-        "optimobile"
-      ]
-    }
-  ],
+  "modules": [],
   "plugin_metadata": {
-    "cordova-plugin-add-swift-support": "2.0.2",
-    "com-optimobilecreate-plugins": "1.0.0"
+    "cordova-plugin-add-swift-support": "2.0.2"
   }
 }

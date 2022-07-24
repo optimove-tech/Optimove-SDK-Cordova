@@ -21,6 +21,12 @@ public class OptimobileSDKPlugin extends CordovaPlugin {
     }
 
     private void setUserId(String userId, CallbackContext callbackContext) {
-      Optimove.getInstance().setUserId(userId);
+      try{
+        Optimove.getInstance().setUserId(userId);
+      }catch(Exception e){
+         callbackContext.error(e.getMessage());   
+      }
+        
+      callbackContext.success("User Id has changed to" + userId);
     }
 }
