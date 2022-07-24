@@ -31,8 +31,6 @@ public class OptimobileInitProvider extends ContentProvider {
         assert optimove_mobile_credentials != null;
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimove_credentials,optimove_mobile_credentials);
         Optimove.initialize(app,configBuilder.build());
-        String s = Optimove.getInstance().getUserInfo().getUserId();
-        Optimove.getInstance().setUserId("theo");
         return false;
     }
 
