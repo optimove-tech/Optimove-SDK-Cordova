@@ -5,6 +5,9 @@ var exec = require('cordova/exec');
 window.setUserId = function(arg0, success, error){
     exec(success, error, 'OptimobileSDKPlugin', 'setUserId', [arg0]);
 }
+window.setUserEmail = function (arg0, success, error) {
+    exec(success, error, 'OptimobileSDKPlugin', 'setUserEmail', [arg0]);
+};
 cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, exports, module) {
     
     

@@ -38,12 +38,12 @@ function initialize() {
     Optimobile.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd")
 }
 
-document.getElementById("Set Install ID").addEventListener("click", setInstallID);
+//document.getElementById("set-install-id").addEventListener("click", setUserEmail);
 
-function setInstallID() {
-    Optimobile.setInstallId(document.getElementById("textareainstallid").value)
-    document.getElementById("textareainstallid").value = ""
-}
+/*function setUserEmail() {
+    window.setUserEmail(document.getElementById("text-area-install-id").value)
+    document.getElementById("text-area-install-id").value = ""
+}*/
 
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
@@ -92,11 +92,11 @@ function setUserId() {
 document.getElementById("set-user-id-button").addEventListener("click", setUserId);
 
 
-document.getElementById("Set User Email").addEventListener("click", setUserEmail);
+document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
 
 function setUserEmail() {
-    Optimobile.setUserEmail(document.getElementById("textareauseremail").value)
-    document.getElementById("textareauseremail").value = ""
+    window.setUserEmail(document.getElementById("text-area-user-email").value)
+    document.getElementById("text-area-user-email").value = ""
 }
 
 document.getElementById("Get Visitor ID").addEventListener("click", getVisitorID);
