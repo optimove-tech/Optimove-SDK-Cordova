@@ -12,11 +12,19 @@ public class OptimobileSDKPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("setUserId")) {
-            String userId = args.getString(0);
-            this.setUserId(userId, callbackContext);
-            return true;
-        }
+      switch(action){
+        case "setUserId":
+                          String userId = args.getString(0);
+                          this.setUserId(userId, callbackContext);
+                          return true;
+        case "setUserEmail":
+                            String email = args.getString(0);
+                            this.setUserEmail(email, callbackContext);
+                            return true;
+                           
+      }
+      
+      
         return false;
     }
 
@@ -27,6 +35,15 @@ public class OptimobileSDKPlugin extends CordovaPlugin {
          callbackContext.error(e.getMessage());   
       }
         
-      callbackContext.success("User Id has changed to" + userId);
+      callbackContext.success();
+ 
+    }
+    private void setUserEmail(String email, CallbackContext callbackContext){
+      try{
+        Optimove.getInstance().setUserEmail(email);
+      }catch(Exception e){
+         callbackContext.error(e.getMessage());   
+      }
+      callbackContext.success();
     }
 }
