@@ -12,6 +12,9 @@ window.setUserEmail = function (arg0, success, error) {
 window.initialize = function (arg0, arg1, success, error) {
     exec(success, error, 'OptimobileSDKPlugin', 'initialize', [arg0, arg1]);
 };
+window.reportEvent = function(arg0, success, error){
+    exec(success, error, 'OptimobileSDKPlugin', 'reportEvent', [arg0]);
+}
 cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, exports, module) {
     
     

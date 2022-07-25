@@ -21,11 +21,16 @@ public class OptimobileSDKPlugin extends CordovaPlugin {
                             String email = args.getString(0);
                             this.setUserEmail(email, callbackContext);
                             return true;
-                           
+        case "reportEvent":
+                            String eventName = args.getString(0);
+                            this.reportEvent(eventName, callbackContext);
+                            return true;                    
+
+                            
+        default:
+                        return false;                   
       }
       
-      
-        return false;
     }
 
     private void setUserId(String userId, CallbackContext callbackContext) {
@@ -42,8 +47,19 @@ public class OptimobileSDKPlugin extends CordovaPlugin {
       try{
         Optimove.getInstance().setUserEmail(email);
       }catch(Exception e){
-         callbackContext.error(e.getMessage());   
+         callbackContext.error(e.getMessage()); 
+         return;  
       }
       callbackContext.success();
+    }
+    private void reportEvent(String eventName,CallbackContext callbackContext){
+      try{
+        Optimove.getInstance().reportEvent(eventName);
+      }catch(Exception e){
+        callbackContext.error(e.getMessage()); 
+        return;  
+      }
+      callbackContext.success();
+   
     }
 }
