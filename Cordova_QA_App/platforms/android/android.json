@@ -1,0 +1,49 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "res/xml/config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"OptimobileSDKPlugin\"><param name=\"android-package\" value=\"com.optimove.android.cordova.OptimobileSDKPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "AndroidManifest.xml": {
+        "parents": {
+          "/manifest/application": [
+            {
+              "xml": "<provider android:authorities=\"${applicationId}.optimobileinitprovider\" android:exported=\"false\" android:name=\"com.optimove.android.cordova.OptimobileInitProvider\" />",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "com-optimobilecreate-plugins": {
+      "PACKAGE_NAME": "com.optimove.cordova"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "com-optimobilecreate-plugins.Optimobile",
+      "file": "plugins/com-optimobilecreate-plugins/www/Optimobile.js",
+      "pluginId": "com-optimobilecreate-plugins",
+      "clobbers": [
+        "Optimobile"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "com-optimobilecreate-plugins": "1.0.0"
+  }
+}
