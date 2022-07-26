@@ -9,12 +9,12 @@
     "libraries": {
         "OptimoveCore": {
             "name": "OptimoveCore",
-            "spec": "5.0.0",
+            "spec": "5.0.1",
             "count": 1
         },
         "OptimoveSDK": {
             "name": "OptimoveSDK",
-            "spec": "5.0.0",
+            "spec": "5.0.1",
             "count": 1
         }
     }

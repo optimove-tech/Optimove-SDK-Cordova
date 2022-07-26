@@ -4,6 +4,6 @@ platform :ios, '11.0'
 
 target 'C:\Users\tom_b\Desktop\Work repositories\Optimove-SDK-Cordova\Cordova_QA_App\platforms\ios\Cordova_QA_App' do
 	project 'C:\Users\tom_b\Desktop\Work repositories\Optimove-SDK-Cordova\Cordova_QA_App\platforms\ios\Cordova_QA_App.xcodeproj'
-	pod 'OptimoveCore', '5.0.0'
-	pod 'OptimoveSDK', '5.0.0'
+	pod 'OptimoveCore', '5.0.1'
+	pod 'OptimoveSDK', '5.0.1'
 end
