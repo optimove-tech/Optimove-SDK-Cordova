@@ -3,7 +3,7 @@ import OptimoveSDK
     private let optimoveCredentialsKey = "optimove_credentials"
     private let optimoveMobileCredentialsKey = "optimove_mobile_credentials"
     
-    private let credentialsJsonName = "optimove.json"
+    private let credentialsJsonName = "optimove"
     
     @objc(initialize:)
     func initialize(command: CDVInvokedUrlCommand) {
