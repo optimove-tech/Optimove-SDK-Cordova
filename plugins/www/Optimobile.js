@@ -3,6 +3,6 @@
 var exec = require('cordova/exec');
 
 
-window.initialize = function (arg0, arg1, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'initialize', [arg0, arg1]);
+window.initialize = function (optimove_credentials, optimove_mobile_credentials, success, error) {
+    exec(success, error, 'OptimobileSDKPlugin', 'initialize', [optimove_credentials, optimove_mobile_credentials]);
 };
