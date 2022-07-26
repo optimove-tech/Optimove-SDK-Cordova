@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Cordova_QA_App.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>

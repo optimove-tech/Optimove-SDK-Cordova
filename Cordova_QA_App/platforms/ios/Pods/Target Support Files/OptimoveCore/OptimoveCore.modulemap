@@ -1,0 +1,6 @@
+module OptimoveCore {
+  umbrella header "OptimoveCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

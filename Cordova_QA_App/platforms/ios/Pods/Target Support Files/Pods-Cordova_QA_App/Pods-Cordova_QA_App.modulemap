@@ -1,0 +1,6 @@
+module Pods_Cordova_QA_App {
+  umbrella header "Pods-Cordova_QA_App-umbrella.h"
+
+  export *
+  module * { export * }
+}

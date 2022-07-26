@@ -1,0 +1,21 @@
+PODS:
+  - OptimoveCore (5.0.0)
+  - OptimoveSDK (5.0.0):
+    - OptimoveCore (= 5.0.0)
+
+DEPENDENCIES:
+  - OptimoveCore (= 5.0.0)
+  - OptimoveSDK (= 5.0.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - OptimoveCore
+    - OptimoveSDK
+
+SPEC CHECKSUMS:
+  OptimoveCore: d847048dba52605a24dc0f7f02e3622edbbdfe3f
+  OptimoveSDK: 3b80312856e3909949ccad83e4064e111182040a
+
+PODFILE CHECKSUM: fcf5380109003ca777cd9dd00623a17c301546f7
+
+COCOAPODS: 1.11.3

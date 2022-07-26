@@ -1,0 +1,1403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0210911797326F46D6B0F5B8D5475903 /* MainFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303F94213AD545FB73744BF4642D0365 /* MainFactory.swift */; };
+		04344DBA80436CE863E3E24B2095BEBD /* LogLevelCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DB6A5196EAE1AB239EF3E60B8CFCA1 /* LogLevelCore.swift */; };
+		04969EFF2AD9A7CAFC01FFA9BF6740F8 /* CwlSysctl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E5E09896378A01B09C70ACE6A7AEE /* CwlSysctl.swift */; };
+		04F50AB2E63DDBA2199344A185B7C9BD /* PendingNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7E3D2D667A3A71DC938825AB2BE58E /* PendingNotification.swift */; };
+		0536FAC47056947E07ADAD5716418339 /* String+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17E96174B40CD7E4DFE166F041EEB2 /* String+Split.swift */; };
+		078EE44E1912BBAD3160C8FAC18AEA8E /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78E3194DCEA30E68D1538CE9F4D0618 /* Assembly.swift */; };
+		0887E13A21C202A3686962559664B147 /* MigrationWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61949419883942F9CBE9CA38E7242FD /* MigrationWork.swift */; };
+		09220AFA7966787A601A243F83539787 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAE15F3156997B79E48C172B53FF97 /* StatisticService.swift */; };
+		0B9025ED2D4A4153992CC2E1C576FA56 /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2827255956734C11B1DDD42FA17D1 /* ComponentFactory.swift */; };
+		0BF57C6BE402490A4F2A0F92C46FC8F6 /* ConfigurationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDDFAC11D58AE4BADD319A8BD255254 /* ConfigurationFetcher.swift */; };
+		10DC2EDED67A43568FEF8D08E460E507 /* NewUserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03261605A1BE12D6B3E178A29288B206 /* NewUserHandler.swift */; };
+		1157681F41E6260D14AECB9E70CEAB8F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6C649DC4BFFA36FB7C18653418D7B1 /* String.swift */; };
+		140F4F6300A0223CF1CB92B56197FD93 /* NewTenantInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467968C4DA33BEA897067E9CE16F3AD8 /* NewTenantInfoHandler.swift */; };
+		1476ECD84A058754E9F35DAED944C2E5 /* KSHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45BD1083C31C58E7B97E78E23A17EDC /* KSHttp.swift */; };
+		157CA3D33CAEAA78A8649BAF0C7794B8 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5766F1D41476B7E780F89ABDF68436AF /* LocationService.swift */; };
+		15931180128C5FB1CA4D2747A71EE60F /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DAD52C5FAEAE01C0DE24E46C3C3DBF /* AnalyticsHelper.swift */; };
+		15A12ADE9CAEF3508AFFD1C253B3528F /* OptistreamQueueImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B260E750A96A927B5BEF81AF6463C70 /* OptistreamQueueImpl.swift */; };
+		15C0E91AA0D5DBAE597713A6AD7F542B /* EventConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DC75816A0B78489B9E09CA8CF065DE /* EventConfig.swift */; };
+		15FA8DB89D259CD3063F0DFF6123F0D9 /* Pods-Cordova_QA_App-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E8AB8623B39EC9C6434F4A4EE779BFB /* Pods-Cordova_QA_App-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		19CDB3DE759A4049A9EA09015B1402A9 /* OptimoveConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC71BB35FE1BCF2C6EA62CA59C75A0 /* OptimoveConfig.swift */; };
+		1B0F3EA2CF3382794926AA0799AEFB7A /* OptistreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C463F463DA1F6379881D75D18029DF /* OptistreamEvent.swift */; };
+		1BB37C25D7AEC598972510D2854B1ED2 /* TimeInterval+Seconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68997BF07AE5D7C51445EC5714076768 /* TimeInterval+Seconds.swift */; };
+		1F09B81BEE2662650194401FC36C2E15 /* MobileProvision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEF8811DF16069D36ED60699BE49507 /* MobileProvision.swift */; };
+		2074D49E8E35EA7CC8E5B7A8A7A229DA /* NSManagedObjectContext+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72B27C87CD3FDD41D96F87007F58F90 /* NSManagedObjectContext+Utilities.swift */; };
+		21D129180029CFBAFE64D3D1713353D5 /* OptimoveInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E977AAC9B4B5C12C89F500E55D7D67 /* OptimoveInApp.swift */; };
+		2641B79FAB34A565E4AE89AD709707E5 /* ProcessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03893DB2D365A8B43318371DDD6A90E /* ProcessInfo.swift */; };
+		268CD2DA4C473DC681352867D679443E /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AE208EC88DD3A389A2EC437CDC187 /* Components.swift */; };
+		26CD2EBB354FFCD387F36975EB7025E4 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FD8CE375876A695DA3E1A290468669 /* NetworkClient.swift */; };
+		27C73A7B822245984EC1C5B10F47DFF2 /* InstallationIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0BE768AEBCEE48F9B716422A1C9AB /* InstallationIdGenerator.swift */; };
+		27DD656946A84078E97CC73F293E8054 /* Pods-Cordova_QA_App-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 17596305D06823DA31D0E71CD9FE358A /* Pods-Cordova_QA_App-dummy.m */; };
+		28F6539D7FFA688448A91C2D7FF7A458 /* SessionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9AD54874441CAF57F465EC5D7311D /* SessionHelper.swift */; };
+		296D66EAFFD9A5993E51ED692BD2FD96 /* MetaDataEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C466564DA7234819F60BF5972648BA /* MetaDataEvent.swift */; };
+		29D2F95AA39F180C7768E73F5AD627C8 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C2B6AD939FEEA20D009E7BDB575CA /* LogLevel.swift */; };
+		2AB870FB0E6E2B5A53A03AE156AEA8A1 /* UserDefaults+Optimove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B334EA3D18152CD7AA115B0E5F11BE /* UserDefaults+Optimove.swift */; };
+		2CDB737871E7B37F0697C4ED7374CCE6 /* ProcessInfo+OsVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE91E581B3144B703F8D57AE2F4245C /* ProcessInfo+OsVersion.swift */; };
+		316130F7C092C98CC331ED09B9E1AF16 /* MediaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A9E61D69B41E909D567D421BD91504 /* MediaHelper.swift */; };
+		31C6C9A0B68B7DDF8C25D3009A43D2FC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC51DF62B5BF2852CA5AD8DC01134B0 /* ServiceLocator.swift */; };
+		323CF64B4D242231180D65C76768C25D /* FileManager+Optimove.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E5770D160C7A7A5783F25BCDB94082 /* FileManager+Optimove.swift */; };
+		335886120B48AB17B58CC54AD6C5F3FC /* KeyValPersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6ED9A7693F25C4FC50AF54C63F95E49 /* KeyValPersistenceHelper.swift */; };
+		33ABFF0D77620DE5385CE35FFAC2CB1F /* SetUserIdEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6957B2BDEE5FB1558218EFCB291B37C /* SetUserIdEvent.swift */; };
+		3885FE7CEAE836E49A4AA5F1E4995095 /* OptimoveUserNotificationCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBA00BB89C53077213CD9724F9EE1D6 /* OptimoveUserNotificationCenterDelegate.swift */; };
+		3A59C912B83B9F3671FBDB25F358EE7C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4FF583D5749875553ABA48064D3AD /* NetworkError.swift */; };
+		3BD6493FFAF1A8EE9F4194153F38B257 /* OptistreamEventBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D58C2B128991D5A7FB507CBC332CD5 /* OptistreamEventBuilder.swift */; };
+		3CCEE180AE12730D1DEE8ED8F585D279 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF35320C84622F813BFAB0B63B7E480A /* EmailValidator.swift */; };
+		3DAAA6C76992606463934BB52AF1A2FA /* ScreenVisitValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218B2DAD17514F383264A73F70C829EC /* ScreenVisitValidator.swift */; };
+		3DD849991E7DDE9C5E7E6B553573D943 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A5F10CA5CB089FF04E8F1FBD5EC7EF /* Configuration.swift */; };
+		3E37C49E8E8457B783C112AF78FAB716 /* Merging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83594C5651D9ADCAF60966C6F42AD7CC /* Merging.swift */; };
+		3F74F0029E199D47920B92BCBE9D9D22 /* AppGroupsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A39AE7BB6D3BD0ECFFD1FFD8012D7 /* AppGroupsHelper.swift */; };
+		421D5BBDCF3A78745335F859DAE92DA4 /* SDKInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F893CD536E1951C4CDA8BD1D1F7E1EF /* SDKInitializer.swift */; };
+		4404B96A39DB5B2DDA53C65C87B4601A /* Bundle+HostApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C071B20039F8A0BE4F16163B8FE95 /* Bundle+HostApp.swift */; };
+		455CC587B25384F721075EC284418D5E /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB37554C8E8BC129EEDF8D438AFBAC4 /* RingBuffer.swift */; };
+		4604F41C502B508930FE5133118FE4CF /* Optimobile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BB46D6AA969BA3DF1CE62E9804CB4A /* Optimobile.swift */; };
+		4643800DF186A4EF406CFC28BEC801CF /* ParametersNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF37924FF8E32AD686626A722093B08F /* ParametersNormalizer.swift */; };
+		4744EACA3DC178C15DA602AA16958615 /* Optimobile+Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBB6CE92810B240141B40406DF4E03 /* Optimobile+Analytics.swift */; };
+		474D247EA54B50FB779E77374DC2B543 /* TenantEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D002BA55829D90DAF10554EC18DBB1 /* TenantEvent.swift */; };
+		498334EF28783D6B8EAE936BEA7BE92A /* RemoteConfigurationRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C664B1E154710BA23C2636C160FAF0F /* RemoteConfigurationRequestBuilder.swift */; };
+		4AA473566C5250A24A0C9809728C8E70 /* StorageFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89224F15CA7437592BEA3EFE5A79DC64 /* StorageFacade.swift */; };
+		4B6735A82CF7A5687ED7A3E123B84A94 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461BAF759BDD3A69E51567E431666026 /* FileStorage.swift */; };
+		4BA9C219B2312A0CDDB8946F98A07499 /* SetUserEmailEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6A17B7F3669C18ADD82C497DED7BE /* SetUserEmailEvent.swift */; };
+		4BE1C3B19566CADDA5C54551885F7E89 /* FirstRunTimestampGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F29715412D979E3F90A77DC7102D0 /* FirstRunTimestampGenerator.swift */; };
+		50A16B8BE20CEBFACFB639EA94C6ACED /* OptimobileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8BA18270DEF77EBCE05427E2102939 /* OptimobileHelper.swift */; };
+		50B776544C1D03F8AC96951C4B6CC78A /* Optimobile+DeepLinking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C9AE8CA8E0911C6068767FD7794377 /* Optimobile+DeepLinking.swift */; };
+		51A45248C96AF2730712535ECDC07798 /* NetworkRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE6D20DEE02E59A84F46C6D4BDEB6B9 /* NetworkRequestFactory.swift */; };
+		53654FCBE099D322F4E741FF3AD519A8 /* OptimoveEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D05F9C992345027E08E0D5CCE271D /* OptimoveEvent.swift */; };
+		53700F68E0875B41099AB7C769875362 /* OptimoveCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E63CEADB6CF9BFEC59CA20E61D1D434 /* OptimoveCore-dummy.m */; };
+		55B835F6C7119A804CE53B5736FCE2DC /* Optimobile+Push.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193899CCB4C89C96E93F4BF3612F80D7 /* Optimobile+Push.swift */; };
+		55C4548ADAD55A0049BD6C87FC5C532D /* EventCDv1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF81787C51035E0A269312950883588 /* EventCDv1.swift */; };
+		58751EF04FE7AE9FE62386980A50C2F9 /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB95C5B58E72D42EC277CD602254F1CE /* CoreDataMigrationVersion.swift */; };
+		5A6C54DB7926EC954C62D19591D8B038 /* CoreDataEntityDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B37E10BEB45072C512BC370769DFED /* CoreDataEntityDescription.swift */; };
+		5F1D690B44623982177053585E18A691 /* NetworkingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72D7972265B0BD625EFB94BE4FD038 /* NetworkingFactory.swift */; };
+		60A20FC0ADD228D17C5AC93C30D6C085 /* CoreDataAttributeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325986A6FBCCC707BB800CE27D8DC8E /* CoreDataAttributeDescription.swift */; };
+		61A8E24FE10B82AFC2C7C96CC4EE83F1 /* ISO+format.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FFBB33FF73C0FAAFADF180B09D399A /* ISO+format.swift */; };
+		642DD3A5EB1F2D2624213C9F1B49E4E0 /* Optimobile+Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F838C3624DACB544F22338186705B /* Optimobile+Stats.swift */; };
+		697F618A53F9A0396DAEC6EB5DB0B8FA /* CoreDataFetchIndexDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3881033156B63EC93273BD71023449 /* CoreDataFetchIndexDescription.swift */; };
+		6BB7A592FC8779C7EFBA6E4E8DA50B7E /* Dictionary+CompactMapKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F25ABA4D4DE60B8026ACCE2D1616CA /* Dictionary+CompactMapKeys.swift */; };
+		6BCC3DAC1AB3CF75A3D839109D299D11 /* Bundle+Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA6A540677F96848A292B88B13D6AE /* Bundle+Identifiers.swift */; };
+		6DD08FAB20D7A0197BC92692315D2A0B /* TenantConfigurationDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F00D23057C41465C2EC1EF5F60AFC02 /* TenantConfigurationDownloader.swift */; };
+		6E5C64D18FD3304208E29B112BC1C7D1 /* Querying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D18316188834B1CDF1947E201838D3D /* Querying.swift */; };
+		750D5053533E25DF139EB4F480732CC0 /* CoreDataRelationshipDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7F0AC75F7E604B871E783B54B142A1 /* CoreDataRelationshipDescription.swift */; };
+		76729659AE73EE5FEF6C26D92FC94FEE /* RealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD22E3F0E0CF7CD7CC9E6204CC83D6F9 /* RealTime.swift */; };
+		76B297EAEA60FEF8E46C1EA66CA884D6 /* DateTimeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877721FDD35D359D94C4341992D0CDE /* DateTimeProvider.swift */; };
+		7BE0ED8C59AF789A467FF32C6271869D /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F04116B9F56E14201991966F744A66 /* PersistentContainer.swift */; };
+		7CD9113C2C5E775EF28DC3B7804A1FCB /* AppOpenOnStartGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9B1B5B12399570227261E05FDE5EB /* AppOpenOnStartGenerator.swift */; };
+		7DD6BFAD57CF4470BAF30CC0EAFB7125 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF42A47323E5FA07FDC34C35A385ECB4 /* Event.swift */; };
+		7F5FDDCBA8BFFFD68F8B05C4465C418E /* Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E180105030883913E282E5B061F857 /* Initialization.swift */; };
+		82F00F4671622B84FBD676B6EB4F3673 /* NewVisitorIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4AE907A1D051844C9E24BECBB38F0 /* NewVisitorIdGenerator.swift */; };
+		84C1CC7CA6EB393D159ADEA81F757DD0 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1C9D331F8FC93C732B555BCC30F63 /* JSON.swift */; };
+		8E71B87764022339C865A0D29910D525 /* RemoteConfigurationNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B166E14EFAF7376D1A9CA35BE90D1D5D /* RemoteConfigurationNetworking.swift */; };
+		92AD22901813CAF8955311D5C838F7B6 /* LoggerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017954E3CBF26AFA3AB6FCBC7CFF6B8 /* LoggerStream.swift */; };
+		92C741D1BB004510203A89B3AABD7922 /* EventCDv1ToEventCDv2MigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268F6A4E02E3AACD5353A4F616B23756 /* EventCDv1ToEventCDv2MigrationPolicy.swift */; };
+		94C983BB553510FFE863530EAA6E94BB /* LoggerInitializator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D68D2097386AD5553C1A9B5F95F3A0C /* LoggerInitializator.swift */; };
+		96ECD1F3F19147C88A5E556A55C30FE9 /* EventValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A373ED9485B862B496DC933139C11C9D /* EventValidator.swift */; };
+		974F97B837D916C427CE3AD92C84E687 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47B960DF9986A8A6B64FF47E13121AC /* Operations.swift */; };
+		99744A3A52003C0C76A4DBFC98C1CCDE /* SDKVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C080EC13B9B426BC79FD53F9D9B0573 /* SDKVersion.swift */; };
+		9C63CBDD2F86DE0F5873C6756FA7C23F /* Pipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD49CDD25FA326F4F24CF3ED58CD9B9 /* Pipe.swift */; };
+		9CE28CDC19B96BAE319AA55202F48780 /* OptimobileUserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187386EA7F26FB21D53E01F42D32131B /* OptimobileUserDefaultsKey.swift */; };
+		9D1D9847165CC0F0E588DAFC8D90AF3E /* OperationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616E5D6443BBE2501FF40546662BA2D8 /* OperationFactory.swift */; };
+		A1335617D2949DB7FA742D34AB3DA345 /* UserValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7C43A9BED944DF212C500C8CC2CBC9 /* UserValidator.swift */; };
+		A21DF88A2518CA223AFF8CFE2C9FEE22 /* DeepLinkFingerprinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A10416CD59A4B017E0C3DD4E57E42C /* DeepLinkFingerprinter.swift */; };
+		A279096C7F7807C5428F7AAD23EC1891 /* OnStartEventGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFF2893E21C99EE8093E6AF87BDF459 /* OnStartEventGenerator.swift */; };
+		A3E8BFE4F8EA3F54CFEB3981DE81491E /* RuntimeCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F449D84D8B751E1C053E1A6A372BF /* RuntimeCodingKey.swift */; };
+		A4C2A1601DE03C196B4ADEF040514E72 /* OptitrackMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1499BA7BF71CC7EAD2FE218D50883543 /* OptitrackMetaData.swift */; };
+		A56A57AC00A55D8AF0AB66DC2862DD0A /* InAppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6525AC5F47C8BF038D7CA4DB9F7DF174 /* InAppModels.swift */; };
+		A60E2BF2A3A9DE5A314491E7C22D0FFB /* RunningFlagsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6223743051E299781523057A7FED0E9F /* RunningFlagsContainer.swift */; };
+		A74E76E02461C8BC6B60BDB7AE58844C /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34A3D4CC6186E99F428EBDC8CF64666 /* CoreDataMigrator.swift */; };
+		A7D8D329E0B761A0C28894AF4FB80554 /* ComponentHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF9DD721BD3550666B551C3F5E7242 /* ComponentHandlers.swift */; };
+		A817DF96C2E8F506E76910460AF4A208 /* InMemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C715B50404A09F70C04E7DE3F63729 /* InMemoryBuffer.swift */; };
+		A9976DEA6F6AFDF34F55BF236C83E418 /* DeviceStateObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E591DD3A7E6A75D7D75F7F98E616E6 /* DeviceStateObserverFactory.swift */; };
+		AA4D3C399C8E7198DAD6B67CBEE0633D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31895A350F5764BC318FAD1919268B65 /* Notification.swift */; };
+		AA5D4571E3816A243F650325D79CF879 /* InAppPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E84E2AD9FA96D880F6DAA1A89C0A13 /* InAppPresenter.swift */; };
+		AB8C3EC58D5CA4D410ED7FC25B2445A6 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6E4B9CB9F8D023852FCA9A827B597A /* Parameter.swift */; };
+		AC305C2A0C9027EB9E0850FC97708A57 /* GlobalConfigurationDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7454302B56FAE64A6E0675308911B5 /* GlobalConfigurationDownloader.swift */; };
+		ACD636EB80B2AF5D7F88E951273C972E /* AppOpenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBDED93C2F70A5A97FA43F48B0E213F /* AppOpenEvent.swift */; };
+		AD55568D41B0DA16A5BF3D0E30355242 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A397807C43C85DEAD3EF1DF63987085 /* GlobalFunctions.swift */; };
+		AFCEF68BE211A91CF948B9126FC2593E /* LogBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A71B8E763F99609BF5B9467EA39D37D /* LogBody.swift */; };
+		AFEACF75B83C88E147F3541426F89C26 /* OptimoveSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F39C077EC2CB865CAD0FC7F30DC46AF /* OptimoveSDK-dummy.m */; };
+		B2898D5D63A50654033557F87531EB16 /* OptimoveSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE756D52437654591A19DED03EE9A5A /* OptimoveSDK-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B2A71E825A1E40B3595AE00E7ACCE24E /* CoreDataMigrationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28A775C5043DC8157C656DE124C6EAD /* CoreDataMigrationStep.swift */; };
+		B37C23B5CBAFC98CDF043731DF4F4924 /* PageVisitEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C30BA4739B485B04669C4E2771F53 /* PageVisitEvent.swift */; };
+		B4A689466375826A41CE862AAE7EC4E9 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2C8FFCA2D2CAA33BCDEB77447A23CE /* AsyncOperation.swift */; };
+		B4C90142802A3E77807B02BCBB4025E7 /* OptistreamQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888CFA84D2B0D65FFAFED8AEC8B64D3C /* OptistreamQueue.swift */; };
+		B5463A0310752FB98246A30B78829597 /* GlobalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC082F7688AB4C444CF9C498448627C /* GlobalConfig.swift */; };
+		B581326954F8A4E235F9BEFC08106A82 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42879897E8C8F92F51D149735DDB4EF /* UrlBuilder.swift */; };
+		B58C83594ECA75F789BF715ED98F651E /* Managed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0708F30068695ECDED7640369848574 /* Managed.swift */; };
+		B84CB996A1A5F1B3CF5A4E4362CCD7E9 /* OptimobileBadgeObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73E3989B75294192EA3664A3C85AE9C /* OptimobileBadgeObserver.swift */; };
+		B85AD4B7A25744F85152F31BFFF99DBE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B434FFCE274914A6376A5C533990B1C1 /* User.swift */; };
+		BA1F6E71F1BFB98B239E0781F3AB8C30 /* SdkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728CFB480B8A397CFBD8B31EDA6F9050 /* SdkEnvironment.swift */; };
+		BB257FD1E19ABA7FBCAD02D37A88C969 /* ConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49398F710A5E214A74EF74DC15D1FAF5 /* ConfigurationRepository.swift */; };
+		BB7D7DAA01D7169684B60FB1341DBB79 /* EventCDv1ToEventCDv2MappingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F23112C28C8B09C236D0EF1F61B8F52 /* EventCDv1ToEventCDv2MappingModel.swift */; };
+		BC1001AE3E2F2ADC674C1A7389C248C6 /* OptimoveCore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DA152E8D3B6373864F38598D85DAF2B /* OptimoveCore-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BD36AC38A7F5C2B8B404990741AD3D8B /* ConsoleLoggerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA94BD3500DF073A73F0CB717E4B395 /* ConsoleLoggerStream.swift */; };
+		BEA5B1376AFF2ACB62CD7BA0C4128665 /* String+isBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D65F65C3C93941CCD40D305B083D942 /* String+isBlank.swift */; };
+		BFE57BB1678B32EA2C95753AF9300ABC /* SetUserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC3B2C37DC8CBA50F7638D3B282706 /* SetUserAgent.swift */; };
+		C1955EB1211AE0E5DB21FB0900FB103C /* UserAgentGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E292106ED8D604E10187F261734C436B /* UserAgentGenerator.swift */; };
+		C1D6DF256D072F5C6802811147809B47 /* String+alphanumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D81921E950E082DF442A5EC32C1A27 /* String+alphanumeric.swift */; };
+		C32DC5BB7E84ECD584681E4A1E10448C /* MultiplexLoggerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9189F5F374D9098F16882983E4453A62 /* MultiplexLoggerStream.swift */; };
+		C619F4C30BDA0C37D30A7D865EAD0FE8 /* OptiLoggerStreamsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7342887255480173A5ABCB4B5C4AA7E /* OptiLoggerStreamsContainer.swift */; };
+		C66147C21144A6A3CCD74E44B03BBC1A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F69FEF27E5296E8FF30878AD70BA19 /* Endpoint.swift */; };
+		C6F6B337A0B478B0E3209A759A234032 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956017C3111B1850646DC1D9B56132C0 /* NetworkResult.swift */; };
+		C89B3C9D20D1166267C77F09CEB1C22D /* ConfigurationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F8976A093C698794C7391CF1AE43D /* ConfigurationBuilder.swift */; };
+		CA6FA913F6DF6B0E82E2357A0EE518CB /* ParametersDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B0E8FE3B649AD2275B41B62592B636 /* ParametersDecorator.swift */; };
+		CC84F7EB7382748116E870DDD89ED22E /* OptimoveKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C72A3803C169852A51D90FA842DB2CA /* OptimoveKeys.swift */; };
+		CCA589C97F94A7D17C7B44F9C0F7C56F /* CoreEventFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439C61F1D72553040BEA108E673473AD /* CoreEventFactory.swift */; };
+		CDF445327099567B770A78C56D2973CB /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA836D6271D2FF60ADF010F7E5C655A /* String+SHA1.swift */; };
+		CEE81EB846FD583C77006291F9CDF615 /* RealtimeMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B47D0BFD99F9D9A2B019956E258989 /* RealtimeMetaData.swift */; };
+		D0780F37FE0A329AA4FF4205A75D4D0C /* CoreDataModelDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A87620A1A1AE2A96252F3AD0A4AFA5A /* CoreDataModelDescription.swift */; };
+		D10D2F67809C839C476F0292816BAAF4 /* InAppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCF6351F4060BE5966ABC54DF468CB8 /* InAppManager.swift */; };
+		D2BF902A8F3E3DBB20259B63638FDDED /* CoreDataFetchedPropertyDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28093B7A2614966CF299442C229EFC /* CoreDataFetchedPropertyDescription.swift */; };
+		D3149CD1DEB19503D51DA24EDB8A9837 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB70192BD639D80B4AD65A546C199C25 /* NetworkRequest.swift */; };
+		D38EC65ADCF6461588AD6384B097813E /* ResignActiveObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1581F4102D6E0CA0F08BF5288D963CC6 /* ResignActiveObserver.swift */; };
+		D409458A3E17EBBD5B9F7515617BC59B /* KeyPath+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A683FF1172F9CD8245CC818F79F27482 /* KeyPath+Extension.swift */; };
+		D40DA2C94F3E98B5D1C3962AA9A3FFEC /* MigrationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E112A83274B1FB238DDBD0C55F97E /* MigrationObserver.swift */; };
+		D521150350AC115A190C4F7BA650ADD1 /* OptiTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF61E914028382C237F9B26FE44C91B /* OptiTrack.swift */; };
+		D56B177DA2C45957211792AAE081A696 /* utsname+DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F26E9F5494CB0B3FFCF33C472EB7538 /* utsname+DeviceModel.swift */; };
+		D63262F66EDE009D2297536BF5013D18 /* Optimove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9322FE9D87B2DC9488F00AA49E09C015 /* Optimove.swift */; };
+		DD38DA5F1C5E6517BF7247C6554F116C /* PendingNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B2152070AB796CE35BA521B2BFFF36 /* PendingNotificationHelper.swift */; };
+		DF9E893F2444367F67012C5D90370076 /* SdkPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6D8398FE6A5E1FD8354CA4A1319331 /* SdkPlatform.swift */; };
+		E0832AFB1A1203B457A80D109BAFA824 /* AppOpenObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD42898E7434393103E3B36AF8004E8 /* AppOpenObserver.swift */; };
+		E17423F97DF8E3C49CB5A53A88BA00BC /* String+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195CE6924A89E315802BE7E785CF2204 /* String+random.swift */; };
+		E30501B13BB89D6D425C2F802C129D53 /* DeviceStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C3F9067EA854C6080523F71D76D9C8 /* DeviceStateObserver.swift */; };
+		E711B56674964BF06B1CA5C4030BA8D6 /* NewEmailHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD485C68C702051516D22C37135B75 /* NewEmailHandler.swift */; };
+		E723CE74DEA610E2B11D6B4A25247DAF /* Result+Successful.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BEF7DA40C0C4A442D10D12878E653 /* Result+Successful.swift */; };
+		E8D0F4F55712B7CB68CDAB1C63677C3C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB541E2913F883A90B5EE2FED6A710 /* Logger.swift */; };
+		E9F9819B90904672A4BD4519B74AE0AA /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A0E70A80BA82DC825B0F4EF7FEAD04 /* Version.swift */; };
+		EA30BB13F8A053D8442BB992E53CC9E6 /* EventCDv2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7211E9CEBD8EDEB6E715C799431EDB37 /* EventCDv2.swift */; };
+		EBD853D2EDDC68DA68A821E05A4BB529 /* MergeRemoteConfigurationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D98655B3F9A471FBD7409D034538E5 /* MergeRemoteConfigurationOperation.swift */; };
+		ED96FB05FEDEF231E549A3BDBE6D92D9 /* RemoteLoggerStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4B0FF1A54A6303D1FE9C3FF2E36C3 /* RemoteLoggerStream.swift */; };
+		EFA40D6BD0B90C0A7BF1929AD2A0395C /* OptistreamNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECAF4FCD50F56DC5BE5A8D1F4EBF842 /* OptistreamNetworking.swift */; };
+		EFDD1DC99366104F31FE9876E51BDE2E /* OptiLoggerOutputStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA310160F0D180B8F4DAAD1FA00CBC6A /* OptiLoggerOutputStream.swift */; };
+		F322EA5E01E1F69C865FE0BC901A7B73 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0FE9588880AF3B4D2C3C78FC50DB9D /* Container.swift */; };
+		F8E5EE582B27F9DA9D62903511608060 /* Pipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D2E9660D7B1D8B7F88B7E1B40C0D8F /* Pipeline.swift */; };
+		FB0446739A2FCD392761D65D5625FC6D /* Bundle+AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08203D5EF1F08A9ACFD0422448283E50 /* Bundle+AppVersion.swift */; };
+		FB117EE9901D7159EBDF2D4D0360FFA3 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE548A055DDAC76D4AEAB7C0A4A17F3 /* NetworkResponse.swift */; };
+		FBE771D4A2073BCC58B888429D0E929D /* TenantConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4958D52992A5043702743FB20B53C2 /* TenantConfig.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		463B0579CBFF0A4FAFE647FBDDD28939 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56640D04F849F6426F7CECA832AA8599;
+			remoteInfo = OptimoveSDK;
+		};
+		5149E882445D13B00FE0C7243018859F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DE76B408494897AAE3DB4518F1078A0;
+			remoteInfo = OptimoveCore;
+		};
+		ED8896782A4DA4BE894DFE97962BA57A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DE76B408494897AAE3DB4518F1078A0;
+			remoteInfo = OptimoveCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02DB541E2913F883A90B5EE2FED6A710 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = OptimoveCore/Sources/Classes/Logger/Logger.swift; sourceTree = "<group>"; };
+		03261605A1BE12D6B3E178A29288B206 /* NewUserHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NewUserHandler.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/NewUserHandler.swift; sourceTree = "<group>"; };
+		03F6A17B7F3669C18ADD82C497DED7BE /* SetUserEmailEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetUserEmailEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/SetUserEmailEvent.swift; sourceTree = "<group>"; };
+		07C466564DA7234819F60BF5972648BA /* MetaDataEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MetaDataEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/MetaDataEvent.swift; sourceTree = "<group>"; };
+		07DB6A5196EAE1AB239EF3E60B8CFCA1 /* LogLevelCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogLevelCore.swift; path = OptimoveCore/Sources/Classes/Logger/LogLevelCore.swift; sourceTree = "<group>"; };
+		08203D5EF1F08A9ACFD0422448283E50 /* Bundle+AppVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+AppVersion.swift"; path = "OptimoveCore/Sources/Classes/Extension/Bundle+AppVersion.swift"; sourceTree = "<group>"; };
+		0877721FDD35D359D94C4341992D0CDE /* DateTimeProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateTimeProvider.swift; path = OptimoveSDK/Sources/Classes/Providers/DateTimeProvider.swift; sourceTree = "<group>"; };
+		0D18316188834B1CDF1947E201838D3D /* Querying.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Querying.swift; path = OptimoveCore/Sources/Classes/JSON/Querying.swift; sourceTree = "<group>"; };
+		12EF9DD721BD3550666B551C3F5E7242 /* ComponentHandlers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComponentHandlers.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/ComponentHandlers.swift; sourceTree = "<group>"; };
+		1499BA7BF71CC7EAD2FE218D50883543 /* OptitrackMetaData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptitrackMetaData.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/OptitrackMetaData.swift; sourceTree = "<group>"; };
+		1581F4102D6E0CA0F08BF5288D963CC6 /* ResignActiveObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResignActiveObserver.swift; path = OptimoveSDK/Sources/Classes/Observers/ResignActiveObserver.swift; sourceTree = "<group>"; };
+		17596305D06823DA31D0E71CD9FE358A /* Pods-Cordova_QA_App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Cordova_QA_App-dummy.m"; sourceTree = "<group>"; };
+		17D58C2B128991D5A7FB507CBC332CD5 /* OptistreamEventBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamEventBuilder.swift; path = OptimoveCore/Sources/Classes/Optistream/OptistreamEventBuilder.swift; sourceTree = "<group>"; };
+		187386EA7F26FB21D53E01F42D32131B /* OptimobileUserDefaultsKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimobileUserDefaultsKey.swift; path = OptimobileShared/OptimobileUserDefaultsKey.swift; sourceTree = "<group>"; };
+		193899CCB4C89C96E93F4BF3612F80D7 /* Optimobile+Push.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Optimobile+Push.swift"; path = "OptimoveSDK/Sources/Classes/Optimobile/Optimobile+Push.swift"; sourceTree = "<group>"; };
+		195CE6924A89E315802BE7E785CF2204 /* String+random.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+random.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+random.swift"; sourceTree = "<group>"; };
+		19AA6A540677F96848A292B88B13D6AE /* Bundle+Identifiers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+Identifiers.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/Bundle+Identifiers.swift"; sourceTree = "<group>"; };
+		1A87620A1A1AE2A96252F3AD0A4AFA5A /* CoreDataModelDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataModelDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataModelDescription.swift; sourceTree = "<group>"; };
+		1C664B1E154710BA23C2636C160FAF0F /* RemoteConfigurationRequestBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoteConfigurationRequestBuilder.swift; path = OptimoveSDK/Sources/Classes/Configuration/RemoteConfiguration/RemoteConfigurationRequestBuilder.swift; sourceTree = "<group>"; };
+		1EC082F7688AB4C444CF9C498448627C /* GlobalConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GlobalConfig.swift; path = OptimoveCore/Sources/Classes/Configurations/Global/GlobalConfig.swift; sourceTree = "<group>"; };
+		1EDDFAC11D58AE4BADD319A8BD255254 /* ConfigurationFetcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigurationFetcher.swift; path = OptimoveSDK/Sources/Classes/Initializer/ConfigurationFetcher.swift; sourceTree = "<group>"; };
+		1FC9AD54874441CAF57F465EC5D7311D /* SessionHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionHelper.swift; path = OptimoveSDK/Sources/Classes/Optimobile/SessionHelper.swift; sourceTree = "<group>"; };
+		218B2DAD17514F383264A73F70C829EC /* ScreenVisitValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScreenVisitValidator.swift; path = OptimoveSDK/Sources/Classes/Validators/ScreenVisitValidator.swift; sourceTree = "<group>"; };
+		22D002BA55829D90DAF10554EC18DBB1 /* TenantEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TenantEvent.swift; path = OptimoveSDK/Sources/Classes/Events/TenantEvent.swift; sourceTree = "<group>"; };
+		268F6A4E02E3AACD5353A4F616B23756 /* EventCDv1ToEventCDv2MigrationPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventCDv1ToEventCDv2MigrationPolicy.swift; path = OptimoveSDK/Sources/Classes/CoreData/Versions/EventCDv1ToEventCDv2MigrationPolicy.swift; sourceTree = "<group>"; };
+		26E4B0FF1A54A6303D1FE9C3FF2E36C3 /* RemoteLoggerStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoteLoggerStream.swift; path = OptimoveCore/Sources/Classes/Logger/RemoteLoggerStream.swift; sourceTree = "<group>"; };
+		29E591DD3A7E6A75D7D75F7F98E616E6 /* DeviceStateObserverFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceStateObserverFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/DeviceStateObserverFactory.swift; sourceTree = "<group>"; };
+		2D509270C016B9EB942EAF3FABA98446 /* Pods-Cordova_QA_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Cordova_QA_App.release.xcconfig"; sourceTree = "<group>"; };
+		2DBAE15F3156997B79E48C172B53FF97 /* StatisticService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatisticService.swift; path = OptimoveSDK/Sources/Classes/Services/StatisticService.swift; sourceTree = "<group>"; };
+		2E6D8398FE6A5E1FD8354CA4A1319331 /* SdkPlatform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SdkPlatform.swift; path = OptimoveCore/Sources/Classes/Constants/SdkPlatform.swift; sourceTree = "<group>"; };
+		2F893CD536E1951C4CDA8BD1D1F7E1EF /* SDKInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKInitializer.swift; path = OptimoveSDK/Sources/Classes/Initializer/SDKInitializer.swift; sourceTree = "<group>"; };
+		2FA94BD3500DF073A73F0CB717E4B395 /* ConsoleLoggerStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsoleLoggerStream.swift; path = OptimoveCore/Sources/Classes/Logger/ConsoleLoggerStream.swift; sourceTree = "<group>"; };
+		303F94213AD545FB73744BF4642D0365 /* MainFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MainFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/MainFactory.swift; sourceTree = "<group>"; };
+		31895A350F5764BC318FAD1919268B65 /* Notification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = OptimoveSDK/Sources/Classes/Extensions/Notification.swift; sourceTree = "<group>"; };
+		32E977AAC9B4B5C12C89F500E55D7D67 /* OptimoveInApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimoveInApp.swift; path = OptimoveSDK/Sources/Classes/Optimobile/OptimoveInApp.swift; sourceTree = "<group>"; };
+		35B0E8FE3B649AD2275B41B62592B636 /* ParametersDecorator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParametersDecorator.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/ParametersDecorator.swift; sourceTree = "<group>"; };
+		36A5F10CA5CB089FF04E8F1FBD5EC7EF /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = OptimoveCore/Sources/Classes/Configurations/Configuration.swift; sourceTree = "<group>"; };
+		377D05F9C992345027E08E0D5CCE271D /* OptimoveEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimoveEvent.swift; path = OptimoveSDK/Sources/Classes/Events/OptimoveEvent.swift; sourceTree = "<group>"; };
+		37C715B50404A09F70C04E7DE3F63729 /* InMemoryBuffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InMemoryBuffer.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/InMemoryBuffer.swift; sourceTree = "<group>"; };
+		38DAD52C5FAEAE01C0DE24E46C3C3DBF /* AnalyticsHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnalyticsHelper.swift; path = OptimobileShared/AnalyticsHelper.swift; sourceTree = "<group>"; };
+		3AE548A055DDAC76D4AEAB7C0A4A17F3 /* NetworkResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkResponse.swift; path = OptimoveCore/Sources/Classes/NetworkClient/NetworkResponse.swift; sourceTree = "<group>"; };
+		3BD42898E7434393103E3B36AF8004E8 /* AppOpenObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppOpenObserver.swift; path = OptimoveSDK/Sources/Classes/Observers/AppOpenObserver.swift; sourceTree = "<group>"; };
+		3BF61E914028382C237F9B26FE44C91B /* OptiTrack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptiTrack.swift; path = OptimoveSDK/Sources/Classes/Components/OptiTrack/OptiTrack.swift; sourceTree = "<group>"; };
+		3D68D2097386AD5553C1A9B5F95F3A0C /* LoggerInitializator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoggerInitializator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/LoggerInitializator.swift; sourceTree = "<group>"; };
+		3DB37554C8E8BC129EEDF8D438AFBAC4 /* RingBuffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RingBuffer.swift; path = OptimoveSDK/Sources/Classes/DataStructs/RingBuffer.swift; sourceTree = "<group>"; };
+		3DCF6351F4060BE5966ABC54DF468CB8 /* InAppManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppManager.swift; path = OptimoveSDK/Sources/Classes/Optimobile/InApp/InAppManager.swift; sourceTree = "<group>"; };
+		3F23112C28C8B09C236D0EF1F61B8F52 /* EventCDv1ToEventCDv2MappingModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventCDv1ToEventCDv2MappingModel.swift; path = OptimoveSDK/Sources/Classes/CoreData/Mapping/EventCDv1ToEventCDv2MappingModel.swift; sourceTree = "<group>"; };
+		3F4422230FAB89BFBDEAFBBC32C16316 /* Pods-Cordova_QA_App-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Cordova_QA_App-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4154B3FD48B4ED68D1E4BEC159D1330E /* Pods-Cordova_QA_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Cordova_QA_App.debug.xcconfig"; sourceTree = "<group>"; };
+		439C61F1D72553040BEA108E673473AD /* CoreEventFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreEventFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/CoreEventFactory.swift; sourceTree = "<group>"; };
+		461BAF759BDD3A69E51567E431666026 /* FileStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileStorage.swift; path = OptimoveCore/Sources/Classes/Storage/FileStorage.swift; sourceTree = "<group>"; };
+		467968C4DA33BEA897067E9CE16F3AD8 /* NewTenantInfoHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NewTenantInfoHandler.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/NewTenantInfoHandler.swift; sourceTree = "<group>"; };
+		48FD8CE375876A695DA3E1A290468669 /* NetworkClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkClient.swift; path = OptimoveCore/Sources/Classes/NetworkClient/NetworkClient.swift; sourceTree = "<group>"; };
+		49398F710A5E214A74EF74DC15D1FAF5 /* ConfigurationRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigurationRepository.swift; path = OptimoveCore/Sources/Classes/Repository/ConfigurationRepository.swift; sourceTree = "<group>"; };
+		4B6E4B9CB9F8D023852FCA9A827B597A /* Parameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Parameter.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/Parameter.swift; sourceTree = "<group>"; };
+		4BBA00BB89C53077213CD9724F9EE1D6 /* OptimoveUserNotificationCenterDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimoveUserNotificationCenterDelegate.swift; path = OptimoveSDK/Sources/Classes/Optimobile/OptimoveUserNotificationCenterDelegate.swift; sourceTree = "<group>"; };
+		4C080EC13B9B426BC79FD53F9D9B0573 /* SDKVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKVersion.swift; path = OptimoveCore/Sources/Classes/Constants/SDKVersion.swift; sourceTree = "<group>"; };
+		4E0FE9588880AF3B4D2C3C78FC50DB9D /* Container.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Container.swift; path = OptimoveSDK/Sources/Classes/DI/Container.swift; sourceTree = "<group>"; };
+		4E7C43A9BED944DF212C500C8CC2CBC9 /* UserValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserValidator.swift; path = OptimoveSDK/Sources/Classes/Validators/UserValidator.swift; sourceTree = "<group>"; };
+		4E7E3D2D667A3A71DC938825AB2BE58E /* PendingNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PendingNotification.swift; path = OptimobileShared/PendingNotification.swift; sourceTree = "<group>"; };
+		4F39C077EC2CB865CAD0FC7F30DC46AF /* OptimoveSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OptimoveSDK-dummy.m"; sourceTree = "<group>"; };
+		51AC3B2C37DC8CBA50F7638D3B282706 /* SetUserAgent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetUserAgent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/SetUserAgent.swift; sourceTree = "<group>"; };
+		549617FB40F42154A682C5793311FA32 /* OptimoveSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = OptimoveSDK.modulemap; sourceTree = "<group>"; };
+		5766F1D41476B7E780F89ABDF68436AF /* LocationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocationService.swift; path = OptimoveSDK/Sources/Classes/Services/LocationService.swift; sourceTree = "<group>"; };
+		57AE83DD71350E4C8B635F19310B8F11 /* OptimoveCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = OptimoveCore.modulemap; sourceTree = "<group>"; };
+		57B37E10BEB45072C512BC370769DFED /* CoreDataEntityDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataEntityDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataEntityDescription.swift; sourceTree = "<group>"; };
+		57BF79C44720B0F6C2D6D9FCF5C3F039 /* OptimoveCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OptimoveCore.release.xcconfig; sourceTree = "<group>"; };
+		58F2827255956734C11B1DDD42FA17D1 /* ComponentFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComponentFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/ComponentFactory.swift; sourceTree = "<group>"; };
+		59D2E9660D7B1D8B7F88B7E1B40C0D8F /* Pipeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pipeline.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipeline.swift; sourceTree = "<group>"; };
+		5AEF8811DF16069D36ED60699BE49507 /* MobileProvision.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MobileProvision.swift; path = OptimoveSDK/Sources/Classes/Provisioning/MobileProvision.swift; sourceTree = "<group>"; };
+		5B260E750A96A927B5BEF81AF6463C70 /* OptistreamQueueImpl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamQueueImpl.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/OptistreamQueueImpl.swift; sourceTree = "<group>"; };
+		5BBDED93C2F70A5A97FA43F48B0E213F /* AppOpenEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppOpenEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/AppOpenEvent.swift; sourceTree = "<group>"; };
+		5BF81787C51035E0A269312950883588 /* EventCDv1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventCDv1.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/EventCDv1.swift; sourceTree = "<group>"; };
+		5C72A3803C169852A51D90FA842DB2CA /* OptimoveKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimoveKeys.swift; path = OptimoveSDK/Sources/Classes/Constants/OptimoveKeys.swift; sourceTree = "<group>"; };
+		5CAC71BB35FE1BCF2C6EA62CA59C75A0 /* OptimoveConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimoveConfig.swift; path = OptimoveSDK/Sources/Classes/OptimoveConfig.swift; sourceTree = "<group>"; };
+		5E63CEADB6CF9BFEC59CA20E61D1D434 /* OptimoveCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OptimoveCore-dummy.m"; sourceTree = "<group>"; };
+		5EE0BE768AEBCEE48F9B716422A1C9AB /* InstallationIdGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InstallationIdGenerator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/InstallationIdGenerator.swift; sourceTree = "<group>"; };
+		615F8976A093C698794C7391CF1AE43D /* ConfigurationBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigurationBuilder.swift; path = OptimoveCore/Sources/Classes/Configurations/ConfigurationBuilder.swift; sourceTree = "<group>"; };
+		616E5D6443BBE2501FF40546662BA2D8 /* OperationFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OperationFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/OperationFactory.swift; sourceTree = "<group>"; };
+		6223743051E299781523057A7FED0E9F /* RunningFlagsContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RunningFlagsContainer.swift; path = OptimoveSDK/Sources/Classes/Legacy/RunningFlagsContainer.swift; sourceTree = "<group>"; };
+		62BB46D6AA969BA3DF1CE62E9804CB4A /* Optimobile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Optimobile.swift; path = OptimoveSDK/Sources/Classes/Optimobile/Optimobile.swift; sourceTree = "<group>"; };
+		63A0E70A80BA82DC825B0F4EF7FEAD04 /* Version.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Version.swift; path = OptimoveSDK/Sources/Classes/Migration/Version.swift; sourceTree = "<group>"; };
+		63D81921E950E082DF442A5EC32C1A27 /* String+alphanumeric.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+alphanumeric.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+alphanumeric.swift"; sourceTree = "<group>"; };
+		6525AC5F47C8BF038D7CA4DB9F7DF174 /* InAppModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppModels.swift; path = OptimoveSDK/Sources/Classes/Optimobile/InApp/InAppModels.swift; sourceTree = "<group>"; };
+		66019A665806C91DE32904E7987700C8 /* OptimoveSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OptimoveSDK-prefix.pch"; sourceTree = "<group>"; };
+		66FD485C68C702051516D22C37135B75 /* NewEmailHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NewEmailHandler.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/NewEmailHandler.swift; sourceTree = "<group>"; };
+		67707C67D8BAF44D981E0FCC9EF12F03 /* OptimoveSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OptimoveSDK.debug.xcconfig; sourceTree = "<group>"; };
+		67E9B1B5B12399570227261E05FDE5EB /* AppOpenOnStartGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppOpenOnStartGenerator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/AppOpenOnStartGenerator.swift; sourceTree = "<group>"; };
+		68997BF07AE5D7C51445EC5714076768 /* TimeInterval+Seconds.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "TimeInterval+Seconds.swift"; path = "OptimoveCore/Sources/Classes/Extension/TimeInterval+Seconds.swift"; sourceTree = "<group>"; };
+		698C2B6AD939FEEA20D009E7BDB575CA /* LogLevel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogLevel.swift; path = OptimoveSDK/Sources/Classes/Legacy/Logger/LogLevel.swift; sourceTree = "<group>"; };
+		6A397807C43C85DEAD3EF1DF63987085 /* GlobalFunctions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GlobalFunctions.swift; path = OptimoveCore/Sources/Classes/GlobalScope/GlobalFunctions.swift; sourceTree = "<group>"; };
+		6BE6D20DEE02E59A84F46C6D4BDEB6B9 /* NetworkRequestFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkRequestFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/NetworkRequestFactory.swift; sourceTree = "<group>"; };
+		6EFB563F8DBE84241FD9D03F21979C68 /* OptimoveCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OptimoveCore.debug.xcconfig; sourceTree = "<group>"; };
+		6FD49CDD25FA326F4F24CF3ED58CD9B9 /* Pipe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pipe.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipe.swift; sourceTree = "<group>"; };
+		6FE756D52437654591A19DED03EE9A5A /* OptimoveSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OptimoveSDK-umbrella.h"; sourceTree = "<group>"; };
+		707E112A83274B1FB238DDBD0C55F97E /* MigrationObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MigrationObserver.swift; path = OptimoveSDK/Sources/Classes/Observers/MigrationObserver.swift; sourceTree = "<group>"; };
+		7211E9CEBD8EDEB6E715C799431EDB37 /* EventCDv2.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventCDv2.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/EventCDv2.swift; sourceTree = "<group>"; };
+		728CFB480B8A397CFBD8B31EDA6F9050 /* SdkEnvironment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SdkEnvironment.swift; path = OptimoveCore/Sources/Classes/Constants/SdkEnvironment.swift; sourceTree = "<group>"; };
+		74B334EA3D18152CD7AA115B0E5F11BE /* UserDefaults+Optimove.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Optimove.swift"; path = "OptimoveCore/Sources/Classes/Storage/UserDefaults+Optimove.swift"; sourceTree = "<group>"; };
+		75E180105030883913E282E5B061F857 /* Initialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Initialization.swift; path = OptimoveCore/Sources/Classes/JSON/Initialization.swift; sourceTree = "<group>"; };
+		76E84E2AD9FA96D880F6DAA1A89C0A13 /* InAppPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppPresenter.swift; path = OptimoveSDK/Sources/Classes/Optimobile/InApp/InAppPresenter.swift; sourceTree = "<group>"; };
+		76F69FEF27E5296E8FF30878AD70BA19 /* Endpoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = OptimoveCore/Sources/Classes/Constants/Endpoint.swift; sourceTree = "<group>"; };
+		773C30BA4739B485B04669C4E2771F53 /* PageVisitEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PageVisitEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/PageVisitEvent.swift; sourceTree = "<group>"; };
+		790AE208EC88DD3A389A2EC437CDC187 /* Components.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Components.swift; path = OptimoveSDK/Sources/Classes/Components/Components.swift; sourceTree = "<group>"; };
+		7A3C071B20039F8A0BE4F16163B8FE95 /* Bundle+HostApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+HostApp.swift"; path = "OptimoveCore/Sources/Classes/Extension/Bundle+HostApp.swift"; sourceTree = "<group>"; };
+		7C3881033156B63EC93273BD71023449 /* CoreDataFetchIndexDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataFetchIndexDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataFetchIndexDescription.swift; sourceTree = "<group>"; };
+		7C4958D52992A5043702743FB20B53C2 /* TenantConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TenantConfig.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/TenantConfig.swift; sourceTree = "<group>"; };
+		7E4A39AE7BB6D3BD0ECFFD1FFD8012D7 /* AppGroupsHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppGroupsHelper.swift; path = OptimobileShared/AppGroupsHelper.swift; sourceTree = "<group>"; };
+		7ECAF4FCD50F56DC5BE5A8D1F4EBF842 /* OptistreamNetworking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamNetworking.swift; path = OptimoveCore/Sources/Classes/Optistream/OptistreamNetworking.swift; sourceTree = "<group>"; };
+		7F6E5E09896378A01B09C70ACE6A7AEE /* CwlSysctl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlSysctl.swift; path = OptimoveSDK/Sources/Classes/Optimobile/CwlSysctl.swift; sourceTree = "<group>"; };
+		8017954E3CBF26AFA3AB6FCBC7CFF6B8 /* LoggerStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoggerStream.swift; path = OptimoveCore/Sources/Classes/Logger/LoggerStream.swift; sourceTree = "<group>"; };
+		83594C5651D9ADCAF60966C6F42AD7CC /* Merging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Merging.swift; path = OptimoveCore/Sources/Classes/JSON/Merging.swift; sourceTree = "<group>"; };
+		85D5985BB8E85D1AA1277D4A9B0F5ABF /* Pods-Cordova_QA_App-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Cordova_QA_App-acknowledgements.plist"; sourceTree = "<group>"; };
+		888CFA84D2B0D65FFAFED8AEC8B64D3C /* OptistreamQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamQueue.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/OptistreamQueue.swift; sourceTree = "<group>"; };
+		89224F15CA7437592BEA3EFE5A79DC64 /* StorageFacade.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StorageFacade.swift; path = OptimoveCore/Sources/Classes/Storage/StorageFacade.swift; sourceTree = "<group>"; };
+		8D65F65C3C93941CCD40D305B083D942 /* String+isBlank.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+isBlank.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+isBlank.swift"; sourceTree = "<group>"; };
+		8E2C8FFCA2D2CAA33BCDEB77447A23CE /* AsyncOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncOperation.swift; path = OptimoveCore/Sources/Classes/Operations/AsyncOperation.swift; sourceTree = "<group>"; };
+		8E8AB8623B39EC9C6434F4A4EE779BFB /* Pods-Cordova_QA_App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Cordova_QA_App-umbrella.h"; sourceTree = "<group>"; };
+		8EF1C9D331F8FC93C732B555BCC30F63 /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = OptimoveCore/Sources/Classes/JSON/JSON.swift; sourceTree = "<group>"; };
+		8F26E9F5494CB0B3FFCF33C472EB7538 /* utsname+DeviceModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "utsname+DeviceModel.swift"; path = "OptimoveCore/Sources/Classes/Extension/utsname+DeviceModel.swift"; sourceTree = "<group>"; };
+		91829D690DB67F9A6A7957CABC5DDDC3 /* OptimoveCore */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = OptimoveCore; path = libOptimoveCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9189F5F374D9098F16882983E4453A62 /* MultiplexLoggerStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultiplexLoggerStream.swift; path = OptimoveCore/Sources/Classes/Logger/MultiplexLoggerStream.swift; sourceTree = "<group>"; };
+		91B47D0BFD99F9D9A2B019956E258989 /* RealtimeMetaData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RealtimeMetaData.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/RealtimeMetaData.swift; sourceTree = "<group>"; };
+		9322FE9D87B2DC9488F00AA49E09C015 /* Optimove.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Optimove.swift; path = OptimoveSDK/Sources/Classes/Optimove.swift; sourceTree = "<group>"; };
+		940F838C3624DACB544F22338186705B /* Optimobile+Stats.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Optimobile+Stats.swift"; path = "OptimoveSDK/Sources/Classes/Optimobile/Optimobile+Stats.swift"; sourceTree = "<group>"; };
+		94EBB6CE92810B240141B40406DF4E03 /* Optimobile+Analytics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Optimobile+Analytics.swift"; path = "OptimoveSDK/Sources/Classes/Optimobile/Optimobile+Analytics.swift"; sourceTree = "<group>"; };
+		956017C3111B1850646DC1D9B56132C0 /* NetworkResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = OptimoveCore/Sources/Classes/NetworkClient/NetworkResult.swift; sourceTree = "<group>"; };
+		97C9AE8CA8E0911C6068767FD7794377 /* Optimobile+DeepLinking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Optimobile+DeepLinking.swift"; path = "OptimoveSDK/Sources/Classes/Optimobile/Optimobile+DeepLinking.swift"; sourceTree = "<group>"; };
+		9A71B8E763F99609BF5B9467EA39D37D /* LogBody.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogBody.swift; path = OptimoveCore/Sources/Classes/Logger/LogBody.swift; sourceTree = "<group>"; };
+		9BC51DF62B5BF2852CA5AD8DC01134B0 /* ServiceLocator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServiceLocator.swift; path = OptimoveSDK/Sources/Classes/Services/ServiceLocator.swift; sourceTree = "<group>"; };
+		9D72D7972265B0BD625EFB94BE4FD038 /* NetworkingFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkingFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/NetworkingFactory.swift; sourceTree = "<group>"; };
+		9D7454302B56FAE64A6E0675308911B5 /* GlobalConfigurationDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GlobalConfigurationDownloader.swift; path = OptimoveSDK/Sources/Classes/Configuration/GlobalConfigurationDownloader.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9DA152E8D3B6373864F38598D85DAF2B /* OptimoveCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OptimoveCore-umbrella.h"; sourceTree = "<group>"; };
+		9E17E96174B40CD7E4DFE166F041EEB2 /* String+Split.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Split.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+Split.swift"; sourceTree = "<group>"; };
+		9F00D23057C41465C2EC1EF5F60AFC02 /* TenantConfigurationDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TenantConfigurationDownloader.swift; path = OptimoveSDK/Sources/Classes/Configuration/TenantConfigurationDownloader.swift; sourceTree = "<group>"; };
+		A1F04116B9F56E14201991966F744A66 /* PersistentContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PersistentContainer.swift; path = OptimoveSDK/Sources/Classes/CoreData/PersistentContainer.swift; sourceTree = "<group>"; };
+		A373ED9485B862B496DC933139C11C9D /* EventValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventValidator.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/EventValidator.swift; sourceTree = "<group>"; };
+		A683FF1172F9CD8245CC818F79F27482 /* KeyPath+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KeyPath+Extension.swift"; path = "OptimoveSDK/Sources/Classes/CoreData/KeyPath+Extension.swift"; sourceTree = "<group>"; };
+		A78E3194DCEA30E68D1538CE9F4D0618 /* Assembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Assembly.swift; path = OptimoveSDK/Sources/Classes/DI/Assembly.swift; sourceTree = "<group>"; };
+		A7D98655B3F9A471FBD7409D034538E5 /* MergeRemoteConfigurationOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MergeRemoteConfigurationOperation.swift; path = OptimoveSDK/Sources/Classes/Configuration/MergeRemoteConfigurationOperation.swift; sourceTree = "<group>"; };
+		A9E5770D160C7A7A5783F25BCDB94082 /* FileManager+Optimove.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FileManager+Optimove.swift"; path = "OptimoveCore/Sources/Classes/Storage/FileManager+Optimove.swift"; sourceTree = "<group>"; };
+		AA310160F0D180B8F4DAAD1FA00CBC6A /* OptiLoggerOutputStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptiLoggerOutputStream.swift; path = OptimoveSDK/Sources/Classes/Legacy/Logger/OptiLoggerOutputStream.swift; sourceTree = "<group>"; };
+		AA6C649DC4BFFA36FB7C18653418D7B1 /* String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = String.swift; path = OptimoveSDK/Sources/Classes/Extensions/String.swift; sourceTree = "<group>"; };
+		AD8BA18270DEF77EBCE05427E2102939 /* OptimobileHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimobileHelper.swift; path = OptimobileShared/OptimobileHelper.swift; sourceTree = "<group>"; };
+		B166E14EFAF7376D1A9CA35BE90D1D5D /* RemoteConfigurationNetworking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoteConfigurationNetworking.swift; path = OptimoveSDK/Sources/Classes/Configuration/RemoteConfiguration/RemoteConfigurationNetworking.swift; sourceTree = "<group>"; };
+		B434FFCE274914A6376A5C533990B1C1 /* User.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = User.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/User.swift; sourceTree = "<group>"; };
+		B7342887255480173A5ABCB4B5C4AA7E /* OptiLoggerStreamsContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptiLoggerStreamsContainer.swift; path = OptimoveSDK/Sources/Classes/Legacy/Logger/OptiLoggerStreamsContainer.swift; sourceTree = "<group>"; };
+		BAA836D6271D2FF60ADF010F7E5C655A /* String+SHA1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+SHA1.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+SHA1.swift"; sourceTree = "<group>"; };
+		BCFF2893E21C99EE8093E6AF87BDF459 /* OnStartEventGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnStartEventGenerator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/OnStartEventGenerator.swift; sourceTree = "<group>"; };
+		BD22E3F0E0CF7CD7CC9E6204CC83D6F9 /* RealTime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RealTime.swift; path = OptimoveSDK/Sources/Classes/Components/RealTime/RealTime.swift; sourceTree = "<group>"; };
+		BF37924FF8E32AD686626A722093B08F /* ParametersNormalizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParametersNormalizer.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/ParametersNormalizer.swift; sourceTree = "<group>"; };
+		BF42A47323E5FA07FDC34C35A385ECB4 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = OptimoveCore/Sources/Classes/Events/Event.swift; sourceTree = "<group>"; };
+		C03617F8DC5E9F40DE6A5424A339AD1E /* Pods-Cordova_QA_App.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Cordova_QA_App.modulemap"; sourceTree = "<group>"; };
+		C03893DB2D365A8B43318371DDD6A90E /* ProcessInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProcessInfo.swift; path = OptimoveSDK/Sources/Classes/Extensions/ProcessInfo.swift; sourceTree = "<group>"; };
+		C0708F30068695ECDED7640369848574 /* Managed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Managed.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/Managed.swift; sourceTree = "<group>"; };
+		C1FFBB33FF73C0FAAFADF180B09D399A /* ISO+format.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ISO+format.swift"; path = "OptimoveCore/Sources/Classes/Extension/ISO+format.swift"; sourceTree = "<group>"; };
+		C6DC75816A0B78489B9E09CA8CF065DE /* EventConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventConfig.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/EventConfig.swift; sourceTree = "<group>"; };
+		CB70192BD639D80B4AD65A546C199C25 /* NetworkRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkRequest.swift; path = OptimoveCore/Sources/Classes/NetworkClient/NetworkRequest.swift; sourceTree = "<group>"; };
+		CB95C5B58E72D42EC277CD602254F1CE /* CoreDataMigrationVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataMigrationVersion.swift; path = OptimoveSDK/Sources/Classes/CoreData/Migration/CoreDataMigrationVersion.swift; sourceTree = "<group>"; };
+		CF28093B7A2614966CF299442C229EFC /* CoreDataFetchedPropertyDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataFetchedPropertyDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataFetchedPropertyDescription.swift; sourceTree = "<group>"; };
+		D14F29715412D979E3F90A77DC7102D0 /* FirstRunTimestampGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FirstRunTimestampGenerator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/FirstRunTimestampGenerator.swift; sourceTree = "<group>"; };
+		D32BEF7DA40C0C4A442D10D12878E653 /* Result+Successful.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Result+Successful.swift"; path = "OptimoveCore/Sources/Classes/Extension/Result+Successful.swift"; sourceTree = "<group>"; };
+		D34A3D4CC6186E99F428EBDC8CF64666 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataMigrator.swift; path = OptimoveSDK/Sources/Classes/CoreData/Migration/CoreDataMigrator.swift; sourceTree = "<group>"; };
+		D6ED9A7693F25C4FC50AF54C63F95E49 /* KeyValPersistenceHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyValPersistenceHelper.swift; path = OptimobileShared/KeyValPersistenceHelper.swift; sourceTree = "<group>"; };
+		D8F25ABA4D4DE60B8026ACCE2D1616CA /* Dictionary+CompactMapKeys.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Dictionary+CompactMapKeys.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/Dictionary+CompactMapKeys.swift"; sourceTree = "<group>"; };
+		D9E4AE907A1D051844C9E24BECBB38F0 /* NewVisitorIdGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NewVisitorIdGenerator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/NewVisitorIdGenerator.swift; sourceTree = "<group>"; };
+		DCE91E581B3144B703F8D57AE2F4245C /* ProcessInfo+OsVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ProcessInfo+OsVersion.swift"; path = "OptimoveCore/Sources/Classes/Extension/ProcessInfo+OsVersion.swift"; sourceTree = "<group>"; };
+		DF35320C84622F813BFAB0B63B7E480A /* EmailValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = OptimoveSDK/Sources/Classes/Validators/EmailValidator.swift; sourceTree = "<group>"; };
+		E0004E3CD88A061BE9F7787ACDBBD626 /* OptimoveCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OptimoveCore-prefix.pch"; sourceTree = "<group>"; };
+		E16F449D84D8B751E1C053E1A6A372BF /* RuntimeCodingKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RuntimeCodingKey.swift; path = OptimoveCore/Sources/Classes/Coding/RuntimeCodingKey.swift; sourceTree = "<group>"; };
+		E1A4FF583D5749875553ABA48064D3AD /* NetworkError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = OptimoveCore/Sources/Classes/NetworkClient/NetworkError.swift; sourceTree = "<group>"; };
+		E28A775C5043DC8157C656DE124C6EAD /* CoreDataMigrationStep.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataMigrationStep.swift; path = OptimoveSDK/Sources/Classes/CoreData/Migration/CoreDataMigrationStep.swift; sourceTree = "<group>"; };
+		E292106ED8D604E10187F261734C436B /* UserAgentGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserAgentGenerator.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/UserAgentGenerator.swift; sourceTree = "<group>"; };
+		E3A9E61D69B41E909D567D421BD91504 /* MediaHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MediaHelper.swift; path = OptimobileShared/MediaHelper.swift; sourceTree = "<group>"; };
+		E42879897E8C8F92F51D149735DDB4EF /* UrlBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UrlBuilder.swift; path = OptimoveSDK/Sources/Classes/Optimobile/UrlBuilder.swift; sourceTree = "<group>"; };
+		E47B960DF9986A8A6B64FF47E13121AC /* Operations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Operations.swift; path = OptimoveSDK/Sources/Classes/Components/Operations.swift; sourceTree = "<group>"; };
+		E5A10416CD59A4B017E0C3DD4E57E42C /* DeepLinkFingerprinter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeepLinkFingerprinter.swift; path = OptimoveSDK/Sources/Classes/Optimobile/DeepLinkFingerprinter.swift; sourceTree = "<group>"; };
+		E73E3989B75294192EA3664A3C85AE9C /* OptimobileBadgeObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimobileBadgeObserver.swift; path = OptimoveSDK/Sources/Classes/Optimobile/OptimobileBadgeObserver.swift; sourceTree = "<group>"; };
+		F325986A6FBCCC707BB800CE27D8DC8E /* CoreDataAttributeDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataAttributeDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataAttributeDescription.swift; sourceTree = "<group>"; };
+		F44ADE558AE15584399D2BA765AE5AAE /* OptimoveSDK */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = OptimoveSDK; path = libOptimoveSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F45BD1083C31C58E7B97E78E23A17EDC /* KSHttp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSHttp.swift; path = OptimobileShared/KSHttp.swift; sourceTree = "<group>"; };
+		F4B2152070AB796CE35BA521B2BFFF36 /* PendingNotificationHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PendingNotificationHelper.swift; path = OptimobileShared/PendingNotificationHelper.swift; sourceTree = "<group>"; };
+		F5C463F463DA1F6379881D75D18029DF /* OptistreamEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamEvent.swift; path = OptimoveCore/Sources/Classes/Optistream/OptistreamEvent.swift; sourceTree = "<group>"; };
+		F61949419883942F9CBE9CA38E7242FD /* MigrationWork.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MigrationWork.swift; path = OptimoveSDK/Sources/Classes/Migration/MigrationWork.swift; sourceTree = "<group>"; };
+		F6957B2BDEE5FB1558218EFCB291B37C /* SetUserIdEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetUserIdEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/SetUserIdEvent.swift; sourceTree = "<group>"; };
+		F72B27C87CD3FDD41D96F87007F58F90 /* NSManagedObjectContext+Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+Utilities.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/NSManagedObjectContext+Utilities.swift"; sourceTree = "<group>"; };
+		F8BA07677587698C8CD212A11ED129E1 /* OptimoveSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OptimoveSDK.release.xcconfig; sourceTree = "<group>"; };
+		F9C3F9067EA854C6080523F71D76D9C8 /* DeviceStateObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceStateObserver.swift; path = OptimoveSDK/Sources/Classes/Observers/DeviceStateObserver.swift; sourceTree = "<group>"; };
+		FC0932C3A9B0576BE0206DE2B3ECE61C /* Pods-Cordova_QA_App */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-Cordova_QA_App"; path = "libPods-Cordova_QA_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE7F0AC75F7E604B871E783B54B142A1 /* CoreDataRelationshipDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataRelationshipDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataRelationshipDescription.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14707AC465B15355932AA60864DA511F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		445309906BCA089EF3FCA594FE103CE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B72526ED614367EACC7797744A076498 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19D2A5E61B3B553E2F242D19D968807E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				57AE83DD71350E4C8B635F19310B8F11 /* OptimoveCore.modulemap */,
+				5E63CEADB6CF9BFEC59CA20E61D1D434 /* OptimoveCore-dummy.m */,
+				E0004E3CD88A061BE9F7787ACDBBD626 /* OptimoveCore-prefix.pch */,
+				9DA152E8D3B6373864F38598D85DAF2B /* OptimoveCore-umbrella.h */,
+				6EFB563F8DBE84241FD9D03F21979C68 /* OptimoveCore.debug.xcconfig */,
+				57BF79C44720B0F6C2D6D9FCF5C3F039 /* OptimoveCore.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/OptimoveCore";
+			sourceTree = "<group>";
+		};
+		7002027DB3F5AF704D2FD303B5AD3AD0 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8BDDC006F17F3E301D42F773A8B911B8 /* Pods-Cordova_QA_App */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		8BDDC006F17F3E301D42F773A8B911B8 /* Pods-Cordova_QA_App */ = {
+			isa = PBXGroup;
+			children = (
+				C03617F8DC5E9F40DE6A5424A339AD1E /* Pods-Cordova_QA_App.modulemap */,
+				3F4422230FAB89BFBDEAFBBC32C16316 /* Pods-Cordova_QA_App-acknowledgements.markdown */,
+				85D5985BB8E85D1AA1277D4A9B0F5ABF /* Pods-Cordova_QA_App-acknowledgements.plist */,
+				17596305D06823DA31D0E71CD9FE358A /* Pods-Cordova_QA_App-dummy.m */,
+				8E8AB8623B39EC9C6434F4A4EE779BFB /* Pods-Cordova_QA_App-umbrella.h */,
+				4154B3FD48B4ED68D1E4BEC159D1330E /* Pods-Cordova_QA_App.debug.xcconfig */,
+				2D509270C016B9EB942EAF3FABA98446 /* Pods-Cordova_QA_App.release.xcconfig */,
+			);
+			name = "Pods-Cordova_QA_App";
+			path = "Target Support Files/Pods-Cordova_QA_App";
+			sourceTree = "<group>";
+		};
+		950565C9669E0B005B4F68001093B1C9 /* OptimoveSDK */ = {
+			isa = PBXGroup;
+			children = (
+				38DAD52C5FAEAE01C0DE24E46C3C3DBF /* AnalyticsHelper.swift */,
+				7E4A39AE7BB6D3BD0ECFFD1FFD8012D7 /* AppGroupsHelper.swift */,
+				5BBDED93C2F70A5A97FA43F48B0E213F /* AppOpenEvent.swift */,
+				3BD42898E7434393103E3B36AF8004E8 /* AppOpenObserver.swift */,
+				67E9B1B5B12399570227261E05FDE5EB /* AppOpenOnStartGenerator.swift */,
+				A78E3194DCEA30E68D1538CE9F4D0618 /* Assembly.swift */,
+				19AA6A540677F96848A292B88B13D6AE /* Bundle+Identifiers.swift */,
+				58F2827255956734C11B1DDD42FA17D1 /* ComponentFactory.swift */,
+				12EF9DD721BD3550666B551C3F5E7242 /* ComponentHandlers.swift */,
+				790AE208EC88DD3A389A2EC437CDC187 /* Components.swift */,
+				1EDDFAC11D58AE4BADD319A8BD255254 /* ConfigurationFetcher.swift */,
+				4E0FE9588880AF3B4D2C3C78FC50DB9D /* Container.swift */,
+				F325986A6FBCCC707BB800CE27D8DC8E /* CoreDataAttributeDescription.swift */,
+				57B37E10BEB45072C512BC370769DFED /* CoreDataEntityDescription.swift */,
+				CF28093B7A2614966CF299442C229EFC /* CoreDataFetchedPropertyDescription.swift */,
+				7C3881033156B63EC93273BD71023449 /* CoreDataFetchIndexDescription.swift */,
+				E28A775C5043DC8157C656DE124C6EAD /* CoreDataMigrationStep.swift */,
+				CB95C5B58E72D42EC277CD602254F1CE /* CoreDataMigrationVersion.swift */,
+				D34A3D4CC6186E99F428EBDC8CF64666 /* CoreDataMigrator.swift */,
+				1A87620A1A1AE2A96252F3AD0A4AFA5A /* CoreDataModelDescription.swift */,
+				FE7F0AC75F7E604B871E783B54B142A1 /* CoreDataRelationshipDescription.swift */,
+				439C61F1D72553040BEA108E673473AD /* CoreEventFactory.swift */,
+				7F6E5E09896378A01B09C70ACE6A7AEE /* CwlSysctl.swift */,
+				0877721FDD35D359D94C4341992D0CDE /* DateTimeProvider.swift */,
+				E5A10416CD59A4B017E0C3DD4E57E42C /* DeepLinkFingerprinter.swift */,
+				F9C3F9067EA854C6080523F71D76D9C8 /* DeviceStateObserver.swift */,
+				29E591DD3A7E6A75D7D75F7F98E616E6 /* DeviceStateObserverFactory.swift */,
+				D8F25ABA4D4DE60B8026ACCE2D1616CA /* Dictionary+CompactMapKeys.swift */,
+				DF35320C84622F813BFAB0B63B7E480A /* EmailValidator.swift */,
+				5BF81787C51035E0A269312950883588 /* EventCDv1.swift */,
+				3F23112C28C8B09C236D0EF1F61B8F52 /* EventCDv1ToEventCDv2MappingModel.swift */,
+				268F6A4E02E3AACD5353A4F616B23756 /* EventCDv1ToEventCDv2MigrationPolicy.swift */,
+				7211E9CEBD8EDEB6E715C799431EDB37 /* EventCDv2.swift */,
+				A373ED9485B862B496DC933139C11C9D /* EventValidator.swift */,
+				D14F29715412D979E3F90A77DC7102D0 /* FirstRunTimestampGenerator.swift */,
+				9D7454302B56FAE64A6E0675308911B5 /* GlobalConfigurationDownloader.swift */,
+				3DCF6351F4060BE5966ABC54DF468CB8 /* InAppManager.swift */,
+				6525AC5F47C8BF038D7CA4DB9F7DF174 /* InAppModels.swift */,
+				76E84E2AD9FA96D880F6DAA1A89C0A13 /* InAppPresenter.swift */,
+				37C715B50404A09F70C04E7DE3F63729 /* InMemoryBuffer.swift */,
+				5EE0BE768AEBCEE48F9B716422A1C9AB /* InstallationIdGenerator.swift */,
+				A683FF1172F9CD8245CC818F79F27482 /* KeyPath+Extension.swift */,
+				D6ED9A7693F25C4FC50AF54C63F95E49 /* KeyValPersistenceHelper.swift */,
+				F45BD1083C31C58E7B97E78E23A17EDC /* KSHttp.swift */,
+				5766F1D41476B7E780F89ABDF68436AF /* LocationService.swift */,
+				3D68D2097386AD5553C1A9B5F95F3A0C /* LoggerInitializator.swift */,
+				698C2B6AD939FEEA20D009E7BDB575CA /* LogLevel.swift */,
+				303F94213AD545FB73744BF4642D0365 /* MainFactory.swift */,
+				C0708F30068695ECDED7640369848574 /* Managed.swift */,
+				E3A9E61D69B41E909D567D421BD91504 /* MediaHelper.swift */,
+				A7D98655B3F9A471FBD7409D034538E5 /* MergeRemoteConfigurationOperation.swift */,
+				07C466564DA7234819F60BF5972648BA /* MetaDataEvent.swift */,
+				707E112A83274B1FB238DDBD0C55F97E /* MigrationObserver.swift */,
+				F61949419883942F9CBE9CA38E7242FD /* MigrationWork.swift */,
+				5AEF8811DF16069D36ED60699BE49507 /* MobileProvision.swift */,
+				9D72D7972265B0BD625EFB94BE4FD038 /* NetworkingFactory.swift */,
+				6BE6D20DEE02E59A84F46C6D4BDEB6B9 /* NetworkRequestFactory.swift */,
+				66FD485C68C702051516D22C37135B75 /* NewEmailHandler.swift */,
+				467968C4DA33BEA897067E9CE16F3AD8 /* NewTenantInfoHandler.swift */,
+				03261605A1BE12D6B3E178A29288B206 /* NewUserHandler.swift */,
+				D9E4AE907A1D051844C9E24BECBB38F0 /* NewVisitorIdGenerator.swift */,
+				31895A350F5764BC318FAD1919268B65 /* Notification.swift */,
+				F72B27C87CD3FDD41D96F87007F58F90 /* NSManagedObjectContext+Utilities.swift */,
+				BCFF2893E21C99EE8093E6AF87BDF459 /* OnStartEventGenerator.swift */,
+				616E5D6443BBE2501FF40546662BA2D8 /* OperationFactory.swift */,
+				E47B960DF9986A8A6B64FF47E13121AC /* Operations.swift */,
+				AA310160F0D180B8F4DAAD1FA00CBC6A /* OptiLoggerOutputStream.swift */,
+				B7342887255480173A5ABCB4B5C4AA7E /* OptiLoggerStreamsContainer.swift */,
+				62BB46D6AA969BA3DF1CE62E9804CB4A /* Optimobile.swift */,
+				94EBB6CE92810B240141B40406DF4E03 /* Optimobile+Analytics.swift */,
+				97C9AE8CA8E0911C6068767FD7794377 /* Optimobile+DeepLinking.swift */,
+				193899CCB4C89C96E93F4BF3612F80D7 /* Optimobile+Push.swift */,
+				940F838C3624DACB544F22338186705B /* Optimobile+Stats.swift */,
+				E73E3989B75294192EA3664A3C85AE9C /* OptimobileBadgeObserver.swift */,
+				AD8BA18270DEF77EBCE05427E2102939 /* OptimobileHelper.swift */,
+				187386EA7F26FB21D53E01F42D32131B /* OptimobileUserDefaultsKey.swift */,
+				9322FE9D87B2DC9488F00AA49E09C015 /* Optimove.swift */,
+				5CAC71BB35FE1BCF2C6EA62CA59C75A0 /* OptimoveConfig.swift */,
+				377D05F9C992345027E08E0D5CCE271D /* OptimoveEvent.swift */,
+				32E977AAC9B4B5C12C89F500E55D7D67 /* OptimoveInApp.swift */,
+				5C72A3803C169852A51D90FA842DB2CA /* OptimoveKeys.swift */,
+				4BBA00BB89C53077213CD9724F9EE1D6 /* OptimoveUserNotificationCenterDelegate.swift */,
+				888CFA84D2B0D65FFAFED8AEC8B64D3C /* OptistreamQueue.swift */,
+				5B260E750A96A927B5BEF81AF6463C70 /* OptistreamQueueImpl.swift */,
+				3BF61E914028382C237F9B26FE44C91B /* OptiTrack.swift */,
+				773C30BA4739B485B04669C4E2771F53 /* PageVisitEvent.swift */,
+				35B0E8FE3B649AD2275B41B62592B636 /* ParametersDecorator.swift */,
+				BF37924FF8E32AD686626A722093B08F /* ParametersNormalizer.swift */,
+				4E7E3D2D667A3A71DC938825AB2BE58E /* PendingNotification.swift */,
+				F4B2152070AB796CE35BA521B2BFFF36 /* PendingNotificationHelper.swift */,
+				A1F04116B9F56E14201991966F744A66 /* PersistentContainer.swift */,
+				6FD49CDD25FA326F4F24CF3ED58CD9B9 /* Pipe.swift */,
+				59D2E9660D7B1D8B7F88B7E1B40C0D8F /* Pipeline.swift */,
+				C03893DB2D365A8B43318371DDD6A90E /* ProcessInfo.swift */,
+				BD22E3F0E0CF7CD7CC9E6204CC83D6F9 /* RealTime.swift */,
+				B166E14EFAF7376D1A9CA35BE90D1D5D /* RemoteConfigurationNetworking.swift */,
+				1C664B1E154710BA23C2636C160FAF0F /* RemoteConfigurationRequestBuilder.swift */,
+				1581F4102D6E0CA0F08BF5288D963CC6 /* ResignActiveObserver.swift */,
+				3DB37554C8E8BC129EEDF8D438AFBAC4 /* RingBuffer.swift */,
+				6223743051E299781523057A7FED0E9F /* RunningFlagsContainer.swift */,
+				218B2DAD17514F383264A73F70C829EC /* ScreenVisitValidator.swift */,
+				2F893CD536E1951C4CDA8BD1D1F7E1EF /* SDKInitializer.swift */,
+				9BC51DF62B5BF2852CA5AD8DC01134B0 /* ServiceLocator.swift */,
+				1FC9AD54874441CAF57F465EC5D7311D /* SessionHelper.swift */,
+				51AC3B2C37DC8CBA50F7638D3B282706 /* SetUserAgent.swift */,
+				03F6A17B7F3669C18ADD82C497DED7BE /* SetUserEmailEvent.swift */,
+				F6957B2BDEE5FB1558218EFCB291B37C /* SetUserIdEvent.swift */,
+				2DBAE15F3156997B79E48C172B53FF97 /* StatisticService.swift */,
+				AA6C649DC4BFFA36FB7C18653418D7B1 /* String.swift */,
+				63D81921E950E082DF442A5EC32C1A27 /* String+alphanumeric.swift */,
+				8D65F65C3C93941CCD40D305B083D942 /* String+isBlank.swift */,
+				195CE6924A89E315802BE7E785CF2204 /* String+random.swift */,
+				BAA836D6271D2FF60ADF010F7E5C655A /* String+SHA1.swift */,
+				9E17E96174B40CD7E4DFE166F041EEB2 /* String+Split.swift */,
+				9F00D23057C41465C2EC1EF5F60AFC02 /* TenantConfigurationDownloader.swift */,
+				22D002BA55829D90DAF10554EC18DBB1 /* TenantEvent.swift */,
+				E42879897E8C8F92F51D149735DDB4EF /* UrlBuilder.swift */,
+				B434FFCE274914A6376A5C533990B1C1 /* User.swift */,
+				E292106ED8D604E10187F261734C436B /* UserAgentGenerator.swift */,
+				4E7C43A9BED944DF212C500C8CC2CBC9 /* UserValidator.swift */,
+				63A0E70A80BA82DC825B0F4EF7FEAD04 /* Version.swift */,
+				96D0E74798FFE0C3982E5D659F952C3B /* Support Files */,
+			);
+			name = OptimoveSDK;
+			path = OptimoveSDK;
+			sourceTree = "<group>";
+		};
+		96D0E74798FFE0C3982E5D659F952C3B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				549617FB40F42154A682C5793311FA32 /* OptimoveSDK.modulemap */,
+				4F39C077EC2CB865CAD0FC7F30DC46AF /* OptimoveSDK-dummy.m */,
+				66019A665806C91DE32904E7987700C8 /* OptimoveSDK-prefix.pch */,
+				6FE756D52437654591A19DED03EE9A5A /* OptimoveSDK-umbrella.h */,
+				67707C67D8BAF44D981E0FCC9EF12F03 /* OptimoveSDK.debug.xcconfig */,
+				F8BA07677587698C8CD212A11ED129E1 /* OptimoveSDK.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/OptimoveSDK";
+			sourceTree = "<group>";
+		};
+		977B25D1612A5EA50B23A959C0E604F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7091A77B6595D39A15120FA77182E83 /* OptimoveCore */,
+				950565C9669E0B005B4F68001093B1C9 /* OptimoveSDK */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AF1757D074A88B53995A11B394F43314 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				91829D690DB67F9A6A7957CABC5DDDC3 /* OptimoveCore */,
+				F44ADE558AE15584399D2BA765AE5AAE /* OptimoveSDK */,
+				FC0932C3A9B0576BE0206DE2B3ECE61C /* Pods-Cordova_QA_App */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				977B25D1612A5EA50B23A959C0E604F1 /* Pods */,
+				AF1757D074A88B53995A11B394F43314 /* Products */,
+				7002027DB3F5AF704D2FD303B5AD3AD0 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D7091A77B6595D39A15120FA77182E83 /* OptimoveCore */ = {
+			isa = PBXGroup;
+			children = (
+				8E2C8FFCA2D2CAA33BCDEB77447A23CE /* AsyncOperation.swift */,
+				08203D5EF1F08A9ACFD0422448283E50 /* Bundle+AppVersion.swift */,
+				7A3C071B20039F8A0BE4F16163B8FE95 /* Bundle+HostApp.swift */,
+				36A5F10CA5CB089FF04E8F1FBD5EC7EF /* Configuration.swift */,
+				615F8976A093C698794C7391CF1AE43D /* ConfigurationBuilder.swift */,
+				49398F710A5E214A74EF74DC15D1FAF5 /* ConfigurationRepository.swift */,
+				2FA94BD3500DF073A73F0CB717E4B395 /* ConsoleLoggerStream.swift */,
+				76F69FEF27E5296E8FF30878AD70BA19 /* Endpoint.swift */,
+				BF42A47323E5FA07FDC34C35A385ECB4 /* Event.swift */,
+				C6DC75816A0B78489B9E09CA8CF065DE /* EventConfig.swift */,
+				A9E5770D160C7A7A5783F25BCDB94082 /* FileManager+Optimove.swift */,
+				461BAF759BDD3A69E51567E431666026 /* FileStorage.swift */,
+				1EC082F7688AB4C444CF9C498448627C /* GlobalConfig.swift */,
+				6A397807C43C85DEAD3EF1DF63987085 /* GlobalFunctions.swift */,
+				75E180105030883913E282E5B061F857 /* Initialization.swift */,
+				C1FFBB33FF73C0FAAFADF180B09D399A /* ISO+format.swift */,
+				8EF1C9D331F8FC93C732B555BCC30F63 /* JSON.swift */,
+				9A71B8E763F99609BF5B9467EA39D37D /* LogBody.swift */,
+				02DB541E2913F883A90B5EE2FED6A710 /* Logger.swift */,
+				8017954E3CBF26AFA3AB6FCBC7CFF6B8 /* LoggerStream.swift */,
+				07DB6A5196EAE1AB239EF3E60B8CFCA1 /* LogLevelCore.swift */,
+				83594C5651D9ADCAF60966C6F42AD7CC /* Merging.swift */,
+				9189F5F374D9098F16882983E4453A62 /* MultiplexLoggerStream.swift */,
+				48FD8CE375876A695DA3E1A290468669 /* NetworkClient.swift */,
+				E1A4FF583D5749875553ABA48064D3AD /* NetworkError.swift */,
+				CB70192BD639D80B4AD65A546C199C25 /* NetworkRequest.swift */,
+				3AE548A055DDAC76D4AEAB7C0A4A17F3 /* NetworkResponse.swift */,
+				956017C3111B1850646DC1D9B56132C0 /* NetworkResult.swift */,
+				F5C463F463DA1F6379881D75D18029DF /* OptistreamEvent.swift */,
+				17D58C2B128991D5A7FB507CBC332CD5 /* OptistreamEventBuilder.swift */,
+				7ECAF4FCD50F56DC5BE5A8D1F4EBF842 /* OptistreamNetworking.swift */,
+				1499BA7BF71CC7EAD2FE218D50883543 /* OptitrackMetaData.swift */,
+				4B6E4B9CB9F8D023852FCA9A827B597A /* Parameter.swift */,
+				DCE91E581B3144B703F8D57AE2F4245C /* ProcessInfo+OsVersion.swift */,
+				0D18316188834B1CDF1947E201838D3D /* Querying.swift */,
+				91B47D0BFD99F9D9A2B019956E258989 /* RealtimeMetaData.swift */,
+				26E4B0FF1A54A6303D1FE9C3FF2E36C3 /* RemoteLoggerStream.swift */,
+				D32BEF7DA40C0C4A442D10D12878E653 /* Result+Successful.swift */,
+				E16F449D84D8B751E1C053E1A6A372BF /* RuntimeCodingKey.swift */,
+				728CFB480B8A397CFBD8B31EDA6F9050 /* SdkEnvironment.swift */,
+				2E6D8398FE6A5E1FD8354CA4A1319331 /* SdkPlatform.swift */,
+				4C080EC13B9B426BC79FD53F9D9B0573 /* SDKVersion.swift */,
+				89224F15CA7437592BEA3EFE5A79DC64 /* StorageFacade.swift */,
+				7C4958D52992A5043702743FB20B53C2 /* TenantConfig.swift */,
+				68997BF07AE5D7C51445EC5714076768 /* TimeInterval+Seconds.swift */,
+				74B334EA3D18152CD7AA115B0E5F11BE /* UserDefaults+Optimove.swift */,
+				8F26E9F5494CB0B3FFCF33C472EB7538 /* utsname+DeviceModel.swift */,
+				19D2A5E61B3B553E2F242D19D968807E /* Support Files */,
+			);
+			name = OptimoveCore;
+			path = OptimoveCore;
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2B0D7D62C784AD85C680697D7D7BF737 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2898D5D63A50654033557F87531EB16 /* OptimoveSDK-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6C7F1A0BFE3B9ABDF51F71307C9B89D7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC1001AE3E2F2ADC674C1A7389C248C6 /* OptimoveCore-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB69D8026BF7B2F02C969ED36731F45E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15FA8DB89D259CD3063F0DFF6123F0D9 /* Pods-Cordova_QA_App-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		05B75CF93B06E1F401E66E705BFE7A31 /* Pods-Cordova_QA_App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A1E2F15F7D2F9BE7665AB8C961DFC53 /* Build configuration list for PBXNativeTarget "Pods-Cordova_QA_App" */;
+			buildPhases = (
+				AB69D8026BF7B2F02C969ED36731F45E /* Headers */,
+				7644E19EE843CB7DE8F59EE8A6836453 /* Sources */,
+				14707AC465B15355932AA60864DA511F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88C25A1ACACD81BFD146F9BC9F9E3280 /* PBXTargetDependency */,
+				4222A4FF34AEE898433C387DEDFD070D /* PBXTargetDependency */,
+			);
+			name = "Pods-Cordova_QA_App";
+			productName = "Pods-Cordova_QA_App";
+			productReference = FC0932C3A9B0576BE0206DE2B3ECE61C /* Pods-Cordova_QA_App */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D35901A6A0D9A774819A7527F3FD2963 /* Build configuration list for PBXNativeTarget "OptimoveCore" */;
+			buildPhases = (
+				6C7F1A0BFE3B9ABDF51F71307C9B89D7 /* Headers */,
+				69D356EEA4BCD964521059D1945230BA /* Sources */,
+				B72526ED614367EACC7797744A076498 /* Frameworks */,
+				0309A1AEAA4CBB02F7CF7AE1AC3CDFDF /* Copy generated compatibility header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OptimoveCore;
+			productName = OptimoveCore;
+			productReference = 91829D690DB67F9A6A7957CABC5DDDC3 /* OptimoveCore */;
+			productType = "com.apple.product-type.library.static";
+		};
+		56640D04F849F6426F7CECA832AA8599 /* OptimoveSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4162F62F4FEB3AF9FB6C5ABC5A32FCE5 /* Build configuration list for PBXNativeTarget "OptimoveSDK" */;
+			buildPhases = (
+				2B0D7D62C784AD85C680697D7D7BF737 /* Headers */,
+				CC5F6D441075BEF5A90C95B39B5048FE /* Sources */,
+				445309906BCA089EF3FCA594FE103CE9 /* Frameworks */,
+				9C30E47807285516B5067D52560A98D3 /* Copy generated compatibility header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7BADB32D00EDC908B3A7376D03125625 /* PBXTargetDependency */,
+			);
+			name = OptimoveSDK;
+			productName = OptimoveSDK;
+			productReference = F44ADE558AE15584399D2BA765AE5AAE /* OptimoveSDK */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = AF1757D074A88B53995A11B394F43314 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */,
+				56640D04F849F6426F7CECA832AA8599 /* OptimoveSDK */,
+				05B75CF93B06E1F401E66E705BFE7A31 /* Pods-Cordova_QA_App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0309A1AEAA4CBB02F7CF7AE1AC3CDFDF /* Copy generated compatibility header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h",
+				"${PODS_ROOT}/Headers/Public/OptimoveCore/OptimoveCore.modulemap",
+				"${PODS_ROOT}/Headers/Public/OptimoveCore/OptimoveCore-umbrella.h",
+			);
+			name = "Copy generated compatibility header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap",
+				"${BUILT_PRODUCTS_DIR}/OptimoveCore-umbrella.h",
+				"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/OptimoveCore/OptimoveCore.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/OptimoveCore/OptimoveCore-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
+		};
+		9C30E47807285516B5067D52560A98D3 /* Copy generated compatibility header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h",
+				"${PODS_ROOT}/Headers/Public/OptimoveSDK/OptimoveSDK.modulemap",
+				"${PODS_ROOT}/Headers/Public/OptimoveSDK/OptimoveSDK-umbrella.h",
+			);
+			name = "Copy generated compatibility header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap",
+				"${BUILT_PRODUCTS_DIR}/OptimoveSDK-umbrella.h",
+				"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/OptimoveSDK/OptimoveSDK.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/OptimoveSDK/OptimoveSDK-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69D356EEA4BCD964521059D1945230BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A689466375826A41CE862AAE7EC4E9 /* AsyncOperation.swift in Sources */,
+				FB0446739A2FCD392761D65D5625FC6D /* Bundle+AppVersion.swift in Sources */,
+				4404B96A39DB5B2DDA53C65C87B4601A /* Bundle+HostApp.swift in Sources */,
+				3DD849991E7DDE9C5E7E6B553573D943 /* Configuration.swift in Sources */,
+				C89B3C9D20D1166267C77F09CEB1C22D /* ConfigurationBuilder.swift in Sources */,
+				BB257FD1E19ABA7FBCAD02D37A88C969 /* ConfigurationRepository.swift in Sources */,
+				BD36AC38A7F5C2B8B404990741AD3D8B /* ConsoleLoggerStream.swift in Sources */,
+				C66147C21144A6A3CCD74E44B03BBC1A /* Endpoint.swift in Sources */,
+				7DD6BFAD57CF4470BAF30CC0EAFB7125 /* Event.swift in Sources */,
+				15C0E91AA0D5DBAE597713A6AD7F542B /* EventConfig.swift in Sources */,
+				323CF64B4D242231180D65C76768C25D /* FileManager+Optimove.swift in Sources */,
+				4B6735A82CF7A5687ED7A3E123B84A94 /* FileStorage.swift in Sources */,
+				B5463A0310752FB98246A30B78829597 /* GlobalConfig.swift in Sources */,
+				AD55568D41B0DA16A5BF3D0E30355242 /* GlobalFunctions.swift in Sources */,
+				7F5FDDCBA8BFFFD68F8B05C4465C418E /* Initialization.swift in Sources */,
+				61A8E24FE10B82AFC2C7C96CC4EE83F1 /* ISO+format.swift in Sources */,
+				84C1CC7CA6EB393D159ADEA81F757DD0 /* JSON.swift in Sources */,
+				AFCEF68BE211A91CF948B9126FC2593E /* LogBody.swift in Sources */,
+				E8D0F4F55712B7CB68CDAB1C63677C3C /* Logger.swift in Sources */,
+				92AD22901813CAF8955311D5C838F7B6 /* LoggerStream.swift in Sources */,
+				04344DBA80436CE863E3E24B2095BEBD /* LogLevelCore.swift in Sources */,
+				3E37C49E8E8457B783C112AF78FAB716 /* Merging.swift in Sources */,
+				C32DC5BB7E84ECD584681E4A1E10448C /* MultiplexLoggerStream.swift in Sources */,
+				26CD2EBB354FFCD387F36975EB7025E4 /* NetworkClient.swift in Sources */,
+				3A59C912B83B9F3671FBDB25F358EE7C /* NetworkError.swift in Sources */,
+				D3149CD1DEB19503D51DA24EDB8A9837 /* NetworkRequest.swift in Sources */,
+				FB117EE9901D7159EBDF2D4D0360FFA3 /* NetworkResponse.swift in Sources */,
+				C6F6B337A0B478B0E3209A759A234032 /* NetworkResult.swift in Sources */,
+				53700F68E0875B41099AB7C769875362 /* OptimoveCore-dummy.m in Sources */,
+				1B0F3EA2CF3382794926AA0799AEFB7A /* OptistreamEvent.swift in Sources */,
+				3BD6493FFAF1A8EE9F4194153F38B257 /* OptistreamEventBuilder.swift in Sources */,
+				EFA40D6BD0B90C0A7BF1929AD2A0395C /* OptistreamNetworking.swift in Sources */,
+				A4C2A1601DE03C196B4ADEF040514E72 /* OptitrackMetaData.swift in Sources */,
+				AB8C3EC58D5CA4D410ED7FC25B2445A6 /* Parameter.swift in Sources */,
+				2CDB737871E7B37F0697C4ED7374CCE6 /* ProcessInfo+OsVersion.swift in Sources */,
+				6E5C64D18FD3304208E29B112BC1C7D1 /* Querying.swift in Sources */,
+				CEE81EB846FD583C77006291F9CDF615 /* RealtimeMetaData.swift in Sources */,
+				ED96FB05FEDEF231E549A3BDBE6D92D9 /* RemoteLoggerStream.swift in Sources */,
+				E723CE74DEA610E2B11D6B4A25247DAF /* Result+Successful.swift in Sources */,
+				A3E8BFE4F8EA3F54CFEB3981DE81491E /* RuntimeCodingKey.swift in Sources */,
+				BA1F6E71F1BFB98B239E0781F3AB8C30 /* SdkEnvironment.swift in Sources */,
+				DF9E893F2444367F67012C5D90370076 /* SdkPlatform.swift in Sources */,
+				99744A3A52003C0C76A4DBFC98C1CCDE /* SDKVersion.swift in Sources */,
+				4AA473566C5250A24A0C9809728C8E70 /* StorageFacade.swift in Sources */,
+				FBE771D4A2073BCC58B888429D0E929D /* TenantConfig.swift in Sources */,
+				1BB37C25D7AEC598972510D2854B1ED2 /* TimeInterval+Seconds.swift in Sources */,
+				2AB870FB0E6E2B5A53A03AE156AEA8A1 /* UserDefaults+Optimove.swift in Sources */,
+				D56B177DA2C45957211792AAE081A696 /* utsname+DeviceModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7644E19EE843CB7DE8F59EE8A6836453 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27DD656946A84078E97CC73F293E8054 /* Pods-Cordova_QA_App-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC5F6D441075BEF5A90C95B39B5048FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15931180128C5FB1CA4D2747A71EE60F /* AnalyticsHelper.swift in Sources */,
+				3F74F0029E199D47920B92BCBE9D9D22 /* AppGroupsHelper.swift in Sources */,
+				ACD636EB80B2AF5D7F88E951273C972E /* AppOpenEvent.swift in Sources */,
+				E0832AFB1A1203B457A80D109BAFA824 /* AppOpenObserver.swift in Sources */,
+				7CD9113C2C5E775EF28DC3B7804A1FCB /* AppOpenOnStartGenerator.swift in Sources */,
+				078EE44E1912BBAD3160C8FAC18AEA8E /* Assembly.swift in Sources */,
+				6BCC3DAC1AB3CF75A3D839109D299D11 /* Bundle+Identifiers.swift in Sources */,
+				0B9025ED2D4A4153992CC2E1C576FA56 /* ComponentFactory.swift in Sources */,
+				A7D8D329E0B761A0C28894AF4FB80554 /* ComponentHandlers.swift in Sources */,
+				268CD2DA4C473DC681352867D679443E /* Components.swift in Sources */,
+				0BF57C6BE402490A4F2A0F92C46FC8F6 /* ConfigurationFetcher.swift in Sources */,
+				F322EA5E01E1F69C865FE0BC901A7B73 /* Container.swift in Sources */,
+				60A20FC0ADD228D17C5AC93C30D6C085 /* CoreDataAttributeDescription.swift in Sources */,
+				5A6C54DB7926EC954C62D19591D8B038 /* CoreDataEntityDescription.swift in Sources */,
+				D2BF902A8F3E3DBB20259B63638FDDED /* CoreDataFetchedPropertyDescription.swift in Sources */,
+				697F618A53F9A0396DAEC6EB5DB0B8FA /* CoreDataFetchIndexDescription.swift in Sources */,
+				B2A71E825A1E40B3595AE00E7ACCE24E /* CoreDataMigrationStep.swift in Sources */,
+				58751EF04FE7AE9FE62386980A50C2F9 /* CoreDataMigrationVersion.swift in Sources */,
+				A74E76E02461C8BC6B60BDB7AE58844C /* CoreDataMigrator.swift in Sources */,
+				D0780F37FE0A329AA4FF4205A75D4D0C /* CoreDataModelDescription.swift in Sources */,
+				750D5053533E25DF139EB4F480732CC0 /* CoreDataRelationshipDescription.swift in Sources */,
+				CCA589C97F94A7D17C7B44F9C0F7C56F /* CoreEventFactory.swift in Sources */,
+				04969EFF2AD9A7CAFC01FFA9BF6740F8 /* CwlSysctl.swift in Sources */,
+				76B297EAEA60FEF8E46C1EA66CA884D6 /* DateTimeProvider.swift in Sources */,
+				A21DF88A2518CA223AFF8CFE2C9FEE22 /* DeepLinkFingerprinter.swift in Sources */,
+				E30501B13BB89D6D425C2F802C129D53 /* DeviceStateObserver.swift in Sources */,
+				A9976DEA6F6AFDF34F55BF236C83E418 /* DeviceStateObserverFactory.swift in Sources */,
+				6BB7A592FC8779C7EFBA6E4E8DA50B7E /* Dictionary+CompactMapKeys.swift in Sources */,
+				3CCEE180AE12730D1DEE8ED8F585D279 /* EmailValidator.swift in Sources */,
+				55C4548ADAD55A0049BD6C87FC5C532D /* EventCDv1.swift in Sources */,
+				BB7D7DAA01D7169684B60FB1341DBB79 /* EventCDv1ToEventCDv2MappingModel.swift in Sources */,
+				92C741D1BB004510203A89B3AABD7922 /* EventCDv1ToEventCDv2MigrationPolicy.swift in Sources */,
+				EA30BB13F8A053D8442BB992E53CC9E6 /* EventCDv2.swift in Sources */,
+				96ECD1F3F19147C88A5E556A55C30FE9 /* EventValidator.swift in Sources */,
+				4BE1C3B19566CADDA5C54551885F7E89 /* FirstRunTimestampGenerator.swift in Sources */,
+				AC305C2A0C9027EB9E0850FC97708A57 /* GlobalConfigurationDownloader.swift in Sources */,
+				D10D2F67809C839C476F0292816BAAF4 /* InAppManager.swift in Sources */,
+				A56A57AC00A55D8AF0AB66DC2862DD0A /* InAppModels.swift in Sources */,
+				AA5D4571E3816A243F650325D79CF879 /* InAppPresenter.swift in Sources */,
+				A817DF96C2E8F506E76910460AF4A208 /* InMemoryBuffer.swift in Sources */,
+				27C73A7B822245984EC1C5B10F47DFF2 /* InstallationIdGenerator.swift in Sources */,
+				D409458A3E17EBBD5B9F7515617BC59B /* KeyPath+Extension.swift in Sources */,
+				335886120B48AB17B58CC54AD6C5F3FC /* KeyValPersistenceHelper.swift in Sources */,
+				1476ECD84A058754E9F35DAED944C2E5 /* KSHttp.swift in Sources */,
+				157CA3D33CAEAA78A8649BAF0C7794B8 /* LocationService.swift in Sources */,
+				94C983BB553510FFE863530EAA6E94BB /* LoggerInitializator.swift in Sources */,
+				29D2F95AA39F180C7768E73F5AD627C8 /* LogLevel.swift in Sources */,
+				0210911797326F46D6B0F5B8D5475903 /* MainFactory.swift in Sources */,
+				B58C83594ECA75F789BF715ED98F651E /* Managed.swift in Sources */,
+				316130F7C092C98CC331ED09B9E1AF16 /* MediaHelper.swift in Sources */,
+				EBD853D2EDDC68DA68A821E05A4BB529 /* MergeRemoteConfigurationOperation.swift in Sources */,
+				296D66EAFFD9A5993E51ED692BD2FD96 /* MetaDataEvent.swift in Sources */,
+				D40DA2C94F3E98B5D1C3962AA9A3FFEC /* MigrationObserver.swift in Sources */,
+				0887E13A21C202A3686962559664B147 /* MigrationWork.swift in Sources */,
+				1F09B81BEE2662650194401FC36C2E15 /* MobileProvision.swift in Sources */,
+				5F1D690B44623982177053585E18A691 /* NetworkingFactory.swift in Sources */,
+				51A45248C96AF2730712535ECDC07798 /* NetworkRequestFactory.swift in Sources */,
+				E711B56674964BF06B1CA5C4030BA8D6 /* NewEmailHandler.swift in Sources */,
+				140F4F6300A0223CF1CB92B56197FD93 /* NewTenantInfoHandler.swift in Sources */,
+				10DC2EDED67A43568FEF8D08E460E507 /* NewUserHandler.swift in Sources */,
+				82F00F4671622B84FBD676B6EB4F3673 /* NewVisitorIdGenerator.swift in Sources */,
+				AA4D3C399C8E7198DAD6B67CBEE0633D /* Notification.swift in Sources */,
+				2074D49E8E35EA7CC8E5B7A8A7A229DA /* NSManagedObjectContext+Utilities.swift in Sources */,
+				A279096C7F7807C5428F7AAD23EC1891 /* OnStartEventGenerator.swift in Sources */,
+				9D1D9847165CC0F0E588DAFC8D90AF3E /* OperationFactory.swift in Sources */,
+				974F97B837D916C427CE3AD92C84E687 /* Operations.swift in Sources */,
+				EFDD1DC99366104F31FE9876E51BDE2E /* OptiLoggerOutputStream.swift in Sources */,
+				C619F4C30BDA0C37D30A7D865EAD0FE8 /* OptiLoggerStreamsContainer.swift in Sources */,
+				4604F41C502B508930FE5133118FE4CF /* Optimobile.swift in Sources */,
+				4744EACA3DC178C15DA602AA16958615 /* Optimobile+Analytics.swift in Sources */,
+				50B776544C1D03F8AC96951C4B6CC78A /* Optimobile+DeepLinking.swift in Sources */,
+				55B835F6C7119A804CE53B5736FCE2DC /* Optimobile+Push.swift in Sources */,
+				642DD3A5EB1F2D2624213C9F1B49E4E0 /* Optimobile+Stats.swift in Sources */,
+				B84CB996A1A5F1B3CF5A4E4362CCD7E9 /* OptimobileBadgeObserver.swift in Sources */,
+				50A16B8BE20CEBFACFB639EA94C6ACED /* OptimobileHelper.swift in Sources */,
+				9CE28CDC19B96BAE319AA55202F48780 /* OptimobileUserDefaultsKey.swift in Sources */,
+				D63262F66EDE009D2297536BF5013D18 /* Optimove.swift in Sources */,
+				19CDB3DE759A4049A9EA09015B1402A9 /* OptimoveConfig.swift in Sources */,
+				53654FCBE099D322F4E741FF3AD519A8 /* OptimoveEvent.swift in Sources */,
+				21D129180029CFBAFE64D3D1713353D5 /* OptimoveInApp.swift in Sources */,
+				CC84F7EB7382748116E870DDD89ED22E /* OptimoveKeys.swift in Sources */,
+				AFEACF75B83C88E147F3541426F89C26 /* OptimoveSDK-dummy.m in Sources */,
+				3885FE7CEAE836E49A4AA5F1E4995095 /* OptimoveUserNotificationCenterDelegate.swift in Sources */,
+				B4C90142802A3E77807B02BCBB4025E7 /* OptistreamQueue.swift in Sources */,
+				15A12ADE9CAEF3508AFFD1C253B3528F /* OptistreamQueueImpl.swift in Sources */,
+				D521150350AC115A190C4F7BA650ADD1 /* OptiTrack.swift in Sources */,
+				B37C23B5CBAFC98CDF043731DF4F4924 /* PageVisitEvent.swift in Sources */,
+				CA6FA913F6DF6B0E82E2357A0EE518CB /* ParametersDecorator.swift in Sources */,
+				4643800DF186A4EF406CFC28BEC801CF /* ParametersNormalizer.swift in Sources */,
+				04F50AB2E63DDBA2199344A185B7C9BD /* PendingNotification.swift in Sources */,
+				DD38DA5F1C5E6517BF7247C6554F116C /* PendingNotificationHelper.swift in Sources */,
+				7BE0ED8C59AF789A467FF32C6271869D /* PersistentContainer.swift in Sources */,
+				9C63CBDD2F86DE0F5873C6756FA7C23F /* Pipe.swift in Sources */,
+				F8E5EE582B27F9DA9D62903511608060 /* Pipeline.swift in Sources */,
+				2641B79FAB34A565E4AE89AD709707E5 /* ProcessInfo.swift in Sources */,
+				76729659AE73EE5FEF6C26D92FC94FEE /* RealTime.swift in Sources */,
+				8E71B87764022339C865A0D29910D525 /* RemoteConfigurationNetworking.swift in Sources */,
+				498334EF28783D6B8EAE936BEA7BE92A /* RemoteConfigurationRequestBuilder.swift in Sources */,
+				D38EC65ADCF6461588AD6384B097813E /* ResignActiveObserver.swift in Sources */,
+				455CC587B25384F721075EC284418D5E /* RingBuffer.swift in Sources */,
+				A60E2BF2A3A9DE5A314491E7C22D0FFB /* RunningFlagsContainer.swift in Sources */,
+				3DAAA6C76992606463934BB52AF1A2FA /* ScreenVisitValidator.swift in Sources */,
+				421D5BBDCF3A78745335F859DAE92DA4 /* SDKInitializer.swift in Sources */,
+				31C6C9A0B68B7DDF8C25D3009A43D2FC /* ServiceLocator.swift in Sources */,
+				28F6539D7FFA688448A91C2D7FF7A458 /* SessionHelper.swift in Sources */,
+				BFE57BB1678B32EA2C95753AF9300ABC /* SetUserAgent.swift in Sources */,
+				4BA9C219B2312A0CDDB8946F98A07499 /* SetUserEmailEvent.swift in Sources */,
+				33ABFF0D77620DE5385CE35FFAC2CB1F /* SetUserIdEvent.swift in Sources */,
+				09220AFA7966787A601A243F83539787 /* StatisticService.swift in Sources */,
+				1157681F41E6260D14AECB9E70CEAB8F /* String.swift in Sources */,
+				C1D6DF256D072F5C6802811147809B47 /* String+alphanumeric.swift in Sources */,
+				BEA5B1376AFF2ACB62CD7BA0C4128665 /* String+isBlank.swift in Sources */,
+				E17423F97DF8E3C49CB5A53A88BA00BC /* String+random.swift in Sources */,
+				CDF445327099567B770A78C56D2973CB /* String+SHA1.swift in Sources */,
+				0536FAC47056947E07ADAD5716418339 /* String+Split.swift in Sources */,
+				6DD08FAB20D7A0197BC92692315D2A0B /* TenantConfigurationDownloader.swift in Sources */,
+				474D247EA54B50FB779E77374DC2B543 /* TenantEvent.swift in Sources */,
+				B581326954F8A4E235F9BEFC08106A82 /* UrlBuilder.swift in Sources */,
+				B85AD4B7A25744F85152F31BFFF99DBE /* User.swift in Sources */,
+				C1955EB1211AE0E5DB21FB0900FB103C /* UserAgentGenerator.swift in Sources */,
+				A1335617D2949DB7FA742D34AB3DA345 /* UserValidator.swift in Sources */,
+				E9F9819B90904672A4BD4519B74AE0AA /* Version.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4222A4FF34AEE898433C387DEDFD070D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OptimoveSDK;
+			target = 56640D04F849F6426F7CECA832AA8599 /* OptimoveSDK */;
+			targetProxy = 463B0579CBFF0A4FAFE647FBDDD28939 /* PBXContainerItemProxy */;
+		};
+		7BADB32D00EDC908B3A7376D03125625 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OptimoveCore;
+			target = 4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */;
+			targetProxy = ED8896782A4DA4BE894DFE97962BA57A /* PBXContainerItemProxy */;
+		};
+		88C25A1ACACD81BFD146F9BC9F9E3280 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OptimoveCore;
+			target = 4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */;
+			targetProxy = 5149E882445D13B00FE0C7243018859F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0EB26BD95A0043113CCCF8620152C5B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4154B3FD48B4ED68D1E4BEC159D1330E /* Pods-Cordova_QA_App.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Cordova_QA_App/Pods-Cordova_QA_App.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		391A1B459E70F76381D95924EB5CFACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57BF79C44720B0F6C2D6D9FCF5C3F039 /* OptimoveCore.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/OptimoveCore/OptimoveCore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MODULEMAP_FILE = Headers/Public/OptimoveCore/OptimoveCore.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = OptimoveCore;
+				PRODUCT_NAME = OptimoveCore;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3B861354DFD5BBBBF35D2C33A70A10C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67707C67D8BAF44D981E0FCC9EF12F03 /* OptimoveSDK.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/OptimoveSDK/OptimoveSDK-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MODULEMAP_FILE = Headers/Public/OptimoveSDK/OptimoveSDK.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = OptimoveSDK;
+				PRODUCT_NAME = OptimoveSDK;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		70D209E992D281A4E790BB953F1A87A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8BA07677587698C8CD212A11ED129E1 /* OptimoveSDK.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/OptimoveSDK/OptimoveSDK-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MODULEMAP_FILE = Headers/Public/OptimoveSDK/OptimoveSDK.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = OptimoveSDK;
+				PRODUCT_NAME = OptimoveSDK;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8DD6D65ACAA0CEF8A5E0B6298BCA48DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D509270C016B9EB942EAF3FABA98446 /* Pods-Cordova_QA_App.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Cordova_QA_App/Pods-Cordova_QA_App.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		EA3D100FC02AE8871B847FC22A2E8699 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EFB563F8DBE84241FD9D03F21979C68 /* OptimoveCore.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/OptimoveCore/OptimoveCore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MODULEMAP_FILE = Headers/Public/OptimoveCore/OptimoveCore.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = OptimoveCore;
+				PRODUCT_NAME = OptimoveCore;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4162F62F4FEB3AF9FB6C5ABC5A32FCE5 /* Build configuration list for PBXNativeTarget "OptimoveSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B861354DFD5BBBBF35D2C33A70A10C9 /* Debug */,
+				70D209E992D281A4E790BB953F1A87A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */,
+				903A0004D3E6651EFD5D2E16214D101B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A1E2F15F7D2F9BE7665AB8C961DFC53 /* Build configuration list for PBXNativeTarget "Pods-Cordova_QA_App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0EB26BD95A0043113CCCF8620152C5B9 /* Debug */,
+				8DD6D65ACAA0CEF8A5E0B6298BCA48DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D35901A6A0D9A774819A7527F3FD2963 /* Build configuration list for PBXNativeTarget "OptimoveCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA3D100FC02AE8871B847FC22A2E8699 /* Debug */,
+				391A1B459E70F76381D95924EB5CFACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
