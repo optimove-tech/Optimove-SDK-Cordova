@@ -3,18 +3,19 @@ import OptimoveSDK
     private let optimoveCredentialsKey = "optimove_credentials"
     private let optimoveMobileCredentialsKey = "optimove_mobile_credentials"
     
+    private let credentialsJsonPath = "optimove.json"
+    
     @objc(initialize:)
     func initialize(command: CDVInvokedUrlCommand) {
+        guard let credentials = getCredentials(path: credentialsJsonPath) else { return }
         let args = command.arguments
-        
         let inAppConsentStrategy: InAppConsentStrategy = {
-            if let strategy = args?[2] as? String {
+            if let strategy = args?[0] as? String {
                 return .init(rawValue: strategy)!
             }
             return.notEnabled
         }()
-        
-        let config = OptimoveConfigBuilder(optimoveCredentials: args?[0] as? String, optimobileCredentials: args?[1] as? String).enableInAppMessaging(inAppConsentStrategy: inAppConsentStrategy).build()
+        let config = OptimoveConfigBuilder(optimoveCredentials: credentials[0], optimobileCredentials: credentials[1]).enableInAppMessaging(inAppConsentStrategy: inAppConsentStrategy).build()
         Optimove.initialize(with: config)
     }
     
