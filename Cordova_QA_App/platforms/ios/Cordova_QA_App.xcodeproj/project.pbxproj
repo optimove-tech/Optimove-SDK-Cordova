@@ -14,7 +14,7 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		E2EAFDA1D78D4E51947A2DC9 /* OptimobileSDKPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE10C9B23F043FD8F376448 /* OptimobileSDKPlugin.swift */; };
+		29FA037F098A4D4885F75824 /* OptimobileSDKPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A99CFB686340C3BEFC2E69 /* OptimobileSDKPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Cordova_QA_App/config.xml"; sourceTree = "<group>"; };
-		7CE10C9B23F043FD8F376448 /* OptimobileSDKPlugin.swift */ = {isa = PBXFileReference; name = "OptimobileSDKPlugin.swift"; path = "com-optimobilecreate-plugins/OptimobileSDKPlugin.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		B5A99CFB686340C3BEFC2E69 /* OptimobileSDKPlugin.swift */ = {isa = PBXFileReference; name = "OptimobileSDKPlugin.swift"; path = "com-optimobilecreate-plugins/OptimobileSDKPlugin.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,7 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				7CE10C9B23F043FD8F376448 /* OptimobileSDKPlugin.swift */,
+				B5A99CFB686340C3BEFC2E69 /* OptimobileSDKPlugin.swift */,
 			);
 			name = Plugins;
 			path = "Cordova_QA_App/Plugins";
@@ -296,7 +296,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				E2EAFDA1D78D4E51947A2DC9 /* OptimobileSDKPlugin.swift in Sources */,
+				29FA037F098A4D4885F75824 /* OptimobileSDKPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

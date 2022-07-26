@@ -4,8 +4,8 @@ cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, expo
 var exec = require('cordova/exec');
 
 
-window.initialize = function (optimove_credentials, optimove_mobile_credentials, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'initialize', [optimove_credentials, optimove_mobile_credentials]);
+window.initialize = function (optimove_credentials, optimove_mobile_credentials,inAppConsentStrategy, success, error) {
+    exec(success, error, 'OptimobileSDKPlugin', 'initialize', [optimove_credentials, optimove_mobile_credentials, inAppConsentStrategy]);
 };
 
 });
