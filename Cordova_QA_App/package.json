@@ -19,8 +19,7 @@
   },
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ],
     "plugins": {
       "com-optimobilecreate-plugins": {}
