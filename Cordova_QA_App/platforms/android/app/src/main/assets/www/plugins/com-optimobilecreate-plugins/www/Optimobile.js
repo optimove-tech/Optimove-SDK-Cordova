@@ -3,17 +3,17 @@ cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, expo
 
 var exec = require('cordova/exec');
 
-window.setUserId = function(arg0, success, error){
-    exec(success, error, 'OptimobileSDKPlugin', 'setUserId', [arg0]);
+window.setUserId = function(userId, success, error){
+    exec(success, error, 'OptimobileSDKPlugin', 'setUserId', [userId]);
 }
-window.setUserEmail = function (arg0, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'setUserEmail', [arg0]);
+window.setUserEmail = function (userEmail, success, error) {
+    exec(success, error, 'OptimobileSDKPlugin', 'setUserEmail', [userEmail]);
 };
-window.initialize = function (arg0, arg1, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'initialize', [arg0, arg1]);
+    window.initialize = function (optimove_credentials, optimove_mobile_credentials, success, error) {
+        exec(success, error, 'OptimobileSDKPlugin', 'initialize', [optimove_credentials, optimove_mobile_credentials]);
 };
-window.reportEvent = function(arg0, success, error){
-    exec(success, error, 'OptimobileSDKPlugin', 'reportEvent', [arg0]);
+window.reportEvent = function(eventName, success, error){
+    exec(success, error, 'OptimobileSDKPlugin', 'reportEvent', [eventName]);
 }
 cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, exports, module) {
     
@@ -38,9 +38,6 @@ cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, expo
         exec(success, error, 'OptimobileSDKPlugin', 'reportScreenVisit', [arg0]);
     };
     
-  /*  exports.setUserId = function (arg0, success, error) {
-        exec(success, error, 'OptimobileSDKPlugin', 'setUserId', [arg0]);
-    };*/
     
     exports.registerUser = function (arg0, success, error) {
         exec(success, error, 'OptimobileSDKPlugin', 'registerUser', [arg0]);
@@ -61,5 +58,8 @@ cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, expo
     };
 });
 
+window.initialize = function (optimove_credentials, optimove_mobile_credentials,inAppConsentStrategy, success, error) {
+    exec(success, error, 'OptimobileSDKPlugin', 'initialize', [optimove_credentials, optimove_mobile_credentials, inAppConsentStrategy]);
+};
 
 });

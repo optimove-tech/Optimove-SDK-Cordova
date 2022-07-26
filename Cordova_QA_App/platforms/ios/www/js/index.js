@@ -26,21 +26,54 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-    window.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd");
+    window.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd", "ExplicitByUser");
     alert('device ready');
 }
 
 document.getElementById("Initialize").addEventListener("click", initialize);
 
 function initialize() {
-    window.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd",(successMessage)=>{
-        console.log(successMessage);
-    },(errorMessage)=>{
-        console.log(errorMessage);
-    })
+    window.initialize("WzEsIm15LXRva2VuIiwibXktY29uZmlnLWZpbGUiXQ==", "WzEsImV1LWNlbnRyYWwtMSIsIjE5ZGY1ZTc3LTJhNmMtNGIzZC05YmI5LWNiNTQ0MDgwMmEyNiIsIlMxTksyWjBMSVpWeVl6eVk4bnB0RlAzQjBpSDVjbU50RU5pSSJd", "ExplicitByUser",
+        (successMessage) => {
+
+            console.log(successMessage);
+
+        }, (errorMessage) => {
+
+            console.error(errorMessage);
+
+        });
 }
 
 
+document.getElementById("set-user-id-button").addEventListener("click", setUserId);
+
+function setUserId() {
+    window.setUserId(document.getElementById("text-area-user-id").value, (successMessage) => {
+        console.log(successMessage);
+    }, (errorMessage) => {
+        console.error(errorMessage);
+    });
+    document.getElementById("text-area-user-id").value = "";
+}
+
+document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
+
+function setUserEmail() {
+    window.setUserEmail(document.getElementById("text-area-user-email").value);
+    document.getElementById("text-area-user-email").value = ""
+}
+
+document.getElementById("report-event-button").addEventListener("click", reportEvent);
+
+function reportEvent() {
+    window.reportEvent(document.getElementById("text-area-event").value, (successMessage) => {
+        console.log(successMessage);
+    }, (errorMessage) => {
+        console.error(errorMessage);
+    })
+    document.getElementById("text-area-event").value = ""
+}
 
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
@@ -54,16 +87,7 @@ function getInbox() {
     Optimobile.getInboxItems()
 }
 
-document.getElementById("report-event-button").addEventListener("click", reportEvent);
 
-function reportEvent() {
-    window.reportEvent( document.getElementById("text-area-event").value,(successMessage)=>{
-        console.log(successMessage);
-    },(errorMessage)=>{
-        console.log(errorMessage);
-    })
-    document.getElementById("text-area-event").value = ""
-}
 
 document.getElementById("Report Screen Visit").addEventListener("click", reportScreenVisit);
 
@@ -74,30 +98,14 @@ function reportScreenVisit() {
 document.getElementById("Register User").addEventListener("click", registerUser);
 
 function registerUser() {
-    Optimobile.registerUser(document.getElementById("text-area-user-id").value,  document.getElementById("textareauseremail").value)
+    Optimobile.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("textareauseremail").value)
     document.getElementById("text-area-user-id").value = "";
     document.getElementById("textareauseremail").value = "";
 }
 
 
-function setUserId() {
-    window.setUserId(document.getElementById("text-area-user-id").value,(success)=>{
-        console.log(success);
-    },(error) => {
-        console.log(error);
-    });
-    document.getElementById("text-area-user-id").value = "";
-}
-
-document.getElementById("set-user-id-button").addEventListener("click", setUserId);
 
 
-document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
-
-function setUserEmail() {
-    window.setUserEmail(document.getElementById("text-area-user-email").value)
-    document.getElementById("text-area-user-email").value = ""
-}
 
 document.getElementById("Get Visitor ID").addEventListener("click", getVisitorID);
 

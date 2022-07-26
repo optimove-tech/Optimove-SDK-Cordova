@@ -40,6 +40,34 @@ function initialize() {
     })
 }
 
+document.getElementById("set-user-id-button").addEventListener("click", setUserId);
+
+function setUserId() {
+    window.setUserId(document.getElementById("text-area-user-id").value, (success) => {
+        console.log(success);
+    }, (error) => {
+        console.log(error);
+    });
+    document.getElementById("text-area-user-id").value = "";
+}
+
+document.getElementById("report-event-button").addEventListener("click", reportEvent);
+
+function reportEvent() {
+    window.reportEvent(document.getElementById("text-area-event").value, (successMessage) => {
+        console.log(successMessage);
+    }, (errorMessage) => {
+        console.log(errorMessage);
+    })
+    document.getElementById("text-area-event").value = ""
+}
+
+document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
+
+function setUserEmail() {
+    window.setUserEmail(document.getElementById("text-area-user-email").value)
+    document.getElementById("text-area-user-email").value = ""
+}
 
 
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
@@ -54,16 +82,8 @@ function getInbox() {
     Optimobile.getInboxItems()
 }
 
-document.getElementById("report-event-button").addEventListener("click", reportEvent);
 
-function reportEvent() {
-    window.reportEvent( document.getElementById("text-area-event").value,(successMessage)=>{
-        console.log(successMessage);
-    },(errorMessage)=>{
-        console.log(errorMessage);
-    })
-    document.getElementById("text-area-event").value = ""
-}
+
 
 document.getElementById("Report Screen Visit").addEventListener("click", reportScreenVisit);
 
@@ -79,25 +99,6 @@ function registerUser() {
     document.getElementById("textareauseremail").value = "";
 }
 
-
-function setUserId() {
-    window.setUserId(document.getElementById("text-area-user-id").value,(success)=>{
-        console.log(success);
-    },(error) => {
-        console.log(error);
-    });
-    document.getElementById("text-area-user-id").value = "";
-}
-
-document.getElementById("set-user-id-button").addEventListener("click", setUserId);
-
-
-document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
-
-function setUserEmail() {
-    window.setUserEmail(document.getElementById("text-area-user-email").value)
-    document.getElementById("text-area-user-email").value = ""
-}
 
 document.getElementById("Get Visitor ID").addEventListener("click", getVisitorID);
 

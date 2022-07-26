@@ -17,26 +17,29 @@ import com.optimove.android.OptimoveConfig;
 public class OptimobileInitProvider extends ContentProvider {
     private static final String OPTIMOVE_CREDENTIALS = "optimove_credentials";
     private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimove_mobile_credentials";
+
     @Override
     public boolean onCreate() {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
-        String optimove_credentials = getStringConfigValue(packageName,resources,OPTIMOVE_CREDENTIALS);
-        String optimove_mobile_credentials = getStringConfigValue(packageName,resources,OPTIMOVE_MOBILE_CREDENTIALS);
-        if(TextUtils.isEmpty(optimove_credentials) || TextUtils.isEmpty(optimove_mobile_credentials)){
+        String optimove_credentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
+        String optimove_mobile_credentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
+        if (TextUtils.isEmpty(optimove_credentials) || TextUtils.isEmpty(optimove_mobile_credentials)) {
             return true;
         }
         assert optimove_credentials != null;
         assert optimove_mobile_credentials != null;
-        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimove_credentials,optimove_mobile_credentials);
-        Optimove.initialize(app,configBuilder.build());
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimove_credentials,
+                optimove_mobile_credentials);
+        Optimove.initialize(app, configBuilder.build());
         return false;
     }
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
+            @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         return null;
     }
 
@@ -58,9 +61,11 @@ public class OptimobileInitProvider extends ContentProvider {
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
+            @Nullable String[] selectionArgs) {
         return 0;
     }
+
     private String getStringConfigValue(String packageName, Resources resources, String key) {
         int resId = resources.getIdentifier(key, "string", packageName);
         if (0 == resId) {
