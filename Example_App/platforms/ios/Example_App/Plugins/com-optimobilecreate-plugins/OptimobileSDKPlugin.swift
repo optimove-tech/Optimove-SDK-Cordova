@@ -10,8 +10,10 @@ import OptimoveSDK
         guard let credentials = getCredentials(name: credentialsJsonName) else { return }
         let args = command.arguments
         let inAppConsentStrategy: InAppConsentStrategy = {
-            if let strategy = args?[0] as? String {
-                return .init(rawValue: strategy)!
+            if let strategyName = args?[0] as? String {
+                if let strategy: InAppConsentStrategy = .init(rawValue: strategyName) {
+                    return strategy
+                }
             }
             return.notEnabled
         }()
