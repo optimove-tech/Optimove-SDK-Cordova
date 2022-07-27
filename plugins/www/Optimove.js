@@ -7,11 +7,11 @@ window.initialize = function (inAppConsentStrategy, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'initialize', [inAppConsentStrategy]);
 };
 window.setUserId = function (userId, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'setUserId', [userId]);
+    exec(success, error, 'OptimoveSDKPlugin', 'setUserId', [userId]);
 }
 window.setUserEmail = function (userEmail, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'setUserEmail', [userEmail]);
+    exec(success, error, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]);
 };
 window.reportEvent = function (eventName, success, error) {
-    exec(success, error, 'OptimobileSDKPlugin', 'reportEvent', [eventName]);
+    exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName]);
 }
