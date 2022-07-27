@@ -21,6 +21,51 @@
             {
               "xml": "<provider android:authorities=\"${applicationId}.optimobileinitprovider\" android:exported=\"false\" android:name=\"com.optimove.android.cordova.OptimobileInitProvider\" />",
               "count": 1
+            },
+            {
+              "xml": "<application xmlns:tools=\"http://schemas.android.com/tools\" />",
+              "count": 1,
+              "mode": "merge",
+              "plugin": "com-optimobilecreate-plugins",
+              "oldAttrib": {
+                "android:hardwareAccelerated": "true",
+                "android:icon": "@mipmap/ic_launcher",
+                "android:label": "@string/app_name",
+                "android:supportsRtl": "true",
+                "tools:remove": "android:dataExtractionRules"
+              }
+            }
+          ],
+          "/manifest": [
+            {
+              "xml": "<manifest xmlns:tools=\"http://schemas.android.com/tools\" />",
+              "count": 1,
+              "mode": "merge",
+              "plugin": "com-optimobilecreate-plugins",
+              "oldAttrib": {
+                "android:hardwareAccelerated": "true",
+                "android:versionCode": "10000",
+                "android:versionName": "1.0.0",
+                "package": "com.optimove.cordova.Example_App",
+                "xmlns:android": "http://schemas.android.com/apk/res/android",
+                "xmlns:tools": "http://schemas.android.com/tools"
+              }
+            }
+          ],
+          "/manifest/": [
+            {
+              "xml": "<manifest xmlns:tools=\"http://schemas.android.com/tools\" />",
+              "count": 1,
+              "mode": "merge",
+              "plugin": "com-optimobilecreate-plugins",
+              "oldAttrib": {
+                "android:hardwareAccelerated": "true",
+                "android:versionCode": "10000",
+                "android:versionName": "1.0.0",
+                "package": "com.optimove.cordova.Example_App",
+                "xmlns:android": "http://schemas.android.com/apk/res/android",
+                "xmlns:tools": "http://schemas.android.com/tools"
+              }
             }
           ]
         }

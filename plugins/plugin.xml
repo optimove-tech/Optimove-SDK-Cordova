@@ -33,6 +33,16 @@
             <provider android:authorities="${applicationId}.optimobileinitprovider" android:name="com.optimove.android.cordova.OptimobileInitProvider" android:exported="false" />
             
         </config-file>
+        <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
+            <manifest xmlns:tools="http://schemas.android.com/tools" />
+        </edit-config>
+    
+        <edit-config file="AndroidManifest.xml" target="/manifest/" mode="merge">
+            <manifest xmlns:tools="http://schemas.android.com/tools" />
+        </edit-config>
+        <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
+            <application xmlns:tools="http://schemas.android.com/tools" />
+        </edit-config>
         <source-file src="src/android/OptimobileSDKPlugin.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/OptimobileInitProvider.java" target-dir="src/com/optimove/android/cordova" />
         <framework src="src/android/optimove.gradle" custom="true" type="gradleReference" />
