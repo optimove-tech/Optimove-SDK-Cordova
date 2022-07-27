@@ -26,7 +26,11 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-    window.initialize("ExplicitByUser");
+    window.initialize("ExplicitByUser", (successMessage) => {
+        console.log(successMessage);
+    }, (errorMessage) => {
+        console.error(errorMessage)
+    });
     alert('device ready');
 }
 
