@@ -1,0 +1,15 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com-optimobilecreate-plugins": {
+      "PACKAGE_NAME": "com.optimove.cordova.Example_App"
+    }
+  },
+  "dependent_plugins": {}
+}
