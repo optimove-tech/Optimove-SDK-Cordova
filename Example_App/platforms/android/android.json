@@ -26,13 +26,14 @@
               "xml": "<application xmlns:tools=\"http://schemas.android.com/tools\" />",
               "count": 1,
               "mode": "merge",
-              "plugin": "com-optimobilecreate-plugins",
+              "plugin": "optimove-cordova-plugin",
               "oldAttrib": {
                 "android:hardwareAccelerated": "true",
                 "android:icon": "@mipmap/ic_launcher",
                 "android:label": "@string/app_name",
                 "android:supportsRtl": "true",
-                "tools:remove": "android:dataExtractionRules"
+                "tools:remove": "android:dataExtractionRules",
+                "xmlns:tools": "http://schemas.android.com/tools"
               }
             }
           ],
@@ -41,7 +42,7 @@
               "xml": "<manifest xmlns:tools=\"http://schemas.android.com/tools\" />",
               "count": 1,
               "mode": "merge",
-              "plugin": "com-optimobilecreate-plugins",
+              "plugin": "optimove-cordova-plugin",
               "oldAttrib": {
                 "android:hardwareAccelerated": "true",
                 "android:versionCode": "10000",
@@ -57,7 +58,7 @@
               "xml": "<manifest xmlns:tools=\"http://schemas.android.com/tools\" />",
               "count": 1,
               "mode": "merge",
-              "plugin": "com-optimobilecreate-plugins",
+              "plugin": "optimove-cordova-plugin",
               "oldAttrib": {
                 "android:hardwareAccelerated": "true",
                 "android:versionCode": "10000",
@@ -73,22 +74,22 @@
     }
   },
   "installed_plugins": {
-    "com-optimobilecreate-plugins": {
+    "optimove-cordova-plugin": {
       "PACKAGE_NAME": "com.optimove.cordova.Example_App"
     }
   },
   "dependent_plugins": {},
   "modules": [
     {
-      "id": "com-optimobilecreate-plugins.Optimobile",
-      "file": "plugins/com-optimobilecreate-plugins/www/Optimobile.js",
-      "pluginId": "com-optimobilecreate-plugins",
+      "id": "optimove-cordova-plugin.Optimobile",
+      "file": "plugins/optimove-cordova-plugin/www/Optimobile.js",
+      "pluginId": "optimove-cordova-plugin",
       "clobbers": [
         "Optimobile"
       ]
     }
   ],
   "plugin_metadata": {
-    "com-optimobilecreate-plugins": "1.0.0"
+    "optimove-cordova-plugin": "1.0.0"
   }
 }

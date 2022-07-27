@@ -1,4 +1,4 @@
-cordova.define("com-optimobilecreate-plugins.Optimobile", function(require, exports, module) {
+cordova.define("optimove-cordova-plugin.Optimobile", function(require, exports, module) {
 
 
 var exec = require('cordova/exec');

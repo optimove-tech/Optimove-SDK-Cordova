@@ -109,7 +109,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../com-optimobilecreate-plugins/Example_App-optimove.gradle"
+apply from: "../optimove-cordova-plugin/Example_App-optimove.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()

@@ -23,7 +23,7 @@
       "ios"
     ],
     "plugins": {
-      "com-optimobilecreate-plugins": {}
+      "optimove-cordova-plugin": {}
     }
   }
 }

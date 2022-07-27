@@ -1,5 +1,5 @@
 {
-  "com-optimobilecreate-plugins": {
+  "optimove-cordova-plugin": {
     "source": {
       "type": "local",
       "path": "C:\\Users\\tom_b\\Desktop\\Work repositories\\Optimove-SDK-Cordova\\Example_App\\node_modules\\com.optimobilecreate.testapp"

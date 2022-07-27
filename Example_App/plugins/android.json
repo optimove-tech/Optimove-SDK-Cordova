@@ -7,7 +7,7 @@
     "files": {}
   },
   "installed_plugins": {
-    "com-optimobilecreate-plugins": {
+    "optimove-cordova-plugin": {
       "PACKAGE_NAME": "com.optimove.cordova.Example_App"
     }
   },
