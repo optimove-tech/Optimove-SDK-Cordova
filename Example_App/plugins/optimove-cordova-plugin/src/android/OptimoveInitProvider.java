@@ -10,7 +10,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
 
@@ -23,6 +22,7 @@ public class OptimoveInitProvider extends ContentProvider {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
+        try{
         String optimove_credentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
         String optimove_mobile_credentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
         if (TextUtils.isEmpty(optimove_credentials) || TextUtils.isEmpty(optimove_mobile_credentials)) {
@@ -33,6 +33,9 @@ public class OptimoveInitProvider extends ContentProvider {
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimove_credentials,
                 optimove_mobile_credentials);
         Optimove.initialize(app, configBuilder.build());
+    } catch (Exception e) {
+        
+    }
         return false;
     }
 

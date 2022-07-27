@@ -9,6 +9,6 @@
       return.notEnabled
     }()
 
-    let config = OptimoveConfigBuilder(optimoveCredentials: args?[0] as? String, optimobileCredentials: args?[1] as? String).enableInAppMessaging(inAppConsentStrategy: inAppConsentStrategy).build()
+    let config = OptimoveConfigBuilder(optimoveCredentials: args?[0] as? String, optimoveCredentials: args?[1] as? String).enableInAppMessaging(inAppConsentStrategy: inAppConsentStrategy).build()
     Optimove.initialize(with: config)
   }

@@ -1,6 +1,6 @@
 {
-  "name": "com.optimobilecreate.testapp",
-  "displayName": "TestApp",
+  "name": "optimove-cordova-plugin",
+  "displayName": "Optimove Cordova plugin",
   "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
@@ -17,8 +17,7 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-add-swift-support": {},
-      "optimove-cordova-plugin": {}
+      "cordova-plugin-add-swift-support": {}
     },
     "platforms": [
       "ios",
@@ -26,7 +25,6 @@
     ]
   },
   "devDependencies": {
-    "cordova-ios": "^6.2.0",
-    "OptimobileCordova": "file:../true/OptimobileSwift"
+    "cordova-ios": "^6.2.0"
   }
 }

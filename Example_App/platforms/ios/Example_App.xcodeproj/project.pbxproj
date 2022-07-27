@@ -14,7 +14,7 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		480946A2960444E991966E3E /* OptimobileSDKPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384493E8B8274FB6856D5195 /* OptimobileSDKPlugin.swift */; };
+		87B8EB0A3AAD4A1C8225732C /* OptimoveSDKPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFF4E58163B4514BF8636AE /* OptimoveSDKPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Example_App/config.xml"; sourceTree = "<group>"; };
-		384493E8B8274FB6856D5195 /* OptimobileSDKPlugin.swift */ = {isa = PBXFileReference; name = "OptimobileSDKPlugin.swift"; path = "optimove-cordova-plugin/OptimobileSDKPlugin.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		4BFF4E58163B4514BF8636AE /* OptimoveSDKPlugin.swift */ = {isa = PBXFileReference; name = "OptimoveSDKPlugin.swift"; path = "optimove-cordova-plugin/OptimoveSDKPlugin.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,7 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				384493E8B8274FB6856D5195 /* OptimobileSDKPlugin.swift */,
+				4BFF4E58163B4514BF8636AE /* OptimoveSDKPlugin.swift */,
 			);
 			name = Plugins;
 			path = "Example_App/Plugins";
@@ -296,7 +296,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				480946A2960444E991966E3E /* OptimobileSDKPlugin.swift in Sources */,
+				87B8EB0A3AAD4A1C8225732C /* OptimoveSDKPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
         "parents": {
           "/*": [
             {
-              "xml": "<feature name=\"OptimobileSDKPlugin\"><param name=\"android-package\" value=\"com.optimove.android.cordova.OptimobileSDKPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "xml": "<feature name=\"OptimoveSDKPlugin\"><param name=\"android-package\" value=\"com.optimove.android.cordova.OptimoveSDKPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
             }
           ]
@@ -81,11 +81,11 @@
   "dependent_plugins": {},
   "modules": [
     {
-      "id": "optimove-cordova-plugin.Optimobile",
-      "file": "plugins/optimove-cordova-plugin/www/Optimobile.js",
+      "id": "optimove-cordova-plugin.Optimove",
+      "file": "plugins/optimove-cordova-plugin/www/Optimove.js",
       "pluginId": "optimove-cordova-plugin",
       "clobbers": [
-        "Optimobile"
+        "Optimove"
       ]
     }
   ],
