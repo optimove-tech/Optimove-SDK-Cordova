@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
 
-public class OptimobileInitProvider extends ContentProvider {
+public class OptimoveInitProvider extends ContentProvider {
     private static final String OPTIMOVE_CREDENTIALS = "optimove_credentials";
     private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimove_mobile_credentials";
 

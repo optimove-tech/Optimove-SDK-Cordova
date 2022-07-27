@@ -19,7 +19,7 @@
         "parents": {
           "/manifest/application": [
             {
-              "xml": "<provider android:authorities=\"${applicationId}.optimobileinitprovider\" android:exported=\"false\" android:name=\"com.optimove.android.cordova.OptimobileInitProvider\" />",
+              "xml": "<provider android:authorities=\"${applicationId}.optimoveinitprovider\" android:exported=\"false\" android:name=\"com.optimove.android.cordova.OptimoveInitProvider\" />",
               "count": 1
             },
             {
