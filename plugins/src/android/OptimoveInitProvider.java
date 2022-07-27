@@ -14,28 +14,25 @@ import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
 
 public class OptimoveInitProvider extends ContentProvider {
-    private static final String OPTIMOVE_CREDENTIALS = "optimove_credentials";
-    private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimove_mobile_credentials";
+    private static final String OPTIMOVE_CREDENTIALS = "optimoveCredentials";
+    private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
 
     @Override
     public boolean onCreate() {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
-        try{
-        String optimove_credentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
-        String optimove_mobile_credentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
-        if (TextUtils.isEmpty(optimove_credentials) || TextUtils.isEmpty(optimove_mobile_credentials)) {
+        String optimoveCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
+        if (TextUtils.isEmpty(optimoveCredentials) || TextUtils.isEmpty(optimoveMobileCredentials)) {
             return true;
         }
-        assert optimove_credentials != null;
-        assert optimove_mobile_credentials != null;
-        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimove_credentials,
-                optimove_mobile_credentials);
-        Optimove.initialize(app, configBuilder.build());
-    } catch (Exception e) {
+            assert optimoveCredentials != null;
+            assert optimoveMobileCredentials != null;
+            OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
+                    optimoveMobileCredentials);
+            Optimove.initialize(app, configBuilder.build());
         
-    }
         return false;
     }
 

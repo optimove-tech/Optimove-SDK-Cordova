@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="optimove_credentials" tools:ignore="TypographyDashes">{{OPTIMOVE_CREDENTIALS}}</string>
-    <string name="optimove_mobile_credentials" tools:ignore="TypographyDashes">{{OPTIMOVE_MOBILE_CREDENTIALS}}</string>
+    <string name="optimoveCredentials" tools:ignore="TypographyDashes">{{OPTIMOVE_CREDENTIALS}}</string>
+    <string name="optimoveMobileCredentials" tools:ignore="TypographyDashes">{{OPTIMOVE_MOBILE_CREDENTIALS}}</string>
 </resources>
