@@ -41,7 +41,7 @@
             <manifest xmlns:tools="http://schemas.android.com/tools" />
         </edit-config>
         <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
-            <application xmlns:tools="http://schemas.android.com/tools" />
+            <application tools:remove="android:dataExtractionRules" />
         </edit-config>
         <source-file src="src/android/OptimoveSDKPlugin.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/OptimoveInitProvider.java" target-dir="src/com/optimove/android/cordova" />
