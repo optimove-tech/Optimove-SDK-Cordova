@@ -13,9 +13,9 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
-    "com.optimobilecreate.testapp": "file:../plugins",
     "cordova-android": "^10.1.2",
-    "cordova-ios": "^6.2.0"
+    "cordova-ios": "^6.2.0",
+    "optimove-cordova-plugin": "file:../plugins"
   },
   "cordova": {
     "platforms": [
@@ -23,7 +23,7 @@
       "ios"
     ],
     "plugins": {
-      "com-optimobilecreate-plugins": {}
+      "optimove-cordova-plugin": {}
     }
   }
 }

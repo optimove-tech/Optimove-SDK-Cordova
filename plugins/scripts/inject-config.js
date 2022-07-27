@@ -67,8 +67,8 @@ function prepareAndroid(context, optimoveConifg) {
     );
     
     const config = renderTemplate('optimove.xml', {
-        OPTIMOVE_CREDENTIALS: optimoveConifg.optimove_credentials,
-        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimove_mobile_credentials
+        OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
+        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
     });
 
     fs.writeFileSync(dest, config, { encoding: 'utf-8' });
@@ -91,10 +91,10 @@ function isValidConfig(config) {
         return false;
     }
     if (
-        isEmpty(config.optimove_credentials) ||
-        isEmpty(config.optimove_mobile_credentials) ||
-        !isString(config.optimove_credentials) ||
-        !isString(config.optimove_mobile_credentials)
+        isEmpty(config.optimoveCredentials) ||
+        isEmpty(config.optimoveMobileCredentials) ||
+        !isString(config.optimoveCredentials) ||
+        !isString(config.optimoveMobileCredentials)
     ) {
         console.error(
             'Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json'
