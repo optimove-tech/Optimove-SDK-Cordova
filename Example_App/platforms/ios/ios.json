@@ -1,0 +1,39 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"OptimobileSDKPlugin\"><param name=\"ios-package\" value=\"Optimobile\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "com-optimobilecreate-plugins": {
+      "PACKAGE_NAME": "com.optimove.cordova.Example_App"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "com-optimobilecreate-plugins.Optimobile",
+      "file": "plugins/com-optimobilecreate-plugins/www/Optimobile.js",
+      "pluginId": "com-optimobilecreate-plugins",
+      "clobbers": [
+        "Optimobile"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "com-optimobilecreate-plugins": "1.0.0"
+  }
+}
