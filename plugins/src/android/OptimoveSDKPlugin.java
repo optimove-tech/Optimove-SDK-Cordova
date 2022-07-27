@@ -11,6 +11,52 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        switch (action) {
+            case "setUserId":
+                String userId = args.getString(0);
+                this.setUserId(userId, callbackContext);
+                return true;
+            case "setUserEmail":
+                String email = args.getString(0);
+                this.setUserEmail(email, callbackContext);
+                return true;
+            case "reportEvent":
+                String eventName = args.getString(0);
+                this.reportEvent(eventName, callbackContext);
+                return true;
+        }
         return false;
+    }
+    
+    private void setUserId(String userId, CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().setUserId(userId);
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+        }
+
+        callbackContext.success();
+
+    }
+
+    private void setUserEmail(String email, CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().setUserEmail(email);
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            return;
+        }
+        callbackContext.success();
+    }
+
+    private void reportEvent(String eventName, CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().reportEvent(eventName);
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            return;
+        }
+        callbackContext.success();
+
     }
 }
