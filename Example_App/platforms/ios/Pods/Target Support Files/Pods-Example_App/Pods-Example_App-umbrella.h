@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_Cordova_QA_AppVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_Cordova_QA_AppVersionString[];
+FOUNDATION_EXPORT double Pods_Example_AppVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Example_AppVersionString[];
 

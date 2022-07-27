@@ -1,4 +1,3 @@
-<<<<<<< HEAD:Cordova_QA_App/platforms/ios/Cordova_QA_App/Plugins/com-optimobilecreate-plugins/OptimobileSDKPlugin.swift
 import OptimoveSDK
 @objc(Optimobile_Cordova) class OptimobileSDKPlugin : CDVPlugin {
     private let optimoveCredentialsKey = "optimove_credentials"
@@ -35,19 +34,3 @@ import OptimoveSDK
         return nil
     }
 }
-=======
-@objc(initialize:)
-  func initialize(command: CDVInvokedUrlCommand) {
-    let args = command.arguments
-    
-    let inAppConsentStrategy: InAppConsentStrategy = {
-      if let strategy = args?[2] as? String {
-        return .init(rawValue: strategy)!
-      }
-      return.notEnabled
-    }()
-
-    let config = OptimoveConfigBuilder(optimoveCredentials: args?[0] as? String, optimobileCredentials: args?[1] as? String).enableInAppMessaging(inAppConsentStrategy: inAppConsentStrategy).build()
-    Optimove.initialize(with: config)
-  }
->>>>>>> Cordova-Android-branch:Example_App/platforms/ios/Example_App/Plugins/com-optimobilecreate-plugins/OptimobileSDKPlugin.swift

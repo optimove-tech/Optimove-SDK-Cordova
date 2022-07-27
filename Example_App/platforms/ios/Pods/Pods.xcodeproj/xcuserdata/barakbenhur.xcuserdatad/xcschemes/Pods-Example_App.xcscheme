@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05B75CF93B06E1F401E66E705BFE7A31"
-               BuildableName = "libPods-Cordova_QA_App.a"
-               BlueprintName = "Pods-Cordova_QA_App"
+               BlueprintIdentifier = "8E653662D2601FCA134468A8883C71A3"
+               BuildableName = "libPods-Example_App.a"
+               BlueprintName = "Pods-Example_App"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

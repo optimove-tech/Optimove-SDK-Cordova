@@ -17,6 +17,7 @@
 		09220AFA7966787A601A243F83539787 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBAE15F3156997B79E48C172B53FF97 /* StatisticService.swift */; };
 		0B9025ED2D4A4153992CC2E1C576FA56 /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2827255956734C11B1DDD42FA17D1 /* ComponentFactory.swift */; };
 		0BF57C6BE402490A4F2A0F92C46FC8F6 /* ConfigurationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDDFAC11D58AE4BADD319A8BD255254 /* ConfigurationFetcher.swift */; };
+		0FC5386002CFC325BDEE866D78615DFF /* Pods-Example_App-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B961DBDDE8861EC5DBEAB373BB2F0B /* Pods-Example_App-dummy.m */; };
 		10DC2EDED67A43568FEF8D08E460E507 /* NewUserHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03261605A1BE12D6B3E178A29288B206 /* NewUserHandler.swift */; };
 		1157681F41E6260D14AECB9E70CEAB8F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6C649DC4BFFA36FB7C18653418D7B1 /* String.swift */; };
 		140F4F6300A0223CF1CB92B56197FD93 /* NewTenantInfoHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467968C4DA33BEA897067E9CE16F3AD8 /* NewTenantInfoHandler.swift */; };
@@ -25,7 +26,6 @@
 		15931180128C5FB1CA4D2747A71EE60F /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DAD52C5FAEAE01C0DE24E46C3C3DBF /* AnalyticsHelper.swift */; };
 		15A12ADE9CAEF3508AFFD1C253B3528F /* OptistreamQueueImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B260E750A96A927B5BEF81AF6463C70 /* OptistreamQueueImpl.swift */; };
 		15C0E91AA0D5DBAE597713A6AD7F542B /* EventConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DC75816A0B78489B9E09CA8CF065DE /* EventConfig.swift */; };
-		15FA8DB89D259CD3063F0DFF6123F0D9 /* Pods-Cordova_QA_App-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E8AB8623B39EC9C6434F4A4EE779BFB /* Pods-Cordova_QA_App-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		19CDB3DE759A4049A9EA09015B1402A9 /* OptimoveConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC71BB35FE1BCF2C6EA62CA59C75A0 /* OptimoveConfig.swift */; };
 		1B0F3EA2CF3382794926AA0799AEFB7A /* OptistreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C463F463DA1F6379881D75D18029DF /* OptistreamEvent.swift */; };
 		1BB37C25D7AEC598972510D2854B1ED2 /* TimeInterval+Seconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68997BF07AE5D7C51445EC5714076768 /* TimeInterval+Seconds.swift */; };
@@ -36,7 +36,6 @@
 		268CD2DA4C473DC681352867D679443E /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790AE208EC88DD3A389A2EC437CDC187 /* Components.swift */; };
 		26CD2EBB354FFCD387F36975EB7025E4 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FD8CE375876A695DA3E1A290468669 /* NetworkClient.swift */; };
 		27C73A7B822245984EC1C5B10F47DFF2 /* InstallationIdGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0BE768AEBCEE48F9B716422A1C9AB /* InstallationIdGenerator.swift */; };
-		27DD656946A84078E97CC73F293E8054 /* Pods-Cordova_QA_App-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 17596305D06823DA31D0E71CD9FE358A /* Pods-Cordova_QA_App-dummy.m */; };
 		28F6539D7FFA688448A91C2D7FF7A458 /* SessionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9AD54874441CAF57F465EC5D7311D /* SessionHelper.swift */; };
 		296D66EAFFD9A5993E51ED692BD2FD96 /* MetaDataEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C466564DA7234819F60BF5972648BA /* MetaDataEvent.swift */; };
 		29D2F95AA39F180C7768E73F5AD627C8 /* LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C2B6AD939FEEA20D009E7BDB575CA /* LogLevel.swift */; };
@@ -81,6 +80,7 @@
 		61A8E24FE10B82AFC2C7C96CC4EE83F1 /* ISO+format.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FFBB33FF73C0FAAFADF180B09D399A /* ISO+format.swift */; };
 		642DD3A5EB1F2D2624213C9F1B49E4E0 /* Optimobile+Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F838C3624DACB544F22338186705B /* Optimobile+Stats.swift */; };
 		697F618A53F9A0396DAEC6EB5DB0B8FA /* CoreDataFetchIndexDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3881033156B63EC93273BD71023449 /* CoreDataFetchIndexDescription.swift */; };
+		69AF9CE8FCF7DE7102FA3B9EF0C37451 /* Pods-Example_App-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EB522244CAB321930CAA503BB4690131 /* Pods-Example_App-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6BB7A592FC8779C7EFBA6E4E8DA50B7E /* Dictionary+CompactMapKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F25ABA4D4DE60B8026ACCE2D1616CA /* Dictionary+CompactMapKeys.swift */; };
 		6BCC3DAC1AB3CF75A3D839109D299D11 /* Bundle+Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA6A540677F96848A292B88B13D6AE /* Bundle+Identifiers.swift */; };
 		6DD08FAB20D7A0197BC92692315D2A0B /* TenantConfigurationDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F00D23057C41465C2EC1EF5F60AFC02 /* TenantConfigurationDownloader.swift */; };
@@ -184,14 +184,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		463B0579CBFF0A4FAFE647FBDDD28939 /* PBXContainerItemProxy */ = {
+		3E228DA9EACA76E992FC285B7CCB8201 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 56640D04F849F6426F7CECA832AA8599;
 			remoteInfo = OptimoveSDK;
 		};
-		5149E882445D13B00FE0C7243018859F /* PBXContainerItemProxy */ = {
+		A93BF5AA8C4046B08B6BCA3321C68B75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -211,6 +211,7 @@
 		02DB541E2913F883A90B5EE2FED6A710 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = OptimoveCore/Sources/Classes/Logger/Logger.swift; sourceTree = "<group>"; };
 		03261605A1BE12D6B3E178A29288B206 /* NewUserHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NewUserHandler.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/NewUserHandler.swift; sourceTree = "<group>"; };
 		03F6A17B7F3669C18ADD82C497DED7BE /* SetUserEmailEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SetUserEmailEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/SetUserEmailEvent.swift; sourceTree = "<group>"; };
+		05B961DBDDE8861EC5DBEAB373BB2F0B /* Pods-Example_App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example_App-dummy.m"; sourceTree = "<group>"; };
 		07C466564DA7234819F60BF5972648BA /* MetaDataEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MetaDataEvent.swift; path = OptimoveSDK/Sources/Classes/Events/CoreEvents/MetaDataEvent.swift; sourceTree = "<group>"; };
 		07DB6A5196EAE1AB239EF3E60B8CFCA1 /* LogLevelCore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LogLevelCore.swift; path = OptimoveCore/Sources/Classes/Logger/LogLevelCore.swift; sourceTree = "<group>"; };
 		08203D5EF1F08A9ACFD0422448283E50 /* Bundle+AppVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+AppVersion.swift"; path = "OptimoveCore/Sources/Classes/Extension/Bundle+AppVersion.swift"; sourceTree = "<group>"; };
@@ -219,7 +220,6 @@
 		12EF9DD721BD3550666B551C3F5E7242 /* ComponentHandlers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComponentHandlers.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/ComponentHandlers.swift; sourceTree = "<group>"; };
 		1499BA7BF71CC7EAD2FE218D50883543 /* OptitrackMetaData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptitrackMetaData.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/OptitrackMetaData.swift; sourceTree = "<group>"; };
 		1581F4102D6E0CA0F08BF5288D963CC6 /* ResignActiveObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResignActiveObserver.swift; path = OptimoveSDK/Sources/Classes/Observers/ResignActiveObserver.swift; sourceTree = "<group>"; };
-		17596305D06823DA31D0E71CD9FE358A /* Pods-Cordova_QA_App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Cordova_QA_App-dummy.m"; sourceTree = "<group>"; };
 		17D58C2B128991D5A7FB507CBC332CD5 /* OptistreamEventBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamEventBuilder.swift; path = OptimoveCore/Sources/Classes/Optistream/OptistreamEventBuilder.swift; sourceTree = "<group>"; };
 		187386EA7F26FB21D53E01F42D32131B /* OptimobileUserDefaultsKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimobileUserDefaultsKey.swift; path = OptimobileShared/OptimobileUserDefaultsKey.swift; sourceTree = "<group>"; };
 		193899CCB4C89C96E93F4BF3612F80D7 /* Optimobile+Push.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Optimobile+Push.swift"; path = "OptimoveSDK/Sources/Classes/Optimobile/Optimobile+Push.swift"; sourceTree = "<group>"; };
@@ -227,15 +227,16 @@
 		19AA6A540677F96848A292B88B13D6AE /* Bundle+Identifiers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+Identifiers.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/Bundle+Identifiers.swift"; sourceTree = "<group>"; };
 		1A87620A1A1AE2A96252F3AD0A4AFA5A /* CoreDataModelDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataModelDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataModelDescription.swift; sourceTree = "<group>"; };
 		1C664B1E154710BA23C2636C160FAF0F /* RemoteConfigurationRequestBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoteConfigurationRequestBuilder.swift; path = OptimoveSDK/Sources/Classes/Configuration/RemoteConfiguration/RemoteConfigurationRequestBuilder.swift; sourceTree = "<group>"; };
+		1EA4C1BBEE575C0A0DC450396DE41835 /* Pods-Example_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example_App.debug.xcconfig"; sourceTree = "<group>"; };
 		1EC082F7688AB4C444CF9C498448627C /* GlobalConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GlobalConfig.swift; path = OptimoveCore/Sources/Classes/Configurations/Global/GlobalConfig.swift; sourceTree = "<group>"; };
 		1EDDFAC11D58AE4BADD319A8BD255254 /* ConfigurationFetcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConfigurationFetcher.swift; path = OptimoveSDK/Sources/Classes/Initializer/ConfigurationFetcher.swift; sourceTree = "<group>"; };
 		1FC9AD54874441CAF57F465EC5D7311D /* SessionHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionHelper.swift; path = OptimoveSDK/Sources/Classes/Optimobile/SessionHelper.swift; sourceTree = "<group>"; };
 		218B2DAD17514F383264A73F70C829EC /* ScreenVisitValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScreenVisitValidator.swift; path = OptimoveSDK/Sources/Classes/Validators/ScreenVisitValidator.swift; sourceTree = "<group>"; };
 		22D002BA55829D90DAF10554EC18DBB1 /* TenantEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TenantEvent.swift; path = OptimoveSDK/Sources/Classes/Events/TenantEvent.swift; sourceTree = "<group>"; };
+		230920065C7B9CD4A30A7919B1173897 /* Pods-Example_App-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example_App-acknowledgements.markdown"; sourceTree = "<group>"; };
 		268F6A4E02E3AACD5353A4F616B23756 /* EventCDv1ToEventCDv2MigrationPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventCDv1ToEventCDv2MigrationPolicy.swift; path = OptimoveSDK/Sources/Classes/CoreData/Versions/EventCDv1ToEventCDv2MigrationPolicy.swift; sourceTree = "<group>"; };
 		26E4B0FF1A54A6303D1FE9C3FF2E36C3 /* RemoteLoggerStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RemoteLoggerStream.swift; path = OptimoveCore/Sources/Classes/Logger/RemoteLoggerStream.swift; sourceTree = "<group>"; };
 		29E591DD3A7E6A75D7D75F7F98E616E6 /* DeviceStateObserverFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceStateObserverFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/DeviceStateObserverFactory.swift; sourceTree = "<group>"; };
-		2D509270C016B9EB942EAF3FABA98446 /* Pods-Cordova_QA_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Cordova_QA_App.release.xcconfig"; sourceTree = "<group>"; };
 		2DBAE15F3156997B79E48C172B53FF97 /* StatisticService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatisticService.swift; path = OptimoveSDK/Sources/Classes/Services/StatisticService.swift; sourceTree = "<group>"; };
 		2E6D8398FE6A5E1FD8354CA4A1319331 /* SdkPlatform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SdkPlatform.swift; path = OptimoveCore/Sources/Classes/Constants/SdkPlatform.swift; sourceTree = "<group>"; };
 		2F893CD536E1951C4CDA8BD1D1F7E1EF /* SDKInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKInitializer.swift; path = OptimoveSDK/Sources/Classes/Initializer/SDKInitializer.swift; sourceTree = "<group>"; };
@@ -255,8 +256,6 @@
 		3DB37554C8E8BC129EEDF8D438AFBAC4 /* RingBuffer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RingBuffer.swift; path = OptimoveSDK/Sources/Classes/DataStructs/RingBuffer.swift; sourceTree = "<group>"; };
 		3DCF6351F4060BE5966ABC54DF468CB8 /* InAppManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InAppManager.swift; path = OptimoveSDK/Sources/Classes/Optimobile/InApp/InAppManager.swift; sourceTree = "<group>"; };
 		3F23112C28C8B09C236D0EF1F61B8F52 /* EventCDv1ToEventCDv2MappingModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventCDv1ToEventCDv2MappingModel.swift; path = OptimoveSDK/Sources/Classes/CoreData/Mapping/EventCDv1ToEventCDv2MappingModel.swift; sourceTree = "<group>"; };
-		3F4422230FAB89BFBDEAFBBC32C16316 /* Pods-Cordova_QA_App-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Cordova_QA_App-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4154B3FD48B4ED68D1E4BEC159D1330E /* Pods-Cordova_QA_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Cordova_QA_App.debug.xcconfig"; sourceTree = "<group>"; };
 		439C61F1D72553040BEA108E673473AD /* CoreEventFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreEventFactory.swift; path = OptimoveSDK/Sources/Classes/Factories/CoreEventFactory.swift; sourceTree = "<group>"; };
 		461BAF759BDD3A69E51567E431666026 /* FileStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileStorage.swift; path = OptimoveCore/Sources/Classes/Storage/FileStorage.swift; sourceTree = "<group>"; };
 		467968C4DA33BEA897067E9CE16F3AD8 /* NewTenantInfoHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NewTenantInfoHandler.swift; path = OptimoveSDK/Sources/Classes/OnStartHelpers/NewTenantInfoHandler.swift; sourceTree = "<group>"; };
@@ -265,6 +264,7 @@
 		4B6E4B9CB9F8D023852FCA9A827B597A /* Parameter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Parameter.swift; path = OptimoveCore/Sources/Classes/Configurations/Tenant/Parameter.swift; sourceTree = "<group>"; };
 		4BBA00BB89C53077213CD9724F9EE1D6 /* OptimoveUserNotificationCenterDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimoveUserNotificationCenterDelegate.swift; path = OptimoveSDK/Sources/Classes/Optimobile/OptimoveUserNotificationCenterDelegate.swift; sourceTree = "<group>"; };
 		4C080EC13B9B426BC79FD53F9D9B0573 /* SDKVersion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SDKVersion.swift; path = OptimoveCore/Sources/Classes/Constants/SDKVersion.swift; sourceTree = "<group>"; };
+		4CE9FDD6E6048A389788D580767265C7 /* Pods-Example_App-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example_App-acknowledgements.plist"; sourceTree = "<group>"; };
 		4E0FE9588880AF3B4D2C3C78FC50DB9D /* Container.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Container.swift; path = OptimoveSDK/Sources/Classes/DI/Container.swift; sourceTree = "<group>"; };
 		4E7C43A9BED944DF212C500C8CC2CBC9 /* UserValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserValidator.swift; path = OptimoveSDK/Sources/Classes/Validators/UserValidator.swift; sourceTree = "<group>"; };
 		4E7E3D2D667A3A71DC938825AB2BE58E /* PendingNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PendingNotification.swift; path = OptimobileShared/PendingNotification.swift; sourceTree = "<group>"; };
@@ -320,12 +320,10 @@
 		7F6E5E09896378A01B09C70ACE6A7AEE /* CwlSysctl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CwlSysctl.swift; path = OptimoveSDK/Sources/Classes/Optimobile/CwlSysctl.swift; sourceTree = "<group>"; };
 		8017954E3CBF26AFA3AB6FCBC7CFF6B8 /* LoggerStream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoggerStream.swift; path = OptimoveCore/Sources/Classes/Logger/LoggerStream.swift; sourceTree = "<group>"; };
 		83594C5651D9ADCAF60966C6F42AD7CC /* Merging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Merging.swift; path = OptimoveCore/Sources/Classes/JSON/Merging.swift; sourceTree = "<group>"; };
-		85D5985BB8E85D1AA1277D4A9B0F5ABF /* Pods-Cordova_QA_App-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Cordova_QA_App-acknowledgements.plist"; sourceTree = "<group>"; };
 		888CFA84D2B0D65FFAFED8AEC8B64D3C /* OptistreamQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptistreamQueue.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/OptistreamQueue.swift; sourceTree = "<group>"; };
 		89224F15CA7437592BEA3EFE5A79DC64 /* StorageFacade.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StorageFacade.swift; path = OptimoveCore/Sources/Classes/Storage/StorageFacade.swift; sourceTree = "<group>"; };
 		8D65F65C3C93941CCD40D305B083D942 /* String+isBlank.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+isBlank.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+isBlank.swift"; sourceTree = "<group>"; };
 		8E2C8FFCA2D2CAA33BCDEB77447A23CE /* AsyncOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsyncOperation.swift; path = OptimoveCore/Sources/Classes/Operations/AsyncOperation.swift; sourceTree = "<group>"; };
-		8E8AB8623B39EC9C6434F4A4EE779BFB /* Pods-Cordova_QA_App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Cordova_QA_App-umbrella.h"; sourceTree = "<group>"; };
 		8EF1C9D331F8FC93C732B555BCC30F63 /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = OptimoveCore/Sources/Classes/JSON/JSON.swift; sourceTree = "<group>"; };
 		8F26E9F5494CB0B3FFCF33C472EB7538 /* utsname+DeviceModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "utsname+DeviceModel.swift"; path = "OptimoveCore/Sources/Classes/Extension/utsname+DeviceModel.swift"; sourceTree = "<group>"; };
 		91829D690DB67F9A6A7957CABC5DDDC3 /* OptimoveCore */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = OptimoveCore; path = libOptimoveCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,7 +341,9 @@
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DA152E8D3B6373864F38598D85DAF2B /* OptimoveCore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OptimoveCore-umbrella.h"; sourceTree = "<group>"; };
 		9E17E96174B40CD7E4DFE166F041EEB2 /* String+Split.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Split.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/String+Split.swift"; sourceTree = "<group>"; };
+		9EB72E101CD75F4C68A87DBB5C16A0AC /* Pods-Example_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example_App.release.xcconfig"; sourceTree = "<group>"; };
 		9F00D23057C41465C2EC1EF5F60AFC02 /* TenantConfigurationDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TenantConfigurationDownloader.swift; path = OptimoveSDK/Sources/Classes/Configuration/TenantConfigurationDownloader.swift; sourceTree = "<group>"; };
+		A0265C2E2AC0B400FEDFD661A5050325 /* Pods-Example_App */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-Example_App"; path = "libPods-Example_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1F04116B9F56E14201991966F744A66 /* PersistentContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PersistentContainer.swift; path = OptimoveSDK/Sources/Classes/CoreData/PersistentContainer.swift; sourceTree = "<group>"; };
 		A373ED9485B862B496DC933139C11C9D /* EventValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventValidator.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/EventValidator.swift; sourceTree = "<group>"; };
 		A683FF1172F9CD8245CC818F79F27482 /* KeyPath+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KeyPath+Extension.swift"; path = "OptimoveSDK/Sources/Classes/CoreData/KeyPath+Extension.swift"; sourceTree = "<group>"; };
@@ -361,7 +361,6 @@
 		BD22E3F0E0CF7CD7CC9E6204CC83D6F9 /* RealTime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RealTime.swift; path = OptimoveSDK/Sources/Classes/Components/RealTime/RealTime.swift; sourceTree = "<group>"; };
 		BF37924FF8E32AD686626A722093B08F /* ParametersNormalizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParametersNormalizer.swift; path = OptimoveSDK/Sources/Classes/Pipeline/Pipes/ParametersNormalizer.swift; sourceTree = "<group>"; };
 		BF42A47323E5FA07FDC34C35A385ECB4 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = OptimoveCore/Sources/Classes/Events/Event.swift; sourceTree = "<group>"; };
-		C03617F8DC5E9F40DE6A5424A339AD1E /* Pods-Cordova_QA_App.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Cordova_QA_App.modulemap"; sourceTree = "<group>"; };
 		C03893DB2D365A8B43318371DDD6A90E /* ProcessInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProcessInfo.swift; path = OptimoveSDK/Sources/Classes/Extensions/ProcessInfo.swift; sourceTree = "<group>"; };
 		C0708F30068695ECDED7640369848574 /* Managed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Managed.swift; path = OptimoveSDK/Sources/Classes/Components/Queue/Managed.swift; sourceTree = "<group>"; };
 		C1FFBB33FF73C0FAAFADF180B09D399A /* ISO+format.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ISO+format.swift"; path = "OptimoveCore/Sources/Classes/Extension/ISO+format.swift"; sourceTree = "<group>"; };
@@ -387,6 +386,8 @@
 		E47B960DF9986A8A6B64FF47E13121AC /* Operations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Operations.swift; path = OptimoveSDK/Sources/Classes/Components/Operations.swift; sourceTree = "<group>"; };
 		E5A10416CD59A4B017E0C3DD4E57E42C /* DeepLinkFingerprinter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeepLinkFingerprinter.swift; path = OptimoveSDK/Sources/Classes/Optimobile/DeepLinkFingerprinter.swift; sourceTree = "<group>"; };
 		E73E3989B75294192EA3664A3C85AE9C /* OptimobileBadgeObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OptimobileBadgeObserver.swift; path = OptimoveSDK/Sources/Classes/Optimobile/OptimobileBadgeObserver.swift; sourceTree = "<group>"; };
+		EB522244CAB321930CAA503BB4690131 /* Pods-Example_App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example_App-umbrella.h"; sourceTree = "<group>"; };
+		F0EA857EA3A85A52873CF1345148B1CC /* Pods-Example_App.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example_App.modulemap"; sourceTree = "<group>"; };
 		F325986A6FBCCC707BB800CE27D8DC8E /* CoreDataAttributeDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataAttributeDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataAttributeDescription.swift; sourceTree = "<group>"; };
 		F44ADE558AE15584399D2BA765AE5AAE /* OptimoveSDK */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = OptimoveSDK; path = libOptimoveSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45BD1083C31C58E7B97E78E23A17EDC /* KSHttp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KSHttp.swift; path = OptimobileShared/KSHttp.swift; sourceTree = "<group>"; };
@@ -397,19 +398,18 @@
 		F72B27C87CD3FDD41D96F87007F58F90 /* NSManagedObjectContext+Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+Utilities.swift"; path = "OptimoveSDK/Sources/Classes/Extensions/NSManagedObjectContext+Utilities.swift"; sourceTree = "<group>"; };
 		F8BA07677587698C8CD212A11ED129E1 /* OptimoveSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OptimoveSDK.release.xcconfig; sourceTree = "<group>"; };
 		F9C3F9067EA854C6080523F71D76D9C8 /* DeviceStateObserver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceStateObserver.swift; path = OptimoveSDK/Sources/Classes/Observers/DeviceStateObserver.swift; sourceTree = "<group>"; };
-		FC0932C3A9B0576BE0206DE2B3ECE61C /* Pods-Cordova_QA_App */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-Cordova_QA_App"; path = "libPods-Cordova_QA_App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7F0AC75F7E604B871E783B54B142A1 /* CoreDataRelationshipDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataRelationshipDescription.swift; path = OptimoveSDK/Sources/Classes/CoreData/Descriptions/CoreDataRelationshipDescription.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		14707AC465B15355932AA60864DA511F /* Frameworks */ = {
+		445309906BCA089EF3FCA594FE103CE9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		445309906BCA089EF3FCA594FE103CE9 /* Frameworks */ = {
+		996044F64C4B78DE22F4EAF5452A8B24 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,27 +440,19 @@
 			path = "../Target Support Files/OptimoveCore";
 			sourceTree = "<group>";
 		};
-		7002027DB3F5AF704D2FD303B5AD3AD0 /* Targets Support Files */ = {
+		300AF2C92E1E18279467B01D0F2718A9 /* Pods-Example_App */ = {
 			isa = PBXGroup;
 			children = (
-				8BDDC006F17F3E301D42F773A8B911B8 /* Pods-Cordova_QA_App */,
+				F0EA857EA3A85A52873CF1345148B1CC /* Pods-Example_App.modulemap */,
+				230920065C7B9CD4A30A7919B1173897 /* Pods-Example_App-acknowledgements.markdown */,
+				4CE9FDD6E6048A389788D580767265C7 /* Pods-Example_App-acknowledgements.plist */,
+				05B961DBDDE8861EC5DBEAB373BB2F0B /* Pods-Example_App-dummy.m */,
+				EB522244CAB321930CAA503BB4690131 /* Pods-Example_App-umbrella.h */,
+				1EA4C1BBEE575C0A0DC450396DE41835 /* Pods-Example_App.debug.xcconfig */,
+				9EB72E101CD75F4C68A87DBB5C16A0AC /* Pods-Example_App.release.xcconfig */,
 			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		8BDDC006F17F3E301D42F773A8B911B8 /* Pods-Cordova_QA_App */ = {
-			isa = PBXGroup;
-			children = (
-				C03617F8DC5E9F40DE6A5424A339AD1E /* Pods-Cordova_QA_App.modulemap */,
-				3F4422230FAB89BFBDEAFBBC32C16316 /* Pods-Cordova_QA_App-acknowledgements.markdown */,
-				85D5985BB8E85D1AA1277D4A9B0F5ABF /* Pods-Cordova_QA_App-acknowledgements.plist */,
-				17596305D06823DA31D0E71CD9FE358A /* Pods-Cordova_QA_App-dummy.m */,
-				8E8AB8623B39EC9C6434F4A4EE779BFB /* Pods-Cordova_QA_App-umbrella.h */,
-				4154B3FD48B4ED68D1E4BEC159D1330E /* Pods-Cordova_QA_App.debug.xcconfig */,
-				2D509270C016B9EB942EAF3FABA98446 /* Pods-Cordova_QA_App.release.xcconfig */,
-			);
-			name = "Pods-Cordova_QA_App";
-			path = "Target Support Files/Pods-Cordova_QA_App";
+			name = "Pods-Example_App";
+			path = "Target Support Files/Pods-Example_App";
 			sourceTree = "<group>";
 		};
 		950565C9669E0B005B4F68001093B1C9 /* OptimoveSDK */ = {
@@ -616,12 +608,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AF1757D074A88B53995A11B394F43314 /* Products */ = {
+		C0605508DCE669473AFAF33753C33D4F /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				91829D690DB67F9A6A7957CABC5DDDC3 /* OptimoveCore */,
 				F44ADE558AE15584399D2BA765AE5AAE /* OptimoveSDK */,
-				FC0932C3A9B0576BE0206DE2B3ECE61C /* Pods-Cordova_QA_App */,
+				A0265C2E2AC0B400FEDFD661A5050325 /* Pods-Example_App */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -632,9 +624,17 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
 				977B25D1612A5EA50B23A959C0E604F1 /* Pods */,
-				AF1757D074A88B53995A11B394F43314 /* Products */,
-				7002027DB3F5AF704D2FD303B5AD3AD0 /* Targets Support Files */,
+				C0605508DCE669473AFAF33753C33D4F /* Products */,
+				D2CB3740CF6E48498E3129F175119A98 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		D2CB3740CF6E48498E3129F175119A98 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				300AF2C92E1E18279467B01D0F2718A9 /* Pods-Example_App */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		D7091A77B6595D39A15120FA77182E83 /* OptimoveCore */ = {
@@ -719,36 +719,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB69D8026BF7B2F02C969ED36731F45E /* Headers */ = {
+		F12F1550C3618F4D66AFFBF3FEA8B7BC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15FA8DB89D259CD3063F0DFF6123F0D9 /* Pods-Cordova_QA_App-umbrella.h in Headers */,
+				69AF9CE8FCF7DE7102FA3B9EF0C37451 /* Pods-Example_App-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		05B75CF93B06E1F401E66E705BFE7A31 /* Pods-Cordova_QA_App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4A1E2F15F7D2F9BE7665AB8C961DFC53 /* Build configuration list for PBXNativeTarget "Pods-Cordova_QA_App" */;
-			buildPhases = (
-				AB69D8026BF7B2F02C969ED36731F45E /* Headers */,
-				7644E19EE843CB7DE8F59EE8A6836453 /* Sources */,
-				14707AC465B15355932AA60864DA511F /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				88C25A1ACACD81BFD146F9BC9F9E3280 /* PBXTargetDependency */,
-				4222A4FF34AEE898433C387DEDFD070D /* PBXTargetDependency */,
-			);
-			name = "Pods-Cordova_QA_App";
-			productName = "Pods-Cordova_QA_App";
-			productReference = FC0932C3A9B0576BE0206DE2B3ECE61C /* Pods-Cordova_QA_App */;
-			productType = "com.apple.product-type.library.static";
-		};
 		4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D35901A6A0D9A774819A7527F3FD2963 /* Build configuration list for PBXNativeTarget "OptimoveCore" */;
@@ -786,6 +767,25 @@
 			productReference = F44ADE558AE15584399D2BA765AE5AAE /* OptimoveSDK */;
 			productType = "com.apple.product-type.library.static";
 		};
+		8E653662D2601FCA134468A8883C71A3 /* Pods-Example_App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 502BA2BF11F9BC4D7F8C7D4BAF7349F3 /* Build configuration list for PBXNativeTarget "Pods-Example_App" */;
+			buildPhases = (
+				F12F1550C3618F4D66AFFBF3FEA8B7BC /* Headers */,
+				FA2C82399442ABF1DFE3AC54DBE27015 /* Sources */,
+				996044F64C4B78DE22F4EAF5452A8B24 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				459C116328B08DEDA3D439B6415627A9 /* PBXTargetDependency */,
+				D5820126EAA766A95F8A31EA55940F34 /* PBXTargetDependency */,
+			);
+			name = "Pods-Example_App";
+			productName = "Pods-Example_App";
+			productReference = A0265C2E2AC0B400FEDFD661A5050325 /* Pods-Example_App */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -804,13 +804,13 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = AF1757D074A88B53995A11B394F43314 /* Products */;
+			productRefGroup = C0605508DCE669473AFAF33753C33D4F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */,
 				56640D04F849F6426F7CECA832AA8599 /* OptimoveSDK */,
-				05B75CF93B06E1F401E66E705BFE7A31 /* Pods-Cordova_QA_App */,
+				8E653662D2601FCA134468A8883C71A3 /* Pods-Example_App */,
 			);
 		};
 /* End PBXProject section */
@@ -919,14 +919,6 @@
 				1BB37C25D7AEC598972510D2854B1ED2 /* TimeInterval+Seconds.swift in Sources */,
 				2AB870FB0E6E2B5A53A03AE156AEA8A1 /* UserDefaults+Optimove.swift in Sources */,
 				D56B177DA2C45957211792AAE081A696 /* utsname+DeviceModel.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7644E19EE843CB7DE8F59EE8A6836453 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				27DD656946A84078E97CC73F293E8054 /* Pods-Cordova_QA_App-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,14 +1051,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA2C82399442ABF1DFE3AC54DBE27015 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FC5386002CFC325BDEE866D78615DFF /* Pods-Example_App-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4222A4FF34AEE898433C387DEDFD070D /* PBXTargetDependency */ = {
+		459C116328B08DEDA3D439B6415627A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = OptimoveSDK;
-			target = 56640D04F849F6426F7CECA832AA8599 /* OptimoveSDK */;
-			targetProxy = 463B0579CBFF0A4FAFE647FBDDD28939 /* PBXContainerItemProxy */;
+			name = OptimoveCore;
+			target = 4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */;
+			targetProxy = A93BF5AA8C4046B08B6BCA3321C68B75 /* PBXContainerItemProxy */;
 		};
 		7BADB32D00EDC908B3A7376D03125625 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1074,18 +1074,18 @@
 			target = 4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */;
 			targetProxy = ED8896782A4DA4BE894DFE97962BA57A /* PBXContainerItemProxy */;
 		};
-		88C25A1ACACD81BFD146F9BC9F9E3280 /* PBXTargetDependency */ = {
+		D5820126EAA766A95F8A31EA55940F34 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = OptimoveCore;
-			target = 4DE76B408494897AAE3DB4518F1078A0 /* OptimoveCore */;
-			targetProxy = 5149E882445D13B00FE0C7243018859F /* PBXContainerItemProxy */;
+			name = OptimoveSDK;
+			target = 56640D04F849F6426F7CECA832AA8599 /* OptimoveSDK */;
+			targetProxy = 3E228DA9EACA76E992FC285B7CCB8201 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0EB26BD95A0043113CCCF8620152C5B9 /* Debug */ = {
+		0741C282928BB26E1ADD1FB2F88A5B47 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4154B3FD48B4ED68D1E4BEC159D1330E /* Pods-Cordova_QA_App.debug.xcconfig */;
+			baseConfigurationReference = 1EA4C1BBEE575C0A0DC450396DE41835 /* Pods-Example_App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -1094,7 +1094,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Cordova_QA_App/Pods-Cordova_QA_App.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-Example_App/Pods-Example_App.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1156,6 +1156,29 @@
 			};
 			name = Debug;
 		};
+		476DE2A065B2F750FACA564C2CAAFB3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EB72E101CD75F4C68A87DBB5C16A0AC /* Pods-Example_App.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Example_App/Pods-Example_App.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		70D209E992D281A4E790BB953F1A87A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8BA07677587698C8CD212A11ED129E1 /* OptimoveSDK.release.xcconfig */;
@@ -1177,29 +1200,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		8DD6D65ACAA0CEF8A5E0B6298BCA48DE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D509270C016B9EB942EAF3FABA98446 /* Pods-Cordova_QA_App.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Cordova_QA_App/Pods-Cordova_QA_App.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1379,11 +1379,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4A1E2F15F7D2F9BE7665AB8C961DFC53 /* Build configuration list for PBXNativeTarget "Pods-Cordova_QA_App" */ = {
+		502BA2BF11F9BC4D7F8C7D4BAF7349F3 /* Build configuration list for PBXNativeTarget "Pods-Example_App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0EB26BD95A0043113CCCF8620152C5B9 /* Debug */,
-				8DD6D65ACAA0CEF8A5E0B6298BCA48DE /* Release */,
+				0741C282928BB26E1ADD1FB2F88A5B47 /* Debug */,
+				476DE2A065B2F750FACA564C2CAAFB3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
