@@ -99,6 +99,17 @@ function getVisitorId() {
         document.getElementById("text-area-visitor-id").value = visitorId
     });
 }
+document.getElementById("get-current-user-identifier-button").addEventListener("click", getCurrentUserIdentifier);
+
+function getCurrentUserIdentifier() {
+    window.getCurrentUserIdentifier((currentUserIdentifier) => {
+
+        document.getElementById("text-area-current-user-identifier").value = currentUserIdentifier;
+
+    }, error).then((visitorId) => {
+        document.getElementById("text-area-current-user-identifier").value = visitorId
+    });
+}
 /*
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
@@ -112,16 +123,6 @@ function getInbox() {
     Optimobile.getInboxItems()
 }
 
-
-
-
-document.getElementById("Register User").addEventListener("click", registerUser);
-
-function registerUser() {
-    Optimobile.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("textareauseremail").value)
-    document.getElementById("text-area-user-id").value = "";
-    document.getElementById("textareauseremail").value = "";
-}
 
 
 

@@ -29,3 +29,6 @@ window.registerUser = function (userId, userEmail, success, error) {
 window.getVisitorId = function (success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'getVisitorId',[]);
 };
+window.getCurrentUserIdentifier = function (success, error) {
+    exec(success, error, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []);
+};
