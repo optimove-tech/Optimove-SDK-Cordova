@@ -15,3 +15,7 @@ window.setUserEmail = function (userEmail, success, error) {
 window.reportEvent = function (eventName, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName]);
 }
+
+window.reportScreenVisit = function (screenName, screenCategory, success, error) {
+    exec(success, error, 'OptimoveSDKPlugin', 'reportScreenVisit', [screenName, screenCategory]);
+}

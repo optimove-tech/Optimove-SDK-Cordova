@@ -33,48 +33,50 @@ function onDeviceReady() {
     });
     alert('device ready');
 }
+function success(successMessage = "Success!") {
+    console.log(successMessage);
+}
+
+function error(errorMessage) {
+    console.error(errorMessage);
+}
 
 document.getElementById("Initialize").addEventListener("click", initialize);
 
 function initialize() {
-    
-    window.initialize("ExplicitByUser",(successMessage)=>{
-        console.log(successMessage);
-    },(errorMessage)=>{
-        console.error(errorMessage);
-    })
+
+    window.initialize("ExplicitByUser", success, error)
 }
 
 document.getElementById("set-user-id-button").addEventListener("click", setUserId);
 
 function setUserId() {
-    window.setUserId(document.getElementById("text-area-user-id").value, (success) => {
-        console.log(success);
-    }, (error) => {
-        console.log(error);
-    });
+    window.setUserId(document.getElementById("text-area-user-id").value, success, error);
     document.getElementById("text-area-user-id").value = "";
 }
 
 document.getElementById("report-event-button").addEventListener("click", reportEvent);
 
 function reportEvent() {
-    window.reportEvent(document.getElementById("text-area-event").value, (successMessage) => {
-        console.log(successMessage);
-    }, (errorMessage) => {
-        console.log(errorMessage);
-    })
+    window.reportEvent(document.getElementById("text-area-event").value, success, error)
     document.getElementById("text-area-event").value = ""
 }
 
 document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
 
 function setUserEmail() {
-    window.setUserEmail(document.getElementById("text-area-user-email").value)
+    window.setUserEmail(document.getElementById("text-area-user-email").value, success, error)
     document.getElementById("text-area-user-email").value = ""
 }
 
+document.getElementById("report-screen-visit-button").addEventListener("click", reportScreenVisit);
 
+function reportScreenVisit() {
+    window.reportScreenVisit(document.getElementById("text-area-screen-name").value, document.getElementById("text-area-screen-category").value, success, error);
+    document.getElementById("text-area-screen-name").value = "";
+    document.getElementById("text-area-screen-category").value = "";
+}
+/*
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
 function campaignsIsEnabled() {
@@ -90,16 +92,10 @@ function getInbox() {
 
 
 
-document.getElementById("Report Screen Visit").addEventListener("click", reportScreenVisit);
-
-function reportScreenVisit() {
-    Optimobile.reportScreenVisit("screenTitle", "screenCategory")
-}
-
 document.getElementById("Register User").addEventListener("click", registerUser);
 
 function registerUser() {
-    Optimobile.registerUser(document.getElementById("text-area-user-id").value,  document.getElementById("textareauseremail").value)
+    Optimobile.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("textareauseremail").value)
     document.getElementById("text-area-user-id").value = "";
     document.getElementById("textareauseremail").value = "";
 }
@@ -112,3 +108,4 @@ function getVisitorID() {
         document.getElementById("textareav").value = visitorId
     })
 }
+*/
