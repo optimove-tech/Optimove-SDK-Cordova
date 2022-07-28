@@ -3,6 +3,7 @@ package com.optimove.android.cordova;
 import org.apache.cordova.CordovaPlugin;
 
 import java.nio.file.WatchEvent;
+import java.util.Map;
 
 import org.apache.cordova.CallbackContext;
 import com.optimove.android.Optimove;
@@ -30,7 +31,14 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 return true;
             case REPORT_EVENT:
                 String eventName = args.getString(0);
-                this.reportEvent(eventName, callbackContext);
+                String params = args.getString(1);
+                if (params == "null") {
+                    this.reportEvent(eventName, callbackContext);
+                } else {
+                    JSONObject jsonParams = new JSONObject(params);
+                    reportEvent(eventName, jsonParams, callbackContext);
+                }
+
                 return true;
             case REPORT_SCREEN_VISIT:
                 String screenName = args.getString(0);
@@ -73,6 +81,26 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private void reportEvent(String eventName, CallbackContext callbackContext) {
         try {
             Optimove.getInstance().reportEvent(eventName);
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        callbackContext.success();
+
+    }
+
+    private void reportEvent(String eventName, JSONObject parameters, CallbackContext callbackContext) {
+        Map<String, Object> parametersMap;
+        try {
+            parametersMap = JsonUtils.toMap(parameters);
+        } catch (JSONException e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        try {
+            Optimove.getInstance().reportEvent(eventName, parametersMap);
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();

@@ -12,8 +12,10 @@ window.setUserId = function (userId, success, error) {
 window.setUserEmail = function (userEmail, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]);
 };
-window.reportEvent = function (eventName, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName]);
+
+/* event params is nullable*/
+window.reportEvent = function (eventName, eventParams, success, error) {
+    exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName, eventParams]);
 }
 
 /* screenCategory parameter is nullable*/

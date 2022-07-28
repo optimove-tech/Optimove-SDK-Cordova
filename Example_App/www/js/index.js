@@ -26,11 +26,7 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-    window.initialize("ExplicitByUser", (successMessage) => {
-        console.log(successMessage);
-    }, (errorMessage) => {
-        console.error(errorMessage)
-    });
+    window.initialize("ExplicitByUser", success, error);
     alert('device ready');
 }
 function success(successMessage = "Success!") {
@@ -41,7 +37,7 @@ function error(errorMessage) {
     console.error(errorMessage);
 }
 
-document.getElementById("Initialize").addEventListener("click", initialize);
+//document.getElementById("Initialize").addEventListener("click", initialize);
 
 function initialize() {
 
@@ -58,7 +54,11 @@ function setUserId() {
 document.getElementById("report-event-button").addEventListener("click", reportEvent);
 
 function reportEvent() {
-    window.reportEvent(document.getElementById("text-area-event").value, success, error)
+    var eventParams = document.getElementById("text-area-event-params").value;
+    if (eventParams === "") {
+        eventParams = null;
+    }
+    window.reportEvent(document.getElementById("text-area-event").value, eventParams, success, error)
     document.getElementById("text-area-event").value = ""
 }
 
@@ -75,8 +75,6 @@ function reportScreenVisit() {
     var screenCategory = document.getElementById("text-area-screen-category").value;
     if (screenCategory === "") {
         screenCategory = null;
-    } else {
-      screenCategory =  document.getElementById("text-area-screen-category").value;
     }
     window.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
     document.getElementById("text-area-screen-name").value = "";
