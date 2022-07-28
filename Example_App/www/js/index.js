@@ -88,6 +88,17 @@ function registerUser() {
     document.getElementById("text-area-user-id").value = "";
     document.getElementById("text-area-user-email").value = "";
 }
+document.getElementById("get-visitor-id-button").addEventListener("click", getVisitorId);
+
+function getVisitorId() {
+    window.getVisitorId((visitorId) => { 
+
+        document.getElementById("text-area-visitor-id").value = visitorId;
+
+    },error).then((visitorId)=>{
+        document.getElementById("text-area-visitor-id").value = visitorId
+    });
+}
 /*
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
@@ -113,11 +124,5 @@ function registerUser() {
 }
 
 
-document.getElementById("Get Visitor ID").addEventListener("click", getVisitorID);
 
-function getVisitorID() {
-    Optimobile.getVisitorID().then(function (visitorId) {
-        document.getElementById("textareav").value = visitorId
-    })
-}
 */

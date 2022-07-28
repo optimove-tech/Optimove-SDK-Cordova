@@ -24,4 +24,8 @@ window.reportScreenVisit = function (screenName, screenCategory, success, error)
 }
 window.registerUser = function (userId, userEmail, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'registerUser', [userId, userEmail]);
- }
+}
+
+window.getVisitorId = function (success, error) {
+    exec(success, error, 'OptimoveSDKPlugin', 'getVisitorId',[]);
+};

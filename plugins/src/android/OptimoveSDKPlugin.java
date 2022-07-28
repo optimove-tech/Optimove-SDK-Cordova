@@ -20,6 +20,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String REPORT_EVENT = "reportEvent";
     private static final String REPORT_SCREEN_VISIT = "reportScreenVisit";
     private static final String REGISTER_USER = "registerUser";
+    private static final String GET_VISITOR_ID = "getVisitorId";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -56,6 +57,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 String id = args.getString(0);
                 String userEmail = args.getString(1);
                 this.registerUser(id, userEmail, callbackContext);
+                return true;
+            case GET_VISITOR_ID:
+                String visitorId = this.getVisitorId();
+                if (visitorId != null) {
+                    callbackContext.success(visitorId);
+                } else {
+                    callbackContext.error("visitor id is null");
+                    return false;
+                }
+                return true;
         }
         return false;
     }
@@ -148,5 +159,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             return;
         }
         callbackContext.success();
+    }
+
+    private String getVisitorId() {
+        return Optimove.getInstance().getVisitorId();
     }
 }
