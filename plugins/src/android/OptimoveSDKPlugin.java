@@ -11,10 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OptimoveSDKPlugin extends CordovaPlugin {
+
     private static final String SET_USER_ID = "setUserId";
     private static final String SET_USER_EMAIL = "setUserEmail";
     private static final String REPORT_EVENT = "reportEvent";
-    private static final String REPORT_SCREEN_VISIT = "reportScreenVisit"; 
+    private static final String REPORT_SCREEN_VISIT = "reportScreenVisit";
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
@@ -33,11 +35,17 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             case REPORT_SCREEN_VISIT:
                 String screenName = args.getString(0);
                 String screenCategory = args.getString(1);
-                this.reportScreenVisit(screenName, screenCategory, callbackContext);   
+                if (screenCategory == "null") {
+                    reportScreenVisit(screenName, callbackContext);
+                } else {
+                    this.reportScreenVisit(screenName, screenCategory, callbackContext);
+                }
+                return true;
+
         }
         return false;
     }
-    
+
     private void setUserId(String userId, CallbackContext callbackContext) {
         try {
             Optimove.getInstance().setUserId(userId);
@@ -74,9 +82,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     }
 
-    private void reportScreenVisit(String screenName, String screenCategory, CallbackContext callbackContext) {
+    private void reportScreenVisit(String screenName, CallbackContext callbackContext) {
         try {
-            Optimove.getInstance().reportScreenVisit(screenName,screenCategory);
+            Optimove.getInstance().reportScreenVisit(screenName);
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
@@ -84,5 +92,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
         callbackContext.success();
 
+    }
+
+    private void reportScreenVisit(String screenName, String screenCategory, CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        callbackContext.success();
     }
 }

@@ -72,7 +72,13 @@ function setUserEmail() {
 document.getElementById("report-screen-visit-button").addEventListener("click", reportScreenVisit);
 
 function reportScreenVisit() {
-    window.reportScreenVisit(document.getElementById("text-area-screen-name").value, document.getElementById("text-area-screen-category").value, success, error);
+    var screenCategory = document.getElementById("text-area-screen-category").value;
+    if (screenCategory === "") {
+        screenCategory = null;
+    } else {
+      screenCategory =  document.getElementById("text-area-screen-category").value;
+    }
+    window.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
     document.getElementById("text-area-screen-name").value = "";
     document.getElementById("text-area-screen-category").value = "";
 }

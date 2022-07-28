@@ -16,6 +16,7 @@ window.reportEvent = function (eventName, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName]);
 }
 
+/* screenCategory parameter is nullable*/
 window.reportScreenVisit = function (screenName, screenCategory, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'reportScreenVisit', [screenName, screenCategory]);
 }
