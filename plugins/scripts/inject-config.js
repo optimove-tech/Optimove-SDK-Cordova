@@ -90,7 +90,7 @@ module.exports = function injectOptimoveConfig(context) {
     }
 };
 
-function prepareIos(context, kumulosConfig) {
+function prepareIos(context, OptimoveConfig) {
     const iosPath = path.join(context.opts.projectRoot, 'platforms', 'ios');
     const files = fs.readdirSync(iosPath);
 
@@ -112,10 +112,10 @@ function prepareIos(context, kumulosConfig) {
     }
 
     const config = renderTemplate('optimove.plist', {
-        API_KEY: kumulosConfig.apiKey,
-        SECRET_KEY: kumulosConfig.secretKey,
-        ENABLE_CRASH: kumulosConfig.enableCrashReporting,
-        IN_APP_STRATEGY: kumulosConfig.inAppConsentStrategy
+        API_KEY: OptimoveConfig.apiKey,
+        SECRET_KEY: OptimoveConfig.secretKey,
+        ENABLE_CRASH: OptimoveConfig.enableCrashReporting,
+        IN_APP_STRATEGY: OptimoveConfig.inAppConsentStrategy
     });
 
     fs.writeFileSync(configDest, config, { encoding: 'utf-8' });
