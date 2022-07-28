@@ -6,7 +6,9 @@ import java.nio.file.WatchEvent;
 import java.util.Map;
 
 import org.apache.cordova.CallbackContext;
+
 import com.optimove.android.Optimove;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +19,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String SET_USER_EMAIL = "setUserEmail";
     private static final String REPORT_EVENT = "reportEvent";
     private static final String REPORT_SCREEN_VISIT = "reportScreenVisit";
+    private static final String REGISTER_USER = "registerUser";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -38,8 +41,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                     JSONObject jsonParams = new JSONObject(params);
                     reportEvent(eventName, jsonParams, callbackContext);
                 }
-
                 return true;
+
             case REPORT_SCREEN_VISIT:
                 String screenName = args.getString(0);
                 String screenCategory = args.getString(1);
@@ -49,7 +52,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                     this.reportScreenVisit(screenName, screenCategory, callbackContext);
                 }
                 return true;
-
+            case REGISTER_USER:
+                String id = args.getString(0);
+                String userEmail = args.getString(1);
+                this.registerUser(id, userEmail, callbackContext);
         }
         return false;
     }
@@ -125,6 +131,17 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private void reportScreenVisit(String screenName, String screenCategory, CallbackContext callbackContext) {
         try {
             Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        callbackContext.success();
+    }
+
+    private void registerUser(String userId, String userEmail, CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().registerUser(userId, userEmail);
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();

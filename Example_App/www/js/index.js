@@ -60,6 +60,7 @@ function reportEvent() {
     }
     window.reportEvent(document.getElementById("text-area-event").value, eventParams, success, error)
     document.getElementById("text-area-event").value = ""
+    document.getElementById("text-area-event-params").value = ""
 }
 
 document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
@@ -79,6 +80,13 @@ function reportScreenVisit() {
     window.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
     document.getElementById("text-area-screen-name").value = "";
     document.getElementById("text-area-screen-category").value = "";
+}
+document.getElementById("register-user-button").addEventListener("click", registerUser);
+
+function registerUser() {
+    window.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value)
+    document.getElementById("text-area-user-id").value = "";
+    document.getElementById("text-area-user-email").value = "";
 }
 /*
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
