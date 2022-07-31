@@ -37,3 +37,7 @@ window.getVisitorId = function (success, error) {
 window.getCurrentUserIdentifier = function (success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []);
 };
+
+window.pushRegister = function (success, error) {
+    exec(success, error, 'OptimoveSDKPlugin', 'pushRegister', []);
+};

@@ -27,6 +27,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String REGISTER_USER = "registerUser";
     private static final String GET_VISITOR_ID = "getVisitorId";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
+    private static final String PUSH_REGISTER = "pushRegister";
 
     @Nullable
     static CallbackContext jsCallbackContext;
@@ -92,6 +93,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                     callbackContext.error("current user identifier is null");
                     return false;
                 }
+            case PUSH_REGISTER:
+                this.pushRegister(callbackContext);
                 return true;
         }
         return false;
@@ -230,4 +233,26 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         return true;
     }
 
+    private void pushRegister(CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().pushRegister();
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        callbackContext.success();
+    }
+
+    private void pushUnregister(CallbackContext callbackContext) {
+        try {
+            // Optimove.getInstance().pushUnregister(); TODO figure out why can't I call
+            // this method
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        callbackContext.success();
+    }
 }

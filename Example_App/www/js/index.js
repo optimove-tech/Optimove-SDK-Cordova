@@ -109,9 +109,13 @@ function getCurrentUserIdentifier() {
 
         document.getElementById("text-area-current-user-identifier").value = currentUserIdentifier;
 
-    }, error).then((visitorId) => {
-        document.getElementById("text-area-current-user-identifier").value = visitorId
-    });
+    }, error);
+}
+
+document.getElementById("push-register-button").addEventListener("click", pushRegister);
+
+function pushRegister() {
+    window.pushRegister(success, error);
 }
 /*
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
