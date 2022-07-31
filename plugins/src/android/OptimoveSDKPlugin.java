@@ -1,14 +1,10 @@
 package com.optimove.android.cordova;
 
 import org.apache.cordova.CordovaPlugin;
-
 import java.nio.file.WatchEvent;
 import java.util.Map;
-
 import org.apache.cordova.CallbackContext;
-
 import com.optimove.android.Optimove;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

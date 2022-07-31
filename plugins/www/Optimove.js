@@ -13,7 +13,7 @@ window.setUserEmail = function (userEmail, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]);
 };
 
-/* event params is nullable*/
+/* eventParams is nullable*/
 window.reportEvent = function (eventName, eventParams, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName, eventParams]);
 }
