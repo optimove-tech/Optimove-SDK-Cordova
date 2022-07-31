@@ -37,11 +37,11 @@ function error(errorMessage) {
     console.error(errorMessage);
 }
 
-//document.getElementById("Initialize").addEventListener("click", initialize);
-
 function initialize() {
 
-    window.initialize("ExplicitByUser", success, error)
+    //window.initialize("ExplicitByUser", success, error);
+    window.initBaseSdk(success, error);
+
 }
 
 document.getElementById("set-user-id-button").addEventListener("click", setUserId);

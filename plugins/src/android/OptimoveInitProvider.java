@@ -10,6 +10,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
 
@@ -27,19 +28,20 @@ public class OptimoveInitProvider extends ContentProvider {
         if (TextUtils.isEmpty(optimoveCredentials) || TextUtils.isEmpty(optimoveMobileCredentials)) {
             return true;
         }
-            assert optimoveCredentials != null;
-            assert optimoveMobileCredentials != null;
-            OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
-                    optimoveMobileCredentials);
-            Optimove.initialize(app, configBuilder.build());
-        
+        assert optimoveCredentials != null;
+        assert optimoveMobileCredentials != null;
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
+                optimoveMobileCredentials);
+        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
+        Optimove.initialize(app, configBuilder.build());
+
         return false;
     }
 
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
-            @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         return null;
     }
 
@@ -62,7 +64,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
-            @Nullable String[] selectionArgs) {
+                      @Nullable String[] selectionArgs) {
         return 0;
     }
 

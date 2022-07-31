@@ -1,16 +1,25 @@
 package com.optimove.android.cordova;
 
+import androidx.annotation.Nullable;
+
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
-import java.nio.file.WatchEvent;
+
 import java.util.Map;
+
 import org.apache.cordova.CallbackContext;
+
 import com.optimove.android.Optimove;
+import com.optimove.android.optimobile.PushMessage;
+
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OptimoveSDKPlugin extends CordovaPlugin {
 
+    private static final String INIT_BASE_SDK = "initBaseSdk";
     private static final String SET_USER_ID = "setUserId";
     private static final String SET_USER_EMAIL = "setUserEmail";
     private static final String REPORT_EVENT = "reportEvent";
@@ -19,9 +28,20 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String GET_VISITOR_ID = "getVisitorId";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
 
+    @Nullable
+    static CallbackContext jsCallbackContext;
+    @Nullable
+    static PushMessage pendingPush;
+    @Nullable
+    static String pendingActionId;
+    static CordovaInterface sCordova;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
+            case INIT_BASE_SDK:
+                initBaseSdk(callbackContext);
+                return true;
             case SET_USER_ID:
                 String userId = args.getString(0);
                 this.setUserId(userId, callbackContext);
@@ -174,4 +194,40 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private String getCurrentUserIdentifier() {
         return Optimove.getInstance().getCurrentUserIdentifier();
     }
+
+    private void initBaseSdk(CallbackContext callbackContext) {
+        jsCallbackContext = callbackContext;
+        PluginResult result = new PluginResult(PluginResult.Status.OK);
+        result.setKeepCallback(true);
+        callbackContext.sendPluginResult(result);
+
+        if (null != pendingPush) {
+            OptimoveSDKPlugin.sendMessageToJs("pushOpened",
+                    PushReceiver.pushMessageToJsonObject(pendingPush, pendingActionId));
+            pendingPush = null;
+            pendingActionId = null;
+        }
+    }
+
+    static boolean sendMessageToJs(String type, JSONObject data) {
+        if (null == jsCallbackContext) {
+            return false;
+        }
+
+        JSONObject message = new JSONObject();
+        try {
+            message.put("type", type);
+            message.put("data", data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        PluginResult result = new PluginResult(PluginResult.Status.OK, message);
+        result.setKeepCallback(true);
+        jsCallbackContext.sendPluginResult(result);
+
+        return true;
+    }
+
 }
