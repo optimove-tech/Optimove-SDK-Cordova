@@ -1,5 +1,7 @@
 package com.optimove.android.cordova;
 
+import android.content.Context;
+
 import androidx.annotation.Nullable;
 
 import org.apache.cordova.CordovaInterface;
@@ -10,6 +12,8 @@ import java.util.Map;
 import org.apache.cordova.CallbackContext;
 
 import com.optimove.android.Optimove;
+import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
+import com.optimove.android.optimobile.OptimoveInApp;
 import com.optimove.android.optimobile.PushMessage;
 
 import org.apache.cordova.PluginResult;
@@ -254,5 +258,24 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             return;
         }
         callbackContext.success();
+    }
+
+    static class InAppDeepLinkHandler implements InAppDeepLinkHandlerInterface {
+
+        public void handle(Context context, JSONObject data) {
+
+        }
+
+        @Override
+        public void handle(Context context, InAppButtonPress buttonPress) {
+            sendMessageToJs("inAppDeepLinkPressed", buttonPress.getDeepLinkData());
+        }
+    }
+
+    static class InboxUpdatedHandler implements OptimoveInApp.InAppInboxUpdatedHandler {
+        @Override
+        public void run() {
+            sendMessageToJs("inAppInboxUpdated", null);
+        }
     }
 }

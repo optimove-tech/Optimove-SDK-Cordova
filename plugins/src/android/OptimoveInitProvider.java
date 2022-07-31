@@ -13,10 +13,14 @@ import androidx.annotation.Nullable;
 
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
+import com.optimove.android.optimobile.OptimoveInApp;
 
 public class OptimoveInitProvider extends ContentProvider {
     private static final String OPTIMOVE_CREDENTIALS = "optimoveCredentials";
     private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
+    private static final String IN_APP_AUTO_ENROLL = "autoEnroll";
+    private static final String IN_APP_EXPLICIT_BY_USER = "explicitByUser";
+    private static final String KEY_IN_APP_CONSENT_STRATEGY = "optimoveInAppConsentStrategy";
 
     @Override
     public boolean onCreate() {
@@ -28,10 +32,23 @@ public class OptimoveInitProvider extends ContentProvider {
         if (TextUtils.isEmpty(optimoveCredentials) || TextUtils.isEmpty(optimoveMobileCredentials)) {
             return true;
         }
+        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         assert optimoveCredentials != null;
         assert optimoveMobileCredentials != null;
+
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
                 optimoveMobileCredentials);
+
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
+            configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
+        } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
+        }
+
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
+        }
+
         Optimove.initialize(app, configBuilder.build());
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
 

@@ -53,7 +53,7 @@ function readOptimoveSettings(context) {
     return config;
 }
 
-function prepareAndroid(context, optimoveConifg) {
+function prepareAndroid(context, optimoveConfig) {
     const dest = path.join(
         context.opts.projectRoot,
         'platforms',
@@ -65,13 +65,16 @@ function prepareAndroid(context, optimoveConifg) {
         'values',
         'optimove.xml'
     );
-    
+
     const config = renderTemplate('optimove.xml', {
-        OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
-        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
+        OPTIMOVE_CREDENTIALS: optimoveConfig.optimoveCredentials,
+        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConfig.optimoveMobileCredentials,
+        IN_APP_STRATEGY: optimoveConfig.optimoveInAppConsentStrategy
     });
 
     fs.writeFileSync(dest, config, { encoding: 'utf-8' });
+
+   
 }
 module.exports = function injectOptimoveConfig(context) {
     const optimoveConfig = readOptimoveSettings(context);
@@ -100,6 +103,25 @@ function isValidConfig(config) {
             'Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json'
         );
         return false;
-        }
-        return config;
     }
+    const validInAppStrategies = [
+        'auto-enroll',
+        'explicit-by-user',
+        'in-app-disabled'
+    ];
+
+    if (
+        !isEmpty(config.inAppConsentStrategy) &&
+        validInAppStrategies.indexOf(config.inAppConsentStrategy) < 0
+    ) {
+        console.error(
+            'Optimove: invalid inAppConsentStrategy given in optimove.json, valid options are: ' +
+            validInAppStrategies.join(', ')
+        );
+        return false;
+    } else if (isEmpty(config.inAppConsentStrategy)) {
+        config.inAppConsentStrategy = 'in-app-disabled';
+    }
+
+    return config;
+}
