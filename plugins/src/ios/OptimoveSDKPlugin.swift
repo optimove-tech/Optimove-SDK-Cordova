@@ -31,12 +31,12 @@ import NotificationCenter
             print("optimove.plist IS NOT VALID");return
         }
         
-        if let userInfo = notification.userInfo {
-            let userInfoDict = notification.userInfo?[UIApplication.LaunchOptionsKey.remoteNotification];
-            if userInfoDict != nil {
-                pendingPush = PushNotification.init(userInfo: userInfo, response: nil)
-            }
-        }
+        //        if let userInfo = notification.userInfo {
+        //            let userInfoDict = notification.userInfo?[UIApplication.LaunchOptionsKey.remoteNotification];
+        //            if userInfoDict != nil {
+        //                pendingPush = PushNotification.init(userInfo: userInfo, response: nil)
+        //            }
+        //        }
         
         let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
         
@@ -48,11 +48,6 @@ import NotificationCenter
         }
         
         Optimove.initialize(with: config.build())
-    }
-    
-    @objc(updateConsent:)
-    func updateConsent(command: CDVInvokedUrlCommand) {
-        OptimoveInApp.updateConsent(forUser: command.arguments[0] as? Bool ?? false)
     }
     
     @objc(reportEvent:)
@@ -112,4 +107,27 @@ import NotificationCenter
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         }
     }
+    
+    @objc(pushRequestDeviceToken:)
+    func pushRequestDeviceToken(command: CDVInvokedUrlCommand) {
+        Optimove.shared.pushRequestDeviceToken()
+        self.commandDelegate.run {
+            let pluginResult = CDVPluginResult(status: .ok, messageAs: "")
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
+    }
+    
+    @objc(updateConsent:)
+    func updateConsent(command: CDVInvokedUrlCommand) {
+        OptimoveInApp.updateConsent(forUser: command.arguments[0] as? Bool ?? false)
+    }
+    
+    //    @objc(pushRequestDeviceToken:)
+    //    func pushRequestDeviceToken(command: CDVInvokedUrlCommand) {
+    //        Optimove.shared.dev
+    //        self.commandDelegate.run {
+    //            let pluginResult = CDVPluginResult(status: .ok, messageAs: "")
+    //            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    //        }
+    //    }
 }
