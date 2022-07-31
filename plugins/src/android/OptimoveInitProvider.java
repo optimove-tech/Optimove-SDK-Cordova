@@ -32,8 +32,9 @@ public class OptimoveInitProvider extends ContentProvider {
         assert optimoveMobileCredentials != null;
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
                 optimoveMobileCredentials);
-        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
         Optimove.initialize(app, configBuilder.build());
+        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
+
 
         return false;
     }
