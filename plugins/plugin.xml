@@ -28,7 +28,7 @@
                 <param name="android-package" value="com.optimove.android.cordova.OptimoveSDKPlugin" />
                 <param name="onload" value="true" />
             </feature>
-            
+            <preference name="AndroidXEnabled" value="true" />
         </config-file>
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
                      <!-- Optimove FCM handler -->
@@ -61,6 +61,7 @@
         <source-file src="src/android/OptimoveSDKPlugin.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/OptimoveInitProvider.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/JsonUtils.java" target-dir="src/com/optimove/android/cordova" />
+        <source-file src="src/android/PushReceiver.java" target-dir="src/com/optimove/android/cordova" />
         <framework src="src/android/optimove.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
