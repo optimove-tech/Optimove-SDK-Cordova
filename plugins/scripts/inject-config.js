@@ -73,6 +73,29 @@ function prepareAndroid(context, optimoveConfig) {
     });
 
     fs.writeFileSync(dest, config, { encoding: 'utf-8' });
+    
+    const gServicesJson = path.join(
+        context.opts.projectRoot,
+        'google-services.json'
+    );
+
+    if (fs.existsSync(gServicesJson)) {
+        console.info('Optimove: found google-services.json, configuring FCM');
+        const gServicesDest = path.join(
+            context.opts.projectRoot,
+            'platforms',
+            'android',
+            'app',
+            'google-services.json'
+        );
+
+        fs.copyFileSync(gServicesJson, gServicesDest);
+
+    } else {
+        console.warn(
+            'Optimove: google-services.json was not found, skipping FCM configuration'
+        );
+    }
 
    
 }
