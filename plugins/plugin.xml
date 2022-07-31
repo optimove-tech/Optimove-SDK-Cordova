@@ -31,6 +31,21 @@
             
         </config-file>
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
+             <!-- Optimove FCM handler -->
+            <service android:name="com.optimove.android.optimobile.FirebaseMessagingService" android:exported="false">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+            <!-- Optimove push receiver  -->
+            <receiver android:name=".PushReceiver" android:exported="false">
+                <intent-filter>
+                    <action android:name="com.optimove.push.RECEIVED" />
+                    <action android:name="com.optimove.push.OPENED" />
+                    <action android:name="com.optimove.push.BUTTON_CLICKED" />
+                </intent-filter>
+            </receiver>
+            <!-- Optimove initProvider-->    
             <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />
             
         </config-file>
