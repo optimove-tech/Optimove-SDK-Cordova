@@ -78,7 +78,7 @@ public class PushReceiver extends PushBroadcastReceiver {
             cls = (Class<? extends Activity>) Class.forName(component.getClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            OptimoveSDKPlugin.callbackContext.error(e.getMessage());
+            OptimoveSDKPlugin.jsCallbackContext.error(e.getMessage());
         }
 
         // Ensure we're trying to launch an Activity
