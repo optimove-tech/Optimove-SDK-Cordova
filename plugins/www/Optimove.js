@@ -3,7 +3,7 @@
 var exec = require('cordova/exec');
 
 
-window.initialize = function (inAppConsentStrategy, success, error) {
+window.initBaseSdk = function (inAppConsentStrategy, success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'initialize', [inAppConsentStrategy]);
 };
 
@@ -32,7 +32,7 @@ window.registerUser = function (userId, userEmail, success, error) {
 }
 
 window.getVisitorId = function (success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'getVisitorId',[]);
+    exec(success, error, 'OptimoveSDKPlugin', 'getVisitorId', []);
 };
 window.getCurrentUserIdentifier = function (success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []);

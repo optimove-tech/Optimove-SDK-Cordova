@@ -26,9 +26,10 @@ function onDeviceReady() {
     // Cordova is now initialized. Have fun!
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
-    window.initialize("ExplicitByUser", success, error);
     alert('device ready');
+    initialize();
 }
+
 function success(successMessage = "Success!") {
     console.log(successMessage);
 }
@@ -37,7 +38,9 @@ function error(errorMessage) {
     console.error(errorMessage);
 }
 
-function initialize() {
+document.getElementById("init-base-sdk-button").addEventListener("click", initBaseSdk);
+
+function initBaseSdk() {
 
     //window.initialize("ExplicitByUser", success, error);
     window.initBaseSdk(success, error);

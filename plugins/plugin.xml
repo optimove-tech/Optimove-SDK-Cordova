@@ -26,7 +26,6 @@
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="OptimoveSDKPlugin">
                 <param name="android-package" value="com.optimove.android.cordova.OptimoveSDKPlugin" />
-                <param name="onload" value="true" />
             </feature>
             <preference name="AndroidXEnabled" value="true" />
         </config-file>
