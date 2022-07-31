@@ -3,10 +3,6 @@
 var exec = require('cordova/exec');
 
 
-window.initBaseSdk = function (inAppConsentStrategy, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'initialize', [inAppConsentStrategy]);
-};
-
 window.initBaseSdk = function (success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'initBaseSdk', []);
 };
