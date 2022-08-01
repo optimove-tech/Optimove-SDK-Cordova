@@ -32,19 +32,18 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 return true;
             case REPORT_EVENT:
                 String eventName = args.getString(0);
-                String params = args.getString(1);
-                if (params == "null") {
+                JSONObject params = args.optJSONObject(1);
+                if (params == null) {
                     this.reportEvent(eventName, callbackContext);
                 } else {
-                    JSONObject jsonParams = new JSONObject(params);
-                    reportEvent(eventName, jsonParams, callbackContext);
+                    reportEvent(eventName, params, callbackContext);
                 }
                 return true;
 
             case REPORT_SCREEN_VISIT:
                 String screenName = args.getString(0);
-                String screenCategory = args.getString(1);
-                if (screenCategory == "null") {
+                String screenCategory = args.optString(1);
+                if (screenCategory.equals("null")) {
                     reportScreenVisit(screenName, callbackContext);
                 } else {
                     this.reportScreenVisit(screenName, screenCategory, callbackContext);
