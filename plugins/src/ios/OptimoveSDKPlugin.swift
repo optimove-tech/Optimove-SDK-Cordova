@@ -1,6 +1,6 @@
 import OptimoveSDK
 import NotificationCenter
-@objc(Optimove_Cordova) class OptimobileSDKPlugin : CDVPlugin {
+@objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
     private let internalQueue = DispatchQueue(label: "com.singletioninternal.queue",
                                               qos: .default,
                                               attributes: .concurrent)
