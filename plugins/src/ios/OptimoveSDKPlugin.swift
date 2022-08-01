@@ -1,6 +1,6 @@
 import OptimoveSDK
 import NotificationCenter
-@objc(Optimobile_Cordova) class OptimobileSDKPlugin : CDVPlugin {
+@objc(Optimove_Cordova) class OptimobileSDKPlugin : CDVPlugin {
     
     private let internalQueue = DispatchQueue(label: "com.singletioninternal.queue",
                                               qos: .default,
@@ -10,8 +10,6 @@ import NotificationCenter
     
     private let optimoveCredentialsKey = "optimove_credentials"
     private let optimoveMobileCredentialsKey = "optimove_mobile_credentials"
-    
-    private let credentialsJsonName = "optimove"
     
     func load() {
         internalQueue.sync(flags: .barrier) {
@@ -31,28 +29,23 @@ import NotificationCenter
             print("optimove.plist IS NOT VALID");return
         }
         
-        if let userInfo = notification.userInfo {
-            let userInfoDict = notification.userInfo?[UIApplication.LaunchOptionsKey.remoteNotification];
-            if userInfoDict != nil {
-                pendingPush = PushNotification.init(userInfo: userInfo, response: nil)
-            }
-        }
+        //        if let userInfo = notification.userInfo {
+        //            let userInfoDict = notification.userInfo?[UIApplication.LaunchOptionsKey.remoteNotification];
+        //            if userInfoDict != nil {
+        //                pendingPush = PushNotification.init(userInfo: userInfo, response: nil)
+        //            }
+        //        }
         
-        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
-        
-        if configValues["inAppConsentStrategy"] == "auto-enroll" {
-            config.enableInAppMessaging(inAppConsentStrategy: .autoEnroll)
-        }
-        else if configValues["inAppConsentStrategy"] == "explicit-by-user" {
-            config.enableInAppMessaging(inAppConsentStrategy: .explicitByUser)
-        }
+//        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
+//
+//        if configValues["inAppConsentStrategy"] == "auto-enroll" {
+//            config.enableInAppMessaging(inAppConsentStrategy: .autoEnroll)
+//        }
+//        else if configValues["inAppConsentStrategy"] == "explicit-by-user" {
+//            config.enableInAppMessaging(inAppConsentStrategy: .explicitByUser)
+//        }
         
         Optimove.initialize(with: config.build())
-    }
-    
-    @objc(updateConsent:)
-    func updateConsent(command: CDVInvokedUrlCommand) {
-        OptimoveInApp.updateConsent(forUser: command.arguments[0] as? Bool ?? false)
     }
     
     @objc(reportEvent:)
@@ -97,19 +90,16 @@ import NotificationCenter
         Optimove.shared.setUserEmail(email: command.arguments.first as! String)
     }
     
-    @objc(getInboxItems:)
-    func getInboxItems(command: CDVInvokedUrlCommand) {
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok, messageAs: OptimoveInApp.getInboxItems())
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
-    }
-    
     @objc(isAvailable:)
     func isAvailable(command: CDVInvokedUrlCommand) {
         self.commandDelegate.run {
             let pluginResult = CDVPluginResult(status: .ok, messageAs: OptimoveInApp.getInboxItems())
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         }
+    }
+    
+    @objc(updateConsent:)
+    func updateConsent(command: CDVInvokedUrlCommand) {
+        OptimoveInApp.updateConsent(forUser: command.arguments[0] as? Bool ?? false)
     }
 }
