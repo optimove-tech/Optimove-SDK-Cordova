@@ -7,12 +7,19 @@ import androidx.annotation.Nullable;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.apache.cordova.CallbackContext;
 
 import com.optimove.android.Optimove;
 import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
+import com.optimove.android.optimobile.InAppInboxItem;
 import com.optimove.android.optimobile.OptimoveInApp;
 import com.optimove.android.optimobile.PushMessage;
 
@@ -32,7 +39,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String GET_VISITOR_ID = "getVisitorId";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
     private static final String PUSH_REGISTER = "pushRegister";
-    private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateUserConsent";
+    private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateConsent";
+    private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
 
     @Nullable
     static CallbackContext jsCallbackContext;
@@ -103,7 +111,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 return true;
             case IN_APP_UPDATE_CONSENT:
                 this.inAppUpdateConsent(args, callbackContext);
-
+                return true;
+            case IN_APP_GET_INBOX_ITEMS:
+                cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
         }
         return false;
     }
@@ -277,6 +287,58 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             return;
         }
         callbackContext.success();
+    }
+
+    private void inAppGetInboxItems(CallbackContext callbackContext) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        List<InAppInboxItem> items = OptimoveInApp.getInstance().getInboxItems();
+        JSONArray results = new JSONArray();
+        try {
+            for (InAppInboxItem item : items) {
+                JSONObject mapped = new JSONObject();
+
+                mapped.put("id", item.getId());
+                mapped.put("title", item.getTitle());
+                mapped.put("subtitle", item.getSubtitle());
+                mapped.put("isRead", item.isRead());
+                mapped.put("sentAt", formatter.format(item.getSentAt()));
+
+                Date availableFrom = item.getAvailableFrom();
+                Date availableTo = item.getAvailableTo();
+                Date dismissedAt = item.getDismissedAt();
+                mapped.put("data", item.getData());
+
+                URL imageUrl = item.getImageUrl();
+                mapped.put("imageUrl", imageUrl == null ? null : imageUrl.toString());
+
+                if (null == availableFrom) {
+                    mapped.put("availableFrom", "");
+                } else {
+                    mapped.put("availableFrom", formatter.format(availableFrom));
+                }
+
+                if (null == availableTo) {
+                    mapped.put("availableTo", "");
+                } else {
+                    mapped.put("availableTo", formatter.format(availableTo));
+                }
+
+                if (null == dismissedAt) {
+                    mapped.put("dismissedAt", "");
+                } else {
+                    mapped.put("dismissedAt", formatter.format(dismissedAt));
+                }
+
+                results.put(mapped);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            callbackContext.error(e.getMessage());
+        }
+
+        callbackContext.success(results);
     }
 
     static class InAppDeepLinkHandler implements InAppDeepLinkHandlerInterface {
