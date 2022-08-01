@@ -6,9 +6,5 @@
 	<string>{{optimoveCredentialsKey}}</string>
 	<key>optimoveMobileCredentialsKey</key>
 	<string>{{optimoveMobileCredentialsKey}}</string>
-	<key>enableCrashReporting</key>
-	<{{ENABLE_CRASH}}/>
-	<key>inAppConsentStrategy</key>
-	<string>{{IN_APP_STRATEGY}}</string>
 </dict>
 </plist>
