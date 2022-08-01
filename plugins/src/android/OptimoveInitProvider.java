@@ -44,12 +44,13 @@ public class OptimoveInitProvider extends ContentProvider {
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
             configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
         }
+        
+        Optimove.initialize(app, configBuilder.build());
 
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
             OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
         }
 
-        Optimove.initialize(app, configBuilder.build());
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
 
 
