@@ -1,6 +1,6 @@
 import OptimoveSDK
 import NotificationCenter
-@objc(Optimobile_Cordova) class OptimobileSDKPlugin : CDVPlugin {
+@objc(Optimove_Cordova) class OptimobileSDKPlugin : CDVPlugin {
     private let internalQueue = DispatchQueue(label: "com.singletioninternal.queue",
                                               qos: .default,
                                               attributes: .concurrent)
@@ -9,8 +9,6 @@ import NotificationCenter
     
     private let optimoveCredentialsKey = "optimoveCredentials"
     private let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
-    
-    private let credentialsJsonName = "optimove"
     
     func load() {
         internalQueue.sync(flags: .barrier) {
@@ -30,21 +28,21 @@ import NotificationCenter
             print("optimove.plist IS NOT VALID");return
         }
         
-        if let userInfo = notification.userInfo {
-            let userInfoDict = notification.userInfo?[UIApplication.LaunchOptionsKey.remoteNotification];
-            if userInfoDict != nil {
-                pendingPush = PushNotification.init(userInfo: userInfo, response: nil)
-            }
-        }
+//        if let userInfo = notification.userInfo {
+//            let userInfoDict = notification.userInfo?[UIApplication.LaunchOptionsKey.remoteNotification];
+//            if userInfoDict != nil {
+//                pendingPush = PushNotification.init(userInfo: userInfo, response: nil)
+//            }
+//        }
         
-        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
-        
-        if configValues["inAppConsentStrategy"] == "auto-enroll" {
-            config.enableInAppMessaging(inAppConsentStrategy: .autoEnroll)
-        }
-        else if configValues["inAppConsentStrategy"] == "explicit-by-user" {
-            config.enableInAppMessaging(inAppConsentStrategy: .explicitByUser)
-        }
+//        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
+//        
+//        if configValues["inAppConsentStrategy"] == "auto-enroll" {
+//            config.enableInAppMessaging(inAppConsentStrategy: .autoEnroll)
+//        }
+//        else if configValues["inAppConsentStrategy"] == "explicit-by-user" {
+//            config.enableInAppMessaging(inAppConsentStrategy: .explicitByUser)
+//        }
         
         Optimove.initialize(with: config.build())
     }
