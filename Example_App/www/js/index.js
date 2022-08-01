@@ -17,6 +17,7 @@
  * under the License.
  */
 
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
@@ -41,17 +42,17 @@ function error(errorMessage) {
 document.getElementById("init-base-sdk-button").addEventListener("click", initBaseSdk);
 
 function initBaseSdk() {
-
-    //window.initialize("ExplicitByUser", success, error);
-    window.initBaseSdk(success, error);
-
+    Optimove.initBaseSdk().then(success, error);
 }
 
 document.getElementById("set-user-id-button").addEventListener("click", setUserId);
 
 function setUserId() {
-    window.setUserId(document.getElementById("text-area-user-id").value, success, error);
-    document.getElementById("text-area-user-id").value = "";
+    Optimove.setUserId(document.getElementById("text-area-user-id").value).then(() => {
+        document.getElementById("text-area-user-id").value = "";
+        success();
+    }, error);
+
 }
 
 document.getElementById("report-event-button").addEventListener("click", reportEvent);
@@ -61,16 +62,22 @@ function reportEvent() {
     if (eventParams === "") {
         eventParams = null;
     }
-    window.reportEvent(document.getElementById("text-area-event").value, {"asdas" : "asd"}, success, error)
-    document.getElementById("text-area-event").value = ""
-    document.getElementById("text-area-event-params").value = ""
+    Optimove.reportEvent(document.getElementById("text-area-event").value, eventParams).then(() => {
+        document.getElementById("text-area-event").value = "";
+        document.getElementById("text-area-event-params").value = "";
+        success();
+    }, error);
+
 }
 
 document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
 
 function setUserEmail() {
-    window.setUserEmail(document.getElementById("text-area-user-email").value, success, error)
-    document.getElementById("text-area-user-email").value = ""
+    Optimove.setUserEmail(document.getElementById("text-area-user-email").value).then(() => {
+        document.getElementById("text-area-user-email").value = "";
+        success();
+    }, error);
+
 }
 
 document.getElementById("report-screen-visit-button").addEventListener("click", reportScreenVisit);
@@ -80,32 +87,36 @@ function reportScreenVisit() {
     if (screenCategory === "") {
         screenCategory = null;
     }
-    window.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
-    document.getElementById("text-area-screen-name").value = "";
-    document.getElementById("text-area-screen-category").value = "";
+    Optimove.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory).then(() => {
+        document.getElementById("text-area-screen-name").value = "";
+        document.getElementById("text-area-screen-category").value = "";
+        success();
+    }, error);
+
 }
 document.getElementById("register-user-button").addEventListener("click", registerUser);
 
 function registerUser() {
-    window.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value)
-    document.getElementById("text-area-user-id").value = "";
-    document.getElementById("text-area-user-email").value = "";
+    Optimove.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value).then(() => {
+        document.getElementById("text-area-user-id").value = "";
+        document.getElementById("text-area-user-email").value = "";
+        success();
+    }, error);
+
 }
 document.getElementById("get-visitor-id-button").addEventListener("click", getVisitorId);
 
 function getVisitorId() {
-    window.getVisitorId((visitorId) => { 
+    Optimove.getVisitorId().then((visitorId) => {
 
         document.getElementById("text-area-visitor-id").value = visitorId;
 
-    },error).then((visitorId)=>{
-        document.getElementById("text-area-visitor-id").value = visitorId
-    });
+    }, error);
 }
 document.getElementById("get-current-user-identifier-button").addEventListener("click", getCurrentUserIdentifier);
 
 function getCurrentUserIdentifier() {
-    window.getCurrentUserIdentifier((currentUserIdentifier) => {
+    Optimove.getCurrentUserIdentifier().then((currentUserIdentifier) => {
 
         document.getElementById("text-area-current-user-identifier").value = currentUserIdentifier;
 
@@ -115,33 +126,16 @@ function getCurrentUserIdentifier() {
 document.getElementById("push-register-button").addEventListener("click", pushRegister);
 
 function pushRegister() {
-    window.pushRegister(success, error);
+    Optimove.pushRegister().then(success,error);
 }
 document.getElementById("in-app-consent-true").addEventListener("click", inAppUpdateConsentTrue);
 
 function inAppUpdateConsentTrue() {
-    window.inAppUpdateConsent(true, success, error);
+    Optimove.inAppUpdateConsent(true).then(success, error);
 }
 
 document.getElementById("in-app-consent-false").addEventListener("click", inAppUpdateConsentFalse);
 
 function inAppUpdateConsentFalse() {
-    window.inAppUpdateConsent(false, success, error);
+    window.inAppUpdateConsent(false).then(success, error);
 }
-/*
-document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
-
-function campaignsIsEnabled() {
-    Optimobile.updateConsent(true)
-}
-
-document.getElementById("get Inbox Items").addEventListener("click", getInbox);
-
-function getInbox() {
-    Optimobile.getInboxItems()
-}
-
-
-
-
-*/

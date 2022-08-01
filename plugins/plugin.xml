@@ -2,7 +2,7 @@
 <plugin id="optimove-cordova-plugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>OptimoveSDKPlugin</name>
     <js-module name="Optimove" src="www/Optimove.js">
-        <clobbers target="Optimove" />
+        <clobbers target="window.Optimove" />
     </js-module>
      <hook type="before_prepare" src="scripts/inject-config.js" />
     <platform name="ios">
