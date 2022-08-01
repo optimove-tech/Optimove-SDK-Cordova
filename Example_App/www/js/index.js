@@ -61,7 +61,7 @@ function reportEvent() {
     if (eventParams === "") {
         eventParams = null;
     }
-    window.reportEvent(document.getElementById("text-area-event").value, eventParams, success, error)
+    window.reportEvent(document.getElementById("text-area-event").value, {"asdas" : "asd"}, success, error)
     document.getElementById("text-area-event").value = ""
     document.getElementById("text-area-event-params").value = ""
 }
@@ -116,6 +116,17 @@ document.getElementById("push-register-button").addEventListener("click", pushRe
 
 function pushRegister() {
     window.pushRegister(success, error);
+}
+document.getElementById("in-app-consent-true").addEventListener("click", inAppUpdateConsentTrue);
+
+function inAppUpdateConsentTrue() {
+    window.inAppUpdateConsent(true, success, error);
+}
+
+document.getElementById("in-app-consent-false").addEventListener("click", inAppUpdateConsentFalse);
+
+function inAppUpdateConsentFalse() {
+    window.inAppUpdateConsent(false, success, error);
 }
 /*
 document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);

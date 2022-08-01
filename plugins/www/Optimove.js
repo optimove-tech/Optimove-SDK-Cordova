@@ -37,3 +37,6 @@ window.getCurrentUserIdentifier = function (success, error) {
 window.pushRegister = function (success, error) {
     exec(success, error, 'OptimoveSDKPlugin', 'pushRegister', []);
 };
+window.inAppUpdateConsent = function (consented, success, error) {
+    exec(success, error, 'OptimoveSDKPlugin', 'inAppUpdateConsent', [consented]);
+}

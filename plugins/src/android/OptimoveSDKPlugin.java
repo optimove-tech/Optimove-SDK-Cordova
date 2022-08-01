@@ -32,6 +32,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String GET_VISITOR_ID = "getVisitorId";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
     private static final String PUSH_REGISTER = "pushRegister";
+    private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateUserConsent";
 
     @Nullable
     static CallbackContext jsCallbackContext;
@@ -100,6 +101,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             case PUSH_REGISTER:
                 this.pushRegister(callbackContext);
                 return true;
+            case IN_APP_UPDATE_CONSENT:
+                this.inAppUpdateConsent(args, callbackContext);
+
         }
         return false;
     }
@@ -248,6 +252,21 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         callbackContext.success();
     }
 
+    private void inAppUpdateConsent(JSONArray args, CallbackContext callbackContext) {
+        final boolean consented;
+
+        try {
+            consented = args.getBoolean(0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            callbackContext.error(e.getMessage());
+            return;
+        }
+
+        OptimoveInApp.getInstance().updateConsentForUser(consented);
+        callbackContext.success();
+    }
+
     private void pushUnregister(CallbackContext callbackContext) {
         try {
             // Optimove.getInstance().pushUnregister(); TODO figure out why can't I call
@@ -261,10 +280,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     static class InAppDeepLinkHandler implements InAppDeepLinkHandlerInterface {
-
-        public void handle(Context context, JSONObject data) {
-
-        }
 
         @Override
         public void handle(Context context, InAppButtonPress buttonPress) {
