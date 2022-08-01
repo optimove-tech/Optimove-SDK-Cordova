@@ -5,7 +5,7 @@ import NotificationCenter
                                               qos: .default,
                                               attributes: .concurrent)
     
-    private var pendingPush: PushNotification?
+//    private var pendingPush: PushNotification?
     
     private let optimoveCredentialsKey = "optimoveCredentials"
     private let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
@@ -35,7 +35,7 @@ import NotificationCenter
 //            }
 //        }
         
-//        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
+        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
 //        
 //        if configValues["inAppConsentStrategy"] == "auto-enroll" {
 //            config.enableInAppMessaging(inAppConsentStrategy: .autoEnroll)
