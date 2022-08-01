@@ -42,9 +42,11 @@ function error(errorMessage) {
 document.getElementById("set-user-id-button").addEventListener("click", setUserId);
 
 function setUserId() {
-    alert("click is working")
-    Optimove.setUserId(document.getElementById("text-area-user-id").value, success, error);
-    document.getElementById("text-area-user-id").value = "";
+    Optimove.setUserId(document.getElementById("text-area-user-id").value).then(() => {
+        document.getElementById("text-area-user-id").value = "";
+        success();
+    }, error);
+
 }
 
 document.getElementById("report-event-button").addEventListener("click", reportEvent);
@@ -54,16 +56,22 @@ function reportEvent() {
     if (eventParams === "") {
         eventParams = null;
     }
-    Optimove.reportEvent(document.getElementById("text-area-event").value, eventParams, success, error)
-    document.getElementById("text-area-event").value = ""
-    document.getElementById("text-area-event-params").value = ""
+    Optimove.reportEvent(document.getElementById("text-area-event").value, eventParams).then(() => {
+        document.getElementById("text-area-event").value = "";
+        document.getElementById("text-area-event-params").value = "";
+        success();
+    }, error);
+
 }
 
 document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
 
 function setUserEmail() {
-    Optimove.setUserEmail(document.getElementById("text-area-user-email").value, success, error)
-    document.getElementById("text-area-user-email").value = ""
+    Optimove.setUserEmail(document.getElementById("text-area-user-email").value).then(() => {
+        document.getElementById("text-area-user-email").value = "";
+        success();
+    }, error);
+
 }
 
 document.getElementById("report-screen-visit-button").addEventListener("click", reportScreenVisit);
@@ -73,37 +81,37 @@ function reportScreenVisit() {
     if (screenCategory === "") {
         screenCategory = null;
     }
-    Optimove.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
-    document.getElementById("text-area-screen-name").value = "";
-    document.getElementById("text-area-screen-category").value = "";
+    Optimove.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory).then(() => {
+        document.getElementById("text-area-screen-name").value = "";
+        document.getElementById("text-area-screen-category").value = "";
+        success();
+    }, error);
+
 }
 document.getElementById("register-user-button").addEventListener("click", registerUser);
 
 function registerUser() {
-    Optimove.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value)
-    document.getElementById("text-area-user-id").value = "";
-    document.getElementById("text-area-user-email").value = "";
+    Optimove.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value).then(() => {
+        document.getElementById("text-area-user-id").value = "";
+        document.getElementById("text-area-user-email").value = "";
+        success();
+    }, error);
+
 }
 document.getElementById("get-visitor-id-button").addEventListener("click", getVisitorId);
 
 function getVisitorId() {
-    Optimove.getVisitorId((visitorId) => { 
+    Optimove.getVisitorId().then((visitorId) => {
 
         document.getElementById("text-area-visitor-id").value = visitorId;
 
-    },error).then((visitorId)=>{
-        document.getElementById("text-area-visitor-id").value = visitorId
-    });
+    }, error);
 }
 document.getElementById("get-current-user-identifier-button").addEventListener("click", getCurrentUserIdentifier);
 
 function getCurrentUserIdentifier() {
-    Optimove.getCurrentUserIdentifier((currentUserIdentifier) => {
-
-        document.getElementById("text-area-current-user-identifier").value = currentUserIdentifier;
-
-    }, error).then((visitorId) => {
+    Optimove.getCurrentUserIdentifier().then((visitorId) => {
         document.getElementById("text-area-current-user-identifier").value = visitorId
-    });
+    }, error);
 }
 
