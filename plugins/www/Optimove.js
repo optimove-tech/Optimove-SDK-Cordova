@@ -3,32 +3,36 @@
 var exec = require('cordova/exec');
 
 
-window.initialize = function (inAppConsentStrategy, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'initialize', [inAppConsentStrategy]);
-};
-window.setUserId = function (userId, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'setUserId', [userId]);
-}
-window.setUserEmail = function (userEmail, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]);
-};
 
-/* eventParams is nullable*/
-window.reportEvent = function (eventName, eventParams, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName, eventParams]);
-}
+const Optimove = {
 
-/* screenCategory parameter is nullable*/
-window.reportScreenVisit = function (screenName, screenCategory, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'reportScreenVisit', [screenName, screenCategory]);
-}
-window.registerUser = function (userId, userEmail, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'registerUser', [userId, userEmail]);
-}
+    setUserId: function (userId, success, error) {
 
-window.getVisitorId = function (success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'getVisitorId',[]);
-};
-window.getCurrentUserIdentifier = function (success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []);
-};
+        exec(success, error, 'OptimoveSDKPlugin', 'setUserId', [userId]);
+    },
+    setUserEmail: function (userEmail, success, error) {
+        exec(success, error, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]);
+    },
+
+    /* eventParams is nullable*/
+    reportEvent: function (eventName, eventParams, success, error) {
+        exec(success, error, 'OptimoveSDKPlugin', 'reportEvent', [eventName, eventParams]);
+    },
+
+    /* screenCategory parameter is nullable*/
+    reportScreenVisit: function (screenName, screenCategory, success, error) {
+        exec(success, error, 'OptimoveSDKPlugin', 'reportScreenVisit', [screenName, screenCategory]);
+    },
+    registerUser: function (userId, userEmail, success, error) {
+        exec(success, error, 'OptimoveSDKPlugin', 'registerUser', [userId, userEmail]);
+    },
+
+    getVisitorId: function (success, error) {
+        exec(success, error, 'OptimoveSDKPlugin', 'getVisitorId', []);
+    },
+
+    getCurrentUserIdentifier: function (success, error) {
+        exec(success, error, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []);
+    }
+}
+module.exports = Optimove;

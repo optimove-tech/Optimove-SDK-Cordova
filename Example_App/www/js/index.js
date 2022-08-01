@@ -17,6 +17,7 @@
  * under the License.
  */
 
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
@@ -37,17 +38,12 @@ function error(errorMessage) {
     console.error(errorMessage);
 }
 
-//document.getElementById("Initialize").addEventListener("click", initialize);
-
-function initialize() {
-
-    window.initialize("ExplicitByUser", success, error)
-}
 
 document.getElementById("set-user-id-button").addEventListener("click", setUserId);
 
 function setUserId() {
-    window.setUserId(document.getElementById("text-area-user-id").value, success, error);
+    alert("click is working")
+    Optimove.setUserId(document.getElementById("text-area-user-id").value, success, error);
     document.getElementById("text-area-user-id").value = "";
 }
 
@@ -58,7 +54,7 @@ function reportEvent() {
     if (eventParams === "") {
         eventParams = null;
     }
-    window.reportEvent(document.getElementById("text-area-event").value, eventParams, success, error)
+    Optimove.reportEvent(document.getElementById("text-area-event").value, eventParams, success, error)
     document.getElementById("text-area-event").value = ""
     document.getElementById("text-area-event-params").value = ""
 }
@@ -66,7 +62,7 @@ function reportEvent() {
 document.getElementById("set-user-email-button").addEventListener("click", setUserEmail);
 
 function setUserEmail() {
-    window.setUserEmail(document.getElementById("text-area-user-email").value, success, error)
+    Optimove.setUserEmail(document.getElementById("text-area-user-email").value, success, error)
     document.getElementById("text-area-user-email").value = ""
 }
 
@@ -77,21 +73,21 @@ function reportScreenVisit() {
     if (screenCategory === "") {
         screenCategory = null;
     }
-    window.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
+    Optimove.reportScreenVisit(document.getElementById("text-area-screen-name").value, screenCategory, success, error );
     document.getElementById("text-area-screen-name").value = "";
     document.getElementById("text-area-screen-category").value = "";
 }
 document.getElementById("register-user-button").addEventListener("click", registerUser);
 
 function registerUser() {
-    window.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value)
+    Optimove.registerUser(document.getElementById("text-area-user-id").value, document.getElementById("text-area-user-email").value)
     document.getElementById("text-area-user-id").value = "";
     document.getElementById("text-area-user-email").value = "";
 }
 document.getElementById("get-visitor-id-button").addEventListener("click", getVisitorId);
 
 function getVisitorId() {
-    window.getVisitorId((visitorId) => { 
+    Optimove.getVisitorId((visitorId) => { 
 
         document.getElementById("text-area-visitor-id").value = visitorId;
 
@@ -102,7 +98,7 @@ function getVisitorId() {
 document.getElementById("get-current-user-identifier-button").addEventListener("click", getCurrentUserIdentifier);
 
 function getCurrentUserIdentifier() {
-    window.getCurrentUserIdentifier((currentUserIdentifier) => {
+    Optimove.getCurrentUserIdentifier((currentUserIdentifier) => {
 
         document.getElementById("text-area-current-user-identifier").value = currentUserIdentifier;
 
@@ -110,20 +106,4 @@ function getCurrentUserIdentifier() {
         document.getElementById("text-area-current-user-identifier").value = visitorId
     });
 }
-/*
-document.getElementById("push Campaigns Is Enabled").addEventListener("click", campaignsIsEnabled);
 
-function campaignsIsEnabled() {
-    Optimobile.updateConsent(true)
-}
-
-document.getElementById("get Inbox Items").addEventListener("click", getInbox);
-
-function getInbox() {
-    Optimobile.getInboxItems()
-}
-
-
-
-
-*/
