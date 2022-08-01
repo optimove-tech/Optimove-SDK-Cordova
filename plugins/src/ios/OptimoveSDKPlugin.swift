@@ -1,6 +1,6 @@
 import OptimoveSDK
 import NotificationCenter
-@objc(Optimobile_Cordova) class OptimobileSDKPlugin : CDVPlugin {
+@objc(Optimove_Cordova) class OptimobileSDKPlugin : CDVPlugin {
     
     private let internalQueue = DispatchQueue(label: "com.singletioninternal.queue",
                                               qos: .default,
@@ -10,8 +10,6 @@ import NotificationCenter
     
     private let optimoveCredentialsKey = "optimove_credentials"
     private let optimoveMobileCredentialsKey = "optimove_mobile_credentials"
-    
-    private let credentialsJsonName = "optimove"
     
     func load() {
         internalQueue.sync(flags: .barrier) {
