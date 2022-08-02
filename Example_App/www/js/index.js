@@ -33,6 +33,7 @@ function onDeviceReady() {
 
 function success(successMessage = "Success!") {
     console.log(successMessage);
+    alert(successMessage);
 }
 
 function error(errorMessage) {
@@ -137,5 +138,12 @@ function inAppUpdateConsentTrue() {
 document.getElementById("in-app-consent-false").addEventListener("click", inAppUpdateConsentFalse);
 
 function inAppUpdateConsentFalse() {
-    window.inAppUpdateConsent(false).then(success, error);
+    Optimove.inAppUpdateConsent(false).then(success, error);
+}
+
+
+document.getElementById("in-app-get-inbox-items-button").addEventListener("click", inAppUpdateConsentFalse);
+
+function inAppGetInboxItems() {
+    Optimove.inAppGetInboxItems().then(success, error);
 }
