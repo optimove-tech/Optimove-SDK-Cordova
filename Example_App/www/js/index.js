@@ -127,7 +127,7 @@ function getCurrentUserIdentifier() {
 document.getElementById("push-register-button").addEventListener("click", pushRegister);
 
 function pushRegister() {
-    Optimove.pushRegister().then(success,error);
+    Optimove.pushRegister().then(success, error);
 }
 document.getElementById("in-app-consent-true").addEventListener("click", inAppUpdateConsentTrue);
 
@@ -146,4 +146,10 @@ document.getElementById("in-app-get-inbox-items-button").addEventListener("click
 
 function inAppGetInboxItems() {
     Optimove.inAppGetInboxItems().then(success, error);
+}
+
+document.getElementById("in-app-mark-all-inbox-items-as-read-button").addEventListener("click", inAppUpdateConsentFalse);
+
+function inAppGetInboxItems() {
+    Optimove.inAppMarkAllInboxItemsAsRead().then(success, error);
 }

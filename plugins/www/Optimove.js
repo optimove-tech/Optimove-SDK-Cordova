@@ -4,7 +4,7 @@ var exec = require('cordova/exec');
 
 
 const Optimove = {
-    
+
     initBaseSdk: function () {
         return new Promise((resolve, reject) => {
             exec(resolve, reject, 'OptimoveSDKPlugin', 'initBaseSdk', []);
@@ -64,6 +64,11 @@ const Optimove = {
     inAppGetInboxItems: function () {
         return new Promise((resolve, reject) => {
             exec(resolve, reject, 'OptimoveSDKPlugin', 'inAppGetInboxItems', []);
+        });
+    },
+    inAppMarkAllInboxItemsAsRead: function () {
+        return new Promise((resolve, reject) => {
+            exec(resolve, reject, 'OptimoveSDKPlugin', 'inAppMarkAllInboxItemsAsRead', []);
         });
     }
 }
