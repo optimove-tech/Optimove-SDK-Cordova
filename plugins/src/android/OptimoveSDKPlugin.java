@@ -26,56 +26,59 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
+
         case SET_USER_ID:
             this.setUserId(args, callbackContext);
             return true;
+
         case SET_USER_EMAIL:
             this.setUserEmail(args, callbackContext);
             return true;
+
         case REPORT_EVENT:
             this.reportEvent(args, callbackContext);
             return true;
+
         case REPORT_SCREEN_VISIT:
             reportScreenVisit(args, callbackContext);
             return true;
+
         case REGISTER_USER:
             this.registerUser(args, callbackContext);
             return true;
+
         case GET_VISITOR_ID:
             this.getVisitorId(callbackContext);
             return true;
+
         case GET_CURRENT_USER_IDENTIFIER:
             this.getCurrentUserIdentifier(callbackContext);
             return true;
         }
+
         return false;
     }
 
     private void setUserId(JSONArray args, CallbackContext callbackContext) {
-
         try {
             String userId = args.getString(0);
             Optimove.getInstance().setUserId(userId);
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-
-        callbackContext.success();
-
     }
 
     private void setUserEmail(JSONArray args, CallbackContext callbackContext) {
         try {
             String email = args.getString(0);
             Optimove.getInstance().setUserEmail(email);
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-        callbackContext.success();
     }
 
     private void reportEvent(JSONArray args, CallbackContext callbackContext) {
@@ -88,12 +91,11 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             } else {
                 Optimove.getInstance().reportEvent(eventName, JsonUtils.toMap(params));
             }
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-
     }
 
     private void reportScreenVisit(JSONArray args, CallbackContext callbackContext) {
@@ -117,12 +119,11 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             String userId = args.getString(0);
             String userEmail = args.getString(1);
             Optimove.getInstance().registerUser(userId, userEmail);
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-        callbackContext.success();
     }
 
     private void getVisitorId(CallbackContext callbackContext) {
@@ -132,7 +133,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } else {
             callbackContext.error("visitor id is null");
         }
-
     }
 
     private void getCurrentUserIdentifier(CallbackContext callbackContext) {
@@ -142,7 +142,5 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } else {
             callbackContext.error("current user identifier is null");
         }
-
     }
-
 }
