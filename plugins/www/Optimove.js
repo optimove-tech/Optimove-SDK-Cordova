@@ -115,5 +115,16 @@ const Optimove = {
       ]);
     });
   },
+  inAppDeleteMessageFromInbox: function (inAppInboxItemId) {
+    return new Promise((resolve, reject) => {
+      exec(
+        resolve,
+        reject,
+        "OptimoveSDKPlugin",
+        "inAppDeleteMessageFromInbox",
+        [inAppInboxItemId]
+      );
+    });
+  },
 };
 module.exports = Optimove;

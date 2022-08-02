@@ -45,7 +45,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_MARK_AS_READ = "inAppMarkAsRead";
     private static final String IN_APP_GET_INBOX_SUMMARY = "inAppGetInboxSummary";
     private static final String IN_APP_PRESENT_INBOX_MESSAGE = "inAppPresentInboxMessage";
-
+    private static final String IN_APP_DELETE_INBOX_MESSAGE = "inAppDeleteMessageFromInbox";
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -118,9 +118,39 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             cordova.getThreadPool()
                     .execute(() -> OptimoveSDKPlugin.this.inAppPresentInboxMessage(args, callbackContext));
             return true;
+
+        case IN_APP_DELETE_INBOX_MESSAGE:
+            cordova.getThreadPool()
+                    .execute(() -> OptimoveSDKPlugin.this.inAppDeleteMessageFromInbox(args, callbackContext));
+            return true;
         }
 
         return false;
+    }
+
+    private void inAppDeleteMessageFromInbox(JSONArray args, CallbackContext callbackContext) {
+        int messageId = args.optInt(0, -1);
+
+        if (messageId == -1) {
+            callbackContext.error("Message not found or not available");
+            return;
+        }
+
+        List<InAppInboxItem> items = OptimoveInApp.getInstance().getInboxItems();
+        for (InAppInboxItem item : items) {
+            if (item.getId() == messageId) {
+                boolean result = OptimoveInApp.getInstance().deleteMessageFromInbox(item);
+
+                if (result) {
+                    callbackContext.success();
+                    return;
+                }
+
+                break;
+            }
+        }
+
+        callbackContext.error("Message not found or not available");
     }
 
     private void inAppPresentInboxMessage(JSONArray args, CallbackContext callbackContext) {

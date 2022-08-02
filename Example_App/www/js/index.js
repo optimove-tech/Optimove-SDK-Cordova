@@ -207,12 +207,23 @@ function inAppGetInboxSummary() {
       inboxSummary;
   }, error);
 }
+
 document
   .getElementById("in-app-present-inbox-message-button")
   .addEventListener("click", inAppPresentInboxMessage);
 
 function inAppPresentInboxMessage() {
-    Optimove.inAppPresentInboxMessage(
-      document.getElementById("text-area-in-app-inbox-item-id").value
-    ).then(success, error);    
+  Optimove.inAppPresentInboxMessage(
+    document.getElementById("text-area-in-app-inbox-item-id").value
+  ).then(success, error);
+}
+
+document
+  .getElementById("in-app-delete-inbox-message-button")
+  .addEventListener("click", inAppPresentInboxMessage);
+
+function inAppDeleteMessageFromInbox() {
+  Optimove.inAppDeleteMessageFromInbox(
+    document.getElementById("text-area-in-app-inbox-item-id").value
+  ).then(success, error);
 }
