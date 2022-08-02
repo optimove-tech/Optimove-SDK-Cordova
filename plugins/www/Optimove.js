@@ -3,6 +3,42 @@
 var exec = require('cordova/exec');
 
 
-window.initialize = function (inAppConsentStrategy, success, error) {
-    exec(success, error, 'OptimoveSDKPlugin', 'initialize', [inAppConsentStrategy]);
-};
+
+const Optimove = {
+    setUserId: function (userId) {
+
+        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'setUserId', [userId]); });
+    },
+    setUserEmail: function (userEmail) {
+        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]); });
+    },
+
+    /* eventParams is nullable*/
+    reportEvent: function (eventName, eventParams) {
+        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'reportEvent', [eventName, eventParams]); })
+
+    },
+
+    /* screenCategory parameter is nullable*/
+    reportScreenVisit: function (screenName, screenCategory) {
+        return new Promise((resolve, reject) => {
+            exec(resolve, reject, 'OptimoveSDKPlugin', 'reportScreenVisit', [screenName, screenCategory]);
+        });
+    },
+    registerUser: function (userId, userEmail) {
+        return new Promise((resolve, reject) => {
+            exec(resolve, reject, 'OptimoveSDKPlugin', 'registerUser', [userId, userEmail])
+        });
+    },
+
+    getVisitorId: function () {
+        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'getVisitorId', []); });
+
+    },
+
+    getCurrentUserIdentifier: function () {
+        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []); });
+
+    }
+}
+module.exports = Optimove;
