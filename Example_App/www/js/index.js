@@ -192,9 +192,9 @@ document
 
 function inAppMarkAsRead() {
   Optimove.inAppMarkAsRead(
-    document.getElementById("text-area-in-app-inbox-item").value
+    document.getElementById("text-area-in-app-inbox-item-id").value
   ).then(success, error);
-  document.getElementById("text-area-in-app-inbox-item").value = "";
+  document.getElementById("text-area-in-app-inbox-item-id").value = "";
 }
 
 document
@@ -206,4 +206,13 @@ function inAppGetInboxSummary() {
     document.getElementById("text-area-in-app-inbox-summary").value =
       inboxSummary;
   }, error);
+}
+document
+  .getElementById("in-app-present-inbox-message-button")
+  .addEventListener("click", inAppPresentInboxMessage);
+
+function inAppPresentInboxMessage() {
+    Optimove.inAppPresentInboxMessage(
+      document.getElementById("text-area-in-app-inbox-item-id").value
+    ).then(success, error);    
 }

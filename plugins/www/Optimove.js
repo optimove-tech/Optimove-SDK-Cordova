@@ -96,23 +96,24 @@ const Optimove = {
       );
     });
   },
-  inAppMarkAsRead: function (inAppInboxItem) {
+  inAppMarkAsRead: function (inAppInboxItemId) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppMarkAsRead", [
         inAppInboxItem,
       ]);
     });
   },
-    inAppGetInboxSummary: function () {
-        return new Promise((resolve, reject) => {
-          exec(
-            resolve,
-            reject,
-            "OptimoveSDKPlugin",
-            "inAppGetInboxSummary",
-            []
-          );
-        });
-     }
+  inAppGetInboxSummary: function () {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "inAppGetInboxSummary", []);
+    });
+  },
+  inAppPresentInboxMessage: function (inAppInboxItemId) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "inAppPresentInboxMessage", [
+        inAppInboxItemId,
+      ]);
+    });
+  },
 };
 module.exports = Optimove;
