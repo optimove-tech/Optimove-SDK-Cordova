@@ -6,18 +6,22 @@ import androidx.annotation.Nullable;
 
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
+
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
 import org.apache.cordova.CallbackContext;
+
 import com.optimove.android.Optimove;
 import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
 import com.optimove.android.optimobile.InAppInboxItem;
 import com.optimove.android.optimobile.OptimoveInApp;
 import com.optimove.android.optimobile.PushMessage;
+
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +41,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateConsent";
     private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
     private static final String IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ = "inAppMarkAllInboxItemsAsRead";
+    private static final String IN_APP_MARK_AS_READ = "inAppMarkAsRead";
+
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -96,9 +102,35 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         case IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ:
             this.inAppMarkAllInboxItemsAsRead(callbackContext);
             return true;
-
+        case IN_APP_MARK_AS_READ:
+            this.inAppMarkAsRead(args, callbackContext);
+            return true;
         }
+
         return false;
+    }
+
+    private void inAppMarkAsRead(JSONArray args, CallbackContext callbackContext) {
+        try {
+            JSONObject inAppInboxItemJson = args.optJSONObject(0);
+            int id = inAppInboxItemJson.getInt("id");
+            List<InAppInboxItem> itemsList = OptimoveInApp.getInstance().getInboxItems();
+            for (InAppInboxItem item : itemsList) {
+                if (item.getId() == id) {
+                    boolean result = OptimoveInApp.getInstance().markAsRead(item);
+                    if (result) {
+                        callbackContext.success();
+                    } else {
+                        callbackContext.error("Failed to mark message as read");
+                    }
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            callbackContext.error(e.getMessage());
+        }
+        callbackContext.error("Message not found or not available");
     }
 
     private void setUserId(JSONArray args, CallbackContext callbackContext) {

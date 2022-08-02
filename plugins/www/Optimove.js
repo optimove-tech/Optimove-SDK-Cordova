@@ -56,7 +56,13 @@ const Optimove = {
 
   getCurrentUserIdentifier: function () {
     return new Promise((resolve, reject) => {
-      exec(resolve, reject, "OptimoveSDKPlugin","getCurrentUserIdentifier",[]);
+      exec(
+        resolve,
+        reject,
+        "OptimoveSDKPlugin",
+        "getCurrentUserIdentifier",
+        []
+      );
     });
   },
 
@@ -88,6 +94,13 @@ const Optimove = {
         "inAppMarkAllInboxItemsAsRead",
         []
       );
+    });
+  },
+  inAppMarkAsRead: function (inAppInboxItem) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "inAppMarkAsRead", [
+        inAppInboxItem,
+      ]);
     });
   },
 };
