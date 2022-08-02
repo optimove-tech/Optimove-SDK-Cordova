@@ -223,7 +223,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void setUserId(JSONArray args, CallbackContext callbackContext) {
-
         try {
             String userId = args.getString(0);
             Optimove.getInstance().setUserId(userId);
@@ -231,7 +230,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
     }
 
@@ -243,7 +241,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
     }
 
@@ -262,7 +259,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     private void reportScreenVisit(JSONArray args, CallbackContext callbackContext) {
@@ -300,7 +296,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } else {
             callbackContext.error("visitor id is null");
         }
-
     }
 
     private void getCurrentUserIdentifier(CallbackContext callbackContext) {
@@ -310,7 +305,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } else {
             callbackContext.error("current user identifier is null");
         }
-
     }
 
     private void initBaseSdk(CallbackContext callbackContext) {
