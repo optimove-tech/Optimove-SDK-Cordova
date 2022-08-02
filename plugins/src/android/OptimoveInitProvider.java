@@ -10,12 +10,17 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
+import com.optimove.android.optimobile.OptimoveInApp;
 
 public class OptimoveInitProvider extends ContentProvider {
     private static final String OPTIMOVE_CREDENTIALS = "optimoveCredentials";
     private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
+    private static final String IN_APP_AUTO_ENROLL = "autoEnroll";
+    private static final String IN_APP_EXPLICIT_BY_USER = "explicitByUser";
+    private static final String KEY_IN_APP_CONSENT_STRATEGY = "optimoveInAppConsentStrategy";
 
     @Override
     public boolean onCreate() {
@@ -27,19 +32,34 @@ public class OptimoveInitProvider extends ContentProvider {
         if (TextUtils.isEmpty(optimoveCredentials) || TextUtils.isEmpty(optimoveMobileCredentials)) {
             return true;
         }
-            assert optimoveCredentials != null;
-            assert optimoveMobileCredentials != null;
-            OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
-                    optimoveMobileCredentials);
-            Optimove.initialize(app, configBuilder.build());
-        
-        return false;
+        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
+        assert optimoveCredentials != null;
+        assert optimoveMobileCredentials != null;
+
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
+                optimoveMobileCredentials);
+
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
+            configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
+        } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
+        }
+
+        Optimove.initialize(app, configBuilder.build());
+
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
+        }
+
+        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
+        OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
+        return true;
     }
 
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
-            @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         return null;
     }
 
@@ -62,7 +82,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
-            @Nullable String[] selectionArgs) {
+                      @Nullable String[] selectionArgs) {
         return 0;
     }
 
