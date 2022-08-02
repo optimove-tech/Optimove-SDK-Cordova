@@ -6,15 +6,12 @@ import androidx.annotation.Nullable;
 
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
-
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
-import java.nio.file.WatchEvent;
 import org.apache.cordova.CallbackContext;
 import com.optimove.android.Optimove;
 import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
@@ -39,7 +36,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String PUSH_REGISTER = "pushRegister";
     private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateConsent";
     private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
-
+    private static final String IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ = "inAppMarkAllInboxItemsAsRead";
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -94,6 +91,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
         case IN_APP_GET_INBOX_ITEMS:
             cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
+            return true;
+
+        case IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ:
+            this.inAppMarkAllInboxItemsAsRead(callbackContext);
+            return true;
+
         }
         return false;
     }
@@ -103,26 +106,24 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         try {
             String userId = args.getString(0);
             Optimove.getInstance().setUserId(userId);
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
             return;
         }
-
-        callbackContext.success();
-
     }
 
     private void setUserEmail(JSONArray args, CallbackContext callbackContext) {
         try {
             String email = args.getString(0);
             Optimove.getInstance().setUserEmail(email);
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
             return;
         }
-        callbackContext.success();
     }
 
     private void reportEvent(JSONArray args, CallbackContext callbackContext) {
@@ -135,10 +136,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             } else {
                 Optimove.getInstance().reportEvent(eventName, JsonUtils.toMap(params));
             }
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
 
     }
@@ -164,12 +165,11 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             String userId = args.getString(0);
             String userEmail = args.getString(1);
             Optimove.getInstance().registerUser(userId, userEmail);
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-        callbackContext.success();
     }
 
     private void getVisitorId(CallbackContext callbackContext) {
@@ -197,7 +197,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
-        
+
         if (null != pendingPush) {
             OptimoveSDKPlugin.sendMessageToJs("pushOpened",
                     PushReceiver.pushMessageToJsonObject(pendingPush, pendingActionId));
@@ -230,12 +230,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private void pushRegister(CallbackContext callbackContext) {
         try {
             Optimove.getInstance().pushRegister();
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-        callbackContext.success();
+
     }
 
     private void inAppUpdateConsent(JSONArray args, CallbackContext callbackContext) {
@@ -243,26 +243,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
         try {
             consented = args.getBoolean(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            callbackContext.error(e.getMessage());
-            return;
-        }
-
-        OptimoveInApp.getInstance().updateConsentForUser(consented);
-        callbackContext.success();
-    }
-
-    private void pushUnregister(CallbackContext callbackContext) {
-        try {
-            // Optimove.getInstance().pushUnregister(); TODO figure out why can't I call
-            // this method
+            OptimoveInApp.getInstance().updateConsentForUser(consented);
+            callbackContext.success();
         } catch (Exception e) {
-            callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
+            callbackContext.error(e.getMessage());
         }
-        callbackContext.success();
     }
 
     private void inAppGetInboxItems(CallbackContext callbackContext) {
@@ -315,6 +301,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
 
         callbackContext.success(results);
+    }
+
+    private void inAppMarkAllInboxItemsAsRead(CallbackContext callbackContext) {
+        try {
+            OptimoveInApp.getInstance().markAllInboxItemsAsRead();
+            callbackContext.success();
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     static class InAppDeepLinkHandler implements InAppDeepLinkHandlerInterface {
