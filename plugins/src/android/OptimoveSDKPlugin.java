@@ -51,41 +51,49 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
-            case INIT_BASE_SDK:
-                initBaseSdk(callbackContext);
-                return true;
-            case SET_USER_ID:
-                this.setUserId(args, callbackContext);
-                return true;
-            case SET_USER_EMAIL:
 
-                this.setUserEmail(args, callbackContext);
-                return true;
-            case REPORT_EVENT:
-                this.reportEvent(args, callbackContext);
-                return true;
-            case REPORT_SCREEN_VISIT:
-                reportScreenVisit(args, callbackContext);
-                return true;
-            case REGISTER_USER:
-                this.registerUser(args, callbackContext);
-                return true;
+        case INIT_BASE_SDK:
+            initBaseSdk(callbackContext);
+            return true;
 
-            case GET_VISITOR_ID:
-                this.getVisitorId(callbackContext);
-                return true;
-            case GET_CURRENT_USER_IDENTIFIER:
-                 this.getCurrentUserIdentifier(callbackContext);
-                 return true;
-            case PUSH_REGISTER:
-                this.pushRegister(callbackContext);
-                return true;
-            case IN_APP_UPDATE_CONSENT:
-                this.inAppUpdateConsent(args, callbackContext);
-                this.getCurrentUserIdentifier(callbackContext);
-                return true;
-            case IN_APP_GET_INBOX_ITEMS:
-                cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
+        case SET_USER_ID:
+            this.setUserId(args, callbackContext);
+            return true;
+
+        case SET_USER_EMAIL:
+            this.setUserEmail(args, callbackContext);
+            return true;
+
+        case REPORT_EVENT:
+            this.reportEvent(args, callbackContext);
+            return true;
+
+        case REPORT_SCREEN_VISIT:
+            reportScreenVisit(args, callbackContext);
+            return true;
+
+        case REGISTER_USER:
+            this.registerUser(args, callbackContext);
+            return true;
+
+        case GET_VISITOR_ID:
+            this.getVisitorId(callbackContext);
+            return true;
+
+        case GET_CURRENT_USER_IDENTIFIER:
+            this.getCurrentUserIdentifier(callbackContext);
+            return true;
+
+        case PUSH_REGISTER:
+            this.pushRegister(callbackContext);
+            return true;
+
+        case IN_APP_UPDATE_CONSENT:
+            this.inAppUpdateConsent(args, callbackContext);
+            return true;
+
+        case IN_APP_GET_INBOX_ITEMS:
+            cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
         }
         return false;
     }
@@ -123,47 +131,15 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             String eventName = args.getString(0);
             JSONObject params = args.optJSONObject(1);
             if (params == null) {
-                this.reportEvent(eventName, callbackContext);
+                Optimove.getInstance().reportEvent(eventName);
             } else {
-                reportEvent(eventName, params, callbackContext);
+                Optimove.getInstance().reportEvent(eventName, JsonUtils.toMap(params));
             }
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
             return;
         }
-
-    }
-
-    private void reportEvent(String eventName, CallbackContext callbackContext) {
-        try {
-            Optimove.getInstance().reportEvent(eventName);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
-
-    }
-
-    private void reportEvent(String eventName, JSONObject parameters, CallbackContext callbackContext) {
-        Map<String, Object> parametersMap;
-        try {
-            parametersMap = JsonUtils.toMap(parameters);
-        } catch (JSONException e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        try {
-            Optimove.getInstance().reportEvent(eventName, parametersMap);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
 
     }
 
@@ -172,38 +148,15 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             String screenName = args.getString(0);
             String screenCategory = args.optString(1);
             if (screenCategory.equals("null")) {
-                reportScreenVisit(screenName, callbackContext);
+                Optimove.getInstance().reportScreenVisit(screenName);
             } else {
-                this.reportScreenVisit(screenName, screenCategory, callbackContext);
+                Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
             }
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-    }
-
-    private void reportScreenVisit(String screenName, CallbackContext callbackContext) {
-        try {
-            Optimove.getInstance().reportScreenVisit(screenName);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
-
-    }
-
-    private void reportScreenVisit(String screenName, String screenCategory, CallbackContext callbackContext) {
-        try {
-            Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
     }
 
     private void registerUser(JSONArray args, CallbackContext callbackContext) {
@@ -244,7 +197,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
-
+        
         if (null != pendingPush) {
             OptimoveSDKPlugin.sendMessageToJs("pushOpened",
                     PushReceiver.pushMessageToJsonObject(pendingPush, pendingActionId));
