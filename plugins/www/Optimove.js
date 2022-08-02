@@ -1,75 +1,94 @@
-
-
-var exec = require('cordova/exec');
-
+var exec = require("cordova/exec");
 
 const Optimove = {
+  initBaseSdk: function () {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "initBaseSdk", []);
+    });
+  },
 
-    initBaseSdk: function () {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'initBaseSdk', []);
-        });
-    },
+  setUserId: function (userId) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "setUserId", [userId]);
+    });
+  },
 
-    setUserId: function (userId) {
+  setUserEmail: function (userEmail) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "setUserEmail", [userEmail]);
+    });
+  },
 
-        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'setUserId', [userId]); });
-    },
+  /* eventParams is nullable*/
+  reportEvent: function (eventName, eventParams) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "reportEvent", [
+        eventName,
+        eventParams,
+      ]);
+    });
+  },
 
-    setUserEmail: function (userEmail) {
-        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'setUserEmail', [userEmail]); });
-    },
+  /* screenCategory parameter is nullable*/
+  reportScreenVisit: function (screenName, screenCategory) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "reportScreenVisit", [
+        screenName,
+        screenCategory,
+      ]);
+    });
+  },
 
-    /* eventParams is nullable*/
-    reportEvent: function (eventName, eventParams) {
-        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'reportEvent', [eventName, eventParams]); })
+  registerUser: function (userId, userEmail) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "registerUser", [
+        userId,
+        userEmail,
+      ]);
+    });
+  },
 
-    },
+  getVisitorId: function () {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "getVisitorId", []);
+    });
+  },
 
-    /* screenCategory parameter is nullable*/
-    reportScreenVisit: function (screenName, screenCategory) {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'reportScreenVisit', [screenName, screenCategory]);
-        });
-    },
+  getCurrentUserIdentifier: function () {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin","getCurrentUserIdentifier",[]);
+    });
+  },
 
-    registerUser: function (userId, userEmail) {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'registerUser', [userId, userEmail])
-        });
-    },
+  pushRegister: function () {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "pushRegister", []);
+    });
+  },
 
-    getVisitorId: function () {
-        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'getVisitorId', []); });
+  inAppUpdateConsent: function (consented) {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "inAppUpdateConsent", [
+        consented,
+      ]);
+    });
+  },
 
-    },
-
-    getCurrentUserIdentifier: function () {
-        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []); });
-
-    },
-
-    pushRegister: function () {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'pushRegister', []);
-        });
-    },
-
-    inAppUpdateConsent: function (consented) {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'inAppUpdateConsent', [consented]);
-        });
-    },
-
-    inAppGetInboxItems: function () {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'inAppGetInboxItems', []);
-        });
-    },
-    inAppMarkAllInboxItemsAsRead: function () {
-        return new Promise((resolve, reject) => {
-            exec(resolve, reject, 'OptimoveSDKPlugin', 'inAppMarkAllInboxItemsAsRead', []);
-        });
-    }
-}
+  inAppGetInboxItems: function () {
+    return new Promise((resolve, reject) => {
+      exec(resolve, reject, "OptimoveSDKPlugin", "inAppGetInboxItems", []);
+    });
+  },
+  inAppMarkAllInboxItemsAsRead: function () {
+    return new Promise((resolve, reject) => {
+      exec(
+        resolve,
+        reject,
+        "OptimoveSDKPlugin",
+        "inAppMarkAllInboxItemsAsRead",
+        []
+      );
+    });
+  },
+};
 module.exports = Optimove;
