@@ -84,47 +84,15 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             String eventName = args.getString(0);
             JSONObject params = args.optJSONObject(1);
             if (params == null) {
-                this.reportEvent(eventName, callbackContext);
+                Optimove.getInstance().reportEvent(eventName);
             } else {
-                reportEvent(eventName, params, callbackContext);
+                Optimove.getInstance().reportEvent(eventName, JsonUtils.toMap(params));
             }
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
             return;
         }
-
-    }
-
-    private void reportEvent(String eventName, CallbackContext callbackContext) {
-        try {
-            Optimove.getInstance().reportEvent(eventName);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
-
-    }
-
-    private void reportEvent(String eventName, JSONObject parameters, CallbackContext callbackContext) {
-        Map<String, Object> parametersMap;
-        try {
-            parametersMap = JsonUtils.toMap(parameters);
-        } catch (JSONException e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        try {
-            Optimove.getInstance().reportEvent(eventName, parametersMap);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
 
     }
 
@@ -133,38 +101,15 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             String screenName = args.getString(0);
             String screenCategory = args.optString(1);
             if (screenCategory.equals("null")) {
-                reportScreenVisit(screenName, callbackContext);
+                Optimove.getInstance().reportScreenVisit(screenName);
             } else {
-                this.reportScreenVisit(screenName, screenCategory, callbackContext);
+                Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
             }
+            callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
-            return;
         }
-    }
-
-    private void reportScreenVisit(String screenName, CallbackContext callbackContext) {
-        try {
-            Optimove.getInstance().reportScreenVisit(screenName);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
-
-    }
-
-    private void reportScreenVisit(String screenName, String screenCategory, CallbackContext callbackContext) {
-        try {
-            Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
-            return;
-        }
-        callbackContext.success();
     }
 
     private void registerUser(JSONArray args, CallbackContext callbackContext) {
