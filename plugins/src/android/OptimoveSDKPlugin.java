@@ -14,15 +14,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-
+import java.nio.file.WatchEvent;
 import org.apache.cordova.CallbackContext;
-
 import com.optimove.android.Optimove;
 import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
 import com.optimove.android.optimobile.InAppInboxItem;
 import com.optimove.android.optimobile.OptimoveInApp;
 import com.optimove.android.optimobile.PushMessage;
-
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,59 +55,34 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 initBaseSdk(callbackContext);
                 return true;
             case SET_USER_ID:
-                String userId = args.getString(0);
-                this.setUserId(userId, callbackContext);
+                this.setUserId(args, callbackContext);
                 return true;
             case SET_USER_EMAIL:
-                String email = args.getString(0);
-                this.setUserEmail(email, callbackContext);
+
+                this.setUserEmail(args, callbackContext);
                 return true;
             case REPORT_EVENT:
-                String eventName = args.getString(0);
-                JSONObject params = args.optJSONObject(1);
-                if (params == null) {
-                    this.reportEvent(eventName, callbackContext);
-                } else {
-                    reportEvent(eventName, params, callbackContext);
-                }
+                this.reportEvent(args, callbackContext);
                 return true;
-
             case REPORT_SCREEN_VISIT:
-                String screenName = args.getString(0);
-                String screenCategory = args.optString(1);
-                if (screenCategory.equals("null")) {
-                    reportScreenVisit(screenName, callbackContext);
-                } else {
-                    this.reportScreenVisit(screenName, screenCategory, callbackContext);
-                }
+                reportScreenVisit(args, callbackContext);
                 return true;
             case REGISTER_USER:
-                String id = args.getString(0);
-                String userEmail = args.getString(1);
-                this.registerUser(id, userEmail, callbackContext);
+                this.registerUser(args, callbackContext);
                 return true;
+
             case GET_VISITOR_ID:
-                String visitorId = this.getVisitorId();
-                if (visitorId != null) {
-                    callbackContext.success(visitorId);
-                } else {
-                    callbackContext.error("visitor id is null");
-                    return false;
-                }
+                this.getVisitorId(callbackContext);
                 return true;
             case GET_CURRENT_USER_IDENTIFIER:
-                String currentUserIdentifier = this.getCurrentUserIdentifier();
-                if (currentUserIdentifier != null) {
-                    callbackContext.success(currentUserIdentifier);
-                } else {
-                    callbackContext.error("current user identifier is null");
-                    return false;
-                }
+                 this.getCurrentUserIdentifier(callbackContext);
+                 return true;
             case PUSH_REGISTER:
                 this.pushRegister(callbackContext);
                 return true;
             case IN_APP_UPDATE_CONSENT:
                 this.inAppUpdateConsent(args, callbackContext);
+                this.getCurrentUserIdentifier(callbackContext);
                 return true;
             case IN_APP_GET_INBOX_ITEMS:
                 cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
@@ -117,8 +90,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         return false;
     }
 
-    private void setUserId(String userId, CallbackContext callbackContext) {
+    private void setUserId(JSONArray args, CallbackContext callbackContext) {
+
         try {
+            String userId = args.getString(0);
             Optimove.getInstance().setUserId(userId);
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
@@ -130,8 +105,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     }
 
-    private void setUserEmail(String email, CallbackContext callbackContext) {
+    private void setUserEmail(JSONArray args, CallbackContext callbackContext) {
         try {
+            String email = args.getString(0);
             Optimove.getInstance().setUserEmail(email);
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
@@ -139,6 +115,24 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             return;
         }
         callbackContext.success();
+    }
+
+    private void reportEvent(JSONArray args, CallbackContext callbackContext) {
+        try {
+            reportEvent(args, callbackContext);
+            String eventName = args.getString(0);
+            JSONObject params = args.optJSONObject(1);
+            if (params == null) {
+                this.reportEvent(eventName, callbackContext);
+            } else {
+                reportEvent(eventName, params, callbackContext);
+            }
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+
     }
 
     private void reportEvent(String eventName, CallbackContext callbackContext) {
@@ -173,6 +167,22 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     }
 
+    private void reportScreenVisit(JSONArray args, CallbackContext callbackContext) {
+        try {
+            String screenName = args.getString(0);
+            String screenCategory = args.optString(1);
+            if (screenCategory.equals("null")) {
+                reportScreenVisit(screenName, callbackContext);
+            } else {
+                this.reportScreenVisit(screenName, screenCategory, callbackContext);
+            }
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+    }
+
     private void reportScreenVisit(String screenName, CallbackContext callbackContext) {
         try {
             Optimove.getInstance().reportScreenVisit(screenName);
@@ -196,8 +206,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         callbackContext.success();
     }
 
-    private void registerUser(String userId, String userEmail, CallbackContext callbackContext) {
+    private void registerUser(JSONArray args, CallbackContext callbackContext) {
         try {
+            String userId = args.getString(0);
+            String userEmail = args.getString(1);
             Optimove.getInstance().registerUser(userId, userEmail);
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
@@ -207,12 +219,24 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         callbackContext.success();
     }
 
-    private String getVisitorId() {
-        return Optimove.getInstance().getVisitorId();
+    private void getVisitorId(CallbackContext callbackContext) {
+        String visitorId = Optimove.getInstance().getVisitorId();
+        if (visitorId != null) {
+            callbackContext.success(visitorId);
+        } else {
+            callbackContext.error("visitor id is null");
+        }
+
     }
 
-    private String getCurrentUserIdentifier() {
-        return Optimove.getInstance().getCurrentUserIdentifier();
+    private void getCurrentUserIdentifier(CallbackContext callbackContext) {
+        String currentUserIdentifier = Optimove.getInstance().getCurrentUserIdentifier();
+        if (currentUserIdentifier != null) {
+            callbackContext.success(currentUserIdentifier);
+        } else {
+            callbackContext.error("current user identifier is null");
+        }
+
     }
 
     private void initBaseSdk(CallbackContext callbackContext) {
