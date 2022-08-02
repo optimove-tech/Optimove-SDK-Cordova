@@ -1,11 +1,7 @@
 package com.optimove.android.cordova;
 
 import android.content.Context;
-
 import androidx.annotation.Nullable;
-
-import org.apache.cordova.CordovaInterface;
-import org.apache.cordova.CordovaPlugin;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -14,8 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.apache.cordova.CallbackContext;
-
 import com.optimove.android.Optimove;
 import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
 import com.optimove.android.optimobile.InAppInboxItem;
@@ -23,6 +17,9 @@ import com.optimove.android.optimobile.InAppInboxSummary;
 import com.optimove.android.optimobile.OptimoveInApp;
 import com.optimove.android.optimobile.PushMessage;
 
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
