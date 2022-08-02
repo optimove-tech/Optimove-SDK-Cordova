@@ -103,5 +103,16 @@ const Optimove = {
       ]);
     });
   },
+    inAppGetInboxSummary: function () {
+        return new Promise((resolve, reject) => {
+          exec(
+            resolve,
+            reject,
+            "OptimoveSDKPlugin",
+            "inAppGetInboxSummary",
+            []
+          );
+        });
+     }
 };
 module.exports = Optimove;

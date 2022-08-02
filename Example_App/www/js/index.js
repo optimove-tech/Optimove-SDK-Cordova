@@ -196,3 +196,14 @@ function inAppMarkAsRead() {
   ).then(success, error);
   document.getElementById("text-area-in-app-inbox-item").value = "";
 }
+
+document
+  .getElementById("in-app-get-inbox-summary-button")
+  .addEventListener("click", inAppGetInboxSummary);
+
+function inAppGetInboxSummary() {
+  Optimove.inAppGetInboxSummary().then((inboxSummary) => {
+    document.getElementById("text-area-in-app-inbox-summary").value =
+      inboxSummary;
+  }, error);
+}

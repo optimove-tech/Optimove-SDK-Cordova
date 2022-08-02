@@ -19,6 +19,7 @@ import org.apache.cordova.CallbackContext;
 import com.optimove.android.Optimove;
 import com.optimove.android.optimobile.InAppDeepLinkHandlerInterface;
 import com.optimove.android.optimobile.InAppInboxItem;
+import com.optimove.android.optimobile.InAppInboxSummary;
 import com.optimove.android.optimobile.OptimoveInApp;
 import com.optimove.android.optimobile.PushMessage;
 
@@ -42,6 +43,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
     private static final String IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ = "inAppMarkAllInboxItemsAsRead";
     private static final String IN_APP_MARK_AS_READ = "inAppMarkAsRead";
+    private static final String IN_APP_GET_INBOX_SUMMARY = "inAppGetInboxSummary";
 
     @Nullable
     static CallbackContext jsCallbackContext;
@@ -105,9 +107,30 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         case IN_APP_MARK_AS_READ:
             this.inAppMarkAsRead(args, callbackContext);
             return true;
+        case IN_APP_GET_INBOX_SUMMARY:
+            this.inAppGetInboxSummary(callbackContext);
         }
 
         return false;
+    }
+
+    private void inAppGetInboxSummary(CallbackContext callbackContext) {
+        OptimoveInApp.getInstance().getInboxSummaryAsync((InAppInboxSummary summary) -> {
+            if (summary == null) {
+                callbackContext.error("Could not get inbox summary");
+                return;
+            }
+
+            try {
+                JSONObject res = new JSONObject();
+                res.put("totalCount", summary.getTotalCount());
+                res.put("unreadCount", summary.getUnreadCount());
+                callbackContext.success(res);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                callbackContext.error(e.getMessage());
+            }
+        });
     }
 
     private void inAppMarkAsRead(JSONArray args, CallbackContext callbackContext) {
