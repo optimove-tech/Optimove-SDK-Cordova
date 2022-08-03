@@ -1,10 +1,11 @@
 import OptimoveSDK
 import NotificationCenter
+
 @objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
-    private let optimoveCredentialsKey = "optimoveCredentials"
-    private let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
+    private static let optimoveCredentialsKey = "optimoveCredentials"
+    private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
     
-    private lazy var config: OptimoveConfig? = {
+    private static var config: OptimoveConfig? = {
         let configPath = Bundle.main.path(forResource: "optimove", ofType: "plist")
         
         guard let configPath = configPath else {
@@ -22,12 +23,9 @@ import NotificationCenter
         return config.build()
     }()
     
-    func load() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.didFinishLaunching(notification:)), name: UIApplication.didFinishLaunchingNotification, object: nil)
-    }
-    
-    @objc func didFinishLaunching(notification: NSNotification) {
-        guard let config = config else { return }
+    override func pluginInitialize() {
+        super.pluginInitialize()
+        guard let config = OptimoveSDKPlugin.config else { return }
         Optimove.initialize(with: config)
     }
 }

@@ -12,6 +12,7 @@
             </feature>
         </config-file>
         <source-file src="src/ios/OptimoveSDKPlugin.swift" />
+        <header-file src="src/ios/Bridging-Header-Header.h" type="BridgingHeader" />
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git"/>
