@@ -17,6 +17,7 @@
  * under the License.
  */
 
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
@@ -227,3 +228,20 @@ function inAppDeleteMessageFromInbox() {
     document.getElementById("text-area-in-app-inbox-item-id").value
   ).then(success, error);
 }
+document.getElementById("get-visitor-id-button").addEventListener("click", getVisitorId);
+
+function getVisitorId() {
+    Optimove.getVisitorId().then((visitorId) => {
+
+        document.getElementById("text-area-visitor-id").value = visitorId;
+
+    }, error);
+}
+document.getElementById("get-current-user-identifier-button").addEventListener("click", getCurrentUserIdentifier);
+
+function getCurrentUserIdentifier() {
+    Optimove.getCurrentUserIdentifier().then((visitorId) => {
+        document.getElementById("text-area-current-user-identifier").value = visitorId
+    }, error);
+}
+
