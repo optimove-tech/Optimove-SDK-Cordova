@@ -2,6 +2,24 @@
 const fs = require('fs');
 const path = require('path');
 
+function createJsonWithDefaultValues(optimoveCredentialsParam, optimoveMobileCredentialsParam ,optimoveInAppConsentStrategy) {
+    var optimoveCredentials ="";
+    var optimoveMobileCredentials = "";
+    
+    if (optimoveCredentialsParam) {
+        optimoveCredentials = optimoveCredentialsParam;
+    }
+    if (optimoveMobileCredentialsParam) { 
+        optimoveMobileCredentials = optimoveMobileCredentialsParam;
+    }
+
+    return {
+      OPTIMOVE_CREDENTIALS: optimoveCredentials,
+      OPTIMOVE_MOBILE_CREDENTIALS: optimoveMobileCredentials,
+      IN_APP_STRATEGY: optimoveInAppConsentStrategy,
+    };
+ }
+
 function hasPlatform(context, platform) {
     return context.opts.platforms.indexOf(platform) > -1;
 }
@@ -66,11 +84,10 @@ function prepareAndroid(context, optimoveConfig) {
         'optimove.xml'
     );
 
-    const config = renderTemplate('optimove.xml', {
-        OPTIMOVE_CREDENTIALS: optimoveConfig.optimoveCredentials,
-        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConfig.optimoveMobileCredentials,
-        IN_APP_STRATEGY: optimoveConfig.optimoveInAppConsentStrategy
-    });
+    const config = renderTemplate('optimove.xml',
+        createJsonWithDefaultValues(optimoveConfig.optimoveCredentials,
+            optimoveConfig.optimoveMobileCredentials,
+            optimoveConfig.optimoveInAppConsentStrategy));
 
     fs.writeFileSync(dest, config, { encoding: 'utf-8' });
     
