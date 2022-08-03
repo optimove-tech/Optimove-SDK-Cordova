@@ -80,6 +80,7 @@ function prepareAndroid(context, optimoveConfig) {
     );
 
     if (fs.existsSync(gServicesJson)) {
+        
         console.info('Optimove: found google-services.json, configuring FCM');
         const gServicesDest = path.join(
             context.opts.projectRoot,
@@ -117,15 +118,15 @@ function isValidConfig(config) {
         return false;
     }
     if (
-        isEmpty(config.optimoveCredentials) ||
-        isEmpty(config.optimoveMobileCredentials) ||
-        !isString(config.optimoveCredentials) ||
-        !isString(config.optimoveMobileCredentials)
+      (isEmpty(config.optimoveCredentials) ||
+        !isString(config.optimoveCredentials)) &&
+      (isEmpty(config.optimoveMobileCredentials) ||
+        !isString(config.optimoveMobileCredentials))
     ) {
-        console.error(
-            'Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json'
-        );
-        return false;
+      console.error(
+        "Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json"
+      );
+      return false;
     }
     const validInAppStrategies = [
         'auto-enroll',

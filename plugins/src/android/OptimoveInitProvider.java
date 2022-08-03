@@ -29,12 +29,10 @@ public class OptimoveInitProvider extends ContentProvider {
         Resources resources = app.getResources();
         String optimoveCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
         String optimoveMobileCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
-        if (TextUtils.isEmpty(optimoveCredentials) || TextUtils.isEmpty(optimoveMobileCredentials)) {
-            return true;
-        }
+        optimoveCredentials = handleNullValues(optimoveCredentials);
+        optimoveMobileCredentials = handleNullValues(optimoveMobileCredentials);
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
-        assert optimoveCredentials != null;
-        assert optimoveMobileCredentials != null;
+        assert (optimoveCredentials != null || optimoveMobileCredentials != null);
 
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
                 optimoveMobileCredentials);
@@ -59,7 +57,7 @@ public class OptimoveInitProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
-                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+            @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         return null;
     }
 
@@ -82,7 +80,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
-                      @Nullable String[] selectionArgs) {
+            @Nullable String[] selectionArgs) {
         return 0;
     }
 
@@ -93,5 +91,13 @@ public class OptimoveInitProvider extends ContentProvider {
         }
 
         return resources.getString(resId);
+    }
+
+    @Nullable
+    private String handleNullValues(String credentials) {
+        if (credentials.equals("undefined") || credentials.equals("null") || credentials.isEmpty()) {
+            return null;
+        }
+        return credentials;
     }
 }

@@ -37,7 +37,7 @@
                 </intent-filter>
             </service>
             <!-- Optimove push receiver  -->
-            <receiver android:name=".PushReceiver" android:exported="false">
+            <receiver android:name="com.optimove.android.cordova.PushReceiver" android:exported="false">
                 <intent-filter>
                     <action android:name="com.optimove.push.RECEIVED" />
                     <action android:name="com.optimove.push.OPENED" />
