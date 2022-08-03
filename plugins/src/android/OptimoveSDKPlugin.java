@@ -264,10 +264,11 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private void reportScreenVisit(JSONArray args, CallbackContext callbackContext) {
         try {
             String screenName = args.getString(0);
-            String screenCategory = args.optString(1);
-            if (screenCategory.equals("null")) {
+
+            if (args.isNull(1)) {
                 Optimove.getInstance().reportScreenVisit(screenName);
             } else {
+                String screenCategory = args.optString(1);
                 Optimove.getInstance().reportScreenVisit(screenName, screenCategory);
             }
             callbackContext.success();
