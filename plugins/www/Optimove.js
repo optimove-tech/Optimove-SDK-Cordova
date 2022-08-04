@@ -1,9 +1,41 @@
 var exec = require("cordova/exec");
 
+var inAppInboxUpdatedHandler;
+
+function nativeMessageHandler(message) {
+  alert(message);
+  if (!message || typeof message === "string") {
+    return;
+  }
+  
+  const handlerName = `${message.type}Handler`;
+  alert(handlerName);
+  alert(typeof inAppInboxUpdatedHandler);
+  if (
+    handlerName === "inAppInboxUpdatedHandler" &&
+    typeof inAppInboxUpdatedHandler === "function"
+  ) {
+    inAppInboxUpdatedHandler();
+    return;
+  }
+
+  if (typeof currentConfig[handlerName] === "function") {
+    currentConfig[handlerName](message.data);
+  } else {
+    console.log(`Optimove: No handler defined for '${message.type}' event`);
+  }
+}
+
 const Optimove = {
   initBaseSdk: function () {
     return new Promise((resolve, reject) => {
-      exec(resolve, reject, "OptimoveSDKPlugin", "initBaseSdk", []);
+      exec(
+        nativeMessageHandler,
+        reject,
+        "OptimoveSDKPlugin",
+        "initBaseSdk",
+        []
+      );
     });
   },
 
@@ -96,7 +128,7 @@ const Optimove = {
       );
     });
   },
-  inAppMarkAsRead: function (inAppInboxItemId) {
+  inAppMarkAsRead: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppMarkAsRead", [
         inAppInboxItem,
@@ -108,23 +140,27 @@ const Optimove = {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppGetInboxSummary", []);
     });
   },
-  inAppPresentInboxMessage: function (inAppInboxItemId) {
+  inAppPresentInboxMessage: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppPresentInboxMessage", [
-        inAppInboxItemId,
+        inAppInboxItem,
       ]);
     });
   },
-  inAppDeleteMessageFromInbox: function (inAppInboxItemId) {
+  inAppDeleteMessageFromInbox: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(
         resolve,
         reject,
         "OptimoveSDKPlugin",
         "inAppDeleteMessageFromInbox",
-        [inAppInboxItemId]
+        [inAppInboxItem]
       );
     });
+  },
+
+  setOnInboxUpdatedHandler: function (handler) {
+    inAppInboxUpdatedHandler = handler;
   },
 };
 module.exports = Optimove;

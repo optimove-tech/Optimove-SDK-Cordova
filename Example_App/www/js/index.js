@@ -18,11 +18,15 @@
  */
 
 
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
 document.addEventListener("deviceready", onDeviceReady, false);
-
+function initialize() { 
+  initBaseSdk();
+}
+var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
@@ -45,7 +49,9 @@ document
   .addEventListener("click", initBaseSdk);
 
 function initBaseSdk() {
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
   Optimove.initBaseSdk().then(success, error);
+  
 }
 
 document
@@ -176,7 +182,10 @@ document
   .addEventListener("click", inAppGetInboxItems);
 
 function inAppGetInboxItems() {
-  Optimove.inAppGetInboxItems().then(success, error);
+  Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
+    items = inboxItemsArray;
+    alert(items);
+   }, error);
 }
 
 document
@@ -243,5 +252,16 @@ function getCurrentUserIdentifier() {
     Optimove.getCurrentUserIdentifier().then((visitorId) => {
         document.getElementById("text-area-current-user-identifier").value = visitorId
     }, error);
+}
+
+function onInboxUpdated() {
+ 
+  Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
+    var inboxItem;
+    alert(inboxItemsArray);
+    inboxItem = inboxItemsArray[0];
+    Optimove.inAppPresentInboxMessage(inboxItem);
+  },error)
+      
 }
 

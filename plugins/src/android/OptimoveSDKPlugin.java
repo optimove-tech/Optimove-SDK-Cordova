@@ -126,9 +126,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppDeleteMessageFromInbox(JSONArray args, CallbackContext callbackContext) {
-        int messageId = args.optInt(0, -1);
-
-        if (messageId == -1) {
+        JSONObject inboxItem = args.optJSONObject(0);
+        int messageId = -1;
+        if (inboxItem != null) {
+            messageId = args.optInt(0);
+        }
+        if (inboxItem == null || messageId == -1) {
             callbackContext.error("Message not found or not available");
             return;
         }
@@ -151,9 +154,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppPresentInboxMessage(JSONArray args, CallbackContext callbackContext) {
-        int messageId = args.optInt(0, -1);
-
-        if (messageId == -1) {
+        JSONObject inboxItem = args.optJSONObject(0);
+        int messageId = -1;
+        if (inboxItem != null) {
+            messageId = args.optInt(0);
+        }
+        if (inboxItem == null || messageId == -1) {
             callbackContext.error("Message not found or not available");
             return;
         }
@@ -197,9 +203,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     private void inAppMarkAsRead(JSONArray args, CallbackContext callbackContext) {
         try {
-            int messageId = args.optInt(0, -1);
-
-            if (messageId == -1) {
+            JSONObject inboxItem = args.optJSONObject(0);
+            int messageId = -1;
+            if (inboxItem != null) {
+                messageId = args.optInt(0);
+            }
+            if (inboxItem == null || messageId == -1) {
                 callbackContext.error("Message not found or not available");
                 return;
             }

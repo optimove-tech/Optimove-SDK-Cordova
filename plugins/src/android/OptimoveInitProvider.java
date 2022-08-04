@@ -38,9 +38,9 @@ public class OptimoveInitProvider extends ContentProvider {
                 optimoveMobileCredentials);
 
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
-            configBuilder.enableInAppMessaging(OptimoveConfig.inAppConsentStrategy.AUTO_ENROLL);
+            configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
-            configBuilder.enableInAppMessaging(OptimoveConfig.inAppConsentStrategy.EXPLICIT_BY_USER);
+           configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
         }
 
         Optimove.initialize(app, configBuilder.build());
