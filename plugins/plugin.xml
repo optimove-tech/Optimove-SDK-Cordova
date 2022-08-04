@@ -41,6 +41,7 @@
                 <intent-filter>
                     <action android:name="com.optimove.push.RECEIVED" />
                     <action android:name="com.optimove.push.OPENED" />
+                    <action android:name="com.optimove.push.DISMISSED" />
                     <action android:name="com.optimove.push.BUTTON_CLICKED" />
                 </intent-filter>
             </receiver>
