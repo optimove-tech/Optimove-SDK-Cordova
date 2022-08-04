@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-function createJsonWithDefaultValues(optimoveCredentialsParam, optimoveMobileCredentialsParam ,optimoveInAppConsentStrategy) {
+function createJsonWithDefaultValues(optimoveCredentialsParam, optimoveMobileCredentialsParam , inAppConsentStrategy) {
     var optimoveCredentials ="";
     var optimoveMobileCredentials = "";
     
@@ -16,7 +16,7 @@ function createJsonWithDefaultValues(optimoveCredentialsParam, optimoveMobileCre
     return {
       OPTIMOVE_CREDENTIALS: optimoveCredentials,
       OPTIMOVE_MOBILE_CREDENTIALS: optimoveMobileCredentials,
-      IN_APP_STRATEGY: optimoveInAppConsentStrategy,
+      IN_APP_STRATEGY: inAppConsentStrategy,
     };
  }
 
@@ -87,7 +87,7 @@ function prepareAndroid(context, optimoveConfig) {
     const config = renderTemplate('optimove.xml',
         createJsonWithDefaultValues(optimoveConfig.optimoveCredentials,
             optimoveConfig.optimoveMobileCredentials,
-            optimoveConfig.optimoveInAppConsentStrategy));
+            optimoveConfig.inAppConsentStrategy));
 
     fs.writeFileSync(dest, config, { encoding: 'utf-8' });
     
