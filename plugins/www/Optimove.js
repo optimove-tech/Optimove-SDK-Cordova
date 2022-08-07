@@ -2,6 +2,12 @@ var exec = require("cordova/exec");
 
 var inAppInboxUpdatedHandler;
 
+var currentConfig = {
+  pushReceivedHandler: pushReceivedHandler, //function that receives one argument, a push message object
+  pushOpenedHandler: pushOpenedHandler, //function that receives one argument, a push message object
+  inAppDeepLinkHandler: inAppDeepLinkHandler, //expect to be a function that receives one argument, a deepLink data object
+};
+
 function nativeMessageHandler(message) {
   alert(message);
   if (!message || typeof message === "string") {
@@ -162,5 +168,21 @@ const Optimove = {
   setOnInboxUpdatedHandler: function (handler) {
     inAppInboxUpdatedHandler = handler;
   },
+  setHandlers(pushReceivedHandler, pushOpenedHandler, inAppDeepLinkHandler) {
+    currentConfig["pushReceivedHandler"] = pushReceivedHandler;
+    currentConfig["pushOpenedHandler"] = pushOpenedHandler;
+    currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
+  },
+  setPushOpenedHandler(pushOpenedHandler) {
+    currentConfig["pushOpenedHandler"] = pushOpenedHandler;
+  },
+
+  setReceivedPushHandler(pushReceivedHandler) {
+    currentConfig["pushReceivedHandler"] = pushReceivedHandler;
+  },
+
+  setInAppDeepLinkHandler(inAppDeepLinkHandler) {
+      currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
+  }
 };
 module.exports = Optimove;

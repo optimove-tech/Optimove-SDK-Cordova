@@ -17,13 +17,11 @@
  * under the License.
  */
 
-
-
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
 document.addEventListener("deviceready", onDeviceReady, false);
-function initialize() { 
+function initialize() {
   initBaseSdk();
 }
 var items;
@@ -48,10 +46,27 @@ document
   .getElementById("init-base-sdk-button")
   .addEventListener("click", initBaseSdk);
 
+function pushReceivedHandler(pushMessage) {
+  //handling push received
+}
+
+function pushOpenedHandler(pushMessage) {
+  //handling push message
+}
+
+function inAppDeepLinkHandler(deepLinkData) {
+  //handling inAppDeepLink
+}
+
+Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
+Optimove.setHandlers(
+  pushReceivedHandler,
+  pushOpenedHandler,
+  inAppDeepLinkHandler
+);
+
 function initBaseSdk() {
-  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
   Optimove.initBaseSdk().then(success, error);
-  
 }
 
 document
@@ -185,7 +200,7 @@ function inAppGetInboxItems() {
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
     items = inboxItemsArray;
     alert(items);
-   }, error);
+  }, error);
 }
 
 document
@@ -237,31 +252,31 @@ function inAppDeleteMessageFromInbox() {
     document.getElementById("text-area-in-app-inbox-item-id").value
   ).then(success, error);
 }
-document.getElementById("get-visitor-id-button").addEventListener("click", getVisitorId);
+document
+  .getElementById("get-visitor-id-button")
+  .addEventListener("click", getVisitorId);
 
 function getVisitorId() {
-    Optimove.getVisitorId().then((visitorId) => {
-
-        document.getElementById("text-area-visitor-id").value = visitorId;
-
-    }, error);
+  Optimove.getVisitorId().then((visitorId) => {
+    document.getElementById("text-area-visitor-id").value = visitorId;
+  }, error);
 }
-document.getElementById("get-current-user-identifier-button").addEventListener("click", getCurrentUserIdentifier);
+document
+  .getElementById("get-current-user-identifier-button")
+  .addEventListener("click", getCurrentUserIdentifier);
 
 function getCurrentUserIdentifier() {
-    Optimove.getCurrentUserIdentifier().then((visitorId) => {
-        document.getElementById("text-area-current-user-identifier").value = visitorId
-    }, error);
+  Optimove.getCurrentUserIdentifier().then((visitorId) => {
+    document.getElementById("text-area-current-user-identifier").value =
+      visitorId;
+  }, error);
 }
 
 function onInboxUpdated() {
- 
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
     var inboxItem;
     alert(inboxItemsArray);
     inboxItem = inboxItemsArray[0];
     Optimove.inAppPresentInboxMessage(inboxItem);
-  },error)
-      
+  }, error);
 }
-
