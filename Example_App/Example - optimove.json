@@ -1,4 +1,5 @@
 {
     "optimoveCredentials": "YOUR_OPTIMOVE_CREDENTIALS",
-    "optimoveMobileCredentials": "YOUR_OPTIMOVE_MOBILE_CREDENTIALS"
+    "optimoveMobileCredentials": "YOUR_OPTIMOVE_MOBILE_CREDENTIALS",
+    "inAppConsentStrategy" : "YOUR_IN_APP_CONSENT_STRATEGY"
 }

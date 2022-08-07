@@ -134,6 +134,7 @@ function prepareAndroid(context, optimoveConfig) {
   }
 }
 module.exports = function injectOptimoveConfig(context) {
+<<<<<<< HEAD
     const optimoveConfig = readOptimoveSettings(context);
     if (!optimoveConfig) {
         return;
@@ -145,9 +146,20 @@ module.exports = function injectOptimoveConfig(context) {
     }
 
     if (hasPlatform(context, 'ios')) {
-      console.info('Optimove: Preparing iOS platform...');
-      prepareIos(context, optimoveConfig);
+        console.info('Optimove: Preparing iOS platform...');
+        prepareIos(context, optimoveConfig);
+    }
+=======
+  const optimoveConfig = readOptimoveSettings(context);
+  if (!optimoveConfig) {
+    return;
   }
+
+  if (hasPlatform(context, "android")) {
+    console.info("Optimove: Preparing Android platform...");
+    prepareAndroid(context, optimoveConfig);
+  }
+>>>>>>> cordova-deferred-deep-linking-android
 };
 
 function prepareIos(context, OptimoveConfig) {

@@ -19,7 +19,9 @@ dependencies{
     implementation("androidx.work:work-runtime-ktx:$work_version") {
         force = true
     }
-  
+    implementation platform('com.google.firebase:firebase-bom:28.2.0')
+    implementation 'com.google.firebase:firebase-messaging'
+ 
 }
 
 // Application of google services plugin based on
@@ -35,4 +37,18 @@ buildscript {
         
         
     }
+}
+ext.postBuildExtras = {
+    if (file("./google-services.json").exists()) {
+        if (project.extensions.findByName('googleServices') == null) {
+            // apply plugin: 'com.google.gms.google-services'
+            // class must be used instead of id(string) to be able to apply plugin from non-root gradle file
+            apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
+        }
+    }
+    dependencies {
+        implementation platform('com.google.firebase:firebase-bom:28.2.0')
+        implementation 'com.google.firebase:firebase-messaging'
+    }
+
 }
