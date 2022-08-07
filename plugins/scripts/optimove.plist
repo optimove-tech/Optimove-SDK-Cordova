@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>optimoveCredentialsKey</key>
-	<string>{{optimoveCredentialsKey}}</string>
+	<string>{{optimoveCredentials}}</string>
 	<key>optimoveMobileCredentialsKey</key>
-	<string>{{optimoveMobileCredentialsKey}}</string>
+	<string>{{optimoveMobileCredentials}}</string>
 </dict>
 </plist>
