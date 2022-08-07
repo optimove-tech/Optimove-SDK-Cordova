@@ -4,6 +4,8 @@ import NotificationCenter
 @objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
+    private static let inAppConsentStrategyKey = "inAppConsentStrategy"
+    private static let enableDeepLinkKy = "enableDeepLink"
     
     private static var config: OptimoveConfig? = {
         let configPath = Bundle.main.path(forResource: "optimove", ofType: "plist")
@@ -19,6 +21,16 @@ import NotificationCenter
         }
         
         let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
+        
+        if configValues[enableDeepLinkKy] == "true" {
+            config.enableDeepLinking { deepLink in
+                
+            }
+        }
+        
+        if let inAppConsentStrategy: InAppConsentStrategy = .init(rawValue: inAppConsentStrategyKey) {
+            config.enableInAppMessaging(inAppConsentStrategy: inAppConsentStrategy)
+        }
         
         return config.build()
     }()
