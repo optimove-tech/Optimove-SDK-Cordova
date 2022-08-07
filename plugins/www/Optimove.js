@@ -1,7 +1,7 @@
 var exec = require("cordova/exec");
 
 var inAppInboxUpdatedHandler;
-
+var currentConfig = { 'deepLinkHandler': deepLinkHandler};
 function nativeMessageHandler(message) {
   alert(message);
   if (!message || typeof message === "string") {
@@ -162,5 +162,8 @@ const Optimove = {
   setOnInboxUpdatedHandler: function (handler) {
     inAppInboxUpdatedHandler = handler;
   },
+  setConifg(deepLinkHandler) {
+    currentConfig['deepLinkHandler'] = deepLinkHandler;
+   }
 };
 module.exports = Optimove;

@@ -17,6 +17,8 @@
  * under the License.
  */
 
+const Optimove = require("../../../plugins/www/Optimove");
+
 
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
@@ -44,12 +46,19 @@ function error(errorMessage) {
   console.error(errorMessage);
 }
 
+
+function deepLinkHandler(deepLink) {
+  //handling of deep linking
+ }
+
 document
   .getElementById("init-base-sdk-button")
   .addEventListener("click", initBaseSdk);
 
+Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
+Optimove.setConifg(deepLinkHandler);
+  
 function initBaseSdk() {
-  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
   Optimove.initBaseSdk().then(success, error);
   
 }

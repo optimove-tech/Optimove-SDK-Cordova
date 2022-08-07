@@ -13,7 +13,11 @@ import androidx.annotation.Nullable;
 
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
+import com.optimove.android.optimobile.DeferredDeepLinkHandlerInterface;
 import com.optimove.android.optimobile.OptimoveInApp;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class OptimoveInitProvider extends ContentProvider {
     private static final String OPTIMOVE_CREDENTIALS = "optimoveCredentials";
@@ -21,6 +25,9 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
     private static final String KEY_IN_APP_CONSENT_STRATEGY = "inAppConsentStrategy";
+    private static final String ENABLE_DEFERRED_DEEP_LINKING = "enableDeferredDeepLinking";
+    private static final String TRUE = "true";
+    private static final String FALSE = "false";
 
     @Override
     public boolean onCreate() {
@@ -32,6 +39,7 @@ public class OptimoveInitProvider extends ContentProvider {
         optimoveCredentials = handleNullValues(optimoveCredentials);
         optimoveMobileCredentials = handleNullValues(optimoveMobileCredentials);
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
+        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
         assert (optimoveCredentials != null || optimoveMobileCredentials != null);
 
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
@@ -40,7 +48,10 @@ public class OptimoveInitProvider extends ContentProvider {
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
-           configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
+            configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
+        }
+        if (Boolean.parseBoolean(enableDeferredDeepLinking)) {
+            configBuilder = configBuilder.enableDeepLinking(getDDLHandlerInterface());
         }
 
         Optimove.initialize(app, configBuilder.build());
@@ -99,5 +110,33 @@ public class OptimoveInitProvider extends ContentProvider {
             return null;
         }
         return credentials;
+    }
+
+    private DeferredDeepLinkHandlerInterface getDDLHandlerInterface() {
+        return (context, resolution, link, data) -> {
+            try {
+                JSONObject dataJson = null;
+                if (null != data) {
+                    JSONObject deepLinkContent = null;
+                    if (data.content != null) {
+                        deepLinkContent.put("title", data.content.title);
+                        deepLinkContent.put("description", data.content.description);
+                    }
+                    dataJson = new JSONObject();
+                    dataJson.put("data", data.data != null ? data.data : null);
+                    dataJson.put("content", deepLinkContent);
+                    dataJson.put("url", data.url);
+
+                }
+                JSONObject deepLink = new JSONObject();
+                deepLink.put("link", link);
+                deepLink.put("resolution", resolution.ordinal());
+                deepLink.put("data", dataJson);
+
+                OptimoveSDKPlugin.sendMessageToJs("deepLink", deepLink);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
     }
 }
