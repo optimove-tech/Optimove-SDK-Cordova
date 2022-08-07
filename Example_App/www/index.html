@@ -16,7 +16,6 @@
     under the License.
 -->
 <html>
-
 <head>
     <meta charset="utf-8">
     <!--
@@ -37,31 +36,41 @@
         content="default-src 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <link rel="stylesheet" href="css/index.css">
 </head>
-
 <body>
     <div class="app">
-        <button class="button" id="Initialize">Initialize</button><br>
-        <button class="button" id="Report Screen Visit">Report Screen Visit</button><br>
-        <button class="button" id="push Campaigns Is Enabled">Update Consent</button><br>
-
-        <button class="button" id="set-install-id">Set Install ID</button>
-
-        <textarea id="text-area-install-id" cols="30" rows="1" placeholder="install id"></textarea>
-
+        <button class="button" id="init-base-sdk-button">Init base sdk</button><br>
+        <br><button class="button" id="report-screen-visit-button">Report Screen Visit</button><br>
+        <textarea id="text-area-screen-name" cols="30" rows="1" placeholder="screen name"></textarea>
+        <textarea id="text-area-screen-category" cols="30" rows="1" placeholder="screen category"></textarea>
         <button class="button" id="report-event-button">Report Event</button><br>
         <textarea id="text-area-event" cols="30" rows="1" placeholder="event"></textarea>
-        <textarea id="textareauseremail" cols="13" rows="1" placeholder="email for register user"></textarea>
-        <button class="button" id="Register User">Register User</button><br>
+        <textarea id="text-area-event-params" cols="30" rows="1" placeholder="event params"></textarea>
+        <button class="button" id="register-user-button">Register User</button><br>
         <textarea id="text-area-user-id" cols="13" rows="1" placeholder="user id"></textarea>
-        <button class="button" id="set-user-id-button">Set User Id</button><br>
-        <textarea id="text-area-user-email" cols="13" rows="1" placeholder="email"></textarea>
-        <button class="button" id="set-user-email-button">Set User Email</button><br>
-        <button class="button" id="get Inbox Items">Get Inbox Items</button><br>
-        <textarea id="textareav" cols="30" rows="1" placeholder="Visitor id"></textarea>
-        <button class="button" id="Get Visitor ID">Get Visitor ID</button>
+        <button class="button" id="set-user-id-button">Set User Id</button>
+        <br>
+            <textarea id="text-area-user-email" cols="13" rows="1" placeholder="email"></textarea>
+            <button class="button" id="set-user-email-button">Set User Email</button>
+        <br>
+        <br>
+        <textarea id="text-area-current-user-identifier" cols="13" rows="1" placeholder="current user identifier"></textarea>
+        <button class="button" id="get-current-user-identifier-button">get current user identifier</button>
+        <br>
+        <br><button class="button" id="in-app-get-inbox-items-button">Get Inbox Items</button><br>
+        <textarea id="text-area-visitor-id" cols="30" rows="1" placeholder="Visitor id"></textarea>
+        <button class="button" id="get-visitor-id-button">Get Visitor ID</button><br>
+        <br><button class="button" id="push-register-button">Register for push</button><br>
+        <br><button class="button" id="in-app-consent-true">inApp consent true</button><br>
+        <br><button class="button" id="in-app-consent-false">inApp consent false</button><br>
+        <br><button class="button" id="in-app-mark-all-inbox-items-as-read-button">inApp mark all inbox items as read </button><br>
+        <br><textarea id="text-area-in-app-inbox-item-id" cols="30" rows="1" placeholder="inApp inbox Item"></textarea><br>
+        <br><button class="button" id="in-app-mark-inbox-item-as-read-button">Mark inbox item as read</button>
+        <button class="button" id="in-app-present-inbox-message-button">present inbox message</button>
+        <button class="button" id="in-app-delete-inbox-message-button">delete inbox message</button><br>
+        <br><textarea id="text-area-in-app-inbox-summary" cols="30" rows="1" placeholder="inApp inbox summary"></textarea><br>
+        <br><button class="button" id="in-app-get-inbox-summary-button">get Inbox summary</button><br>
     </div>
     <script src="cordova.js"></script>
     <script src="js/index.js"></script>
-</body>
-
+</body >
 </html>
