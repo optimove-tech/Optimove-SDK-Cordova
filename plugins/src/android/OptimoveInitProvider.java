@@ -16,11 +16,12 @@ import com.optimove.android.OptimoveConfig;
 import com.optimove.android.optimobile.OptimoveInApp;
 
 public class OptimoveInitProvider extends ContentProvider {
-    private static final String OPTIMOVE_CREDENTIALS = "optimoveCredentials";
-    private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
+    private static final String KEY_OPTIMOVE_CREDENTIALS = "optimoveCredentials";
+    private static final String KEY_OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
+    private static final String KEY_IN_APP_CONSENT_STRATEGY = "inAppConsentStrategy";
+
     private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
-    private static final String KEY_IN_APP_CONSENT_STRATEGY = "inAppConsentStrategy";
 
     @Override
     public boolean onCreate() {
