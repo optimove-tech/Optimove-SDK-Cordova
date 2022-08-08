@@ -8,6 +8,37 @@ var currentConfig = {
   inAppDeepLinkHandler: inAppDeepLinkHandler, //expect to be a function that receives one argument, a deepLink data object
 };
 
+/*document.addEventListener("deviceready", init, false);
+
+
+
+function init() {  
+  setHandlersCallBackContext().then(success, (errorMessage) => { console.error(errorMessage); });
+  alert("got to init");
+}
+*/
+setHandlersCallBackContext().then(success, (errorMessage) => {
+  console.error(errorMessage);
+});
+
+ function setHandlersCallBackContext() {
+   return new Promise((resolve, reject) => {
+     exec(
+       nativeMessageHandler,
+       reject,
+       "OptimoveSDKPlugin",
+       "setHandlersCallBackContext",
+       []
+     );
+   });
+}
+ 
+function checkIfPendingPushExists() {
+  return new Promise((resolve, reject) => {
+    exec(resolve, reject, "OptimoveSDKPlugin", "checkIfPendingPushExists", []);
+  });
+}
+
 function nativeMessageHandler(message) {
   alert(message);
   if (!message || typeof message === "string") {
@@ -32,19 +63,14 @@ function nativeMessageHandler(message) {
   }
 }
 
-const Optimove = {
-  initBaseSdk: function () {
-    return new Promise((resolve, reject) => {
-      exec(
-        nativeMessageHandler,
-        reject,
-        "OptimoveSDKPlugin",
-        "initBaseSdk",
-        []
-      );
-    });
-  },
+function success(message = "success!") {
+  console.log(message);
+}
+function error(message = "error") {
+  console.log(message);
+}
 
+const Optimove = {
   setUserId: function (userId) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "setUserId", [userId]);
@@ -168,13 +194,10 @@ const Optimove = {
   setOnInboxUpdatedHandler: function (handler) {
     inAppInboxUpdatedHandler = handler;
   },
-  setHandlers(pushReceivedHandler, pushOpenedHandler, inAppDeepLinkHandler) {
-    currentConfig["pushReceivedHandler"] = pushReceivedHandler;
-    currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
-  },
+  
   setPushOpenedHandler(pushOpenedHandler) {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
+    checkIfPendingPushExists().then(success,error); 
   },
 
   setPushReceivedHandler(pushReceivedHandler) {

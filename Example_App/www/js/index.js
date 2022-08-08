@@ -17,20 +17,18 @@
  * under the License.
  */
 
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
 document.addEventListener("deviceready", onDeviceReady, false);
-function initialize() {
-  initBaseSdk();
-}
+
 var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
   document.getElementById("deviceready").classList.add("ready");
   alert("device ready");
-  initialize();
 }
 
 function success(successMessage = "Success!") {
@@ -42,9 +40,6 @@ function error(errorMessage) {
   console.error(errorMessage);
 }
 
-document
-  .getElementById("init-base-sdk-button")
-  .addEventListener("click", initBaseSdk);
 
 function pushReceivedHandler(pushMessage) {
   //handling push received
@@ -57,17 +52,16 @@ function pushOpenedHandler(pushMessage) {
 function inAppDeepLinkHandler(deepLinkData) {
   //handling inAppDeepLink
 }
-
+/*
 Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
-Optimove.setHandlers(
-  pushReceivedHandler,
-  pushOpenedHandler,
-  inAppDeepLinkHandler
-);
-
-function initBaseSdk() {
-  Optimove.initBaseSdk().then(success, error);
-}
+alert("got to indexJS2");
+Optimove.setPushReceivedHandler(pushReceivedHandler);
+alert("got to indexJS3");
+Optimove.setPushOpenedHandler(pushOpenedHandler);
+alert("got to indexJS4");
+Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);  
+alert("got to indexJS5");*/
+//Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
 
 document
   .getElementById("set-user-id-button")
