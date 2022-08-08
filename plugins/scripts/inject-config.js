@@ -2,22 +2,25 @@
 const fs = require('fs');
 const path = require('path');
 
-function createJsonWithDefaultValues(optimoveCredentialsParam, optimoveMobileCredentialsParam , inAppConsentStrategy) {
-    var optimoveCredentials ="";
-    var optimoveMobileCredentials = "";
-    
-    if (optimoveCredentialsParam) {
-        optimoveCredentials = optimoveCredentialsParam;
-    }
-    if (optimoveMobileCredentialsParam) { 
-        optimoveMobileCredentials = optimoveMobileCredentialsParam;
+function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy) {
+    if (!isString(inAppConsentStrategy) || isEmpty(inAppConsentStrategy)) { 
+        console.error('inAppConsentStrategy is not valid ');
+        return false;
     }
 
-    return {
-      OPTIMOVE_CREDENTIALS: optimoveCredentials,
-      OPTIMOVE_MOBILE_CREDENTIALS: optimoveMobileCredentials,
-      IN_APP_STRATEGY: inAppConsentStrategy,
-    };
+      return {
+        OPTIMOVE_CREDENTIALS:
+          !isEmpty(optimoveCredentials) &&
+          isString(optimoveCredentials)
+            ? optimoveCredentials
+            : "",
+        OPTIMOVE_MOBILE_CREDENTIALS:
+          !isEmpty(optimoveMobileCredentials) &&
+          isString(optimoveMobileCredentials)
+            ? optimoveMobileCredentials
+            : "",
+        IN_APP_STRATEGY: inAppConsentStrategy,
+      };
  }
 
 function hasPlatform(context, platform) {

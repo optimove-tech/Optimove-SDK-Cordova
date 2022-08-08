@@ -28,8 +28,8 @@ public class OptimoveInitProvider extends ContentProvider {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
-        String optimoveCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
+        String optimoveCredentials = getStringConfigValue(packageName, resources,KEY_OPTIMOVE_CREDENTIALS);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,KEY_OPTIMOVE_MOBILE_CREDENTIALS);
         optimoveCredentials = handleNullValues(optimoveCredentials);
         optimoveMobileCredentials = handleNullValues(optimoveMobileCredentials);
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
@@ -96,9 +96,6 @@ public class OptimoveInitProvider extends ContentProvider {
 
     @Nullable
     private String handleNullValues(String credentials) {
-        if (credentials.equals("undefined") || credentials.equals("null") || credentials.isEmpty()) {
-            return null;
-        }
-        return credentials;
+        return TextUtils.isEmpty(credentials) ? null : credentials;
     }
 }
