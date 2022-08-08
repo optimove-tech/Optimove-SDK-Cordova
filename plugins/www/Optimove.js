@@ -177,12 +177,12 @@ const Optimove = {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
   },
 
-  setReceivedPushHandler(pushReceivedHandler) {
+  setPushReceivedHandler(pushReceivedHandler) {
     currentConfig["pushReceivedHandler"] = pushReceivedHandler;
   },
 
   setInAppDeepLinkHandler(inAppDeepLinkHandler) {
-      currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
+    currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
   }
 };
 module.exports = Optimove;
