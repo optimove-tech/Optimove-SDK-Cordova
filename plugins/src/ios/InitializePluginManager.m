@@ -6,7 +6,6 @@
 //
 
 #import "InitializePluginManager.h"
-#import "Example_App-Swift.h"
 
 @implementation InitializePluginManager
 
