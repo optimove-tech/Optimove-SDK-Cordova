@@ -34,7 +34,6 @@ function checkIfPendingPushExists() {
 }
 
 function nativeMessageHandler(message) {
-  alert(message);
   if (!message || typeof message === "string") {
     return;
   }
