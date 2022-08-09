@@ -29,6 +29,10 @@ function onDeviceReady() {
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
   document.getElementById("deviceready").classList.add("ready");
   alert("device ready");
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
+  Optimove.setPushReceivedHandler(pushReceivedHandler);
+  Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
+  Optimove.setPushOpenedHandler(pushOpenedHandler);
 }
 
 function success(successMessage = "Success!") {
@@ -52,16 +56,6 @@ function pushOpenedHandler(pushMessage) {
 function inAppDeepLinkHandler(deepLinkData) {
   //handling inAppDeepLink
 }
-/*
-Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
-alert("got to indexJS2");
-Optimove.setPushReceivedHandler(pushReceivedHandler);
-alert("got to indexJS3");
-Optimove.setPushOpenedHandler(pushOpenedHandler);
-alert("got to indexJS4");
-Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);  
-alert("got to indexJS5");*/
-//Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
 
 document
   .getElementById("set-user-id-button")

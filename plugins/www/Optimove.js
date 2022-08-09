@@ -8,18 +8,12 @@ var currentConfig = {
   inAppDeepLinkHandler: inAppDeepLinkHandler, //expect to be a function that receives one argument, a deepLink data object
 };
 
-/*document.addEventListener("deviceready", init, false);
-
-
+document.addEventListener("deviceready", init, false);
 
 function init() {  
   setHandlersCallBackContext().then(success, (errorMessage) => { console.error(errorMessage); });
-  alert("got to init");
 }
-*/
-setHandlersCallBackContext().then(success, (errorMessage) => {
-  console.error(errorMessage);
-});
+
 
  function setHandlersCallBackContext() {
    return new Promise((resolve, reject) => {
@@ -192,7 +186,7 @@ const Optimove = {
   },
 
   setOnInboxUpdatedHandler: function (handler) {
-    inAppInboxUpdatedHandler = handler;
+      inAppInboxUpdatedHandler = handler;
   },
   
   setPushOpenedHandler(pushOpenedHandler) {
