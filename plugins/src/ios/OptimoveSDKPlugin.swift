@@ -26,6 +26,7 @@ import NotificationCenter
     }()
     
     override func pluginInitialize() {
-        OptimoveSDKPlugin.optimovePluginInstance = self
+        guard let config = OptimoveSDKPlugin.config else { return }
+        Optimove.initialize(with: config)
     }
 }
