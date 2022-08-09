@@ -2,6 +2,8 @@ import OptimoveSDK
 import NotificationCenter
 
 @objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
+    private static var optimovePluginInstance: OptimoveSDKPlugin!
+    
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
     
@@ -24,8 +26,6 @@ import NotificationCenter
     }()
     
     override func pluginInitialize() {
-        super.pluginInitialize()
-        guard let config = OptimoveSDKPlugin.config else { return }
-        Optimove.initialize(with: config)
+        OptimoveSDKPlugin.optimovePluginInstance = self
     }
 }
