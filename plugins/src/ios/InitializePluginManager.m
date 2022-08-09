@@ -21,7 +21,8 @@
 }
 
 + (void) didFinishLaunching: (NSNotification*) n {
-    [[Optimove_Cordova alloc] pluginInitialize];
+    Optimove_Cordova *plugin = [[Optimove_Cordova alloc] init];
+    [plugin didFinishLaunching:n];
 }
 
 @end

@@ -5,7 +5,10 @@ import NotificationCenter
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
     private static let inAppConsentStrategyKey = "inAppConsentStrategy"
-    private static let enableDeepLinkKy = "enableDeepLink"
+    private static let enableDeepLinkKey = "enableDeepLink"
+    
+    private static var jsCordovaCommand: CDVInvokedUrlCommand?  = nil
+    private static var pendingPush: PushNotification? = nil;
     
     private static var config: OptimoveConfig? = {
         let configPath = Bundle.main.path(forResource: "optimove", ofType: "plist")
@@ -22,9 +25,9 @@ import NotificationCenter
         
         let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
         
-        if configValues[enableDeepLinkKy] == "true" {
+        if configValues[enableDeepLinkKey] == "true" {
             config.enableDeepLinking { deepLink in
-                
+//                sendJsMessageWithType(type: "inAppDeepLinkPressed", data: deepLink)
             }
         }
         
@@ -35,11 +38,39 @@ import NotificationCenter
         return config.build()
     }()
     
-    override func pluginInitialize() {
-        super.pluginInitialize()
+    func initBaseSdk(command: CDVInvokedUrlCommand) {
+        OptimoveSDKPlugin.jsCordovaCommand = command
+        let result = CDVPluginResult(status: .ok)
+        result?.setKeepCallbackAs(true)
+        commandDelegate.send(result, callbackId: OptimoveSDKPlugin.jsCordovaCommand?.callbackId)
+        
+        if let pendingPush = OptimoveSDKPlugin.pendingPush {
+            self.sendJsMessageWithType(type: "pushOpened", data: pushDictFromModel(notification: pendingPush))
+            OptimoveSDKPlugin.pendingPush = nil;
+        }
+    }
+    
+    @discardableResult
+    func sendJsMessageWithType(type: String, data: [String : Any]) -> Bool {
+        guard let jsCordovaCommand = OptimoveSDKPlugin.jsCordovaCommand else { return false }
+        let message: [String : Any] = ["type": type, "data": data]
+        let result = CDVPluginResult(status: .ok, messageAs: message)
+        result?.setKeepCallbackAs(true)
+        commandDelegate.send(result, callbackId: jsCordovaCommand.callbackId)
+        return true
+    }
+    
+    @objc(didFinishLaunching:)
+    func didFinishLaunching(notification: Notification) {
         guard let config = OptimoveSDKPlugin.config else { return }
+        
+//        if let userInfo = notification.userInfo, let userInfoDict = userInfo[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable : Any] {
+//            OptimoveSDKPlugin.pendingPush = PushNotification(userInfo: userInfoDict)
+//        }
+        
         Optimove.initialize(with: config)
     }
+    
     
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
