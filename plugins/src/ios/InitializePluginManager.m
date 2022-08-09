@@ -6,6 +6,7 @@
 //
 
 #import "InitializePluginManager.h"
+#import "OptimoveSDKPlugin-Swift.h"
 
 @implementation InitializePluginManager
 
@@ -20,8 +21,8 @@
 }
 
 + (void) didFinishLaunching: (NSNotification*) n {
-    Optimove_Cordova *plugin = [[Optimove_Cordova alloc] init];
-    [plugin didFinishLaunching:n];
+    [[Optimove_Cordova alloc] didFinishLaunching:n];
 }
 
 @end
+
