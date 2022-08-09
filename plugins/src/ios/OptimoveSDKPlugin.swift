@@ -25,7 +25,7 @@ import NotificationCenter
         return config.build()
     }()
     
-    override func pluginInitialize() {
+    func didFinishLaunching(notification: Notification) {
         guard let config = OptimoveSDKPlugin.config else { return }
         Optimove.initialize(with: config)
     }
