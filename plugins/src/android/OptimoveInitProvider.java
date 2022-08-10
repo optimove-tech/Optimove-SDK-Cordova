@@ -3,10 +3,10 @@ package com.optimove.android.cordova;
 import android.app.Application;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
-import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +14,9 @@ import androidx.annotation.Nullable;
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
 import com.optimove.android.optimobile.DeferredDeepLinkHandlerInterface;
+import com.optimove.android.optimobile.DeferredDeepLinkHelper;
 import com.optimove.android.optimobile.OptimoveInApp;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OptimoveInitProvider extends ContentProvider {
@@ -51,7 +51,7 @@ public class OptimoveInitProvider extends ContentProvider {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
         }
         if (Boolean.parseBoolean(enableDeferredDeepLinking)) {
-            configBuilder = configBuilder.enableDeepLinking(getDDLHandlerInterface());
+            configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
         }
 
         Optimove.initialize(app, configBuilder.build());
@@ -112,8 +112,9 @@ public class OptimoveInitProvider extends ContentProvider {
         return credentials;
     }
 
-    private DeferredDeepLinkHandlerInterface getDDLHandlerInterface() {
-        return (context, resolution, link, data) -> {
+    private DeferredDeepLinkHandlerInterface getDDLHandler() {
+        return (Context context, DeferredDeepLinkHelper.DeepLinkResolution resolution, String link,
+                DeferredDeepLinkHelper.DeepLink data) -> {
             try {
                 JSONObject dataJson = null;
                 if (null != data) {
