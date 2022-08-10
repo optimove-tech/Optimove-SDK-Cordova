@@ -27,7 +27,7 @@ import org.json.JSONObject;
 
 public class OptimoveSDKPlugin extends CordovaPlugin {
 
-    private static final String INIT_BASE_SDK = "initBaseSdk";
+    private static final String SET_HANDLERS_CALLBACK_CONTEXT = "setHandlersCallBackContext";
     private static final String SET_USER_ID = "setUserId";
     private static final String SET_USER_EMAIL = "setUserEmail";
     private static final String REPORT_EVENT = "reportEvent";
@@ -43,6 +43,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_GET_INBOX_SUMMARY = "inAppGetInboxSummary";
     private static final String IN_APP_PRESENT_INBOX_MESSAGE = "inAppPresentInboxMessage";
     private static final String IN_APP_DELETE_INBOX_MESSAGE = "inAppDeleteMessageFromInbox";
+    private static final String CHECK_IF_PENDING_PUSH_EXISTS = "checkIfPendingPushExists";
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -55,8 +56,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
 
-        case INIT_BASE_SDK:
-            initBaseSdk(callbackContext);
+        case SET_HANDLERS_CALLBACK_CONTEXT:
+            setHandlersCallBackContext(callbackContext);
             return true;
 
         case SET_USER_ID:
@@ -119,6 +120,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         case IN_APP_DELETE_INBOX_MESSAGE:
             cordova.getThreadPool()
                     .execute(() -> OptimoveSDKPlugin.this.inAppDeleteMessageFromInbox(args, callbackContext));
+            return true;
+        case CHECK_IF_PENDING_PUSH_EXISTS:
+            this.checkIfPendingPushExists();
             return true;
         }
 
@@ -317,12 +321,14 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
-    private void initBaseSdk(CallbackContext callbackContext) {
+    private void setHandlersCallBackContext(CallbackContext callbackContext) {
         jsCallbackContext = callbackContext;
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
+    }
 
+    private void checkIfPendingPushExists() {
         if (null != pendingPush) {
             OptimoveSDKPlugin.sendMessageToJs("pushOpened",
                     PushReceiver.pushMessageToJsonObject(pendingPush, pendingActionId));

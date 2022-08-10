@@ -2,36 +2,31 @@ const fs = require("fs");
 const path = require("path");
 
 function createJsonWithDefaultValues(
-  optimoveCredentialsParam,
-  optimoveMobileCredentialsParam,
-  inAppConsentStrategyParam,
-  enableDeferredDeepLinkingParam
+  optimoveCredentials,
+  optimoveMobileCredentials,
+  inAppConsentStrategy,
+  enableDeferredDeepLinking
 ) {
-  var optimoveCredentials = "";
-  var optimoveMobileCredentials = "";
-  var inAppConsentStrategy = "";
-  var enableDeferredDeepLinking = "";
-  if (optimoveCredentialsParam) {
-    optimoveCredentials = optimoveCredentialsParam;
-  }
-
-  if (optimoveMobileCredentialsParam) {
-    optimoveMobileCredentials = optimoveMobileCredentialsParam;
-  }
-
-  if (inAppConsentStrategyParam) {
-    inAppConsentStrategy = inAppConsentStrategyParam;
-  }
-
-  if (enableDeferredDeepLinkingParam) {
-    enableDeferredDeepLinking = enableDeferredDeepLinkingParam;
+  if (!isString(inAppConsentStrategy) || isEmpty(inAppConsentStrategy)) {
+    console.error("inAppConsentStrategy is not valid ");
+    return false;
   }
 
   return {
-    OPTIMOVE_CREDENTIALS: optimoveCredentials,
-    OPTIMOVE_MOBILE_CREDENTIALS: optimoveMobileCredentials,
+    OPTIMOVE_CREDENTIALS:
+      !isEmpty(optimoveCredentials) && isString(optimoveCredentials)
+        ? optimoveCredentials
+        : "",
+    OPTIMOVE_MOBILE_CREDENTIALS:
+      !isEmpty(optimoveMobileCredentials) && isString(optimoveMobileCredentials)
+        ? optimoveMobileCredentials
+        : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
-    ENABLE_DEFERRED_DEEP_LINKING: enableDeferredDeepLinking,
+
+    ENABLE_DEFERRED_DEEP_LINKING:
+      !isEmpty(enableDeferredDeepLinking) && isString(enableDeferredDeepLinking)
+        ? enableDeferredDeepLinking
+        : "",
   };
 }
 
@@ -104,7 +99,7 @@ function prepareAndroid(context, optimoveConfig) {
     createJsonWithDefaultValues(
       optimoveConfig.optimoveCredentials,
       optimoveConfig.optimoveMobileCredentials,
-        optimoveConfig.inAppConsentStrategy,
+      optimoveConfig.inAppConsentStrategy,
       optimoveConfig.enableDeferredDeepLinking
     )
   );

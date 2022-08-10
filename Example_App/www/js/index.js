@@ -17,20 +17,22 @@
  * under the License.
  */
 
+
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
 document.addEventListener("deviceready", onDeviceReady, false);
-function initialize() {
-  initBaseSdk();
-}
+
 var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
   document.getElementById("deviceready").classList.add("ready");
   alert("device ready");
-  initialize();
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
+  Optimove.setPushReceivedHandler(pushReceivedHandler);
+  Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
+  Optimove.setPushOpenedHandler(pushOpenedHandler);
 }
 
 function success(successMessage = "Success!") {
@@ -42,12 +44,6 @@ function error(errorMessage) {
   console.error(errorMessage);
 }
 
-
-
-
-document
-  .getElementById("init-base-sdk-button")
-  .addEventListener("click", initBaseSdk);
 
 Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
 
@@ -64,17 +60,6 @@ function pushOpenedHandler(pushMessage) {
 
 function inAppDeepLinkHandler(deepLinkData) {
   //handling inAppDeepLink
-}
-
-Optimove.setHandlers(
-  pushReceivedHandler,
-  pushOpenedHandler,
-  inAppDeepLinkHandler,
-  deepLinkHandler
-);
-
-function initBaseSdk() {
-  Optimove.initBaseSdk().then(success, error);
 }
 
 document
