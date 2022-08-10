@@ -118,7 +118,7 @@ public class OptimoveInitProvider extends ContentProvider {
             try {
                 JSONObject dataJson = null;
                 if (null != data) {
-                    JSONObject deepLinkContent = null;
+                    JSONObject deepLinkContent = new JSONObject();
                     if (data.content != null) {
                         deepLinkContent.put("title", data.content.title);
                         deepLinkContent.put("description", data.content.description);
