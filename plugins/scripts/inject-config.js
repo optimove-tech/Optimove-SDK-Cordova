@@ -111,11 +111,9 @@ function prepareIos(context, OptimoveConfig) {
         return;
     }
 
-    const config = renderTemplate('optimove.plist', {
-        API_KEY: OptimoveConfig.apiKey,
-        SECRET_KEY: OptimoveConfig.secretKey,
-        ENABLE_CRASH: OptimoveConfig.enableCrashReporting,
-        IN_APP_STRATEGY: OptimoveConfig.inAppConsentStrategy
+    const config = renderTemplate('optimove.xml', {
+        OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
+        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
     });
 
     fs.writeFileSync(configDest, config, { encoding: 'utf-8' });
