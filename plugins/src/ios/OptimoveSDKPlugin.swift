@@ -37,102 +37,91 @@ import NotificationCenter
     
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
-        var name = ""
-        var parameters: [String: Any] = [:]
-        
-        if let n = command.arguments[0] as? String {
-            name = n
+        guard let name = command.arguments[0] as? String else {
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "name is not invalid")
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+            return
         }
+        
+        var parameters: [String: Any] = [:]
         
         if let param = command.arguments[1] as? [String: Any] {
             parameters = param
         }
         
         Optimove.shared.reportEvent(name: name, parameters: parameters)
-        
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok)
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+       
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(reportScreenVisit:)
     func reportScreenVisit(command: CDVInvokedUrlCommand) {
         guard let screenTitle = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "screenTitle is invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "screenTitle is not invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
         
         let screenCategory = command.arguments[1] as? String
-       
+        
         Optimove.shared.reportScreenVisit(screenTitle: screenTitle, screenCategory: screenCategory)
         
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok)
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(registerUser:)
     func registerUser(command: CDVInvokedUrlCommand) {
-        guard let sdkId = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is invalid")
+        guard let id = command.arguments.first as? String else {
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is not invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
         
         guard let  email = command.arguments[1] as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is not invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
         
-        Optimove.shared.registerUser(sdkId: sdkId, email: email)
+        Optimove.shared.registerUser(sdkId: id, email: email)
         
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok)
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(setUserId:)
     func setUserId(command: CDVInvokedUrlCommand) {
         guard let id = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is not invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
         
         Optimove.shared.setUserId(id)
         
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok)
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(getVisitorID:)
     func getVisitorID(command: CDVInvokedUrlCommand) {
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok, messageAs: Optimove.getVisitorID())
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+        let pluginResult = CDVPluginResult(status: .ok, messageAs: Optimove.getVisitorID())
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(setUserEmail:)
     func setUserEmail(command: CDVInvokedUrlCommand) {
         guard let email = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is not invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
         
         Optimove.shared.setUserEmail(email: email)
         
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok)
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 }
