@@ -105,17 +105,7 @@ const Optimove = {
     });
   },
 
-  getCurrentUserIdentifier: function () {
-    return new Promise((resolve, reject) => {
-      exec(
-        resolve,
-        reject,
-        "OptimoveSDKPlugin",
-        "getCurrentUserIdentifier",
-        []
-      );
-    });
-  },
+
 
   pushRegister: function () {
     return new Promise((resolve, reject) => {
