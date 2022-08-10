@@ -26,8 +26,6 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
     private static final String KEY_IN_APP_CONSENT_STRATEGY = "inAppConsentStrategy";
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "enableDeferredDeepLinking";
-    private static final String TRUE = "true";
-    private static final String FALSE = "false";
 
     @Override
     public boolean onCreate() {
