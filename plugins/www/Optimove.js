@@ -169,12 +169,7 @@ const Optimove = {
   setOnInboxUpdatedHandler: function (handler) {
     inAppInboxUpdatedHandler = handler;
   },
-  setHandlers(pushReceivedHandler, pushOpenedHandler, inAppDeepLinkHandler) {
-    currentConfig["pushReceivedHandler"] = pushReceivedHandler;
-    currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
-    currentConfig['deepLinkHandler'] = deepLinkHandler;
-  },
+  
   setPushOpenedHandler(pushOpenedHandler) {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
   },
