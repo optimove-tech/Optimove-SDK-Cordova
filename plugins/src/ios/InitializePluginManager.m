@@ -21,7 +21,7 @@
 }
 
 + (void) didFinishLaunching: (NSNotification*) n {
-    [[Optimove_Cordova alloc] didFinishLaunching:n];
+    [Optimove_Cordova didFinishLaunching:n];
 }
 
 @end
