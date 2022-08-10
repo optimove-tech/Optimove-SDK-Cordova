@@ -83,7 +83,41 @@ module.exports = function injectOptimoveConfig(context) {
         console.info('Optimove: Preparing Android platform...');
         prepareAndroid(context, optimoveConfig);
     }
+
+    if (hasPlatform(context, 'ios')) {
+        console.info('Optimove: Preparing iOS platform...');
+        prepareIos(context, optimoveConfig);
+    }
 };
+
+function prepareIos(context, OptimoveConfig) {
+    const iosPath = path.join(context.opts.projectRoot, 'platforms', 'ios');
+    const files = fs.readdirSync(iosPath);
+
+    const xcodeProj = files.find(name => name.indexOf('.xcodeproj') > -1);
+    const targetName = xcodeProj.replace('.xcodeproj', '');
+
+    const configDest = path.join(
+        iosPath,
+        targetName,
+        'Resources',
+        'optimove.plist'
+    );
+
+    if (!fs.existsSync(configDest)) {
+        console.error(
+            'optimove: optimove.plist resource not found, aborting setup'
+        );
+        return;
+    }
+
+    const config = renderTemplate('optimove.xml', {
+        OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
+        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
+    });
+
+    fs.writeFileSync(configDest, config, { encoding: 'utf-8' });
+}
 
 function isValidConfig(config) {
     if (!config || typeof config != 'object') {
