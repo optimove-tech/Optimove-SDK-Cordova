@@ -12,7 +12,7 @@
             </feature>
         </config-file>
         <source-file src="src/ios/OptimoveSDKPlugin.swift" />
-        <<header-file src="src/ios/InitializePluginManager.h" />
+        <header-file src="src/ios/InitializePluginManager.h" />
         <source-file src="src/ios/InitializePluginManager.m" />
         <header-file src="src/ios/Bridging-Header.h" type="BridgingHeader" />
         <podspec>
