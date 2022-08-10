@@ -1,11 +1,14 @@
 var exec = require("cordova/exec");
 
 var inAppInboxUpdatedHandler;
+function noop() {
+  
+}
 
 var currentConfig = {
-  pushReceivedHandler: pushReceivedHandler, //function that receives one argument, a push message object
-  pushOpenedHandler: pushOpenedHandler, //function that receives one argument, a push message object
-  inAppDeepLinkHandler: inAppDeepLinkHandler, //expect to be a function that receives one argument, a deepLink data object
+  pushReceivedHandler: noop, //function that receives one argument, a push message object
+  pushOpenedHandler: noop, //function that receives one argument, a push message object
+  inAppDeepLinkHandler: noop, //expect to be a function that receives one argument, a deepLink data object
 };
 
 document.addEventListener("deviceready", init, false);
@@ -39,8 +42,6 @@ function nativeMessageHandler(message) {
   }
   
   const handlerName = `${message.type}Handler`;
-  alert(handlerName);
-  alert(typeof inAppInboxUpdatedHandler);
   if (
     handlerName === "inAppInboxUpdatedHandler" &&
     typeof inAppInboxUpdatedHandler === "function"
@@ -54,13 +55,6 @@ function nativeMessageHandler(message) {
   } else {
     console.log(`Optimove: No handler defined for '${message.type}' event`);
   }
-}
-
-function success(message = "success!") {
-  console.log(message);
-}
-function error(message = "error") {
-  console.log(message);
 }
 
 const Optimove = {
@@ -190,7 +184,7 @@ const Optimove = {
   
   setPushOpenedHandler(pushOpenedHandler) {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    checkIfPendingPushExists().then(success,error); 
+    checkIfPendingPushExists(); 
   },
 
   setPushReceivedHandler(pushReceivedHandler) {
