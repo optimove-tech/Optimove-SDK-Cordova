@@ -40,7 +40,7 @@
 
 <body>
     <div class="app">
-        <button class="button" id="report-screen-visit-button">Report Screen Visit</button><br>
+        <br><button class="button" id="report-screen-visit-button">Report Screen Visit</button><br>
         <textarea id="text-area-screen-name" cols="30" rows="1" placeholder="screen name"></textarea>
         <textarea id="text-area-screen-category" cols="30" rows="1" placeholder="screen category"></textarea>
         <button class="button" id="report-event-button">Report Event</button><br>
@@ -53,16 +53,22 @@
             <textarea id="text-area-user-email" cols="13" rows="1" placeholder="email"></textarea>
             <button class="button" id="set-user-email-button">Set User Email</button>
         <br>
-        <br>
-        <textarea id="text-area-current-user-identifier" cols="13" rows="1" placeholder="current user identifier"></textarea>
-        <button class="button" id="get-current-user-identifier-button">get current user identifier</button>
-        <br>
-        <button class="button" id="get Inbox Items">Get Inbox Items</button><br>
+        <br><button class="button" id="in-app-get-inbox-items-button">Get Inbox Items</button><br>
         <textarea id="text-area-visitor-id" cols="30" rows="1" placeholder="Visitor id"></textarea>
-        <button class="button" id="get-visitor-id-button">Get Visitor ID</button>
+        <button class="button" id="get-visitor-id-button">Get Visitor ID</button><br>
+        <br><button class="button" id="push-register-button">Register for push</button><br>
+        <br><button class="button" id="in-app-consent-true">inApp consent true</button><br>
+        <br><button class="button" id="in-app-consent-false">inApp consent false</button><br>
+        <br><button class="button" id="in-app-mark-all-inbox-items-as-read-button">inApp mark all inbox items as read </button><br>
+        <br><textarea id="text-area-in-app-inbox-item-id" cols="30" rows="1" placeholder="inApp inbox Item"></textarea><br>
+        <br><button class="button" id="in-app-mark-inbox-item-as-read-button">Mark inbox item as read</button>
+        <button class="button" id="in-app-present-inbox-message-button">present inbox message</button>
+        <button class="button" id="in-app-delete-inbox-message-button">delete inbox message</button><br>
+        <br><textarea id="text-area-in-app-inbox-summary" cols="30" rows="1" placeholder="inApp inbox summary"></textarea><br>
+        <br><button class="button" id="in-app-get-inbox-summary-button">get Inbox summary</button><br>
     </div>
     <script src="cordova.js"></script>
     <script src="js/index.js"></script>
-</body>
+</body >
 
 </html>
