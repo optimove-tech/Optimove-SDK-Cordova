@@ -1,9 +1,7 @@
 var exec = require("cordova/exec");
 
 var inAppInboxUpdatedHandler;
-function noop() {
-  
-}
+function noop() {}
 
 var currentConfig = {
   pushReceivedHandler: noop, //function that receives one argument, a push message object
@@ -13,23 +11,50 @@ var currentConfig = {
 
 document.addEventListener("deviceready", init, false);
 
-function init() {  
-  setHandlersCallBackContext().then(success, (errorMessage) => { console.error(errorMessage); });
+function init() {
+  setHandlersCallBackContext().then(success, (errorMessage) => {
+    console.error(errorMessage);
+  });
 }
 
-
- function setHandlersCallBackContext() {
-   return new Promise((resolve, reject) => {
-     exec(
-       nativeMessageHandler,
-       reject,
-       "OptimoveSDKPlugin",
-       "setHandlersCallBackContext",
-       []
-     );
-   });
+function isString(val) {
+  return typeof val === "string";
 }
- 
+
+function isNonEmptyString(val) {
+  return val && isString(val);
+}
+
+function isFunction(param) {
+  return typeof param === "function";
+}
+function isInAppConsentValid(consent) {
+  validValues = ['explicit-by-user', 'auto-enroll', 'in-app-disabled'];
+  return validValues.includes(consent);
+}
+function isInboxItemValid(inboxItem) {
+  var mandatoryValues = ["id", "title", "subtitle", "sentAt"];
+  for (const element of mandatoryValues) {
+    if (!inboxItem[element]) {
+      return false;
+    }
+  }
+  return true;
+  
+}
+
+function setHandlersCallBackContext() {
+  return new Promise((resolve, reject) => {
+    exec(
+      nativeMessageHandler,
+      reject,
+      "OptimoveSDKPlugin",
+      "setHandlersCallBackContext",
+      []
+    );
+  });
+}
+
 function checkIfPendingPushExists() {
   return new Promise((resolve, reject) => {
     exec(resolve, reject, "OptimoveSDKPlugin", "checkIfPendingPushExists", []);
@@ -40,7 +65,7 @@ function nativeMessageHandler(message) {
   if (!message || typeof message === "string") {
     return;
   }
-  
+
   const handlerName = `${message.type}Handler`;
   if (
     handlerName === "inAppInboxUpdatedHandler" &&
@@ -50,7 +75,7 @@ function nativeMessageHandler(message) {
     return;
   }
 
-  if (typeof currentConfig[handlerName] === "function") {
+  if (isFunction(currentConfig[handlerName])) {
     currentConfig[handlerName](message.data);
   } else {
     console.log(`Optimove: No handler defined for '${message.type}' event`);
@@ -60,12 +85,20 @@ function nativeMessageHandler(message) {
 const Optimove = {
   setUserId: function (userId) {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userId)) {
+        reject("Invalid user id");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "setUserId", [userId]);
     });
   },
 
   setUserEmail: function (userEmail) {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userEmail)) {
+        reject("Invalid user email");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "setUserEmail", [userEmail]);
     });
   },
@@ -73,6 +106,10 @@ const Optimove = {
   /* eventParams is nullable*/
   reportEvent: function (eventName, eventParams) {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(eventName)) {
+        reject("Invalid event name");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "reportEvent", [
         eventName,
         eventParams,
@@ -83,6 +120,10 @@ const Optimove = {
   /* screenCategory parameter is nullable*/
   reportScreenVisit: function (screenName, screenCategory) {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(screenName)) {
+        reject("Invalid screen name");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "reportScreenVisit", [
         screenName,
         screenCategory,
@@ -92,6 +133,19 @@ const Optimove = {
 
   registerUser: function (userId, userEmail) {
     return new Promise((resolve, reject) => {
+      var invalidRegister = false; 
+      if (!isNonEmptyString(userId)) {
+        reject("Invalid user id");
+        invalidRegister = true;
+      }
+      if (!isNonEmptyString(userEmail)) {
+        reject("Invalid user email");
+        invalidRegister = true;
+      }
+      if (invalidRegister) {
+        return;
+      }
+
       exec(resolve, reject, "OptimoveSDKPlugin", "registerUser", [
         userId,
         userEmail,
@@ -105,8 +159,6 @@ const Optimove = {
     });
   },
 
-
-
   pushRegister: function () {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "pushRegister", []);
@@ -115,6 +167,10 @@ const Optimove = {
 
   inAppUpdateConsent: function (consented) {
     return new Promise((resolve, reject) => {
+      if (!isInAppConsentValid(consented)) {
+        reject("Invalid inAppConsentStrategy");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppUpdateConsent", [
         consented,
       ]);
@@ -139,6 +195,10 @@ const Optimove = {
   },
   inAppMarkAsRead: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
+      if (!isInboxItemValid(inAppInboxItem)) {
+        reject("Invalid in app inbox item");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppMarkAsRead", [
         inAppInboxItem,
       ]);
@@ -151,6 +211,10 @@ const Optimove = {
   },
   inAppPresentInboxMessage: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
+        if (!isInboxItemValid(inAppInboxItem)) {
+          reject("Invalid in app inbox item");
+          return;
+        }
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppPresentInboxMessage", [
         inAppInboxItem,
       ]);
@@ -158,6 +222,10 @@ const Optimove = {
   },
   inAppDeleteMessageFromInbox: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
+       if (!isInboxItemValid(inAppInboxItem)) {
+         reject("Invalid in app inbox item");
+         return;
+       }
       exec(
         resolve,
         reject,
@@ -169,20 +237,36 @@ const Optimove = {
   },
 
   setOnInboxUpdatedHandler: function (handler) {
-      inAppInboxUpdatedHandler = handler;
+    if (!isFunction(handler)) {
+      console.error("Invalid handler");
+      return;
+    }
+    inAppInboxUpdatedHandler = handler;
   },
-  
+
   setPushOpenedHandler(pushOpenedHandler) {
+    if (!isFunction(pushOpenedHandler)) {
+      console.error("Invalid handler");
+      return;
+    }
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    checkIfPendingPushExists(); 
+    checkIfPendingPushExists();
   },
 
   setPushReceivedHandler(pushReceivedHandler) {
+    if (!isFunction(pushReceivedHandler)) {
+      console.error("Invalid handler");
+      return;
+    }
     currentConfig["pushReceivedHandler"] = pushReceivedHandler;
   },
 
   setInAppDeepLinkHandler(inAppDeepLinkHandler) {
+    if (!isFunction(inAppDeepLinkHandler)) {
+      console.error("Invalid handler");
+      return;
+    }
     currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
-  }
+  },
 };
 module.exports = Optimove;
