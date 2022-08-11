@@ -36,7 +36,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String GET_VISITOR_ID = "getVisitorId";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
     private static final String PUSH_REGISTER = "pushRegister";
-    private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateConsent";
+    private static final String UPDATE_CONSENT_FOR_USER = "updateConsentForUser";
     private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
     private static final String IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ = "inAppMarkAllInboxItemsAsRead";
     private static final String IN_APP_MARK_AS_READ = "inAppMarkAsRead";
@@ -93,7 +93,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             return true;
 
         case IN_APP_UPDATE_CONSENT:
-            this.inAppUpdateConsent(args, callbackContext);
+            this.updateConsentForUser(args, callbackContext);
             return true;
 
         case IN_APP_GET_INBOX_ITEMS:
@@ -369,7 +369,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     }
 
-    private void inAppUpdateConsent(JSONArray args, CallbackContext callbackContext) {
+    private void updateConsentForUser(JSONArray args, CallbackContext callbackContext) {
         final boolean consented;
 
         try {

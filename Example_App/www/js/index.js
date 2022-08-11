@@ -159,18 +159,18 @@ function pushRegister() {
 }
 document
   .getElementById("in-app-consent-true")
-  .addEventListener("click", inAppUpdateConsentTrue);
+  .addEventListener("click", updateConsentForUserTrue);
 
-function inAppUpdateConsentTrue() {
-  Optimove.inAppUpdateConsent(true).then(success, error);
+function updateConsentForUserTrue() {
+  Optimove.updateConsentForUser(true).then(success, error);
 }
 
 document
   .getElementById("in-app-consent-false")
-  .addEventListener("click", inAppUpdateConsentFalse);
+  .addEventListener("click", updateConsentForUserFalse);
 
-function inAppUpdateConsentFalse() {
-  Optimove.inAppUpdateConsent(false).then(success, error);
+function updateConsentForUserFalse() {
+  Optimove.updateConsentForUser(false).then(success, error);
 }
 
 document

@@ -28,10 +28,7 @@ function isNonEmptyString(val) {
 function isFunction(param) {
   return typeof param === "function";
 }
-function isInAppConsentValid(consent) {
-  validValues = ['explicit-by-user', 'auto-enroll', 'in-app-disabled'];
-  return validValues.includes(consent);
-}
+
 function isInboxItemValid(inboxItem) {
   var mandatoryValues = ["id", "title", "subtitle", "sentAt"];
   for (const element of mandatoryValues) {
@@ -133,7 +130,7 @@ const Optimove = {
 
   registerUser: function (userId, userEmail) {
     return new Promise((resolve, reject) => {
-      var invalidRegister = false; 
+      var invalidRegister = false;
       if (!isNonEmptyString(userId)) {
         reject("Invalid user id");
         invalidRegister = true;
@@ -165,13 +162,13 @@ const Optimove = {
     });
   },
 
-  inAppUpdateConsent: function (consented) {
+  updateConsentForUser: function (consented) {
     return new Promise((resolve, reject) => {
-      if (!isInAppConsentValid(consented)) {
-        reject("Invalid inAppConsentStrategy");
+      if (typeof consented === "boolean") {
+        reject("Invalid Consent value");
         return;
       }
-      exec(resolve, reject, "OptimoveSDKPlugin", "inAppUpdateConsent", [
+      exec(resolve, reject, "OptimoveSDKPlugin", "updateConsentForUser", [
         consented,
       ]);
     });
@@ -211,10 +208,10 @@ const Optimove = {
   },
   inAppPresentInboxMessage: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
-        if (!isInboxItemValid(inAppInboxItem)) {
-          reject("Invalid in app inbox item");
-          return;
-        }
+      if (!isInboxItemValid(inAppInboxItem)) {
+        reject("Invalid in app inbox item");
+        return;
+      }
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppPresentInboxMessage", [
         inAppInboxItem,
       ]);
@@ -222,10 +219,10 @@ const Optimove = {
   },
   inAppDeleteMessageFromInbox: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
-       if (!isInboxItemValid(inAppInboxItem)) {
-         reject("Invalid in app inbox item");
-         return;
-       }
+      if (!isInboxItemValid(inAppInboxItem)) {
+        reject("Invalid in app inbox item");
+        return;
+      }
       exec(
         resolve,
         reject,
