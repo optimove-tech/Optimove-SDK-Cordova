@@ -70,7 +70,6 @@ import NotificationCenter
         Optimove.initialize(with: config)
     }
     
-    
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
         guard let name = command.arguments[0] as? String else {
@@ -161,21 +160,11 @@ import NotificationCenter
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
-    @objc(isAvailable:)
-    func isAvailable(command: CDVInvokedUrlCommand) {
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok, messageAs: OptimoveInApp.getInboxItems())
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
-    }
-    
     @objc(pushRequestDeviceToken:)
     func pushRequestDeviceToken(command: CDVInvokedUrlCommand) {
         Optimove.shared.pushRequestDeviceToken()
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok, messageAs: "")
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+        let pluginResult = CDVPluginResult(status: .ok, messageAs: "")
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
     
     @objc(updateConsent:)
@@ -306,10 +295,8 @@ import NotificationCenter
                 items.append(dict)
             }
             
-            self.commandDelegate.run {
-                let pluginResult = CDVPluginResult(status: .ok, messageAs: items)
-                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-            }
+            let pluginResult = CDVPluginResult(status: .ok, messageAs: items)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         }
     }
 }
