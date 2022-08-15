@@ -34,11 +34,6 @@ const Optimove = {
     getVisitorId: function () {
         return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'getVisitorId', []); });
 
-    },
-
-    getCurrentUserIdentifier: function () {
-        return new Promise((resolve, reject) => { exec(resolve, reject, 'OptimoveSDKPlugin', 'getCurrentUserIdentifier', []); });
-
     }
 }
 module.exports = Optimove;
