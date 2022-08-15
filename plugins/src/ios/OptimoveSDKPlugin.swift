@@ -38,7 +38,7 @@ import NotificationCenter
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
         guard let name = command.arguments[0] as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "name is not invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "name is invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
@@ -58,7 +58,7 @@ import NotificationCenter
     @objc(reportScreenVisit:)
     func reportScreenVisit(command: CDVInvokedUrlCommand) {
         guard let screenTitle = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "screenTitle is not invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "screenTitle is invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
@@ -74,13 +74,13 @@ import NotificationCenter
     @objc(registerUser:)
     func registerUser(command: CDVInvokedUrlCommand) {
         guard let id = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is not invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
         
         guard let  email = command.arguments[1] as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is not invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
@@ -94,7 +94,7 @@ import NotificationCenter
     @objc(setUserId:)
     func setUserId(command: CDVInvokedUrlCommand) {
         guard let id = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is not invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "id is invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
@@ -114,7 +114,7 @@ import NotificationCenter
     @objc(setUserEmail:)
     func setUserEmail(command: CDVInvokedUrlCommand) {
         guard let email = command.arguments.first as? String else {
-            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is not invalid")
+            let pluginResult = CDVPluginResult(status: .error, messageAs: "email is invalid")
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             return
         }
