@@ -151,16 +151,9 @@ function getVisitorId() {
     document.getElementById("text-area-visitor-id").value = visitorId;
   }, error);
 }
-document
-  .getElementById("get-current-user-identifier-button")
-  .addEventListener("click", getCurrentUserIdentifier);
 
-function getCurrentUserIdentifier() {
-  Optimove.getCurrentUserIdentifier().then((currentUserIdentifier) => {
-    document.getElementById("text-area-current-user-identifier").value =
-      currentUserIdentifier;
-  }, error);
-}
+
+
 
 document
   .getElementById("push-register-button")
@@ -252,16 +245,6 @@ document
 function getVisitorId() {
   Optimove.getVisitorId().then((visitorId) => {
     document.getElementById("text-area-visitor-id").value = visitorId;
-  }, error);
-}
-document
-  .getElementById("get-current-user-identifier-button")
-  .addEventListener("click", getCurrentUserIdentifier);
-
-function getCurrentUserIdentifier() {
-  Optimove.getCurrentUserIdentifier().then((visitorId) => {
-    document.getElementById("text-area-current-user-identifier").value =
-      visitorId;
   }, error);
 }
 
