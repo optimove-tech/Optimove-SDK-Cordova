@@ -33,6 +33,7 @@ function onDeviceReady() {
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
   Optimove.setPushOpenedHandler(pushOpenedHandler);
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
 }
 
 function success(successMessage = "Success!") {
@@ -45,7 +46,6 @@ function error(errorMessage) {
 }
 
 
-Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
 
 function deepLinkHandler(deepLink) {
   //handling of deep linking
