@@ -259,7 +259,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     private void reportEvent(JSONArray args, CallbackContext callbackContext) {
         try {
-            reportEvent(args, callbackContext);
             String eventName = args.getString(0);
             JSONObject params = args.optJSONObject(1);
             if (params == null) {
@@ -435,12 +434,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppMarkAllInboxItemsAsRead(CallbackContext callbackContext) {
-        try {
-            OptimoveInApp.getInstance().markAllInboxItemsAsRead();
+
+        boolean result = OptimoveInApp.getInstance().markAllInboxItemsAsRead();
+        if (result) {
             callbackContext.success();
-        } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-            e.printStackTrace();
+        } else {
+            callbackContext.error("Failed to mark all messages as read");
         }
     }
 
