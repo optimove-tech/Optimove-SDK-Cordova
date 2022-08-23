@@ -133,7 +133,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         JSONObject inboxItem = args.optJSONObject(0);
         int messageId = -1;
         if (inboxItem != null) {
-            messageId = args.optInt(0);
+            messageId = inboxItem.optInt("id");
         }
         if (inboxItem == null || messageId == -1) {
             callbackContext.error("Message not found or not available");
@@ -161,7 +161,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         JSONObject inboxItem = args.optJSONObject(0);
         int messageId = -1;
         if (inboxItem != null) {
-            messageId = args.optInt(0);
+            messageId = inboxItem.optInt("id");
         }
         if (inboxItem == null || messageId == -1) {
             callbackContext.error("Message not found or not available");
@@ -210,7 +210,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             JSONObject inboxItem = args.optJSONObject(0);
             int messageId = -1;
             if (inboxItem != null) {
-                messageId = args.optInt(0);
+                messageId = inboxItem.optInt("id");
             }
             if (inboxItem == null || messageId == -1) {
                 callbackContext.error("Message not found or not available");
