@@ -3,11 +3,6 @@ const fs = require('fs');
 const path = require('path');
 
 function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy) {
-    if (!isString(inAppConsentStrategy) || isEmpty(inAppConsentStrategy)) { 
-        console.error('inAppConsentStrategy is not valid ');
-        return false;
-    }
-
       return {
         OPTIMOVE_CREDENTIALS:
           !isEmpty(optimoveCredentials) &&
