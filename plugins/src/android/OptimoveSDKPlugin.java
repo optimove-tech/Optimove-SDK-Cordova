@@ -122,7 +122,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                     .execute(() -> OptimoveSDKPlugin.this.inAppDeleteMessageFromInbox(args, callbackContext));
             return true;
         case CHECK_IF_PENDING_PUSH_EXISTS:
-            this.checkIfPendingPushExists();
+            this.checkIfPendingPushExists(callbackContext);
             return true;
         }
 
@@ -283,7 +283,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         callbackContext.sendPluginResult(result);
     }
 
-    private void checkIfPendingPushExists() {
+    private void checkIfPendingPushExists(CallbackContext callbackContext) {
+        if (jsCallbackContext == null) {
+            jsCallbackContext = callbackContext;
+        }
         if (null != pendingPush) {
             OptimoveSDKPlugin.sendMessageToJs("pushOpened",
                     PushReceiver.pushMessageToJsonObject(pendingPush, pendingActionId));
