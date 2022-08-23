@@ -87,8 +87,7 @@ public class OptimoveInitProvider extends ContentProvider {
         return 0;
     }
 
-    @Nullable
-    private String getStringConfigValue(String packageName, Resources resources, String key) {
+    private @Nullable String getStringConfigValue(String packageName, Resources resources, String key) {
         int resId = resources.getIdentifier(key, "string", packageName);
         if (0 == resId) {
             return null;
