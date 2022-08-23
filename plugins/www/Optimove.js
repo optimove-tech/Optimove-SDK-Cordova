@@ -140,7 +140,7 @@ const Optimove = {
   inAppMarkAsRead: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppMarkAsRead", [
-        inAppInboxItem,
+        inAppInboxItem.id,
       ]);
     });
   },
@@ -152,7 +152,7 @@ const Optimove = {
   inAppPresentInboxMessage: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppPresentInboxMessage", [
-        inAppInboxItem,
+        inAppInboxItem.id,
       ]);
     });
   },
@@ -163,7 +163,7 @@ const Optimove = {
         reject,
         "OptimoveSDKPlugin",
         "inAppDeleteMessageFromInbox",
-        [inAppInboxItem]
+        [inAppInboxItem.id]
       );
     });
   },

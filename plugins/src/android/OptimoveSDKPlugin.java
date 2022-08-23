@@ -130,60 +130,32 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppDeleteMessageFromInbox(JSONArray args, CallbackContext callbackContext) {
-        JSONObject inboxItem = args.optJSONObject(0);
-        int messageId = -1;
-        if (inboxItem != null) {
-            messageId = inboxItem.optInt("id");
-        }
-        if (inboxItem == null || messageId == -1) {
+        int messageId = args.optInt(0, -1);
+        InAppInboxItem item = getInboxItemById(messageId);
+        if (item == null || messageId == -1) {
             callbackContext.error("Message not found or not available");
-            return;
         }
-
-        List<InAppInboxItem> items = OptimoveInApp.getInstance().getInboxItems();
-        for (InAppInboxItem item : items) {
-            if (item.getId() == messageId) {
-                boolean result = OptimoveInApp.getInstance().deleteMessageFromInbox(item);
-
-                if (result) {
-                    callbackContext.success();
-                    return;
-                }
-
-                break;
-            }
+        boolean result = OptimoveInApp.getInstance().deleteMessageFromInbox(item);
+        if (result) {
+            callbackContext.success();
+        } else {
+            callbackContext.error("Failed to delete inbox item");
         }
-
-        callbackContext.error("Message not found or not available");
     }
 
     private void inAppPresentInboxMessage(JSONArray args, CallbackContext callbackContext) {
-        JSONObject inboxItem = args.optJSONObject(0);
-        int messageId = -1;
-        if (inboxItem != null) {
-            messageId = inboxItem.optInt("id");
-        }
-        if (inboxItem == null || messageId == -1) {
+        int messageId = args.optInt(0, -1);
+        InAppInboxItem item = getInboxItemById(messageId);
+        if (messageId == -1 || item == null) {
             callbackContext.error("Message not found or not available");
             return;
         }
-
-        List<InAppInboxItem> items = OptimoveInApp.getInstance().getInboxItems();
-        for (InAppInboxItem item : items) {
-            if (item.getId() == messageId) {
-                OptimoveInApp.InboxMessagePresentationResult result = OptimoveInApp.getInstance()
-                        .presentInboxMessage(item);
-
-                if (result == OptimoveInApp.InboxMessagePresentationResult.PRESENTED) {
-                    callbackContext.success();
-                    return;
-                } else {
-                    break;
-                }
-            }
+        OptimoveInApp.InboxMessagePresentationResult result = OptimoveInApp.getInstance().presentInboxMessage(item);
+        if (result == OptimoveInApp.InboxMessagePresentationResult.PRESENTED) {
+            callbackContext.success();
+        } else {
+            callbackContext.error("Failed to present message");
         }
-
-        callbackContext.error("Message not found or not available");
     }
 
     private void inAppGetInboxSummary(CallbackContext callbackContext) {
@@ -206,33 +178,17 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppMarkAsRead(JSONArray args, CallbackContext callbackContext) {
-        try {
-            JSONObject inboxItem = args.optJSONObject(0);
-            int messageId = -1;
-            if (inboxItem != null) {
-                messageId = inboxItem.optInt("id");
-            }
-            if (inboxItem == null || messageId == -1) {
-                callbackContext.error("Message not found or not available");
-                return;
-            }
-            List<InAppInboxItem> itemsList = OptimoveInApp.getInstance().getInboxItems();
-            for (InAppInboxItem item : itemsList) {
-                if (item.getId() == messageId) {
-                    boolean result = OptimoveInApp.getInstance().markAsRead(item);
-                    if (result) {
-                        callbackContext.success();
-                    } else {
-                        callbackContext.error("Failed to mark message as read");
-                    }
-                    return;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            callbackContext.error(e.getMessage());
+        int messageId = args.optInt(0, -1);
+        InAppInboxItem item = getInboxItemById(messageId);
+        if (messageId == -1 || item == null) {
+            callbackContext.error("Message not found or not available");
         }
-        callbackContext.error("Message not found or not available");
+        boolean result = OptimoveInApp.getInstance().markAsRead(item);
+        if (result) {
+            callbackContext.success();
+        } else {
+            callbackContext.error("Failed to mark message as read");
+        }
     }
 
     private void setUserId(JSONArray args, CallbackContext callbackContext) {
@@ -428,19 +384,29 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         } catch (JSONException e) {
             e.printStackTrace();
             callbackContext.error(e.getMessage());
+            return;
         }
 
         callbackContext.success(results);
     }
 
     private void inAppMarkAllInboxItemsAsRead(CallbackContext callbackContext) {
-
         boolean result = OptimoveInApp.getInstance().markAllInboxItemsAsRead();
         if (result) {
             callbackContext.success();
         } else {
             callbackContext.error("Failed to mark all messages as read");
         }
+    }
+
+    private InAppInboxItem getInboxItemById(int id) {
+        List<InAppInboxItem> inboxItems = OptimoveInApp.getInstance().getInboxItems();
+        for (InAppInboxItem item : inboxItems) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
     }
 
     static class InAppDeepLinkHandler implements InAppDeepLinkHandlerInterface {
