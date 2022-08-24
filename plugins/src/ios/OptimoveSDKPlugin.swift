@@ -20,7 +20,11 @@ import NotificationCenter
             return nil
         }
         
-        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
+        let optimoveCredentials = configValues[optimoveCredentialsKey]?.isEmpty == true ? nil : configValues[optimoveCredentialsKey]
+        
+        let optimobileCredentials = configValues[optimoveMobileCredentialsKey]?.isEmpty == true ? nil : configValues[optimoveMobileCredentialsKey]
+        
+        let config = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
         
         return config.build()
     }()
@@ -32,6 +36,7 @@ import NotificationCenter
     @objc(didFinishLaunching:)
     static func didFinishLaunching(notification: Notification) {
         guard let config = OptimoveSDKPlugin.config else { return }
+        
         Optimove.initialize(with: config)
     }
     
