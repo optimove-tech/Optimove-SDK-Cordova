@@ -17,7 +17,6 @@
  * under the License.
  */
 
-
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
@@ -43,7 +42,6 @@ function success(successMessage = "Success!") {
 function error(errorMessage) {
   console.error(errorMessage);
 }
-
 
 function pushReceivedHandler(pushMessage) {
   //handling push received
@@ -147,9 +145,6 @@ function getVisitorId() {
   }, error);
 }
 
-
-
-
 document
   .getElementById("push-register-button")
   .addEventListener("click", pushRegister);
@@ -183,10 +178,10 @@ function inAppGetInboxItems() {
   }, error);
 }
 
-function flattenInboxItemObject(inboxItemsArray) { 
+function flattenInboxItemObject(inboxItemsArray) {
   flattendItemsList = [];
   for (item of inboxItemsArray) {
-    flattendItemsList.push({id: item.id, isRead: item.isRead})
+    flattendItemsList.push({ id: item.id, isRead: item.isRead });
   }
   return flattendItemsList;
 }
@@ -203,11 +198,17 @@ document
   .getElementById("in-app-mark-inbox-item-as-read-button")
   .addEventListener("click", inAppMarkAsRead);
 
+function getInboxItemForTesting() {
+  var id = document.getElementById("text-area-in-app-inbox-item").value;
+  var item = {
+    id: parseInt(id),
+  };
+
+  return item;
+}
+
 function inAppMarkAsRead() {
-  Optimove.inAppMarkAsRead(
-    document.getElementById("text-area-in-app-inbox-item").value
-  ).then(success, error);
-  document.getElementById("text-area-in-app-inbox-item").value = "";
+  Optimove.inAppMarkAsRead(getInboxItemForTesting()).then(success, error);
 }
 
 document
@@ -216,8 +217,7 @@ document
 
 function inAppGetInboxSummary() {
   Optimove.inAppGetInboxSummary().then((inboxSummary) => {
-     alert(
-      JSON.stringify(inboxSummary));
+    alert(JSON.stringify(inboxSummary));
   }, error);
 }
 
@@ -226,9 +226,10 @@ document
   .addEventListener("click", inAppPresentInboxMessage);
 
 function inAppPresentInboxMessage() {
-  Optimove.inAppPresentInboxMessage(
-    document.getElementById("text-area-in-app-inbox-item").value
-  ).then(success, error);
+  Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
+    success,
+    error
+  );
 }
 
 document
@@ -236,9 +237,10 @@ document
   .addEventListener("click", inAppDeleteMessageFromInbox);
 
 function inAppDeleteMessageFromInbox() {
-  Optimove.inAppDeleteMessageFromInbox(
-    document.getElementById("text-area-in-app-inbox-item").value
-  ).then(success, error);
+  Optimove.inAppDeleteMessageFromInbox(getInboxItemForTesting()).then(
+    success,
+    error
+  );
 }
 document
   .getElementById("get-visitor-id-button")
