@@ -198,9 +198,9 @@ document
 
 function inAppMarkAsRead() {
   Optimove.inAppMarkAsRead(
-    document.getElementById("text-area-in-app-inbox-item-id").value
+    document.getElementById("text-area-in-app-inbox-item").value
   ).then(success, error);
-  document.getElementById("text-area-in-app-inbox-item-id").value = "";
+  document.getElementById("text-area-in-app-inbox-item").value = "";
 }
 
 document
@@ -220,7 +220,7 @@ document
 
 function inAppPresentInboxMessage() {
   Optimove.inAppPresentInboxMessage(
-    document.getElementById("text-area-in-app-inbox-item-id").value
+    document.getElementById("text-area-in-app-inbox-item").value
   ).then(success, error);
 }
 
@@ -230,7 +230,7 @@ document
 
 function inAppDeleteMessageFromInbox() {
   Optimove.inAppDeleteMessageFromInbox(
-    document.getElementById("text-area-in-app-inbox-item-id").value
+    document.getElementById("text-area-in-app-inbox-item").value
   ).then(success, error);
 }
 document
