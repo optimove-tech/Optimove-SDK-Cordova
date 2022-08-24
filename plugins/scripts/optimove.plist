@@ -6,5 +6,9 @@
 	<string>{{OPTIMOVE_CREDENTIALS}}</string>
 	<key>optimoveMobileCredentials</key>
 	<string>{{OPTIMOVE_MOBILE_CREDENTIALS}}</string>
+	<key>inAppConsentStrategy</key>
+	<string>{{IN_APP_CONSENT_STRATEGY}}</string>
+	<key>enableDeepLink</key>
+	<string>{{ENABLE_DEEP_LINK}}</string>
 </dict>
 </plist>
