@@ -26,8 +26,6 @@ var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
-  document.getElementById("deviceready").classList.add("ready");
-  alert("device ready");
   Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
