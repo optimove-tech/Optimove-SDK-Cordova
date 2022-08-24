@@ -179,9 +179,16 @@ document
 
 function inAppGetInboxItems() {
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
-    items = inboxItemsArray;
-    alert(items);
+    alert(JSON.stringify(flattenInboxItemObject(inboxItemsArray)));
   }, error);
+}
+
+function flattenInboxItemObject(inboxItemsArray) { 
+  flattendItemsList = [];
+  for (item of inboxItemsArray) {
+    flattendItemsList.push({id: item.id, isRead: item.isRead})
+  }
+  return flattendItemsList;
 }
 
 document
@@ -209,8 +216,8 @@ document
 
 function inAppGetInboxSummary() {
   Optimove.inAppGetInboxSummary().then((inboxSummary) => {
-    document.getElementById("text-area-in-app-inbox-summary").value =
-      inboxSummary;
+     alert(
+      JSON.stringify(inboxSummary));
   }, error);
 }
 
