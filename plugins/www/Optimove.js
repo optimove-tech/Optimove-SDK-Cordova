@@ -165,7 +165,7 @@ const Optimove = {
   },
 
   setOnInboxUpdatedHandler: function (handler) {
-      inAppInboxUpdatedHandler = handler;
+      currentConfig["inAppInboxUpdatedHandler"] = handler;
   },
   
   setPushOpenedHandler(pushOpenedHandler) {
