@@ -1,6 +1,5 @@
 var exec = require("cordova/exec");
 
-var inAppInboxUpdatedHandler;
 function noop() {
   
 }
@@ -9,6 +8,7 @@ var currentConfig = {
   pushReceivedHandler: noop, //function that receives one argument, a push message object
   pushOpenedHandler: noop, //function that receives one argument, a push message object
   inAppDeepLinkHandler: noop, //expect to be a function that receives one argument, a deepLink data object
+  inAppInboxUpdatedHandler : noop
 };
 
 document.addEventListener("deviceready", init, false);
@@ -46,7 +46,7 @@ function nativeMessageHandler(message) {
     handlerName === "inAppInboxUpdatedHandler" &&
     typeof inAppInboxUpdatedHandler === "function"
   ) {
-    inAppInboxUpdatedHandler();
+    currentConfig[handlerName]();
     return;
   }
 
