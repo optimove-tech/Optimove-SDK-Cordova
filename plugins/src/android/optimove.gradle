@@ -49,8 +49,14 @@ ext.postBuildExtras = {
             apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
         }
     }
+
+    def firebaseBomVersion = '28.2.0'
+    
     dependencies {
-        implementation platform('com.google.firebase:firebase-bom:28.2.0')
+        if (project.hasProperty('OptimoveFirebaseBoMVersion')){
+            firebaseBomVersion = project.ext.get("OptimoveFirebaseBoMVersion")
+        }
+        implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
         implementation 'com.google.firebase:firebase-messaging'
     }
 }
