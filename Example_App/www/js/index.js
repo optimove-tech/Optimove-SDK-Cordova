@@ -233,7 +233,7 @@ function inAppPresentInboxMessage() {
 
 document
   .getElementById("in-app-delete-inbox-message-button")
-  .addEventListener("click", inAppPresentInboxMessage);
+  .addEventListener("click", inAppDeleteMessageFromInbox);
 
 function inAppDeleteMessageFromInbox() {
   Optimove.inAppDeleteMessageFromInbox(
