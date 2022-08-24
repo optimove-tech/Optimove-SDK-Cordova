@@ -134,6 +134,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         InAppInboxItem item = getInboxItemById(messageId);
         if (item == null) {
             callbackContext.error("Message not found or not available");
+            return;
         }
         boolean result = OptimoveInApp.getInstance().deleteMessageFromInbox(item);
         if (result) {
@@ -182,6 +183,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         InAppInboxItem item = getInboxItemById(messageId);
         if (item == null) {
             callbackContext.error("Message not found or not available");
+            return;
         }
         boolean result = OptimoveInApp.getInstance().markAsRead(item);
         if (result) {
