@@ -251,10 +251,5 @@ function getVisitorId() {
 }
 
 function onInboxUpdated() {
-  Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
-    var inboxItem;
-    alert(inboxItemsArray);
-    inboxItem = inboxItemsArray[0];
-    Optimove.inAppPresentInboxMessage(inboxItem);
-  }, error);
+ 
 }
