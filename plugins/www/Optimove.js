@@ -1,14 +1,10 @@
 var exec = require("cordova/exec");
 
-function noop() {
-  
-}
-
 var currentConfig = {
-  pushReceivedHandler: noop, //function that receives one argument, a push message object
-  pushOpenedHandler: noop, //function that receives one argument, a push message object
-  inAppDeepLinkHandler: noop, //expect to be a function that receives one argument, a deepLink data object
-  inAppInboxUpdatedHandler : noop
+  pushReceivedHandler: null, //function that receives one argument, a push message object
+  pushOpenedHandler: null, //function that receives one argument, a push message object
+  inAppDeepLinkHandler: null, //expect to be a function that receives one argument, a deepLink data object
+  inAppInboxUpdatedHandler : null
 };
 
 document.addEventListener("deviceready", init, false);
