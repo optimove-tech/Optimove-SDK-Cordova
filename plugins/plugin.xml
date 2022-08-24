@@ -2,7 +2,7 @@
 <plugin id="optimove-cordova-plugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>OptimoveSDKPlugin</name>
     <js-module name="Optimove" src="www/Optimove.js">
-        <clobbers target="Optimove" />
+        <clobbers target="window.Optimove" />
     </js-module>
      <hook type="before_prepare" src="scripts/inject-config.js" />
     <platform name="ios">
@@ -12,13 +12,16 @@
             </feature>
         </config-file>
         <source-file src="src/ios/OptimoveSDKPlugin.swift" />
+        <header-file src="src/ios/InitializePluginManager.h" />
+        <source-file src="src/ios/InitializePluginManager.m" />
+        <header-file src="src/ios/Bridging-Header.h" type="BridgingHeader" />
         <podspec>
             <config>
                 <source url="https://github.com/CocoaPods/Specs.git"/>
             </config>
             <pods>
-                <pod name="OptimoveCore" spec="5.0.1" />
-                <pod name="OptimoveSDK" spec="5.0.1" />
+                <pod name="OptimoveCore" spec="5.1.0" />
+                <pod name="OptimoveSDK" spec="5.1.0" />
             </pods>
         </podspec>
     </platform>
@@ -28,8 +31,10 @@
                 <param name="android-package" value="com.optimove.android.cordova.OptimoveSDKPlugin" />
                 <param name="onload" value="true" />
             </feature>
+            
         </config-file>
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
+               
             <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />
             
         </config-file>
@@ -45,6 +50,7 @@
         </edit-config>
         <source-file src="src/android/OptimoveSDKPlugin.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/OptimoveInitProvider.java" target-dir="src/com/optimove/android/cordova" />
+        <source-file src="src/android/JsonUtils.java" target-dir="src/com/optimove/android/cordova" />
         <framework src="src/android/optimove.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>

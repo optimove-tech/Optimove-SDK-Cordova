@@ -6,11 +6,11 @@
 //
 
 #import "InitializePluginManager.h"
-#import "Example_App-Swift.h"
+#import "OptimoveSDKPlugin-Swift.h"
 
 @implementation InitializePluginManager
 
-+ (void)load {
++ (void) load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [NSNotificationCenter.defaultCenter addObserver: self
@@ -21,7 +21,8 @@
 }
 
 + (void) didFinishLaunching: (NSNotification*) n {
-    [[Optimove_Cordova alloc] pluginInitialize];
+    [Optimove_Cordova didFinishLaunching:n];
 }
 
 @end
+
