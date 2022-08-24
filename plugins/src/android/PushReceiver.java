@@ -12,6 +12,7 @@ import com.optimove.android.optimobile.PushActionHandlerInterface;
 import com.optimove.android.optimobile.PushBroadcastReceiver;
 import com.optimove.android.optimobile.PushMessage;
 
+import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,7 +75,9 @@ public class PushReceiver extends PushBroadcastReceiver {
             cls = (Class<? extends Activity>) Class.forName(component.getClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            OptimoveSDKPlugin.jsCallbackContext.error(e.getMessage());
+            PluginResult result = new PluginResult(PluginResult.Status.ERROR, e.getMessage());
+            result.setKeepCallback(true);
+            OptimoveSDKPlugin.jsCallbackContext.sendPluginResult(result);
         }
 
         // Ensure we're trying to launch an Activity
