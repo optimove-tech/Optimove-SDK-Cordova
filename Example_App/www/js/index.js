@@ -26,7 +26,7 @@ var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
-  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHanler);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
   Optimove.setPushOpenedHandler(pushOpenedHandler);
@@ -41,19 +41,19 @@ function error(errorMessage) {
 }
 
 function pushReceivedHandler(pushMessage) {
-  console.log(JSON.stringify(pushMessage));
+  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
-  console.log(JSON.stringify(pushMessage));
+  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {
-  console.log(JSON.stringify(deepLinkData));
+  console.log("pushOpenedHandler: " + JSON.stringify(deepLinkData));
 }
 
-function onInboxUpdated() {
-  console.log("inbox updated");
+function onInboxUpdatedHanler() {
+  console.log("onInboxUpdatedHanler");
 }
 
 document
