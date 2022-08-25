@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy) {
+function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy, enableDeferredDeepLinking) {
       return {
         OPTIMOVE_CREDENTIALS:
           !isEmpty(optimoveCredentials) &&
