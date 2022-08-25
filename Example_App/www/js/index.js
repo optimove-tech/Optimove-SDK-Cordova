@@ -17,7 +17,6 @@
  * under the License.
  */
 
-
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
@@ -27,9 +26,7 @@ var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
-  document.getElementById("deviceready").classList.add("ready");
-  alert("device ready");
-  Optimove.setOnInboxUpdatedHandler(onInboxUpdated);
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHanler);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
   Optimove.setPushOpenedHandler(pushOpenedHandler);
@@ -37,7 +34,6 @@ function onDeviceReady() {
 }
 
 function success(successMessage = "Success!") {
-  console.log(successMessage);
   alert(successMessage);
 }
 
@@ -51,15 +47,19 @@ function deepLinkHandler(deepLink) {
   //handling of deep linking
  }
 function pushReceivedHandler(pushMessage) {
-  //handling push received
+  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
-  //handling push message
+  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {
-  //handling inAppDeepLink
+  console.log("pushOpenedHandler: " + JSON.stringify(deepLinkData));
+}
+
+function onInboxUpdatedHanler() {
+  console.log("onInboxUpdatedHanler");
 }
 
 document
@@ -152,9 +152,6 @@ function getVisitorId() {
   }, error);
 }
 
-
-
-
 document
   .getElementById("push-register-button")
   .addEventListener("click", pushRegister);
@@ -184,9 +181,16 @@ document
 
 function inAppGetInboxItems() {
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
-    items = inboxItemsArray;
-    alert(items);
+    alert(JSON.stringify(flattenInboxItemObject(inboxItemsArray)));
   }, error);
+}
+
+function flattenInboxItemObject(inboxItemsArray) {
+  flattendItemsList = [];
+  for (item of inboxItemsArray) {
+    flattendItemsList.push({ id: item.id, isRead: item.isRead });
+  }
+  return flattendItemsList;
 }
 
 document
@@ -201,11 +205,17 @@ document
   .getElementById("in-app-mark-inbox-item-as-read-button")
   .addEventListener("click", inAppMarkAsRead);
 
+function getInboxItemForTesting() {
+  var id = document.getElementById("text-area-in-app-inbox-item").value;
+  var item = {
+    id: parseInt(id),
+  };
+
+  return item;
+}
+
 function inAppMarkAsRead() {
-  Optimove.inAppMarkAsRead(
-    document.getElementById("text-area-in-app-inbox-item-id").value
-  ).then(success, error);
-  document.getElementById("text-area-in-app-inbox-item-id").value = "";
+  Optimove.inAppMarkAsRead(getInboxItemForTesting()).then(success, error);
 }
 
 document
@@ -214,8 +224,7 @@ document
 
 function inAppGetInboxSummary() {
   Optimove.inAppGetInboxSummary().then((inboxSummary) => {
-    document.getElementById("text-area-in-app-inbox-summary").value =
-      inboxSummary;
+    alert(JSON.stringify(inboxSummary));
   }, error);
 }
 
@@ -224,19 +233,21 @@ document
   .addEventListener("click", inAppPresentInboxMessage);
 
 function inAppPresentInboxMessage() {
-  Optimove.inAppPresentInboxMessage(
-    document.getElementById("text-area-in-app-inbox-item-id").value
-  ).then(success, error);
+  Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
+    success,
+    error
+  );
 }
 
 document
   .getElementById("in-app-delete-inbox-message-button")
-  .addEventListener("click", inAppPresentInboxMessage);
+  .addEventListener("click", inAppDeleteMessageFromInbox);
 
 function inAppDeleteMessageFromInbox() {
-  Optimove.inAppDeleteMessageFromInbox(
-    document.getElementById("text-area-in-app-inbox-item-id").value
-  ).then(success, error);
+  Optimove.inAppDeleteMessageFromInbox(getInboxItemForTesting()).then(
+    success,
+    error
+  );
 }
 document
   .getElementById("get-visitor-id-button")
@@ -245,14 +256,5 @@ document
 function getVisitorId() {
   Optimove.getVisitorId().then((visitorId) => {
     document.getElementById("text-area-visitor-id").value = visitorId;
-  }, error);
-}
-
-function onInboxUpdated() {
-  Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
-    var inboxItem;
-    alert(inboxItemsArray);
-    inboxItem = inboxItemsArray[0];
-    Optimove.inAppPresentInboxMessage(inboxItem);
   }, error);
 }

@@ -34,13 +34,15 @@ public class OptimoveInitProvider extends ContentProvider {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
-        String optimoveCredentials = getStringConfigValue(packageName, resources,KEY_OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-        optimoveCredentials = handleNullValues(optimoveCredentials);
-        optimoveMobileCredentials = handleNullValues(optimoveMobileCredentials);
+        String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,
+                KEY_OPTIMOVE_MOBILE_CREDENTIALS);
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
-        assert (optimoveCredentials != null || optimoveMobileCredentials != null);
+        if (optimoveCredentials == null && optimoveMobileCredentials == null) {
+            throw new IllegalArgumentException(
+                    "error: Invalid credentials! \n please provide at least one set of credentials");
+        }
 
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
                 optimoveMobileCredentials);
@@ -95,18 +97,13 @@ public class OptimoveInitProvider extends ContentProvider {
         return 0;
     }
 
-    private String getStringConfigValue(String packageName, Resources resources, String key) {
+    private @Nullable String getStringConfigValue(String packageName, Resources resources, String key) {
         int resId = resources.getIdentifier(key, "string", packageName);
         if (0 == resId) {
             return null;
         }
-
-        return resources.getString(resId);
-    }
-
-    @Nullable
-    private String handleNullValues(String credentials) {
-        return TextUtils.isEmpty(credentials) ? null : credentials;
+        String value = resources.getString(resId);
+        return TextUtils.isEmpty(value) ? null : value;
     }
 
     private DeferredDeepLinkHandlerInterface getDDLHandler() {

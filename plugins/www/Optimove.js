@@ -1,38 +1,65 @@
 var exec = require("cordova/exec");
 
-var inAppInboxUpdatedHandler;
-function noop() {
-  
-}
-
 var currentConfig = {
-  pushReceivedHandler: noop, //function that receives one argument, a push message object
-  pushOpenedHandler: noop, //function that receives one argument, a push message object
-  inAppDeepLinkHandler: noop, //expect to be a function that receives one argument, a deepLink data object
+  pushReceivedHandler: null, //function that receives one argument, a push message object
+  pushOpenedHandler: null, //function that receives one argument, a push message object
+  inAppDeepLinkHandler: null, //expect to be a function that receives one argument, a deepLink data object
+  inAppInboxUpdatedHandler: null,
 };
 
 document.addEventListener("deviceready", init, false);
+document.addEventListener("resume", resume, false);
+document.addEventListener("pause", pause, false);
 
-function init() {  
-  setHandlersCallBackContext().then(success, (errorMessage) => { console.error(errorMessage); });
+function init() {
+  setContext();
 }
 
-
- function setHandlersCallBackContext() {
-   return new Promise((resolve, reject) => {
-     exec(
-       nativeMessageHandler,
-       reject,
-       "OptimoveSDKPlugin",
-       "setHandlersCallBackContext",
-       []
-     );
-   });
+function resume() {
+  setContext();
 }
- 
+
+function pause() {
+  clearContext();
+}
+
+function setContext() {
+  setHandlersCallBackContext().then(
+    (successMessage) => {
+      console.log(successMessage);
+    },
+    (errorMessage) => {
+      console.error(errorMessage);
+    }
+  );
+}
+function clearContext() {
+  return new Promise((resolve, reject) => {
+    exec(resolve, reject, "OptimoveSDKPlugin", "clearContext", []);
+  });
+}
+
+function setHandlersCallBackContext() {
+  return new Promise((resolve, reject) => {
+    exec(
+      nativeMessageHandler,
+      reject,
+      "OptimoveSDKPlugin",
+      "setHandlersCallBackContext",
+      []
+    );
+  });
+}
+
 function checkIfPendingPushExists() {
   return new Promise((resolve, reject) => {
-    exec(resolve, reject, "OptimoveSDKPlugin", "checkIfPendingPushExists", []);
+    exec(
+      nativeMessageHandler,
+      reject,
+      "OptimoveSDKPlugin",
+      "checkIfPendingPushExists",
+      []
+    );
   });
 }
 
@@ -40,13 +67,13 @@ function nativeMessageHandler(message) {
   if (!message || typeof message === "string") {
     return;
   }
-  
+
   const handlerName = `${message.type}Handler`;
   if (
     handlerName === "inAppInboxUpdatedHandler" &&
     typeof inAppInboxUpdatedHandler === "function"
   ) {
-    inAppInboxUpdatedHandler();
+    currentConfig[handlerName]();
     return;
   }
 
@@ -105,8 +132,6 @@ const Optimove = {
     });
   },
 
-
-
   pushRegister: function () {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "pushRegister", []);
@@ -140,7 +165,7 @@ const Optimove = {
   inAppMarkAsRead: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppMarkAsRead", [
-        inAppInboxItem,
+        inAppInboxItem.id,
       ]);
     });
   },
@@ -152,7 +177,7 @@ const Optimove = {
   inAppPresentInboxMessage: function (inAppInboxItem) {
     return new Promise((resolve, reject) => {
       exec(resolve, reject, "OptimoveSDKPlugin", "inAppPresentInboxMessage", [
-        inAppInboxItem,
+        inAppInboxItem.id,
       ]);
     });
   },
@@ -163,18 +188,20 @@ const Optimove = {
         reject,
         "OptimoveSDKPlugin",
         "inAppDeleteMessageFromInbox",
-        [inAppInboxItem]
+        [inAppInboxItem.id]
       );
     });
   },
 
   setOnInboxUpdatedHandler: function (handler) {
-    inAppInboxUpdatedHandler = handler;
+    currentConfig["inAppInboxUpdatedHandler"] = handler;
   },
-  
+
   setPushOpenedHandler(pushOpenedHandler) {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    checkIfPendingPushExists(); 
+    if (pushOpenedHandler != null) {
+      checkIfPendingPushExists();
+    }
   },
 
   setPushReceivedHandler(pushReceivedHandler) {
