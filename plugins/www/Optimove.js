@@ -9,7 +9,7 @@ var currentConfig = {
 
 document.addEventListener("deviceready", init, false);
 
-function init() {  
+function init() {
   setHandlersCallBackContext().then(success, (errorMessage) => { console.error(errorMessage); });
 }
 
@@ -25,10 +25,10 @@ function init() {
      );
    });
 }
- 
+
 function checkIfPendingPushExists() {
   return new Promise((resolve, reject) => {
-    exec(resolve, reject, "OptimoveSDKPlugin", "checkIfPendingPushExists", []);
+    exec(nativeMessageHandler, reject, "OptimoveSDKPlugin", "checkIfPendingPushExists", []);
   });
 }
 
@@ -36,7 +36,7 @@ function nativeMessageHandler(message) {
   if (!message || typeof message === "string") {
     return;
   }
-  
+
   const handlerName = `${message.type}Handler`;
   if (
     handlerName === "inAppInboxUpdatedHandler" &&
@@ -167,10 +167,10 @@ const Optimove = {
   setOnInboxUpdatedHandler: function (handler) {
       currentConfig["inAppInboxUpdatedHandler"] = handler;
   },
-  
+
   setPushOpenedHandler(pushOpenedHandler) {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    checkIfPendingPushExists(); 
+    checkIfPendingPushExists();
   },
 
   setPushReceivedHandler(pushReceivedHandler) {
