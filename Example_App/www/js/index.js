@@ -46,7 +46,7 @@ function pushReceivedHandler(pushMessage) {
 }
 
 function pushOpenedHandler(pushMessage) {
-  //handling push message
+  alert(JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {

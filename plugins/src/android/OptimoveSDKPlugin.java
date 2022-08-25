@@ -44,6 +44,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_PRESENT_INBOX_MESSAGE = "inAppPresentInboxMessage";
     private static final String IN_APP_DELETE_INBOX_MESSAGE = "inAppDeleteMessageFromInbox";
     private static final String CHECK_IF_PENDING_PUSH_EXISTS = "checkIfPendingPushExists";
+    private static final String CLEAR_CONTEXT = "clearContext";
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -124,9 +125,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         case CHECK_IF_PENDING_PUSH_EXISTS:
             this.checkIfPendingPushExists(callbackContext);
             return true;
+        case CLEAR_CONTEXT:
+            this.clearJsContext();
+            return true;
         }
 
         return false;
+    }
+
+    private void clearJsContext() {
+        OptimoveSDKPlugin.jsCallbackContext = null;
     }
 
     private void inAppDeleteMessageFromInbox(JSONArray args, CallbackContext callbackContext) {

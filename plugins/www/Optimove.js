@@ -8,10 +8,32 @@ var currentConfig = {
 };
 
 document.addEventListener("deviceready", init, false);
-
+document.addEventListener("pause", onPause, false);
 function init() {
   setHandlersCallBackContext().then(success, (errorMessage) => { console.error(errorMessage); });
+  
 }
+
+function success(successMessage) { 
+  console.log(successMessage);
+}
+function error(errorMessage) {
+  console.log(errorMessage);
+ }
+function onPause() {
+  clearContext().then(success("context was cleared"), error("something went wrong"));
+}
+function clearContext() {
+  return new Promise((resolve, reject) => {
+    exec(
+      resolve,
+      reject,
+      "OptimoveSDKPlugin",
+      "clearContext",
+      []
+    );
+  });
+ }
 
 
  function setHandlersCallBackContext() {
@@ -170,7 +192,8 @@ const Optimove = {
 
   setPushOpenedHandler(pushOpenedHandler) {
     currentConfig["pushOpenedHandler"] = pushOpenedHandler;
-    checkIfPendingPushExists();
+    if (pushOpenedHandler!=null)
+      checkIfPendingPushExists();
   },
 
   setPushReceivedHandler(pushReceivedHandler) {
