@@ -7,10 +7,12 @@ import android.content.Intent;
 import androidx.core.app.TaskStackBuilder;
 
 import com.optimove.android.Optimove;
+import com.optimove.android.optimobile.Optimobile;
 import com.optimove.android.optimobile.PushActionHandlerInterface;
 import com.optimove.android.optimobile.PushBroadcastReceiver;
 import com.optimove.android.optimobile.PushMessage;
 
+import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,12 +52,8 @@ public class PushReceiver extends PushBroadcastReceiver {
     protected void onPushOpened(Context context, PushMessage pushMessage) {
         try {
             Optimove.getInstance().pushTrackOpen(pushMessage.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (OptimoveSDKPlugin.jsCallbackContext != null)
-                OptimoveSDKPlugin.jsCallbackContext.error(e.getMessage());
+        } catch (Optimobile.UninitializedException ignored) {
         }
-
         PushReceiver.handlePushOpen(context, pushMessage, null);
     }
 
@@ -77,7 +75,9 @@ public class PushReceiver extends PushBroadcastReceiver {
             cls = (Class<? extends Activity>) Class.forName(component.getClassName());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            OptimoveSDKPlugin.jsCallbackContext.error(e.getMessage());
+            PluginResult result = new PluginResult(PluginResult.Status.ERROR, e.getMessage());
+            result.setKeepCallback(true);
+            OptimoveSDKPlugin.jsCallbackContext.sendPluginResult(result);
         }
 
         // Ensure we're trying to launch an Activity
