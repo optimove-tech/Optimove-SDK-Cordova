@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
     private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
-    
+
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "enableDeferredDeepLinking";
 
     @Override
