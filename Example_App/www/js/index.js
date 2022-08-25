@@ -33,7 +33,6 @@ function onDeviceReady() {
 }
 
 function success(successMessage = "Success!") {
-  console.log(successMessage);
   alert(successMessage);
 }
 
@@ -42,15 +41,19 @@ function error(errorMessage) {
 }
 
 function pushReceivedHandler(pushMessage) {
-  alert(JSON.stringify(pushMessage));
+  console.log(JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
-  alert(JSON.stringify(pushMessage));
+  console.log(JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {
-  //handling inAppDeepLink
+  console.log(JSON.stringify(deepLinkData));
+}
+
+function onInboxUpdated() {
+  console.log("inbox updated");
 }
 
 document
@@ -248,8 +251,4 @@ function getVisitorId() {
   Optimove.getVisitorId().then((visitorId) => {
     document.getElementById("text-area-visitor-id").value = visitorId;
   }, error);
-}
-
-function onInboxUpdated() {
- 
 }
