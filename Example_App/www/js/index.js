@@ -42,7 +42,7 @@ function error(errorMessage) {
 }
 
 function pushReceivedHandler(pushMessage) {
-  //handling push received
+  alert(pushMessage);
 }
 
 function pushOpenedHandler(pushMessage) {
