@@ -45,6 +45,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_DELETE_INBOX_MESSAGE = "inAppDeleteMessageFromInbox";
     private static final String CHECK_IF_PENDING_PUSH_EXISTS = "checkIfPendingPushExists";
     private static final String CLEAR_CONTEXT = "clearContext";
+    private static final String CHECK_IF_PENDING_DDL_EXISTS = "checkIfPendingDDLExists";
+
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -52,6 +54,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     @Nullable
     static String pendingActionId;
     static CordovaInterface sCordova;
+    static JSONObject pendingDDL;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -128,9 +131,23 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         case CLEAR_CONTEXT:
             this.clearJsContext();
             return true;
+        case CHECK_IF_PENDING_DDL_EXISTS:
+            this.checkIfPendingDDLExists(callbackContext);
+            return true;
         }
 
         return false;
+    }
+
+    private void checkIfPendingDDLExists(CallbackContext callbackContext) {
+        if (jsCallbackContext == null) {
+            jsCallbackContext = callbackContext;
+        }
+        if (null != pendingDDL) {
+            OptimoveSDKPlugin.sendMessageToJs("deepLink", pendingDDL);
+            pendingDDL = null;
+            pendingActionId = null;
+        }
     }
 
     private void clearJsContext() {

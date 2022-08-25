@@ -128,7 +128,7 @@ public class OptimoveInitProvider extends ContentProvider {
                 deepLink.put("link", link);
                 deepLink.put("resolution", resolution.ordinal());
                 deepLink.put("data", dataJson);
-
+                OptimoveSDKPlugin.pendingDDL = deepLink;
                 OptimoveSDKPlugin.sendMessageToJs("deepLink", deepLink);
             } catch (Exception e) {
                 e.printStackTrace();

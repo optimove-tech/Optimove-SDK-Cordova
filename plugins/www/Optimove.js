@@ -17,6 +17,7 @@ function init() {
 
 function resume() {
   setContext();
+  checkIfPendingDDLExists().then(null, (errMsg) => { console.error(errMsg); });
 }
 
 function pause() {
@@ -50,6 +51,17 @@ function setHandlersCallBackContext() {
     );
   });
 }
+function checkIfPendingDDLExists() {
+  return new Promise((resolve, reject) => {
+    exec(
+      nativeMessageHandler,
+      reject,
+      "OptimoveSDKPlugin",
+      "checkIfPendingDDLExists",
+      []
+    );
+  });
+ }
 
 function checkIfPendingPushExists() {
   return new Promise((resolve, reject) => {
