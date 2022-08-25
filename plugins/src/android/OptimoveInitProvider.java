@@ -10,30 +10,51 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.optimove.android.Optimove;
 import com.optimove.android.OptimoveConfig;
+import com.optimove.android.optimobile.OptimoveInApp;
 
 public class OptimoveInitProvider extends ContentProvider {
-    private static final String OPTIMOVE_CREDENTIALS = "optimoveCredentials";
-    private static final String OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
+    private static final String KEY_OPTIMOVE_CREDENTIALS = "optimoveCredentials";
+    private static final String KEY_OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
+    private static final String KEY_IN_APP_CONSENT_STRATEGY = "inAppConsentStrategy";
+
+    private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
+    private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
     @Override
     public boolean onCreate() {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
-        String optimoveCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, OPTIMOVE_MOBILE_CREDENTIALS);
-        if (TextUtils.isEmpty(optimoveCredentials) || TextUtils.isEmpty(optimoveMobileCredentials)) {
-            return true;
+        String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,
+                KEY_OPTIMOVE_MOBILE_CREDENTIALS);
+        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
+        if (optimoveCredentials == null && optimoveMobileCredentials == null) {
+            throw new IllegalArgumentException(
+                    "error: Invalid credentials! \n please provide at least one set of credentials");
         }
-            assert optimoveCredentials != null;
-            assert optimoveMobileCredentials != null;
-            OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
-                    optimoveMobileCredentials);
-            Optimove.initialize(app, configBuilder.build());
-        
-        return false;
+
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
+                optimoveMobileCredentials);
+
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
+            configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
+        } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
+        }
+
+        Optimove.initialize(app, configBuilder.build());
+
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
+        }
+
+        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
+        OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
+        return true;
     }
 
     @Nullable
@@ -66,12 +87,12 @@ public class OptimoveInitProvider extends ContentProvider {
         return 0;
     }
 
-    private String getStringConfigValue(String packageName, Resources resources, String key) {
+    private @Nullable String getStringConfigValue(String packageName, Resources resources, String key) {
         int resId = resources.getIdentifier(key, "string", packageName);
         if (0 == resId) {
             return null;
         }
-
-        return resources.getString(resId);
+        String value = resources.getString(resId);
+        return TextUtils.isEmpty(value) ? null : value;
     }
 }

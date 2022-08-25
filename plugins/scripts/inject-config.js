@@ -2,6 +2,22 @@
 const fs = require('fs');
 const path = require('path');
 
+function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy) {
+      return {
+        OPTIMOVE_CREDENTIALS:
+          !isEmpty(optimoveCredentials) &&
+          isString(optimoveCredentials)
+            ? optimoveCredentials
+            : "",
+        OPTIMOVE_MOBILE_CREDENTIALS:
+          !isEmpty(optimoveMobileCredentials) &&
+          isString(optimoveMobileCredentials)
+            ? optimoveMobileCredentials
+            : "",
+        IN_APP_STRATEGY: inAppConsentStrategy,
+      };
+ }
+
 function hasPlatform(context, platform) {
     return context.opts.platforms.indexOf(platform) > -1;
 }
@@ -53,7 +69,7 @@ function readOptimoveSettings(context) {
     return config;
 }
 
-function prepareAndroid(context, optimoveConifg) {
+function prepareAndroid(context, optimoveConfig) {
     const dest = path.join(
         context.opts.projectRoot,
         'platforms',
@@ -65,13 +81,39 @@ function prepareAndroid(context, optimoveConifg) {
         'values',
         'optimove.xml'
     );
-    
-    const config = renderTemplate('optimove.xml', {
-        OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
-        OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
-    });
+
+    const config = renderTemplate('optimove.xml',
+        createJsonWithDefaultValues(optimoveConfig.optimoveCredentials,
+            optimoveConfig.optimoveMobileCredentials,
+            optimoveConfig.inAppConsentStrategy));
 
     fs.writeFileSync(dest, config, { encoding: 'utf-8' });
+    
+    const gServicesJson = path.join(
+        context.opts.projectRoot,
+        'google-services.json'
+    );
+
+    if (fs.existsSync(gServicesJson)) {
+        
+        console.info('Optimove: found google-services.json, configuring FCM');
+        const gServicesDest = path.join(
+            context.opts.projectRoot,
+            'platforms',
+            'android',
+            'app',
+            'google-services.json'
+        );
+
+        fs.copyFileSync(gServicesJson, gServicesDest);
+
+    } else {
+        console.warn(
+            'Optimove: google-services.json was not found, skipping FCM configuration'
+        );
+    }
+
+   
 }
 module.exports = function injectOptimoveConfig(context) {
     const optimoveConfig = readOptimoveSettings(context);
@@ -125,15 +167,34 @@ function isValidConfig(config) {
         return false;
     }
     if (
-        isEmpty(config.optimoveCredentials) ||
-        isEmpty(config.optimoveMobileCredentials) ||
-        !isString(config.optimoveCredentials) ||
-        !isString(config.optimoveMobileCredentials)
+      (isEmpty(config.optimoveCredentials) ||
+        !isString(config.optimoveCredentials)) &&
+      (isEmpty(config.optimoveMobileCredentials) ||
+        !isString(config.optimoveMobileCredentials))
+    ) {
+      console.error(
+        "Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json"
+      );
+      return false;
+    }
+    const validInAppStrategies = [
+        'auto-enroll',
+        'explicit-by-user',
+        'in-app-disabled'
+    ];
+
+    if (
+        !isEmpty(config.inAppConsentStrategy) &&
+        validInAppStrategies.indexOf(config.inAppConsentStrategy) < 0
     ) {
         console.error(
-            'Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json'
+            'Optimove: invalid inAppConsentStrategy given in optimove.json, valid options are: ' +
+            validInAppStrategies.join(', ')
         );
         return false;
-        }
-        return config;
+    } else if (isEmpty(config.inAppConsentStrategy)) {
+        config.inAppConsentStrategy = 'in-app-disabled';
     }
+
+    return config;
+}
