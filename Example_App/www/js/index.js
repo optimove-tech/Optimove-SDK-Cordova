@@ -42,7 +42,7 @@ function error(errorMessage) {
 }
 
 function pushReceivedHandler(pushMessage) {
-  alert(pushMessage);
+  alert(JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
