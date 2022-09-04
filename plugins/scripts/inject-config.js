@@ -18,7 +18,7 @@ function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredenti
          ENABLE_DEFERRED_DEEP_LINKING:
       !isEmpty(enableDeferredDeepLinking) && isString(enableDeferredDeepLinking)
         ? enableDeferredDeepLinking
-        : ""
+        : "false"
       };
  }
 
