@@ -14,12 +14,12 @@ android {
 }
 dependencies{
     implementation 'com.optimove.android:optimove-android:6.+'
-       def work_version = "2.6.0"
-    // Force WorkManager 2.6.0 for transitive dependency
-    implementation("androidx.work:work-runtime-ktx:$work_version") {
-        force = true
+   
+    api(group: "androidx.work", name: "work-runtime") {
+    version {
+        strictly "2.7.0-alpha04"
     }
-    
+    }
 }
 
 // Application of google services plugin based on
@@ -58,5 +58,6 @@ ext.postBuildExtras = {
         }
         implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
         implementation 'com.google.firebase:firebase-messaging'
+    
     }
 }
