@@ -5,6 +5,7 @@ var currentConfig = {
   pushOpenedHandler: null, //function that receives one argument, a push message object
   inAppDeepLinkHandler: null, //expect to be a function that receives one argument, a deepLink data object
   inAppInboxUpdatedHandler: null,
+  deepLinkHandler: null,
 };
 
 document.addEventListener("deviceready", init, false);
@@ -17,7 +18,6 @@ function init() {
 
 function resume() {
   setContext();
-  checkIfPendingDDLExists().then(null, (errMsg) => { console.error(errMsg); });
 }
 
 function pause() {
