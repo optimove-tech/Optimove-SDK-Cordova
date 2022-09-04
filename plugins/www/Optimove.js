@@ -225,6 +225,7 @@ const Optimove = {
   },
   setDeepLinkHandler(deepLinkHandler){
     currentConfig['deepLinkHandler'] = deepLinkHandler;
+    checkIfPendingDDLExists();
   }
 };
 module.exports = Optimove;
