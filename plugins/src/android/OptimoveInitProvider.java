@@ -109,20 +109,25 @@ public class OptimoveInitProvider extends ContentProvider {
 
     private DeferredDeepLinkHandlerInterface getDDLHandler() {
         return (Context context, DeferredDeepLinkHelper.DeepLinkResolution resolution, String link,
-                DeferredDeepLinkHelper.DeepLink data) -> {
+                @Nullable DeferredDeepLinkHelper.DeepLink data) -> {
             try {
+                JSONObject dataJson = null;
+                if (data != null){
+                    JSONObject deepLinkContent = new JSONObject();
+                    deepLinkContent.put("title", data.content.title);
+                    deepLinkContent.put("description", data.content.description);
 
-                JSONObject deepLinkContent = new JSONObject();
-                deepLinkContent.put("title", data.content.title);
-                deepLinkContent.put("description", data.content.description);
-                JSONObject dataJson = new JSONObject();
-                dataJson.put("data", data.data);
-                dataJson.put("content", deepLinkContent);
-                dataJson.put("url", data.url);
+                    dataJson = new JSONObject();
+                    dataJson.put("data", data.data);
+                    dataJson.put("content", deepLinkContent);
+                    dataJson.put("url", data.url);
+                }
+
                 JSONObject deepLink = new JSONObject();
                 deepLink.put("link", link);
                 deepLink.put("resolution", resolution.ordinal());
                 deepLink.put("data", dataJson);
+
                 if (OptimoveSDKPlugin.jsCallbackContext == null) {
                     OptimoveSDKPlugin.pendingDDL = deepLink;
                     return;
