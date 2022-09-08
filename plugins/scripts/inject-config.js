@@ -3,24 +3,22 @@ const fs = require('fs');
 const path = require('path');
 
 function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy, enableDeferredDeepLinking) {
-      return {
-        OPTIMOVE_CREDENTIALS:
-          !isEmpty(optimoveCredentials) &&
-          isString(optimoveCredentials)
-            ? optimoveCredentials
-            : "",
-        OPTIMOVE_MOBILE_CREDENTIALS:
-          !isEmpty(optimoveMobileCredentials) &&
-          isString(optimoveMobileCredentials)
-            ? optimoveMobileCredentials
-            : "",
-        IN_APP_STRATEGY: inAppConsentStrategy,
-         ENABLE_DEFERRED_DEEP_LINKING:
-      !isEmpty(enableDeferredDeepLinking) && isString(enableDeferredDeepLinking)
-        ? enableDeferredDeepLinking
-        : "false"
-      };
+  return {
+    OPTIMOVE_CREDENTIALS:
+      !isEmpty(optimoveCredentials) &&
+      isString(optimoveCredentials)
+        ? optimoveCredentials
+        : "",
+    OPTIMOVE_MOBILE_CREDENTIALS:
+      !isEmpty(optimoveMobileCredentials) &&
+      isString(optimoveMobileCredentials)
+        ? optimoveMobileCredentials
+        : "",
+    IN_APP_STRATEGY: inAppConsentStrategy,
+    ENABLE_DEFERRED_DEEP_LINKING:
+      enableDeferredDeepLinking === 'true' || enableDeferredDeepLinking === true
  }
+}
 
 function hasPlatform(context, platform) {
   return context.opts.platforms.indexOf(platform) > -1;
@@ -85,7 +83,6 @@ function prepareAndroid(context, optimoveConfig) {
     "values",
     "optimove.xml"
   );
-
   const config = renderTemplate(
     "optimove.xml",
     createJsonWithDefaultValues(
