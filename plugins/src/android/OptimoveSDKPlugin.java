@@ -146,7 +146,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         if (null != pendingDDL) {
             OptimoveSDKPlugin.sendMessageToJs("deepLink", pendingDDL);
             pendingDDL = null;
-            pendingActionId = null;
         }
     }
 
