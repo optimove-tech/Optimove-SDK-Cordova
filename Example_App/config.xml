@@ -8,4 +8,13 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+
+   <config-file parent="/manifest/application/activity" target="AndroidManifest.xml">
+        <intent-filter android:label="deepLabel" android:autoVerify="true">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" android:host="cordova-example-optimove.lnk.click"/>
+        </intent-filter>
+    </config-file>
 </widget>
