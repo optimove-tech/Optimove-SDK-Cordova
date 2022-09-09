@@ -17,4 +17,8 @@
             <data android:scheme="https" android:host="cordova-example-optimove.lnk.click"/>
         </intent-filter>
     </config-file>
+
+    <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="merge">
+        <activity android:name="com.optimove.android.cordova.OptimoveMainActivity"/>
+    </edit-config>
 </widget>
