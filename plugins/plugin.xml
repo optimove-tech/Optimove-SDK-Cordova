@@ -65,7 +65,6 @@
         <source-file src="src/android/OptimoveInitProvider.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/JsonUtils.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/PushReceiver.java" target-dir="src/com/optimove/android/cordova" />
-        <source-file src="src/android/OptimoveMainActivity.java" target-dir="src/com/optimove/android/cordova" />
         <framework src="src/android/optimove.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
