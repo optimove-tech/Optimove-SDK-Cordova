@@ -225,7 +225,7 @@ function writeGoogleServicesJson(context){
 
 // ===================== IOS SPECIFIC ======================
 
-function prepareIos(context, OptimoveConfig) {
+function prepareIos(context, optimoveConfig) {
   const iosPath = path.join(context.opts.projectRoot, 'platforms', 'ios');
   const files = fs.readdirSync(iosPath);
 
@@ -247,8 +247,8 @@ function prepareIos(context, OptimoveConfig) {
   }
 
   const config = renderTemplate('optimove.xml', {
-      OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
-      OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
+      OPTIMOVE_CREDENTIALS: optimoveConfig.optimoveCredentials,
+      OPTIMOVE_MOBILE_CREDENTIALS: optimoveConfig.optimoveMobileCredentials
   });
 
   fs.writeFileSync(configDest, config, { encoding: 'utf-8' });
