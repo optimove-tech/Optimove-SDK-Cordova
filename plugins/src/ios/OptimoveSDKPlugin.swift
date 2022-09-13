@@ -20,7 +20,21 @@ import NotificationCenter
             return nil
         }
 
-        let config = OptimoveConfigBuilder(optimoveCredentials: configValues[optimoveCredentialsKey], optimobileCredentials: configValues[optimoveMobileCredentialsKey])
+        let optimoveCredentials = nil
+        if let val = configValues[optimoveCredentialsKey] {
+            if (!val.isEmpty){
+                optimoveCredentials = val;
+            }
+        }
+
+        let optimobileCredentials = nil
+            if let val = configValues[optimoveMobileCredentialsKey] {
+            if (!val.isEmpty){
+                optimobileCredentials = val;
+            }
+        }
+
+        let config = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
 
         return config.build()
     }()
