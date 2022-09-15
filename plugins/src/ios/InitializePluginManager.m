@@ -1,12 +1,9 @@
-//
-//  InitializePluginManager.m
-//  Example_App
-//
-//  Created by Barak Ben Hur on 03/08/2022.
-//
-
 #import "InitializePluginManager.h"
-#import "OptimoveSDKPlugin-Swift.h"
+
+//copied from ProductModuleName-Swift.h
+@interface Optimove_Cordova
++ (void)didFinishLaunching:(NSNotification * _Nonnull)notification;
+@end
 
 @implementation InitializePluginManager
 

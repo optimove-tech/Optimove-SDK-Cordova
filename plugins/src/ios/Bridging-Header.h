@@ -26,4 +26,4 @@
 //
 
 #import <Cordova/CDV.h>
-#import "InitializePluginManager.h"
+//#import "InitializePluginManager.h"
