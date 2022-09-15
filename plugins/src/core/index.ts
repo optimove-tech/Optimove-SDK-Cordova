@@ -8,7 +8,7 @@ import {
   DeepLinkHandler,
 } from "./handlers";
 
-export interface OptimoveConfig {
+export interface OptimoveConfig{
   pushReceivedHandler?: PushNotificationHandler | null;
   pushOpenedHandler?: PushNotificationHandler | null;
   inAppDeepLinkHandler?: InAppDeepLinkHandler | null;
@@ -368,3 +368,4 @@ const Optimove = {
     checkIfPendingDDLExists();
   },
 };
+export default Optimove;
