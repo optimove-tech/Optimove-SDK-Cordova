@@ -146,7 +146,7 @@ function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredenti
         : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
     ENABLE_DEFERRED_DEEP_LINKING:
-      enableDeferredDeepLinking === 'true' || enableDeferredDeepLinking === true
+      enableDeferredDeepLinking === true
  }
 }
 
