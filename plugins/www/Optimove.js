@@ -1,3 +1,4 @@
+const { isFunction } = require("util");
 
 var currentConfig = {
   pushReceivedHandler: null, //function that receives one argument, a push message object
@@ -9,6 +10,28 @@ var currentConfig = {
 document.addEventListener("deviceready", init, false);
 document.addEventListener("resume", resume, false);
 document.addEventListener("pause", pause, false);
+
+function isString(val) {
+  return typeof val === "string";
+}
+
+function isNonEmptyString(val) {
+  return val && isString(val);
+}
+
+function isFunction(param) {
+  return typeof param === "function";
+}
+
+function isInboxItemValid(inboxItem) {
+  var mandatoryValues = ["id", "title", "subtitle", "sentAt"];
+  for (const element of mandatoryValues) {
+    if (!inboxItem[element]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 function init() {
   setContext();
