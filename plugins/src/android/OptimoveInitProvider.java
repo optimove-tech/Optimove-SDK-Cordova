@@ -23,12 +23,12 @@ import org.json.JSONObject;
 public class OptimoveInitProvider extends ContentProvider {
     private static final String KEY_OPTIMOVE_CREDENTIALS = "optimoveCredentials";
     private static final String KEY_OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
-    private static final String KEY_IN_APP_CONSENT_STRATEGY = "inAppConsentStrategy";
+    private static final String KEY_IN_APP_CONSENT_STRATEGY = "optimoveInAppConsentStrategy";
 
     private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
-    private static final String ENABLE_DEFERRED_DEEP_LINKING = "enableDeferredDeepLinking";
+    private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
 
     @Override
     public boolean onCreate() {
