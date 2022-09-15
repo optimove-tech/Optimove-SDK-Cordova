@@ -111,21 +111,38 @@ public class OptimoveInitProvider extends ContentProvider {
         return (Context context, DeferredDeepLinkHelper.DeepLinkResolution resolution, String link,
                 @Nullable DeferredDeepLinkHelper.DeepLink data) -> {
             try {
+                String mappedResolution = null;
                 JSONObject dataJson = null;
-                if (data != null){
-                    JSONObject deepLinkContent = new JSONObject();
-                    deepLinkContent.put("title", data.content.title);
-                    deepLinkContent.put("description", data.content.description);
+                switch (resolution) {
+                    case LINK_MATCHED:
+                        mappedResolution = "LINK_MATCHED";
+                        JSONObject deepLinkContent = new JSONObject();
+                        deepLinkContent.put("title", data.content.title);
+                        deepLinkContent.put("description", data.content.description);
 
-                    dataJson = new JSONObject();
-                    dataJson.put("data", data.data);
-                    dataJson.put("content", deepLinkContent);
-                    dataJson.put("url", data.url);
+                        dataJson = new JSONObject();
+                        dataJson.put("data", data.data);
+                        dataJson.put("content", deepLinkContent);
+                        dataJson.put("url", data.url);
+                        break;
+                    case LINK_NOT_FOUND:
+                        mappedResolution = "LINK_NOT_FOUND";
+                        break;
+                    case LINK_EXPIRED:
+                        mappedResolution = "LINK_EXPIRED";
+                        break;
+                    case LINK_LIMIT_EXCEEDED:
+                        mappedResolution = "LINK_LIMIT_EXCEEDED";
+                        break;
+                    case LOOKUP_FAILED:
+                    default:
+                        mappedResolution = "LOOKUP_FAILED";
+                        break;
                 }
 
                 JSONObject deepLink = new JSONObject();
                 deepLink.put("link", link);
-                deepLink.put("resolution", resolution.ordinal());
+                deepLink.put("resolution", mappedResolution);
                 deepLink.put("data", dataJson);
 
                 if (OptimoveSDKPlugin.jsCallbackContext == null) {
