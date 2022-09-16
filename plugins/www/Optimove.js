@@ -5,6 +5,7 @@ var currentConfig = {
   pushOpenedHandler: null, //function that receives one argument, a push message object
   inAppDeepLinkHandler: null, //expect to be a function that receives one argument, a deepLink data object
   inAppInboxUpdatedHandler: null,
+  deepLinkHandler: null,
 };
 
 document.addEventListener("deviceready", init, false);
@@ -50,6 +51,17 @@ function setHandlersCallBackContext() {
     );
   });
 }
+function checkIfPendingDDLExists() {
+  return new Promise((resolve, reject) => {
+    exec(
+      nativeMessageHandler,
+      reject,
+      "OptimoveSDKPlugin",
+      "checkIfPendingDDLExists",
+      []
+    );
+  });
+ }
 
 function checkIfPendingPushExists() {
   return new Promise((resolve, reject) => {
@@ -209,7 +221,11 @@ const Optimove = {
   },
 
   setInAppDeepLinkHandler(inAppDeepLinkHandler) {
-    currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
+      currentConfig["inAppDeepLinkHandler"] = inAppDeepLinkHandler;
   },
+  setDeepLinkHandler(deepLinkHandler){
+    currentConfig['deepLinkHandler'] = deepLinkHandler;
+    checkIfPendingDDLExists();
+  }
 };
 module.exports = Optimove;
