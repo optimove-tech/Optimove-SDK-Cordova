@@ -20,23 +20,18 @@ import NotificationCenter
             return nil
         }
 
-        let optimoveCredentials = nil
+        var optimoveCredentials: String? = nil
         if let val = configValues[optimoveCredentialsKey] {
             if (!val.isEmpty){
                 optimoveCredentials = val;
             }
         }
 
-        let optimobileCredentials = nil
+        var optimobileCredentials: String? = nil
             if let val = configValues[optimoveMobileCredentialsKey] {
             if (!val.isEmpty){
                 optimobileCredentials = val;
             }
-        }
-
-        if (optimoveCredentials == nil && optimobileCredentials == nil) {
-            print("Invalid credentials! Please provide at least one set of credentials")
-            return nil;
         }
 
         let config = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
