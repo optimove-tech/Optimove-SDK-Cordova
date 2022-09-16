@@ -4,11 +4,12 @@
     <js-module name="Optimove" src="www/Optimove.js">
         <clobbers target="window.Optimove" />
     </js-module>
-     <hook type="before_prepare" src="scripts/inject-config.js" />
+    <hook type="before_prepare" src="scripts/inject-config.js" />
     <platform name="ios">
+        <resource-file src="scripts/optimove.plist" target="optimove.plist" />
         <config-file target="config.xml" parent="/*">
             <feature name="OptimoveSDKPlugin">
-                <param name="ios-package" value="Optimove" />
+                <param name="ios-package" value="Optimove_Cordova" />
             </feature>
         </config-file>
         <source-file src="src/ios/OptimoveSDKPlugin.swift" />
