@@ -3,6 +3,7 @@ import NotificationCenter
 
 @objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
     private static var optimovePluginInstance: OptimoveSDKPlugin!
+    private static var cordovaCommand: CDVInvokedUrlCommand? = nil
 
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
@@ -34,9 +35,11 @@ import NotificationCenter
             }
         }
 
-        let config = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
+        //TODO: opened.received/... handlers
+        let builder = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
+        builder.setPushOpenedHandler(pushOpenedHandlerBlock:...)
 
-        return config.build()
+        return builder.build()
     }()
 
     override func pluginInitialize() {
@@ -48,6 +51,12 @@ import NotificationCenter
         guard let config = OptimoveSDKPlugin.config else { return }
 
         Optimove.initialize(with: config)
+
+        OptimoveInApp.setOnInboxUpdated(inboxUpdatedHandlerBlock: {
+            if (optimovePluginInstance != nil){
+                optimovePluginInstance.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
+            }
+        })
     }
 
     @objc(reportEvent:)
@@ -136,6 +145,43 @@ import NotificationCenter
         Optimove.shared.setUserEmail(email: email)
 
         let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
+    // ========================== MESSAGING ==========================
+
+    @objc(setHandlersCallBackContext:)
+    func setHandlersCallBackContext(command: CDVInvokedUrlCommand){
+        OptimoveSDKPlugin.cordovaCommand = command
+
+        let pluginResult:CDVPluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
+        pluginResult.setKeepCallbackAs(true)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
+    @objc(clearJsContext:)
+    func clearJsContext(command: CDVInvokedUrlCommand){
+        OptimoveSDKPlugin.cordovaCommand = nil
+
+        self.commandDelegate.send(CDVPluginResult.init(status: CDVCommandStatus_OK), callbackId: command.callbackId)
+    }
+
+
+    func sendMessageToJs(type: String, data: Any?){
+        guard let command = OptimoveSDKPlugin.cordovaCommand else {
+            return
+        }
+
+        var message: [String: Any] = [
+            "type": type
+        ]
+
+        if (data != nil){
+            message["data"] = data
+        }
+
+        let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: message)
+        pluginResult.setKeepCallbackAs(true)
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
