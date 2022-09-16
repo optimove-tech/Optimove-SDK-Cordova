@@ -31,9 +31,9 @@
                 <param name="android-package" value="com.optimove.android.cordova.OptimoveSDKPlugin" />
             </feature>
             <preference name="AndroidXEnabled" value="true" />
-        </config-file>
+        </config-file >
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
-                     <!-- Optimove FCM handler -->
+            <!-- Optimove FCM handler -->
             <service android:name="com.optimove.android.optimobile.FirebaseMessagingService" android:exported="false">
                 <intent-filter>
                     <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -48,13 +48,13 @@
                     <action android:name="com.optimove.push.BUTTON_CLICKED" />
                 </intent-filter>
             </receiver>
-            <!-- Optimove initProvider-->    
-            <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />        
+            <!-- Optimove initProvider-->
+            <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />
         </config-file>
         <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
             <manifest xmlns:tools="http://schemas.android.com/tools" />
         </edit-config>
-    
+
         <edit-config file="AndroidManifest.xml" target="/manifest/" mode="merge">
             <manifest xmlns:tools="http://schemas.android.com/tools" />
         </edit-config>
