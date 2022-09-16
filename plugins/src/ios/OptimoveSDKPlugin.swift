@@ -34,6 +34,11 @@ import NotificationCenter
             }
         }
 
+        if (optimoveCredentials == nil && optimobileCredentials == nil) {
+            print("Invalid credentials! Please provide at least one set of credentials")
+            return nil;
+        }
+
         let config = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
 
         return config.build()
