@@ -139,90 +139,129 @@ import NotificationCenter
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
-    @objc(isAvailable:)
-    func isAvailable(command: CDVInvokedUrlCommand) {
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok, messageAs: OptimoveInApp.getInboxItems())
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
-    }
-
-    @objc(pushRequestDeviceToken:)
-    func pushRequestDeviceToken(command: CDVInvokedUrlCommand) {
+    @objc(pushRegister:)
+    func pushRegister(command: CDVInvokedUrlCommand) {
         Optimove.shared.pushRequestDeviceToken()
-        self.commandDelegate.run {
-            let pluginResult = CDVPluginResult(status: .ok, messageAs: "")
-            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
-        }
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
     }
 
-    @objc(updateConsent:)
-    func updateConsent(command: CDVInvokedUrlCommand) {
-        OptimoveInApp.updateConsent(forUser: command.arguments[0] as? Bool ?? false)
+    @objc(inAppUpdateConsent:)
+    func inAppUpdateConsent(command: CDVInvokedUrlCommand) {
+        let consented: Bool = command.arguments[0] as! Bool
+        OptimoveInApp.updateConsent(forUser: consented)
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
+    @objc(inAppGetInboxItems:)
+    func inAppGetInboxItems(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run(inBackground:{
+            let inboxItems = OptimoveInApp.getInboxItems()
+            var items = [[String : Any]]()
+
+            let formatter = DateFormatter()
+            formatter.timeStyle = .full
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+            for item in inboxItems {
+                var dict: [String: Any] = [
+                    "id": item.id,
+                    "title": item.title,
+                    "subtitle": item.subtitle,
+                    "availableFrom": item.availableFrom != nil ? formatter.string(from: item.availableFrom!) : "",
+                    "availableTo": item.availableTo != nil ? formatter.string(from: item.availableTo!) : "",
+                    "dismissedAt": item.dismissedAt != nil ? formatter.string(from: item.dismissedAt!) : "",
+                    "isRead": item.isRead(),
+                    "sentAt": formatter.string(from: item.sentAt)
+                ]
+
+                if let data = item.data {
+                    dict["data"] = data
+                }
+
+                if let imageUrl = item.getImageUrl() {
+                    dict["imageUrl"] = imageUrl.absoluteString
+                }
+
+                items.append(dict)
+            }
+
+
+            let pluginResult = CDVPluginResult(status: .ok, messageAs: items)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        })
     }
 
     @objc(inAppPresentInboxMessage:)
     func inAppPresentInboxMessage(command: CDVInvokedUrlCommand) {
         self.commandDelegate.run(inBackground: {
-            let messageId = command.arguments.first as! NSNumber
+            let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
+            var pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Message not found or not available")
             for msg in inboxItems {
-                if msg.id == messageId.int64Value {
-                    let result = OptimoveInApp.presentInboxMessage(item: msg)
-
-                    if result == .PRESENTED {
-                        self.commandDelegate.send(.init(status: .ok), callbackId: command.callbackId)
-                    }
-                    else {
-                        break
-                    }
+                if (msg.id != messageId){
+                    continue
                 }
+
+                let result = OptimoveInApp.presentInboxMessage(item: msg)
+                if (result == .PRESENTED){
+                    pluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
+                }
+
+                break;
+
             }
+
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         })
     }
 
     @objc(inAppDeleteMessageFromInbox:)
     func inAppDeleteMessageFromInbox(command: CDVInvokedUrlCommand) {
         self.commandDelegate.run(inBackground: {
-            let messageId = command.arguments.first as! NSNumber
+            let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
+            var pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Message not found or not available")
             for msg in inboxItems {
-                if msg.id == messageId.int64Value {
-                    let result = OptimoveInApp.deleteMessageFromInbox(item: msg)
-
-                    if result {
-                        self.commandDelegate.send(.init(status: .ok), callbackId: command.callbackId)
-                        return
-                    }
-
-                    break
+                if msg.id != messageId {
+                    continue
                 }
+
+                let result = OptimoveInApp.deleteMessageFromInbox(item: msg)
+                if result {
+                    pluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
+                }
+                break
             }
+
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         })
     }
 
     @objc(inAppMarkAsRead:)
     func inAppMarkAsRead(command: CDVInvokedUrlCommand) {
         self.commandDelegate.run(inBackground: {
-            let messageId = command.arguments.first as! NSNumber
+            let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
+            var pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Message not found")
             for msg in inboxItems {
-                if msg.id == messageId.int64Value {
-                    let result = OptimoveInApp.markAsRead(item: msg)
-
-                    if result {
-                        self.commandDelegate.send(.init(status: .ok), callbackId: command.callbackId)
-                    }
-                    else {
-                        self.commandDelegate.send(.init(status: .error, messageAs: "Failed to mark message as read"), callbackId: command.callbackId)
-                    }
-
-                    return
+                if msg.id != messageId {
+                    continue
                 }
+
+                let result = OptimoveInApp.markAsRead(item: msg)
+                pluginResult = result ?
+                    CDVPluginResult.init(status: CDVCommandStatus_OK) :
+                    CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Failed to mark message as read")
+
+                break
             }
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         })
     }
 
@@ -248,45 +287,6 @@ import NotificationCenter
             }
             else {
                 self.commandDelegate.send(.init(status: .error, messageAs: "Could not get inbox summary"), callbackId: command.callbackId)
-            }
-        }
-    }
-
-    @objc(getInboxItems:)
-    func getInboxItems(command: CDVInvokedUrlCommand) {
-        self.commandDelegate.run {
-            let inboxItems = OptimoveInApp.getInboxItems()
-            var items = [[String : Any]]()
-
-            let formatter = DateFormatter()
-            formatter.timeStyle = .full
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-
-            for item in inboxItems {
-                var dict  = [String: Any]()
-                dict["id"] = item.id
-                dict["title"] = item.title
-                dict["subtitle"] = item.subtitle
-                dict["availableFrom"] = item.availableFrom != nil ? formatter.string(from: item.availableFrom!) : ""
-                dict["availableTo"] = item.availableTo != nil ? formatter.string(from: item.availableTo!) : ""
-                dict["dismissedAt"] =  item.dismissedAt != nil ? formatter.string(from: item.dismissedAt!) : ""
-                dict["isRead"] = item.isRead
-                dict["sentAt"] = formatter.string(from: item.sentAt)
-
-                if let data = item.data {
-                    dict["data"] = data
-                }
-                if let imageUrl = item.getImageUrl() {
-                    dict["imageUrl"] = imageUrl.absoluteString
-                }
-
-                items.append(dict)
-            }
-
-            self.commandDelegate.run {
-                let pluginResult = CDVPluginResult(status: .ok, messageAs: items)
-                self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
             }
         }
     }
