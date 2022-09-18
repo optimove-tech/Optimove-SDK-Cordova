@@ -1,26 +1,91 @@
 import OptimoveSDK
 import NotificationCenter
 
+enum InAppConsentStrategy: String {
+    case autoEnroll = "auto-enroll"
+    case explicitByUser = "explicit-by-user"
+    case disabled = "in-app-disabled"
+}
+
 @objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
     private static var optimovePluginInstance: OptimoveSDKPlugin!
     private static var cordovaCommand: CDVInvokedUrlCommand? = nil
 
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
+    private static let inAppConsentStrategy = "optimoveInAppConsentStrategy"
+    //private static let enableDeferredDeepLinking = "optimoveEnableDeferredDeepLinking"
 
-    private static var config: OptimoveConfig? = {
+    private static var pendingPush: PushNotification? = nil
+
+    // ========================== INITIALIZATION ==========================
+
+    override func pluginInitialize() {
+        OptimoveSDKPlugin.optimovePluginInstance = self
+    }
+
+    @objc(didFinishLaunching:)
+    static func didFinishLaunching(notification: Notification) {
         let configPath = Bundle.main.path(forResource: "optimove", ofType: "plist")
 
         guard let configPath = configPath else {
             print("optimove.plist NOT FOUND")
-            return nil
+            return
         }
 
         guard let configValues: [String: String] = NSDictionary(contentsOfFile: configPath) as? [String: String] else {
             print("optimove.plist IS NOT VALID")
-            return nil
+            return
         }
 
+        guard let builder = getConfigBuilder(configValues: configValues) else{
+            return
+        };
+
+//      // TODO: PushNotification initializer is internal. Flutter: no pending anything
+//      if let userInfo = notification.userInfo {
+//          let dict = userInfo[UIApplication.LaunchOptionsKey.remoteNotification];
+//          if (dict != nil){
+//              pendingPush = PushNotification(userInfo: dict)
+//          }
+//      }
+
+        builder.setPushOpenedHandler(pushOpenedHandlerBlock: { notification in
+            if (OptimoveSDKPlugin.optimovePluginInstance != nil){
+                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushOpened", data: getPushNotificationMap(pushNotification: notification))
+            }
+        })
+
+        if #available(iOS 10, *) {
+            builder.setPushReceivedInForegroundHandler(pushReceivedInForegroundHandlerBlock: { notification , UNNotificationPresentationOptions -> Void in
+                if (OptimoveSDKPlugin.optimovePluginInstance != nil){
+                    OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushReceived", data: getPushNotificationMap(pushNotification: notification))
+                }
+            })
+        }
+
+        if (configValues[inAppConsentStrategy] != InAppConsentStrategy.disabled.rawValue) {
+            builder.enableInAppMessaging(inAppConsentStrategy: configValues[inAppConsentStrategy] == InAppConsentStrategy.autoEnroll.rawValue ? OptimoveSDK.InAppConsentStrategy.autoEnroll : OptimoveSDK.InAppConsentStrategy.explicitByUser)
+        }
+
+        builder.setInAppDeepLinkHandler(inAppDeepLinkHandlerBlock: { data in
+            if (OptimoveSDKPlugin.optimovePluginInstance != nil){
+                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "inAppDeepLinkHandler", data: getInappButtonPressMap(inAppButtonPress: data))
+            }
+        })
+
+        let config = builder.build()
+
+        Optimove.initialize(with: config)
+
+        OptimoveInApp.setOnInboxUpdated(inboxUpdatedHandlerBlock: {
+            if (OptimoveSDKPlugin.optimovePluginInstance != nil){
+                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
+            }
+        })
+    }
+
+    static func getConfigBuilder(configValues: [String: String]) -> OptimoveConfigBuilder? {
         var optimoveCredentials: String? = nil
         if let val = configValues[optimoveCredentialsKey] {
             if (!val.isEmpty){
@@ -29,35 +94,18 @@ import NotificationCenter
         }
 
         var optimobileCredentials: String? = nil
-            if let val = configValues[optimoveMobileCredentialsKey] {
+        if let val = configValues[optimoveMobileCredentialsKey] {
             if (!val.isEmpty){
                 optimobileCredentials = val;
             }
         }
 
-        //TODO: opened.received/... handlers
         let builder = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
-        builder.setPushOpenedHandler(pushOpenedHandlerBlock:...)
 
-        return builder.build()
-    }()
-
-    override func pluginInitialize() {
-        OptimoveSDKPlugin.optimovePluginInstance = self
+        return builder
     }
 
-    @objc(didFinishLaunching:)
-    static func didFinishLaunching(notification: Notification) {
-        guard let config = OptimoveSDKPlugin.config else { return }
-
-        Optimove.initialize(with: config)
-
-        OptimoveInApp.setOnInboxUpdated(inboxUpdatedHandlerBlock: {
-            if (optimovePluginInstance != nil){
-                optimovePluginInstance.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
-            }
-        })
-    }
+    // ========================== ASSOCIATION AND EVENTS ==========================
 
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
@@ -166,8 +214,24 @@ import NotificationCenter
         self.commandDelegate.send(CDVPluginResult.init(status: CDVCommandStatus_OK), callbackId: command.callbackId)
     }
 
+    @objc(checkIfPendingPushExists:)
+    func checkIfPendingPushExists(command: CDVInvokedUrlCommand){
+        if (OptimoveSDKPlugin.cordovaCommand == nil){
+            OptimoveSDKPlugin.cordovaCommand = command
+        }
 
-    func sendMessageToJs(type: String, data: Any?){
+        if let notification = OptimoveSDKPlugin.pendingPush {
+            OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushOpened", data: OptimoveSDKPlugin.getPushNotificationMap(pushNotification: notification))
+            OptimoveSDKPlugin.pendingPush = nil
+        }
+        else{
+            let pluginResult: CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK)
+            pluginResult.setKeepCallbackAs(true)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
+    }
+
+    func sendMessageToJs(type: String, data: [String: Any?]?){
         guard let command = OptimoveSDKPlugin.cordovaCommand else {
             return
         }
@@ -302,8 +366,8 @@ import NotificationCenter
 
                 let result = OptimoveInApp.markAsRead(item: msg)
                 pluginResult = result ?
-                    CDVPluginResult.init(status: CDVCommandStatus_OK) :
-                    CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Failed to mark message as read")
+                CDVPluginResult.init(status: CDVCommandStatus_OK) :
+                CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Failed to mark message as read")
 
                 break
             }
@@ -335,5 +399,37 @@ import NotificationCenter
                 self.commandDelegate.send(.init(status: .error, messageAs: "Could not get inbox summary"), callbackId: command.callbackId)
             }
         }
+    }
+
+    private static func getPushNotificationMap(pushNotification: PushNotification) -> [String: Any?] {
+        let aps: [AnyHashable:Any] = pushNotification.aps
+        var alert: [String: String] = [:]
+        if let a = aps["alert"] as? Dictionary<String, String> {
+            alert = a
+        }
+
+        let title: String? = alert["title"] ?? nil
+        let message: String? = alert["body"] ?? nil
+
+        let dict: [String: Any?] = [
+            "id": pushNotification.id,
+            "title": title,
+            "message": message,
+            "data": pushNotification.data,
+            "url": pushNotification.url?.absoluteString,
+            "actionId": pushNotification.actionIdentifier
+        ]
+
+        return dict
+    }
+
+    private static func getInappButtonPressMap(inAppButtonPress: InAppButtonPress) -> [String: Any?] {
+        let dict: [String: Any?] = [
+            "deepLinkData": inAppButtonPress.deepLinkData,
+            "messageData": inAppButtonPress.messageData,
+            "messageId": inAppButtonPress.messageId
+        ]
+
+        return dict
     }
 }
