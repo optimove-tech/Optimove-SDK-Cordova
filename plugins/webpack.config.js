@@ -5,13 +5,16 @@ module.exports = {
   entry: "./src/core/index.ts",
   externals: {
     cordova: "cordova",
-    },
-    resolve: {
-        extensions: ['.ts','.js']
-    },
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   output: {
     path: path.resolve(__dirname, "www"),
     filename: "OptimoveCore.js",
+    library: {
+        type: "commonjs2"
+    },
   },
   module: {
     rules: [
