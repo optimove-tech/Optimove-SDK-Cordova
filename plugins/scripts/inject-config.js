@@ -11,14 +11,21 @@ module.exports = function injectOptimoveConfig(context) {
       return;
   }
 
+  const config = createJsonWithDefaultValues(
+    optimoveConfig.optimoveCredentials,
+    optimoveConfig.optimoveMobileCredentials,
+    optimoveConfig.inAppConsentStrategy,
+    optimoveConfig.enableDeferredDeepLinking
+  );
+
   if (hasPlatform(context, 'android')) {
       console.info('Optimove: Preparing Android platform...');
-      prepareAndroid(context, optimoveConfig);
+      prepareAndroid(context, config);
   }
 
   if (hasPlatform(context, 'ios')) {
       console.info('Optimove: Preparing iOS platform...');
-      prepareIos(context, optimoveConfig);
+      prepareIos(context, config);
   }
 };
 
@@ -115,14 +122,7 @@ function replaceFields(str, fields) {
 
 // ===================== ANDROID SPECIFIC ======================
 
-function prepareAndroid(context, optimoveConfig) {
-  const config = createJsonWithDefaultValues(
-    optimoveConfig.optimoveCredentials,
-    optimoveConfig.optimoveMobileCredentials,
-    optimoveConfig.inAppConsentStrategy,
-    optimoveConfig.enableDeferredDeepLinking
-  );
-
+function prepareAndroid(context, config) {
   writeOptimoveXml(context, config);
 
   if (config.ENABLE_DEFERRED_DEEP_LINKING){
@@ -146,7 +146,7 @@ function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredenti
         : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
     ENABLE_DEFERRED_DEEP_LINKING:
-      enableDeferredDeepLinking === 'true' || enableDeferredDeepLinking === true
+      enableDeferredDeepLinking === true
  }
 }
 
@@ -225,7 +225,7 @@ function writeGoogleServicesJson(context){
 
 // ===================== IOS SPECIFIC ======================
 
-function prepareIos(context, OptimoveConfig) {
+function prepareIos(context, config) {
   const iosPath = path.join(context.opts.projectRoot, 'platforms', 'ios');
   const files = fs.readdirSync(iosPath);
 
@@ -246,10 +246,7 @@ function prepareIos(context, OptimoveConfig) {
       return;
   }
 
-  const config = renderTemplate('optimove.xml', {
-      OPTIMOVE_CREDENTIALS: optimoveConifg.optimoveCredentials,
-      OPTIMOVE_MOBILE_CREDENTIALS: optimoveConifg.optimoveMobileCredentials
-  });
+  const realisedTemplate = renderTemplate('optimove.plist', config);
 
-  fs.writeFileSync(configDest, config, { encoding: 'utf-8' });
+  fs.writeFileSync(configDest, realisedTemplate, { encoding: 'utf-8' });
 }

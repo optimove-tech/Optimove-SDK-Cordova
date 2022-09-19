@@ -1,12 +1,5 @@
-//
-//  InitializePluginManager.m
-//  Example_App
-//
-//  Created by Barak Ben Hur on 03/08/2022.
-//
-
 #import "InitializePluginManager.h"
-#import "OptimoveSDKPlugin-Swift.h"
+#import "Bridging-Header.h"
 
 @implementation InitializePluginManager
 
