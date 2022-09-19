@@ -70,7 +70,7 @@ enum InAppConsentStrategy: String {
 
         builder.setInAppDeepLinkHandler(inAppDeepLinkHandlerBlock: { data in
             if (OptimoveSDKPlugin.optimovePluginInstance != nil){
-                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "inAppDeepLinkHandler", data: getInappButtonPressMap(inAppButtonPress: data))
+                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "inAppDeepLink", data: getInappButtonPressMap(inAppButtonPress: data))
             }
         })
 
@@ -207,8 +207,8 @@ enum InAppConsentStrategy: String {
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
-    @objc(clearJsContext:)
-    func clearJsContext(command: CDVInvokedUrlCommand){
+    @objc(clearContext:)
+    func clearContext(command: CDVInvokedUrlCommand){
         OptimoveSDKPlugin.cordovaCommand = nil
 
         self.commandDelegate.send(CDVPluginResult.init(status: CDVCommandStatus_OK), callbackId: command.callbackId)
@@ -431,5 +431,16 @@ enum InAppConsentStrategy: String {
         ]
 
         return dict
+    }
+
+    // ========================== DDL ==========================
+
+    @objc(checkIfPendingDDLExists:)
+    func checkIfPendingDDLExists(command: CDVInvokedUrlCommand){
+        //TODO: implement. this stub is to prevent error
+
+        let pluginResult: CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK)
+        pluginResult.setKeepCallbackAs(true)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 }
