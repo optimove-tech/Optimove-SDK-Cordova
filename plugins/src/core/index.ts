@@ -115,13 +115,13 @@ interface InAppInboxItem {
     id: number;
     title: string ;
     subtitle:String ;
-    availableFrom?: string;
-    availableTo?: string;
-    dismissedAt?: string;
-    readAt?: string ;
+    availableFrom: string | null;
+    availableTo: string | null;
+    dismissedAt: string | null;
+    readAt: string | null ;
     sentAt: string ;
-    data?: JSON;
-    imagePath?: string;
+    data: JSON | null;
+    imagePath: string | null;
     isRead: boolean;
 }
 interface EventParams {
