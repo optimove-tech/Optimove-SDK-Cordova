@@ -88,8 +88,8 @@ function checkIfPendingPushExists() {
   });
 }
 
-function nativeMessageHandler(message) {
-  if (!message || typeof message === "string") {
+function nativeMessageHandler(message: handlerMessage) {
+  if (!message) {
     return;
   }
 
@@ -131,7 +131,10 @@ interface InAppInboxSummary {
   totalCount: number;
   unreadCount: number;
 }
-
+interface handlerMessage {
+  type: string;
+  data: JSON;
+ }
 const Optimove = {
   /**
    * Sets the User ID of the current user and starts the {@code Visitor} to {@code Customer} conversion flow.
