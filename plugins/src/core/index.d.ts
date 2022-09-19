@@ -29,7 +29,7 @@ interface InAppInboxSummary {
 }
 declare const Optimove: {
     /**
-     * Sets the User ID of the current user and starts the {@code Visitor} to {@code Customer} conversion flow.<br>
+     * Sets the User ID of the current user and starts the {@code Visitor} to {@code Customer} conversion flow.
      * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
      * If you report both the user ID and the email, use {@link Optimove.registerUser(String, String)}
      *
@@ -40,7 +40,7 @@ declare const Optimove: {
      * Attaches an email address to the current user.
      * If you report both the user ID and the email, use {@link Optimove.registerUser(String, String)}
      *
-     * @param email the <i>email address</i> to attach
+     * @param email the email address to attach
      */
     setUserEmail: (userEmail: string) => Promise<void>;
     /**
@@ -108,7 +108,7 @@ declare const Optimove: {
     inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<void>;
     /**
      * Deletes a specified inAppInboxItem from inbox
-     * @param inAppInboxItem the item to that will be deleted
+     * @param inAppInboxItem the item to be deleted
      */
     inAppDeleteMessageFromInbox: (inAppInboxItem: InAppInboxItem) => Promise<void>;
     /**
