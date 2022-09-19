@@ -96,14 +96,14 @@ function nativeMessageHandler(message: handlerMessage) {
   const handlerName = `${message.type}Handler`;
   if (
     handlerName === "inAppInboxUpdatedHandler" &&
-    typeof currentConfig[handlerName] === "function"
+     currentConfig[handlerName] !== null
   ) {
     currentConfig[handlerName]?.();
 
     return;
   }
 
-  if (typeof currentConfig[handlerName] === "function") {
+  if (currentConfig[handlerName] !== null) {
     currentConfig[handlerName](message.data);
   } else {
     console.log(`Optimove: No handler defined for '${message.type}' event`);
