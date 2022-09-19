@@ -137,7 +137,7 @@ interface handlerMessage {
  }
 const Optimove = {
   /**
-   * Sets the User ID of the current user and starts the {@code Visitor} to {@code Customer} conversion flow.
+   * Sets the User ID of the current user.
    * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
    * If you report both the user ID and the email, use {@link Optimove.registerUser(String, String)}
    *
@@ -193,7 +193,7 @@ const Optimove = {
     });
   },
   /**
-   * Method that performs both the {@code setUserId} and the {@code setUserEmail} flows from a single call.
+   * Method that performs both the {setUserId} and the {setUserEmail} flows from a single call.
    *
    * @param userId The new userId
    * @param email  the email address to attach
