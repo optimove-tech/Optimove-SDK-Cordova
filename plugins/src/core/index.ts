@@ -111,16 +111,18 @@ function nativeMessageHandler(message) {
 }
 
 interface InAppInboxItem {
-  id: number;
-  title: string;
-  subtitle: string;
-  availableFrom: string | "";
-  availableTo: string | "";
-  dismissedAt: string | "";
-  isRead: boolean;
-  sentAt?: string;
-  data?: { [key: string]: any };
-  imageUrl?: string;
+ 
+    id: number;
+    title: string ;
+    subtitle:String ;
+    availableFrom?: string;
+    availableTo?: string;
+    dismissedAt?: string;
+    readAt?: string ;
+    sentAt: string ;
+    data?: JSON;
+    imagePath?: string;
+    isRead: boolean;
 }
 interface EventParams {
   [key: string]: any;
