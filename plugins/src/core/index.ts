@@ -7,11 +7,11 @@ import {
 } from "./handlers";
 
 export interface OptimoveConfig{
-  pushReceivedHandler?: PushNotificationHandler | null;
-  pushOpenedHandler?: PushNotificationHandler | null;
-  inAppDeepLinkHandler?: InAppDeepLinkHandler | null;
-  inAppInboxUpdatedHandler?: InAppInboxUpdatedHandler | null;
-  deepLinkHandler?: DeepLinkHandler | null;
+  pushReceivedHandler: PushNotificationHandler | null;
+  pushOpenedHandler: PushNotificationHandler | null;
+  inAppDeepLinkHandler: InAppDeepLinkHandler | null;
+  inAppInboxUpdatedHandler: InAppInboxUpdatedHandler | null;
+  deepLinkHandler: DeepLinkHandler | null;
 }
 
 let currentConfig: OptimoveConfig = {
