@@ -2,9 +2,14 @@ interface DeepLinkContent {
   title?: string;
   description?: string;
 }
-
-export interface DeepLink {
+export interface DeepLinkData {
+  data: JSON;
   content: DeepLinkContent;
-  data: any;
   url: string;
+}
+ 
+export interface DeepLink {
+  link: string;
+  resolution: string;
+  data: DeepLinkData;
 }
