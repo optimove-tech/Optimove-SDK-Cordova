@@ -1,24 +1,23 @@
 import { PushNotificationHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, DeepLinkHandler } from "./handlers";
 export interface OptimoveConfig {
-    pushReceivedHandler?: PushNotificationHandler | null;
-    pushOpenedHandler?: PushNotificationHandler | null;
-    inAppDeepLinkHandler?: InAppDeepLinkHandler | null;
-    inAppInboxUpdatedHandler?: InAppInboxUpdatedHandler | null;
-    deepLinkHandler?: DeepLinkHandler | null;
+    pushReceivedHandler: PushNotificationHandler | null;
+    pushOpenedHandler: PushNotificationHandler | null;
+    inAppDeepLinkHandler: InAppDeepLinkHandler | null;
+    inAppInboxUpdatedHandler: InAppInboxUpdatedHandler | null;
+    deepLinkHandler: DeepLinkHandler | null;
 }
 interface InAppInboxItem {
     id: number;
     title: string;
-    subtitle: string;
-    availableFrom: string | "";
-    availableTo: string | "";
-    dismissedAt: string | "";
+    subtitle: String;
+    availableFrom: string | null;
+    availableTo: string | null;
+    dismissedAt: string | null;
+    readAt: string | null;
+    sentAt: string;
+    data: JSON | null;
+    imagePath: string | null;
     isRead: boolean;
-    sentAt?: string;
-    data?: {
-        [key: string]: any;
-    };
-    imageUrl?: string;
 }
 interface EventParams {
     [key: string]: any;
@@ -29,7 +28,7 @@ interface InAppInboxSummary {
 }
 declare const Optimove: {
     /**
-     * Sets the User ID of the current user and starts the {@code Visitor} to {@code Customer} conversion flow.
+     * Sets the User ID of the current user.
      * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
      * If you report both the user ID and the email, use {@link Optimove.registerUser(String, String)}
      *
@@ -56,7 +55,7 @@ declare const Optimove: {
      */
     reportScreenVisit: (screenName: string, screenCategory: string) => Promise<void>;
     /**
-     * Method that performs both the {@code setUserId} and the {@code setUserEmail} flows from a single call.
+     * Method that performs both the {setUserId} and the {setUserEmail} flows from a single call.
      *
      * @param userId The new userId
      * @param email  the email address to attach

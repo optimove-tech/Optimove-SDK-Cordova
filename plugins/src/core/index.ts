@@ -88,18 +88,14 @@ function checkIfPendingPushExists() {
   });
 }
 
-function nativeMessageHandler(message: handlerMessage) {
-  if (!message) {
+function nativeMessageHandler(message : HandlerMessage | string) {
+  if (!message || typeof message === 'string') {
     return;
   }
-
   const handlerName = `${message.type}Handler`;
   if (
-    handlerName === "inAppInboxUpdatedHandler" &&
-     currentConfig[handlerName] !== null
-  ) {
+    handlerName === "inAppInboxUpdatedHandler") {
     currentConfig[handlerName]?.();
-
     return;
   }
 
@@ -131,7 +127,7 @@ interface InAppInboxSummary {
   totalCount: number;
   unreadCount: number;
 }
-interface handlerMessage {
+interface HandlerMessage {
   type: string;
   data: JSON;
  }
