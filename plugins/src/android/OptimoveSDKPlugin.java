@@ -452,7 +452,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 inAppButtonPress.put("messageId", buttonPress.getMessageId());
                 inAppButtonPress.put("messageData", buttonPress.getMessageData());
             } catch (JSONException e) {
-                LOG.e("inAppDeepLinkHandler failed due to JSONException. error message:", e.getMessage());
+                LOG.e("inAppDeepLinkHandler handling failed due to JSONException. error message:", e.getMessage());
                 return;
             }
             sendMessageToJs("inAppDeepLink", inAppButtonPress);
