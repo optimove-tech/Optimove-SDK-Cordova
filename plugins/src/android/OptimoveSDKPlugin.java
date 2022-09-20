@@ -452,7 +452,6 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 inAppButtonPress.put("messageData", buttonPress.getMessageData());
             } catch (JSONException e) {
                 //noop
-                return;
             }
             sendMessageToJs("inAppDeepLink", inAppButtonPress);
         }
