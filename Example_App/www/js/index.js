@@ -41,11 +41,9 @@ function error(errorMessage) {
   console.error(errorMessage);
 }
 
-
-
 function deepLinkHandler(deepLink) {
-    alert("deepLinkHandler: " + JSON.stringify(deepLink));
- }
+  alert("deepLinkHandler: " + JSON.stringify(deepLink));
+}
 function pushReceivedHandler(pushMessage) {
   console.log("pushReceivedHandler: " + JSON.stringify(pushMessage));
 }
@@ -148,7 +146,7 @@ document
 
 function getVisitorId() {
   Optimove.getVisitorId().then((visitorId) => {
-    document.getElementById("text-area-visitor-id").value = visitorId;
+    alert(visitorId);
   }, error);
 }
 
@@ -249,12 +247,4 @@ function inAppDeleteMessageFromInbox() {
     error
   );
 }
-document
-  .getElementById("get-visitor-id-button")
-  .addEventListener("click", getVisitorId);
 
-function getVisitorId() {
-  Optimove.getVisitorId().then((visitorId) => {
-    document.getElementById("text-area-visitor-id").value = visitorId;
-  }, error);
-}
