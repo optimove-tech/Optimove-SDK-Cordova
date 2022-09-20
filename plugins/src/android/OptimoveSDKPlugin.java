@@ -445,7 +445,15 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
         @Override
         public void handle(Context context, InAppButtonPress buttonPress) {
-            sendMessageToJs("inAppDeepLink", buttonPress.getDeepLinkData());
+            JSONObject inAppButtonPress = new JSONObject();
+            try {
+                inAppButtonPress.put("deepLinkData", buttonPress.getDeepLinkData());
+                inAppButtonPress.put("messageId", buttonPress.getMessageId());
+                inAppButtonPress.put("messageData", buttonPress.getMessageData());
+            } catch (JSONException e) {
+                //noop
+            }
+            sendMessageToJs("inAppDeepLink", inAppButtonPress);
         }
     }
 
