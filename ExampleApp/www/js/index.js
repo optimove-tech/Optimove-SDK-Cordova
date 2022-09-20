@@ -234,8 +234,8 @@ document
 
 function inAppPresentInboxMessage() {
   Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
-    success,
-    error
+      () => {},
+      error
   );
 }
 

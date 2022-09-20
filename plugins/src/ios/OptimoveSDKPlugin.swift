@@ -57,10 +57,12 @@ enum InAppConsentStrategy: String {
         })
 
         if #available(iOS 10, *) {
-            builder.setPushReceivedInForegroundHandler(pushReceivedInForegroundHandlerBlock: { notification , UNNotificationPresentationOptions -> Void in
+            builder.setPushReceivedInForegroundHandler(pushReceivedInForegroundHandlerBlock: { notification, completionHanlder in
                 if (OptimoveSDKPlugin.optimovePluginInstance != nil){
                     OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushReceived", data: getPushNotificationMap(pushNotification: notification))
                 }
+
+                completionHanlder(UNNotificationPresentationOptions.alert)
             })
         }
 
