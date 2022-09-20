@@ -1,4 +1,5 @@
 import { PushNotificationHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, DeepLinkHandler } from "./handlers";
+import { InAppInboxItem, InAppInboxSummary } from "./inApp";
 export interface OptimoveConfig {
     pushReceivedHandler: PushNotificationHandler | null;
     pushOpenedHandler: PushNotificationHandler | null;
@@ -6,25 +7,8 @@ export interface OptimoveConfig {
     inAppInboxUpdatedHandler: InAppInboxUpdatedHandler | null;
     deepLinkHandler: DeepLinkHandler | null;
 }
-interface InAppInboxItem {
-    id: number;
-    title: string;
-    subtitle: String;
-    availableFrom: string | null;
-    availableTo: string | null;
-    dismissedAt: string | null;
-    readAt: string | null;
-    sentAt: string;
-    data: JSON | null;
-    imagePath: string | null;
-    isRead: boolean;
-}
 interface EventParams {
     [key: string]: any;
-}
-interface InAppInboxSummary {
-    totalCount: number;
-    unreadCount: number;
 }
 declare const Optimove: {
     /**

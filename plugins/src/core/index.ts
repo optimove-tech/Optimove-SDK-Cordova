@@ -5,7 +5,7 @@ import {
   InAppInboxUpdatedHandler,
   DeepLinkHandler,
 } from "./handlers";
-
+import { InAppInboxItem, InAppInboxSummary} from "./inApp";
 export interface OptimoveConfig{
   pushReceivedHandler: PushNotificationHandler | null;
   pushOpenedHandler: PushNotificationHandler | null;
@@ -106,27 +106,10 @@ function nativeMessageHandler(message : HandlerMessage | string) {
   }
 }
 
-interface InAppInboxItem {
- 
-    id: number;
-    title: string ;
-    subtitle:String ;
-    availableFrom: string | null;
-    availableTo: string | null;
-    dismissedAt: string | null;
-    readAt: string | null ;
-    sentAt: string ;
-    data: JSON | null;
-    imagePath: string | null;
-    isRead: boolean;
-}
 interface EventParams {
   [key: string]: any;
 }
-interface InAppInboxSummary {
-  totalCount: number;
-  unreadCount: number;
-}
+
 interface HandlerMessage {
   type: string;
   data: JSON;

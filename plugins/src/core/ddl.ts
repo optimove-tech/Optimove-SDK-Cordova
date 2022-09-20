@@ -1,4 +1,4 @@
-interface DeepLinkContent {
+export interface DeepLinkContent {
   title?: string;
   description?: string;
 }
