@@ -10,6 +10,14 @@ export interface DeepLinkData {
  
 export interface DeepLink {
   link: string;
-  resolution: string;
+  resolution: DeepLinkResolution;
   data: DeepLinkData;
+}
+
+export enum DeepLinkResolution {
+  LOOKUP_FAILED,
+  LINK_NOT_FOUND,
+  LINK_EXPIRED,
+  LINK_LIMIT_EXCEEDED,
+  LINK_MATCHED,
 }
