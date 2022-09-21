@@ -1,15 +1,14 @@
 export interface InAppInboxItem {
     id: number;
     title: string;
-    subtitle: String;
+    subtitle: string;
     availableFrom: string | null;
     availableTo: string | null;
     dismissedAt: string | null;
-    readAt: string | null;
     sentAt: string;
     data: JSON | null;
-    imagePath: string | null;
     isRead: boolean;
+    imageUrl: string;
 }
 export interface InAppInboxSummary {
     totalCount: number;
