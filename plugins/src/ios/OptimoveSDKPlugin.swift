@@ -42,18 +42,14 @@ enum InAppConsentStrategy: String {
             return
         };
 
-//      // TODO: PushNotification initializer is internal. Flutter: no pending anything
-//      if let userInfo = notification.userInfo {
-//          let dict = userInfo[UIApplication.LaunchOptionsKey.remoteNotification];
-//          if (dict != nil){
-//              pendingPush = PushNotification(userInfo: dict)
-//          }
-//      }
-
         builder.setPushOpenedHandler(pushOpenedHandlerBlock: { notification in
-            if (OptimoveSDKPlugin.optimovePluginInstance != nil){
-                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushOpened", data: getPushNotificationMap(pushNotification: notification))
+            guard let pluginInstance = OptimoveSDKPlugin.optimovePluginInstance, let _ = OptimoveSDKPlugin.cordovaCommand else {
+                pendingPush = notification
+
+                return
             }
+
+            pluginInstance.sendMessageToJs(type: "pushOpened", data: getPushNotificationMap(pushNotification: notification))
         })
 
         if #available(iOS 10, *) {
@@ -203,6 +199,19 @@ enum InAppConsentStrategy: String {
     @objc(setHandlersCallBackContext:)
     func setHandlersCallBackContext(command: CDVInvokedUrlCommand){
         OptimoveSDKPlugin.cordovaCommand = command
+
+        let checkForPendingPush: Bool = command.arguments[0] as! Bool
+        let checkForPendingDdl: Bool = command.arguments[1] as! Bool
+
+        if (checkForPendingPush){
+            self.checkIfPendingPushExists(command: command)
+        }
+
+        if (checkForPendingDdl){
+            //TODO
+
+            //return
+        }
 
         let pluginResult:CDVPluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
         pluginResult.setKeepCallbackAs(true)
@@ -434,6 +443,7 @@ enum InAppConsentStrategy: String {
 
         return dict
     }
+
 
     // ========================== DDL ==========================
 

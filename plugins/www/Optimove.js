@@ -41,13 +41,15 @@ function clearContext() {
 }
 
 function setHandlersCallBackContext() {
+  const checkForPendingPush = currentConfig["pushOpenedHandler"] !== null;
+  const checkForPendingDdl = currentConfig["deepLinkHandler"] !== null;
   return new Promise((resolve, reject) => {
     exec(
       nativeMessageHandler,
       reject,
       "OptimoveSDKPlugin",
       "setHandlersCallBackContext",
-      []
+      [checkForPendingPush, checkForPendingDdl]
     );
   });
 }
