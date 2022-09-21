@@ -7,7 +7,7 @@ export interface OptimoveConfig {
     inAppInboxUpdatedHandler: InAppInboxUpdatedHandler | null;
     deepLinkHandler: DeepLinkHandler | null;
 }
-interface EventParams {
+export interface EventParams {
     [key: string]: any;
 }
 declare const Optimove: {

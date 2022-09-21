@@ -106,11 +106,11 @@ function nativeMessageHandler(message : HandlerMessage | string) {
   }
 }
 
-interface EventParams {
+export interface EventParams {
   [key: string]: any;
 }
 
-interface HandlerMessage {
+export interface HandlerMessage {
   type: string;
   data: JSON;
  }
