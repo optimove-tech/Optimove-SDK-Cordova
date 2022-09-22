@@ -62,8 +62,18 @@ enum InAppConsentStrategy: String {
             })
         }
 
-        if (configValues[inAppConsentStrategy] != InAppConsentStrategy.disabled.rawValue) {
-            builder.enableInAppMessaging(inAppConsentStrategy: configValues[inAppConsentStrategy] == InAppConsentStrategy.autoEnroll.rawValue ? OptimoveSDK.InAppConsentStrategy.autoEnroll : OptimoveSDK.InAppConsentStrategy.explicitByUser)
+        switch(configValues[inAppConsentStrategy]){
+            case InAppConsentStrategy.autoEnroll.rawValue:
+                builder.enableInAppMessaging(inAppConsentStrategy:OptimoveSDK.InAppConsentStrategy.autoEnroll);
+                break
+            case InAppConsentStrategy.explicitByUser.rawValue:
+                builder.enableInAppMessaging(inAppConsentStrategy:OptimoveSDK.InAppConsentStrategy.explicitByUser);
+                break
+            case InAppConsentStrategy.disabled.rawValue:
+                break
+            default:
+                print("Invalid inApp consent strategy")
+                return
         }
 
         builder.setInAppDeepLinkHandler(inAppDeepLinkHandlerBlock: { data in
