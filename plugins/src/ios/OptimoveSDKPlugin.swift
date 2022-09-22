@@ -1,25 +1,93 @@
 import OptimoveSDK
 import NotificationCenter
 
+enum InAppConsentStrategy: String {
+    case autoEnroll = "auto-enroll"
+    case explicitByUser = "explicit-by-user"
+    case disabled = "in-app-disabled"
+}
+
 @objc(Optimove_Cordova) class OptimoveSDKPlugin : CDVPlugin {
     private static var optimovePluginInstance: OptimoveSDKPlugin!
+    private static var cordovaCommand: CDVInvokedUrlCommand? = nil
 
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
+    private static let inAppConsentStrategy = "optimoveInAppConsentStrategy"
+    //private static let enableDeferredDeepLinking = "optimoveEnableDeferredDeepLinking"
 
-    private static var config: OptimoveConfig? = {
+    private static var pendingPush: PushNotification? = nil
+
+    // ========================== INITIALIZATION ==========================
+
+    override func pluginInitialize() {
+        OptimoveSDKPlugin.optimovePluginInstance = self
+    }
+
+    @objc(didFinishLaunching:)
+    static func didFinishLaunching(notification: Notification) {
         let configPath = Bundle.main.path(forResource: "optimove", ofType: "plist")
 
         guard let configPath = configPath else {
             print("optimove.plist NOT FOUND")
-            return nil
+            return
         }
 
         guard let configValues: [String: String] = NSDictionary(contentsOfFile: configPath) as? [String: String] else {
             print("optimove.plist IS NOT VALID")
-            return nil
+            return
         }
 
+        guard let builder = getConfigBuilder(configValues: configValues) else{
+            return
+        };
+
+        builder.setPushOpenedHandler(pushOpenedHandlerBlock: { notification in
+            guard let pluginInstance = OptimoveSDKPlugin.optimovePluginInstance, let _ = OptimoveSDKPlugin.cordovaCommand else {
+                pendingPush = notification
+
+                return
+            }
+
+            pluginInstance.sendMessageToJs(type: "pushOpened", data: getPushNotificationMap(pushNotification: notification))
+        })
+
+        if #available(iOS 10, *) {
+            builder.setPushReceivedInForegroundHandler(pushReceivedInForegroundHandlerBlock: { notification, completionHanlder in
+                OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "pushReceived", data: getPushNotificationMap(pushNotification: notification))
+
+                completionHanlder(UNNotificationPresentationOptions.alert)
+            })
+        }
+
+        switch(configValues[inAppConsentStrategy]){
+            case InAppConsentStrategy.autoEnroll.rawValue:
+                builder.enableInAppMessaging(inAppConsentStrategy:OptimoveSDK.InAppConsentStrategy.autoEnroll);
+                break
+            case InAppConsentStrategy.explicitByUser.rawValue:
+                builder.enableInAppMessaging(inAppConsentStrategy:OptimoveSDK.InAppConsentStrategy.explicitByUser);
+                break
+            case InAppConsentStrategy.disabled.rawValue:
+                break
+            default:
+                print("Invalid inApp consent strategy")
+                return
+        }
+
+        builder.setInAppDeepLinkHandler(inAppDeepLinkHandlerBlock: { data in
+            OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "inAppDeepLink", data: getInappButtonPressMap(inAppButtonPress: data))
+        })
+
+        let config = builder.build()
+
+        Optimove.initialize(with: config)
+
+        OptimoveInApp.setOnInboxUpdated(inboxUpdatedHandlerBlock: {
+            OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
+        })
+    }
+
+    static func getConfigBuilder(configValues: [String: String]) -> OptimoveConfigBuilder? {
         var optimoveCredentials: String? = nil
         if let val = configValues[optimoveCredentialsKey] {
             if (!val.isEmpty){
@@ -28,27 +96,18 @@ import NotificationCenter
         }
 
         var optimobileCredentials: String? = nil
-            if let val = configValues[optimoveMobileCredentialsKey] {
+        if let val = configValues[optimoveMobileCredentialsKey] {
             if (!val.isEmpty){
                 optimobileCredentials = val;
             }
         }
 
-        let config = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
+        let builder = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
 
-        return config.build()
-    }()
-
-    override func pluginInitialize() {
-        OptimoveSDKPlugin.optimovePluginInstance = self
+        return builder
     }
 
-    @objc(didFinishLaunching:)
-    static func didFinishLaunching(notification: Notification) {
-        guard let config = OptimoveSDKPlugin.config else { return }
-
-        Optimove.initialize(with: config)
-    }
+    // ========================== ASSOCIATION AND EVENTS ==========================
 
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
@@ -65,7 +124,6 @@ import NotificationCenter
         }
 
         Optimove.shared.reportEvent(name: name, parameters: parameters)
-
         let pluginResult = CDVPluginResult(status: .ok)
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
@@ -137,6 +195,268 @@ import NotificationCenter
         Optimove.shared.setUserEmail(email: email)
 
         let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
+    // ========================== MESSAGING ==========================
+
+    @objc(setHandlersCallBackContext:)
+    func setHandlersCallBackContext(command: CDVInvokedUrlCommand){
+        OptimoveSDKPlugin.cordovaCommand = command
+
+        let checkForPendingPush: Bool = command.arguments[0] as! Bool
+        let checkForPendingDdl: Bool = command.arguments[1] as! Bool
+
+        if (checkForPendingPush){
+            self.checkIfPendingPushExists(command: command)
+        }
+
+        if (checkForPendingDdl){
+            //TODO
+
+            //return
+        }
+
+        let pluginResult:CDVPluginResult = CDVPluginResult.init(status: .ok)
+        pluginResult.setKeepCallbackAs(true)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
+    @objc(clearContext:)
+    func clearContext(command: CDVInvokedUrlCommand){
+        OptimoveSDKPlugin.cordovaCommand = nil
+
+        self.commandDelegate.send(CDVPluginResult.init(status: .ok), callbackId: command.callbackId)
+    }
+
+    @objc(checkIfPendingPushExists:)
+    func checkIfPendingPushExists(command: CDVInvokedUrlCommand){
+        if (OptimoveSDKPlugin.cordovaCommand == nil){
+            OptimoveSDKPlugin.cordovaCommand = command
+        }
+
+        if let notification = OptimoveSDKPlugin.pendingPush {
+            OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushOpened", data: OptimoveSDKPlugin.getPushNotificationMap(pushNotification: notification))
+            OptimoveSDKPlugin.pendingPush = nil
+        }
+        else{
+            let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
+            pluginResult.setKeepCallbackAs(true)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
+    }
+
+    func sendMessageToJs(type: String, data: [String: Any?]?){
+        guard let command = OptimoveSDKPlugin.cordovaCommand else {
+            return
+        }
+
+        var message: [String: Any] = [
+            "type": type
+        ]
+
+        if (data != nil){
+            message["data"] = data
+        }
+
+        let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok, messageAs: message)
+        pluginResult.setKeepCallbackAs(true)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
+    @objc(pushRegister:)
+    func pushRegister(command: CDVInvokedUrlCommand) {
+        Optimove.shared.pushRequestDeviceToken()
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
+    @objc(inAppUpdateConsent:)
+    func inAppUpdateConsent(command: CDVInvokedUrlCommand) {
+        let consented: Bool = command.arguments[0] as! Bool
+        OptimoveInApp.updateConsent(forUser: consented)
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
+    @objc(inAppGetInboxItems:)
+    func inAppGetInboxItems(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run(inBackground:{
+            let inboxItems = OptimoveInApp.getInboxItems()
+            var items = [[String : Any]]()
+
+            let formatter = DateFormatter()
+            formatter.timeStyle = .full
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+            for item in inboxItems {
+                var dict: [String: Any] = [
+                    "id": item.id,
+                    "title": item.title,
+                    "subtitle": item.subtitle,
+                    "availableFrom": item.availableFrom != nil ? formatter.string(from: item.availableFrom!) : "",
+                    "availableTo": item.availableTo != nil ? formatter.string(from: item.availableTo!) : "",
+                    "dismissedAt": item.dismissedAt != nil ? formatter.string(from: item.dismissedAt!) : "",
+                    "isRead": item.isRead(),
+                    "sentAt": formatter.string(from: item.sentAt)
+                ]
+
+                if let data = item.data {
+                    dict["data"] = data
+                }
+
+                if let imageUrl = item.getImageUrl() {
+                    dict["imageUrl"] = imageUrl.absoluteString
+                }
+
+                items.append(dict)
+            }
+
+
+            let pluginResult = CDVPluginResult(status: .ok, messageAs: items)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        })
+    }
+
+    @objc(inAppPresentInboxMessage:)
+    func inAppPresentInboxMessage(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run(inBackground: {
+            let messageId = command.arguments[0] as! Int64
+            let inboxItems = OptimoveInApp.getInboxItems()
+
+            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found or not available")
+            for msg in inboxItems {
+                if (msg.id != messageId){
+                    continue
+                }
+
+                let result = OptimoveInApp.presentInboxMessage(item: msg)
+                if (result == .PRESENTED){
+                    pluginResult = CDVPluginResult.init(status: .ok)
+                }
+
+                break;
+
+            }
+
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        })
+    }
+
+    @objc(inAppDeleteMessageFromInbox:)
+    func inAppDeleteMessageFromInbox(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run(inBackground: {
+            let messageId = command.arguments[0] as! Int64
+            let inboxItems = OptimoveInApp.getInboxItems()
+
+            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found or not available")
+            for msg in inboxItems {
+                if msg.id != messageId {
+                    continue
+                }
+
+                let result = OptimoveInApp.deleteMessageFromInbox(item: msg)
+                if result {
+                    pluginResult = CDVPluginResult.init(status: .ok)
+                }
+                break
+            }
+
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        })
+    }
+
+    @objc(inAppMarkAsRead:)
+    func inAppMarkAsRead(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run(inBackground: {
+            let messageId = command.arguments[0] as! Int64
+            let inboxItems = OptimoveInApp.getInboxItems()
+
+            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found")
+            for msg in inboxItems {
+                if msg.id != messageId {
+                    continue
+                }
+
+                let result = OptimoveInApp.markAsRead(item: msg)
+                pluginResult = result ?
+                CDVPluginResult.init(status: .ok) :
+                CDVPluginResult.init(status: .error, messageAs: "Failed to mark message as read")
+
+                break
+            }
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        })
+    }
+
+    @objc(inAppMarkAllInboxItemsAsRead:)
+    func inAppMarkAllInboxItemsAsRead(command: CDVInvokedUrlCommand) {
+        self.commandDelegate.run(inBackground: {
+            let result = OptimoveInApp.markAllInboxItemsAsRead()
+
+            if result {
+                self.commandDelegate.send(.init(status: .ok), callbackId: command.callbackId)
+            }
+            else {
+                self.commandDelegate.send(.init(status: .error, messageAs: "Failed to mark all messages as read"), callbackId: command.callbackId)
+            }
+        })
+    }
+
+    @objc(inAppGetInboxSummary:)
+    func inAppGetInboxSummary(command: CDVInvokedUrlCommand) {
+        OptimoveInApp.getInboxSummaryAsync { summary in
+            if let summary = summary {
+                self.commandDelegate.send(.init(status: .ok, messageAs: ["totalCount" : summary.totalCount, "unreadCount" : summary.unreadCount]), callbackId: command.callbackId)
+            }
+            else {
+                self.commandDelegate.send(.init(status: .error, messageAs: "Could not get inbox summary"), callbackId: command.callbackId)
+            }
+        }
+    }
+
+    private static func getPushNotificationMap(pushNotification: PushNotification) -> [String: Any?] {
+        let aps: [AnyHashable:Any] = pushNotification.aps
+        var alert: [String: String] = [:]
+        if let a = aps["alert"] as? Dictionary<String, String> {
+            alert = a
+        }
+
+        let title: String? = alert["title"] ?? nil
+        let message: String? = alert["body"] ?? nil
+
+        let dict: [String: Any?] = [
+            "id": pushNotification.id,
+            "title": title,
+            "message": message,
+            "data": pushNotification.data,
+            "url": pushNotification.url?.absoluteString,
+            "actionId": pushNotification.actionIdentifier
+        ]
+
+        return dict
+    }
+
+    private static func getInappButtonPressMap(inAppButtonPress: InAppButtonPress) -> [String: Any?] {
+        let dict: [String: Any?] = [
+            "deepLinkData": inAppButtonPress.deepLinkData,
+            "messageData": inAppButtonPress.messageData,
+            "messageId": inAppButtonPress.messageId
+        ]
+
+        return dict
+    }
+
+
+    // ========================== DDL ==========================
+
+    @objc(checkIfPendingDDLExists:)
+    func checkIfPendingDDLExists(command: CDVInvokedUrlCommand){
+        //TODO: implement. this stub is to prevent error
+
+        let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
+        pluginResult.setKeepCallbackAs(true)
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "com.optimove.cordova.example_app",
-  "displayName": "Example_App",
+  "name": "com.optimove.cordova.exampleapp",
+  "displayName": "ExampleApp",
   "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "main": "index.js",
@@ -19,8 +19,7 @@
   },
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ],
     "plugins": {
       "optimove-cordova-plugin": {}
