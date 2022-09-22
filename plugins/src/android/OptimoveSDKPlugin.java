@@ -382,7 +382,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppGetInboxItems(CallbackContext callbackContext) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         List<InAppInboxItem> items = OptimoveInApp.getInstance().getInboxItems();
