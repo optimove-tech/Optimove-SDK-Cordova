@@ -14,7 +14,6 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "@types/cordova": "0.0.34",
     "cordova-plugin-add-swift-support": "2.0.2"
   },
   "cordova": {
