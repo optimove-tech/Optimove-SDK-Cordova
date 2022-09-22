@@ -8,7 +8,7 @@ export interface InAppInboxItem {
     sentAt: string;
     data: JSON | null;
     isRead: boolean;
-    imageUrl: string;
+    imageUrl: string | null;
 }
 export interface InAppInboxSummary {
     totalCount: number;
