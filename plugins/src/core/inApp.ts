@@ -2,7 +2,7 @@ export interface InAppInboxItem {
   id: number;
   title: string;
   subtitle: string;
-  availableFrom: string | null; // Date?
+  availableFrom: string | null;
   availableTo: string | null;
   dismissedAt: string | null;
   sentAt: string;
