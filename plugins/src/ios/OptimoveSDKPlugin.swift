@@ -283,7 +283,7 @@ enum InAppConsentStrategy: String {
     func inAppGetInboxItems(command: CDVInvokedUrlCommand) {
         self.commandDelegate.run(inBackground:{
             let inboxItems = OptimoveInApp.getInboxItems()
-            var items = [[String : Any]]()
+            var items = [[String : Any?]]()
 
             let formatter = DateFormatter()
             formatter.timeStyle = .full
@@ -291,28 +291,21 @@ enum InAppConsentStrategy: String {
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
 
             for item in inboxItems {
-                var dict: [String: Any] = [
+                let dict: [String: Any?] = [
                     "id": item.id,
                     "title": item.title,
                     "subtitle": item.subtitle,
-                    "availableFrom": item.availableFrom != nil ? formatter.string(from: item.availableFrom!) : "",
-                    "availableTo": item.availableTo != nil ? formatter.string(from: item.availableTo!) : "",
-                    "dismissedAt": item.dismissedAt != nil ? formatter.string(from: item.dismissedAt!) : "",
+                    "availableFrom": item.availableFrom != nil ? formatter.string(from: item.availableFrom!) : nil,
+                    "availableTo": item.availableTo != nil ? formatter.string(from: item.availableTo!) : nil,
+                    "dismissedAt": item.dismissedAt != nil ? formatter.string(from: item.dismissedAt!) : nil,
                     "isRead": item.isRead(),
-                    "sentAt": formatter.string(from: item.sentAt)
+                    "sentAt": formatter.string(from: item.sentAt),
+                    "imageUrl": item.getImageUrl()?.absoluteString,
+                    "data": item.data
                 ]
-
-                if let data = item.data {
-                    dict["data"] = data
-                }
-
-                if let imageUrl = item.getImageUrl() {
-                    dict["imageUrl"] = imageUrl.absoluteString
-                }
 
                 items.append(dict)
             }
-
 
             let pluginResult = CDVPluginResult(status: .ok, messageAs: items)
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
