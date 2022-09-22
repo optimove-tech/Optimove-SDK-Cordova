@@ -54,13 +54,16 @@ function clearContext() {
 }
 
 function setHandlersCallBackContext() {
+  let checkForPendingPush: boolean = currentConfig["pushOpenedHandler"] !== null;
+  let checkForPendingDDL: boolean = currentConfig["deepLinkHandler"] !== null;
+
   return new Promise((resolve, reject) => {
     cordova.exec(
       nativeMessageHandler,
       reject,
       "OptimoveSDKPlugin",
       "setHandlersCallBackContext",
-      []
+      [checkForPendingPush, checkForPendingDDL]
     );
   });
 }

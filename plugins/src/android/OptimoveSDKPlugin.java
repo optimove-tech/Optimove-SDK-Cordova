@@ -302,13 +302,27 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
-    private void setHandlersCallBackContext(CallbackContext callbackContext) {
+    private void setHandlersCallBackContext(JSONArray args, CallbackContext callbackContext) {
         jsCallbackContext = callbackContext;
+        try {
+            boolean checkForPendingPush = args.getBoolean(0);
+            boolean checkForPendingDDL = args.getBoolean(1);
+            if (checkForPendingPush) {
+                checkIfPendingPushExists(callbackContext);
+            }
+            if (checkForPendingDDL) {
+                checkIfPendingDDLExists(callbackContext);
+            }
+
+        } catch (JSONException e) {
+            // noop
+        }
+
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
     }
-
+    
     private void checkIfPendingPushExists(CallbackContext callbackContext) {
         if (jsCallbackContext == null) {
             jsCallbackContext = callbackContext;
