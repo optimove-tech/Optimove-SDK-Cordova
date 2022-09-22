@@ -41,25 +41,27 @@ function error(errorMessage) {
   console.error(errorMessage);
 }
 
-
-
 function deepLinkHandler(deepLink) {
-    alert("deepLinkHandler: " + JSON.stringify(deepLink));
+  setOutput("deepLinkHandler: " + JSON.stringify(deepLink));
  }
 function pushReceivedHandler(pushMessage) {
-  console.log("pushReceivedHandler: " + JSON.stringify(pushMessage));
+  setOutput("pushReceivedHandler: " + JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
-  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
+  setOutput("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {
-  console.log("inAppDeepLinkHandler: " + JSON.stringify(deepLinkData));
+  setOutput("inAppDeepLinkHandler: " + JSON.stringify(deepLinkData));
 }
 
 function onInboxUpdatedHandler() {
   console.log("onInboxUpdatedHandler");
+}
+
+function setOutput(output){
+  document.getElementById("text-area-output").value = output;
 }
 
 document
