@@ -13,9 +13,9 @@ export interface DeepLink {
     data: DeepLinkData;
 }
 export declare enum DeepLinkResolution {
-    LOOKUP_FAILED = 0,
-    LINK_NOT_FOUND = 1,
-    LINK_EXPIRED = 2,
-    LINK_LIMIT_EXCEEDED = 3,
-    LINK_MATCHED = 4
+    LOOKUP_FAILED = "LOOKUP_FAILED",
+    LINK_NOT_FOUND = "LINK_NOT_FOUND",
+    LINK_EXPIRED = "LINK_EXPIRED",
+    LINK_LIMIT_EXCEEDED = "LINK_LIMIT_EXCEEDED",
+    LINK_MATCHED = "LINK_MATCHED"
 }
