@@ -217,7 +217,7 @@ enum InAppConsentStrategy: String {
             //return
         }
 
-        let pluginResult:CDVPluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
+        let pluginResult:CDVPluginResult = CDVPluginResult.init(status: .ok)
         pluginResult.setKeepCallbackAs(true)
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
@@ -226,7 +226,7 @@ enum InAppConsentStrategy: String {
     func clearContext(command: CDVInvokedUrlCommand){
         OptimoveSDKPlugin.cordovaCommand = nil
 
-        self.commandDelegate.send(CDVPluginResult.init(status: CDVCommandStatus_OK), callbackId: command.callbackId)
+        self.commandDelegate.send(CDVPluginResult.init(status: .ok), callbackId: command.callbackId)
     }
 
     @objc(checkIfPendingPushExists:)
@@ -240,7 +240,7 @@ enum InAppConsentStrategy: String {
             OptimoveSDKPlugin.pendingPush = nil
         }
         else{
-            let pluginResult: CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK)
+            let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
             pluginResult.setKeepCallbackAs(true)
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         }
@@ -325,7 +325,7 @@ enum InAppConsentStrategy: String {
             let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
-            var pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Message not found or not available")
+            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found or not available")
             for msg in inboxItems {
                 if (msg.id != messageId){
                     continue
@@ -333,7 +333,7 @@ enum InAppConsentStrategy: String {
 
                 let result = OptimoveInApp.presentInboxMessage(item: msg)
                 if (result == .PRESENTED){
-                    pluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
+                    pluginResult = CDVPluginResult.init(status: .ok)
                 }
 
                 break;
@@ -350,7 +350,7 @@ enum InAppConsentStrategy: String {
             let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
-            var pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Message not found or not available")
+            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found or not available")
             for msg in inboxItems {
                 if msg.id != messageId {
                     continue
@@ -358,7 +358,7 @@ enum InAppConsentStrategy: String {
 
                 let result = OptimoveInApp.deleteMessageFromInbox(item: msg)
                 if result {
-                    pluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK)
+                    pluginResult = CDVPluginResult.init(status: .ok)
                 }
                 break
             }
@@ -373,7 +373,7 @@ enum InAppConsentStrategy: String {
             let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
-            var pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Message not found")
+            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found")
             for msg in inboxItems {
                 if msg.id != messageId {
                     continue
@@ -381,8 +381,8 @@ enum InAppConsentStrategy: String {
 
                 let result = OptimoveInApp.markAsRead(item: msg)
                 pluginResult = result ?
-                CDVPluginResult.init(status: CDVCommandStatus_OK) :
-                CDVPluginResult.init(status: CDVCommandStatus_ERROR, messageAs: "Failed to mark message as read")
+                CDVPluginResult.init(status: .ok) :
+                CDVPluginResult.init(status: .error, messageAs: "Failed to mark message as read")
 
                 break
             }
@@ -455,7 +455,7 @@ enum InAppConsentStrategy: String {
     func checkIfPendingDDLExists(command: CDVInvokedUrlCommand){
         //TODO: implement. this stub is to prevent error
 
-        let pluginResult: CDVPluginResult = CDVPluginResult(status: CDVCommandStatus_OK)
+        let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
         pluginResult.setKeepCallbackAs(true)
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
