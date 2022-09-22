@@ -53,12 +53,10 @@ enum InAppConsentStrategy: String {
         })
 
         if #available(iOS 10, *) {
-            builder.setPushReceivedInForegroundHandler(pushReceivedInForegroundHandlerBlock: { notification, completionHandlder in
-                if (OptimoveSDKPlugin.optimovePluginInstance != nil){
-                    OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushReceived", data: getPushNotificationMap(pushNotification: notification))
-                }
+            builder.setPushReceivedInForegroundHandler(pushReceivedInForegroundHandlerBlock: { notification, completionHanlder in
+                OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "pushReceived", data: getPushNotificationMap(pushNotification: notification))
 
-                completionHandlder(UNNotificationPresentationOptions.alert)
+                completionHanlder(UNNotificationPresentationOptions.alert)
             })
         }
 
@@ -77,9 +75,7 @@ enum InAppConsentStrategy: String {
         }
 
         builder.setInAppDeepLinkHandler(inAppDeepLinkHandlerBlock: { data in
-            if (OptimoveSDKPlugin.optimovePluginInstance != nil){
-                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "inAppDeepLink", data: getInappButtonPressMap(inAppButtonPress: data))
-            }
+            OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "inAppDeepLink", data: getInappButtonPressMap(inAppButtonPress: data))
         })
 
         let config = builder.build()
@@ -87,9 +83,7 @@ enum InAppConsentStrategy: String {
         Optimove.initialize(with: config)
 
         OptimoveInApp.setOnInboxUpdated(inboxUpdatedHandlerBlock: {
-            if (OptimoveSDKPlugin.optimovePluginInstance != nil){
-                OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
-            }
+            OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
         })
     }
 
