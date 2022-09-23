@@ -117,7 +117,7 @@ interface EventParams {
 
 interface HandlerMessage {
   type: string;
-  data: JSON;
+  data: { [key: string]: any };
  }
 const Optimove = {
   /**

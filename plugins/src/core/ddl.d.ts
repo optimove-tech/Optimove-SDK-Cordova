@@ -3,7 +3,9 @@ export interface DeepLinkContent {
     description?: string;
 }
 export interface DeepLinkData {
-    data: JSON;
+    data: {
+        [key: string]: any;
+    };
     content: DeepLinkContent;
     url: string;
 }
