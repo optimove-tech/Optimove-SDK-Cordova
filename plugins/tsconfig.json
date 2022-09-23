@@ -11,9 +11,9 @@
         "moduleResolution": "node"
     },
      "include":[
-        "src/core/*.ts"
+        "src/core/**/*.ts"
     ],
     "exclude": [
-        "src/core/*.d.ts"
+        "src/core/declarations/*.d.ts"
     ]
 }
