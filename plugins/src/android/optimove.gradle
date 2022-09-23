@@ -52,5 +52,6 @@ ext.postBuildExtras = {
         }
         implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
         implementation 'com.google.firebase:firebase-messaging'
+    
     }
 }

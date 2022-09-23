@@ -150,7 +150,7 @@ document
 
 function getVisitorId() {
   Optimove.getVisitorId().then((visitorId) => {
-    document.getElementById("text-area-visitor-id").value = visitorId;
+    alert(visitorId);
   }, error);
 }
 
@@ -190,7 +190,11 @@ function inAppGetInboxItems() {
 function flattenInboxItemObject(inboxItemsArray) {
   flattendItemsList = [];
   for (item of inboxItemsArray) {
-    flattendItemsList.push({ id: item.id, isRead: item.isRead });
+    flattendItemsList.push({
+      id: item.id,
+      isRead: item.isRead,
+      sentAt: item.sentAt.toISOString()
+    });
   }
   return flattendItemsList;
 }
@@ -251,12 +255,4 @@ function inAppDeleteMessageFromInbox() {
     error
   );
 }
-document
-  .getElementById("get-visitor-id-button")
-  .addEventListener("click", getVisitorId);
 
-function getVisitorId() {
-  Optimove.getVisitorId().then((visitorId) => {
-    document.getElementById("text-area-visitor-id").value = visitorId;
-  }, error);
-}
