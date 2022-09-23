@@ -190,7 +190,11 @@ function inAppGetInboxItems() {
 function flattenInboxItemObject(inboxItemsArray) {
   flattendItemsList = [];
   for (item of inboxItemsArray) {
-    flattendItemsList.push({ id: item.id, isRead: item.isRead });
+    flattendItemsList.push({
+      id: item.id,
+      isRead: item.isRead,
+      sentAt: item.sentAt.toISOString()
+    });
   }
   return flattendItemsList;
 }
