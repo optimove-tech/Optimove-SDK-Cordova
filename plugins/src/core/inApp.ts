@@ -22,6 +22,7 @@ export interface InAppButtonPress {
   messageData: { [key: string]: any } | null;
 }
 
+// internal
 export interface InAppInboxItemRaw {
   id: number;
   title: string;
