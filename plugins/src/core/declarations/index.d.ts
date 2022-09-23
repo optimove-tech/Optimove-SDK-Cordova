@@ -7,9 +7,6 @@ export interface OptimoveConfig {
     inAppInboxUpdatedHandler: InAppInboxUpdatedHandler | null;
     deepLinkHandler: DeepLinkHandler | null;
 }
-interface EventParams {
-    [key: string]: any;
-}
 declare const Optimove: {
     /**
      * Sets the User ID of the current user.
@@ -29,9 +26,9 @@ declare const Optimove: {
     /**
      * Reports a custom analytics event
      * @param {string} eventName - the custom event name
-     * @param {EventParams} eventParams - optional to add parameters of the event
+     * @param {Record<string,any>} eventParams - optional to add parameters of the event
      */
-    reportEvent: (eventName: string, eventParams: EventParams) => Promise<void>;
+    reportEvent: (eventName: string, eventParams: Record<string, any>) => Promise<void>;
     /**
      * Reports a visit in a given screen
      * @param {string} screenName - the screen name

@@ -111,13 +111,9 @@ function nativeMessageHandler(message : HandlerMessage | string) {
   }
 }
 
-interface EventParams {
-  [key: string]: any;
-}
-
 interface HandlerMessage {
   type: string;
-  data: { [key: string]: any };
+  data: Record<string,any>
  }
 const Optimove = {
   /**
@@ -150,9 +146,9 @@ const Optimove = {
   /**
    * Reports a custom analytics event
    * @param {string} eventName - the custom event name
-   * @param {EventParams} eventParams - optional to add parameters of the event
+   * @param {Record<string,any>} eventParams - optional to add parameters of the event
    */
-  reportEvent: (eventName: string, eventParams: EventParams): Promise<void> => {
+  reportEvent: (eventName: string, eventParams: Record<string,any>): Promise<void> => {
     return new Promise((resolve, reject) => {
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "reportEvent", [
         eventName,

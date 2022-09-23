@@ -6,9 +6,7 @@ export interface InAppInboxItem {
     availableTo: Date | null;
     dismissedAt: Date | null;
     sentAt: Date;
-    data: {
-        [key: string]: any;
-    } | null;
+    data: Record<string, any> | null;
     isRead: boolean;
     imageUrl: string | null;
 }
@@ -17,13 +15,9 @@ export interface InAppInboxSummary {
     unreadCount: number;
 }
 export interface InAppButtonPress {
-    deepLinkData: {
-        [key: string]: any;
-    };
+    deepLinkData: Record<string, any>;
     messageId: number;
-    messageData: {
-        [key: string]: any;
-    } | null;
+    messageData: Record<string, any> | null;
 }
 export interface InAppInboxItemRaw {
     id: number;
@@ -33,9 +27,7 @@ export interface InAppInboxItemRaw {
     availableTo: string | null;
     dismissedAt: string | null;
     sentAt: string;
-    data: {
-        [key: string]: any;
-    } | null;
+    data: Record<string, any> | null;
     isRead: boolean;
     imageUrl: string | null;
 }

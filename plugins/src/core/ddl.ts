@@ -3,7 +3,7 @@ export interface DeepLinkContent {
   description?: string;
 }
 export interface DeepLinkData {
-  data: { [key: string]: any };
+  data: Record<string,any>;
   content: DeepLinkContent;
   url: string;
 }
