@@ -1,11 +1,13 @@
-import * as cordova from "cordova";
 import {
-  PushNotificationHandler,
+  DeepLinkHandler,
   InAppDeepLinkHandler,
   InAppInboxUpdatedHandler,
-  DeepLinkHandler,
+  PushNotificationHandler,
 } from "./handlers";
-import { InAppInboxItem, InAppInboxSummary} from "./inApp";
+import { InAppInboxItem, InAppInboxSummary } from "./inApp";
+
+import cordova from "cordova";
+
 export interface OptimoveConfig{
   pushReceivedHandler: PushNotificationHandler | null;
   pushOpenedHandler: PushNotificationHandler | null;

@@ -1,4 +1,4 @@
-import { PushNotificationHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, DeepLinkHandler } from "./handlers";
+import { DeepLinkHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, PushNotificationHandler } from "./handlers";
 import { InAppInboxItem, InAppInboxSummary } from "./inApp";
 export interface OptimoveConfig {
     pushReceivedHandler: PushNotificationHandler | null;
