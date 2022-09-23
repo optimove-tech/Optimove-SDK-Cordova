@@ -4,7 +4,7 @@ import {
   InAppInboxUpdatedHandler,
   PushNotificationHandler,
 } from "./handlers";
-import { InAppInboxItem, InAppInboxSummary } from "./inApp";
+import { InAppInboxItem, InAppInboxItemRaw, InAppInboxSummary } from "./inApp";
 
 import cordova from "cordova";
 
@@ -229,15 +229,36 @@ const Optimove = {
    * @returns {Promise<InAppInboxItem[]>} the list of available in-app messages sent to the user and stored in the inbox
    */
   inAppGetInboxItems: (): Promise<InAppInboxItem[]> => {
-    return new Promise((resolve, reject) => {
+    let response: Promise<InAppInboxItemRaw[]> = new Promise((resolve, reject) => {
       cordova.exec(
         resolve,
         reject,
         "OptimoveSDKPlugin",
         "inAppGetInboxItems",
         []
-      );
+       );
     });
+    return new Promise((resolve, reject) => {
+      let inAppInboxItems: InAppInboxItem[];
+      response.then((inAppInboxItemsRaw: InAppInboxItemRaw[]) => {
+        inAppInboxItemsRaw.forEach((rawItem) => {
+          let item: InAppInboxItem = {
+            id: rawItem.id,
+            title: rawItem.title,
+            subtitle: rawItem.subtitle,
+            availableFrom: new Date(rawItem.availableFrom),
+            availableTo: new Date(rawItem.availableTo),
+            dismissedAt: new Date(rawItem.dismissedAt),
+            sentAt: new Date(rawItem.sentAt),
+            data: rawItem.data,
+            isRead: rawItem.isRead,
+            imageUrl: rawItem.imageUrl,
+          };
+          inAppInboxItems.push(item);
+        });
+        resolve(inAppInboxItems);
+      });
+    })
   },
 
   /**

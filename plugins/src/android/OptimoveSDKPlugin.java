@@ -61,80 +61,80 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
 
-            case SET_HANDLERS_CALLBACK_CONTEXT:
-                setHandlersCallBackContext(args, callbackContext);
-                return true;
+        case SET_HANDLERS_CALLBACK_CONTEXT:
+            setHandlersCallBackContext(args, callbackContext);
+            return true;
 
-            case SET_USER_ID:
-                this.setUserId(args, callbackContext);
-                return true;
+        case SET_USER_ID:
+            this.setUserId(args, callbackContext);
+            return true;
 
-            case SET_USER_EMAIL:
-                this.setUserEmail(args, callbackContext);
-                return true;
+        case SET_USER_EMAIL:
+            this.setUserEmail(args, callbackContext);
+            return true;
 
-            case REPORT_EVENT:
-                this.reportEvent(args, callbackContext);
-                return true;
+        case REPORT_EVENT:
+            this.reportEvent(args, callbackContext);
+            return true;
 
-            case REPORT_SCREEN_VISIT:
-                reportScreenVisit(args, callbackContext);
-                return true;
+        case REPORT_SCREEN_VISIT:
+            reportScreenVisit(args, callbackContext);
+            return true;
 
-            case REGISTER_USER:
-                this.registerUser(args, callbackContext);
-                return true;
+        case REGISTER_USER:
+            this.registerUser(args, callbackContext);
+            return true;
 
-            case GET_VISITOR_ID:
-                this.getVisitorId(callbackContext);
-                return true;
+        case GET_VISITOR_ID:
+            this.getVisitorId(callbackContext);
+            return true;
 
-            case GET_CURRENT_USER_IDENTIFIER:
-                this.getCurrentUserIdentifier(callbackContext);
-                return true;
+        case GET_CURRENT_USER_IDENTIFIER:
+            this.getCurrentUserIdentifier(callbackContext);
+            return true;
 
-            case PUSH_REGISTER:
-                this.pushRegister(callbackContext);
-                return true;
+        case PUSH_REGISTER:
+            this.pushRegister(callbackContext);
+            return true;
 
-            case IN_APP_UPDATE_CONSENT:
-                this.inAppUpdateConsent(args, callbackContext);
-                return true;
+        case IN_APP_UPDATE_CONSENT:
+            this.inAppUpdateConsent(args, callbackContext);
+            return true;
 
-            case IN_APP_GET_INBOX_ITEMS:
-                cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
-                return true;
+        case IN_APP_GET_INBOX_ITEMS:
+            cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppGetInboxItems(callbackContext));
+            return true;
 
-            case IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ:
-                cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppMarkAllInboxItemsAsRead(callbackContext));
-                return true;
+        case IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ:
+            cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppMarkAllInboxItemsAsRead(callbackContext));
+            return true;
 
-            case IN_APP_MARK_AS_READ:
-                cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppMarkAsRead(args, callbackContext));
-                return true;
+        case IN_APP_MARK_AS_READ:
+            cordova.getThreadPool().execute(() -> OptimoveSDKPlugin.this.inAppMarkAsRead(args, callbackContext));
+            return true;
 
-            case IN_APP_GET_INBOX_SUMMARY:
-                this.inAppGetInboxSummary(callbackContext);
-                return true;
+        case IN_APP_GET_INBOX_SUMMARY:
+            this.inAppGetInboxSummary(callbackContext);
+            return true;
 
-            case IN_APP_PRESENT_INBOX_MESSAGE:
-                cordova.getThreadPool()
-                        .execute(() -> OptimoveSDKPlugin.this.inAppPresentInboxMessage(args, callbackContext));
-                return true;
+        case IN_APP_PRESENT_INBOX_MESSAGE:
+            cordova.getThreadPool()
+                    .execute(() -> OptimoveSDKPlugin.this.inAppPresentInboxMessage(args, callbackContext));
+            return true;
 
-            case IN_APP_DELETE_INBOX_MESSAGE:
-                cordova.getThreadPool()
-                        .execute(() -> OptimoveSDKPlugin.this.inAppDeleteMessageFromInbox(args, callbackContext));
-                return true;
-            case CHECK_IF_PENDING_PUSH_EXISTS:
-                this.checkIfPendingPushExists(callbackContext);
-                return true;
-            case CLEAR_CONTEXT:
-                this.clearJsContext();
-                return true;
-            case CHECK_IF_PENDING_DDL_EXISTS:
-                this.checkIfPendingDDLExists(callbackContext);
-                return true;
+        case IN_APP_DELETE_INBOX_MESSAGE:
+            cordova.getThreadPool()
+                    .execute(() -> OptimoveSDKPlugin.this.inAppDeleteMessageFromInbox(args, callbackContext));
+            return true;
+        case CHECK_IF_PENDING_PUSH_EXISTS:
+            this.checkIfPendingPushExists(callbackContext);
+            return true;
+        case CLEAR_CONTEXT:
+            this.clearJsContext();
+            return true;
+        case CHECK_IF_PENDING_DDL_EXISTS:
+            this.checkIfPendingDDLExists(callbackContext);
+            return true;
         }
 
         return false;
@@ -308,15 +308,15 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         try {
             boolean checkForPendingPush = args.getBoolean(0);
             boolean checkForPendingDDL = args.getBoolean(1);
-            if (checkForPendingPush){
+            if (checkForPendingPush) {
                 checkIfPendingPushExists(callbackContext);
             }
-            if (checkForPendingDDL){
+            if (checkForPendingDDL) {
                 checkIfPendingDDLExists(callbackContext);
             }
-            
+
         } catch (JSONException e) {
-            //noop
+            // noop
         }
 
         PluginResult result = new PluginResult(PluginResult.Status.OK);
@@ -382,7 +382,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     }
 
     private void inAppGetInboxItems(CallbackContext callbackContext) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         List<InAppInboxItem> items = OptimoveInApp.getInstance().getInboxItems();
@@ -406,19 +406,19 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 mapped.put("imageUrl", imageUrl == null ? null : imageUrl.toString());
 
                 if (null == availableFrom) {
-                    mapped.put("availableFrom", "");
+                    mapped.put("availableFrom", null);
                 } else {
                     mapped.put("availableFrom", formatter.format(availableFrom));
                 }
 
                 if (null == availableTo) {
-                    mapped.put("availableTo", "");
+                    mapped.put("availableTo", null);
                 } else {
                     mapped.put("availableTo", formatter.format(availableTo));
                 }
 
                 if (null == dismissedAt) {
-                    mapped.put("dismissedAt", "");
+                    mapped.put("dismissedAt", null);
                 } else {
                     mapped.put("dismissedAt", formatter.format(dismissedAt));
                 }
@@ -466,7 +466,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 inAppButtonPress.put("messageId", buttonPress.getMessageId());
                 inAppButtonPress.put("messageData", buttonPress.getMessageData());
             } catch (JSONException e) {
-                //noop
+                // noop
             }
             sendMessageToJs("inAppDeepLink", inAppButtonPress);
         }
