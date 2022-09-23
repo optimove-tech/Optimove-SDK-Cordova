@@ -4,8 +4,6 @@
         "allowSyntheticDefaultImports": true,
         "declaration": true,
         "outDir": "./src/core/declarations",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
         "rootDir": "./src/core",
         "module": "esnext",
         "moduleResolution": "node"
