@@ -531,9 +531,31 @@ enum InAppConsentStrategy: String {
 
         return [
             "resolution": resolution,
-            "urlString": urlString,
+            "url": urlString,
             "content": content,
             "linkData": linkData,
         ]
+    }
+
+    @objc(application:userActivity:restorationHandler:)
+    static func application(_ application: UIApplication, userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void){
+        _ = Optimove.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    }
+
+    @available(iOS 13.0, *)
+    @objc(scene:session:options:)
+    static func scene(_ scene: UIScene, session: UISceneSession, options: UIScene.ConnectionOptions) {
+        guard let _ = (scene as? UIWindowScene) else { return }
+
+        // Deep links from cold starts
+        if let userActivity = options.userActivities.first {
+            Optimove.shared.scene(scene, continue: userActivity)
+        }
+    }
+
+    @available(iOS 13.0, *)
+    @objc(scene:userActivity:)
+    static func scene(_ scene: UIScene, userActivity: NSUserActivity) {
+        Optimove.shared.scene(scene, continue: userActivity)
     }
 }

@@ -212,9 +212,14 @@ document
   .addEventListener("click", inAppMarkAsRead);
 
 function getInboxItemForTesting() {
-  var id = document.getElementById("text-area-in-app-inbox-item").value;
+  var id = parseInt(document.getElementById("text-area-in-app-inbox-item").value);
+  if (isNaN(id)){
+    alert("item id is required");
+    return;
+  }
+
   var item = {
-    id: parseInt(id),
+    id: id,
   };
 
   return item;
