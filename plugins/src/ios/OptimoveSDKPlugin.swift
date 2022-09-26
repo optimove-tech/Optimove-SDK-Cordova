@@ -14,9 +14,11 @@ enum InAppConsentStrategy: String {
     private static let optimoveCredentialsKey = "optimoveCredentials"
     private static let optimoveMobileCredentialsKey = "optimoveMobileCredentials"
     private static let inAppConsentStrategy = "optimoveInAppConsentStrategy"
-    //private static let enableDeferredDeepLinking = "optimoveEnableDeferredDeepLinking"
+    private static let enableDeferredDeepLinking = "optimoveEnableDeferredDeepLinking"
+    private static let cname = "optimoveDdlCname"
 
     private static var pendingPush: PushNotification? = nil
+    private static var pendingDdl: DeepLinkResolution? = nil
 
     // ========================== INITIALIZATION ==========================
 
@@ -77,6 +79,25 @@ enum InAppConsentStrategy: String {
         builder.setInAppDeepLinkHandler(inAppDeepLinkHandlerBlock: { data in
             OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "inAppDeepLink", data: getInappButtonPressMap(inAppButtonPress: data))
         })
+
+        if (configValues[enableDeferredDeepLinking] != nil) {
+            let ddlHandler: DeepLinkHandler = { deepLinkResolution in
+                guard let pluginInstance = OptimoveSDKPlugin.optimovePluginInstance, let _ = OptimoveSDKPlugin.cordovaCommand else {
+                    pendingDdl = deepLinkResolution
+
+                    return
+                }
+
+                pluginInstance.sendMessageToJs(type: "deepLink", data: getDdlResolutionMap(deepLinkResolution: deepLinkResolution))
+            }
+
+            if (configValues[cname] != nil){
+                builder.enableDeepLinking(cname: configValues[cname], ddlHandler)
+            }
+            else{
+                builder.enableDeepLinking(ddlHandler)
+            }
+        }
 
         let config = builder.build()
 
@@ -207,19 +228,21 @@ enum InAppConsentStrategy: String {
         let checkForPendingPush: Bool = command.arguments[0] as! Bool
         let checkForPendingDdl: Bool = command.arguments[1] as! Bool
 
+        var sentPushResult = false
+        var sentDdlResult = false
         if (checkForPendingPush){
-            self.checkIfPendingPushExists(command: command)
+            sentPushResult = maybeSendAndClearPendingPush(command: command)
         }
 
         if (checkForPendingDdl){
-            //TODO
-
-            //return
+            sentDdlResult = maybeSendAndClearPendingDdl(command: command)
         }
 
-        let pluginResult:CDVPluginResult = CDVPluginResult.init(status: .ok)
-        pluginResult.setKeepCallbackAs(true)
-        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        if (!sentPushResult && !sentDdlResult){
+            let pluginResult:CDVPluginResult = CDVPluginResult.init(status: .ok)
+            pluginResult.setKeepCallbackAs(true)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
     }
 
     @objc(clearContext:)
@@ -235,18 +258,26 @@ enum InAppConsentStrategy: String {
             OptimoveSDKPlugin.cordovaCommand = command
         }
 
-        if let notification = OptimoveSDKPlugin.pendingPush {
-            OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushOpened", data: OptimoveSDKPlugin.getPushNotificationMap(pushNotification: notification))
-            OptimoveSDKPlugin.pendingPush = nil
-        }
-        else{
+        let sent = maybeSendAndClearPendingPush(command: command)
+        if (!sent){
             let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
             pluginResult.setKeepCallbackAs(true)
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         }
     }
 
-    func sendMessageToJs(type: String, data: [String: Any?]?){
+    private func maybeSendAndClearPendingPush(command: CDVInvokedUrlCommand) -> Bool{
+        guard let notification = OptimoveSDKPlugin.pendingPush else {
+            return false
+        }
+
+        OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "pushOpened", data: OptimoveSDKPlugin.getPushNotificationMap(pushNotification: notification))
+        OptimoveSDKPlugin.pendingPush = nil
+
+        return true
+    }
+
+    private func sendMessageToJs(type: String, data: [String: Any?]?){
         guard let command = OptimoveSDKPlugin.cordovaCommand else {
             return
         }
@@ -446,10 +477,63 @@ enum InAppConsentStrategy: String {
 
     @objc(checkIfPendingDDLExists:)
     func checkIfPendingDDLExists(command: CDVInvokedUrlCommand){
-        //TODO: implement. this stub is to prevent error
+        if (OptimoveSDKPlugin.cordovaCommand == nil){
+            OptimoveSDKPlugin.cordovaCommand = command
+        }
 
-        let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
-        pluginResult.setKeepCallbackAs(true)
-        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        let sent = maybeSendAndClearPendingDdl(command: command)
+        if (!sent){
+            let pluginResult: CDVPluginResult = CDVPluginResult(status: .ok)
+            pluginResult.setKeepCallbackAs(true)
+            self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+        }
+    }
+
+    private func maybeSendAndClearPendingDdl(command: CDVInvokedUrlCommand) -> Bool{
+        guard let ddlResolution = OptimoveSDKPlugin.pendingDdl else {
+            return false
+        }
+
+        OptimoveSDKPlugin.optimovePluginInstance.sendMessageToJs(type: "deepLink", data: OptimoveSDKPlugin.getDdlResolutionMap(deepLinkResolution: ddlResolution))
+        OptimoveSDKPlugin.pendingDdl = nil
+
+        return true
+    }
+
+    private static func getDdlResolutionMap(deepLinkResolution: DeepLinkResolution) -> [String: Any?] {
+        var urlString: String
+        var resolution: String
+        var content: [String: Any?]? = nil
+        var linkData: [AnyHashable:Any?]? = nil
+
+        switch deepLinkResolution {
+            case .lookupFailed(let dl):
+                urlString = dl.absoluteString
+                resolution = "LOOKUP_FAILED"
+            case .linkNotFound(let dl):
+                urlString = dl.absoluteString
+                resolution = "LINK_NOT_FOUND"
+            case .linkExpired(let dl):
+                urlString = dl.absoluteString
+                resolution = "LINK_EXPIRED"
+            case .linkLimitExceeded(let dl):
+                urlString = dl.absoluteString
+                resolution = "LINK_LIMIT_EXCEEDED"
+            case .linkMatched(let dl):
+                urlString = dl.url.absoluteString
+                resolution = "LINK_MATCHED"
+                content = [
+                    "title": dl.content.title,
+                    "description": dl.content.description,
+                ]
+                linkData = dl.data
+        }
+
+        return [
+            "resolution": resolution,
+            "urlString": urlString,
+            "content": content,
+            "linkData": linkData,
+        ]
     }
 }

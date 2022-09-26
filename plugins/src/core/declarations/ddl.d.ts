@@ -1,16 +1,12 @@
 export interface DeepLinkContent {
-    title?: string;
-    description?: string;
-}
-export interface DeepLinkData {
-    data: Record<string, any>;
-    content: DeepLinkContent;
-    url: string;
+    title: string | null;
+    description: string | null;
 }
 export interface DeepLink {
-    link: string;
     resolution: DeepLinkResolution;
-    data: DeepLinkData;
+    url: string;
+    content: DeepLinkContent | null;
+    linkData: Record<string, any> | null;
 }
 export declare enum DeepLinkResolution {
     LOOKUP_FAILED = "LOOKUP_FAILED",
