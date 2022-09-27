@@ -111,6 +111,10 @@ function nativeMessageHandler(message : HandlerMessage | string) {
   }
 }
 
+function isNonEmptyString(val: string) {
+  return typeof val === "string" && val !== "";
+}
+
 interface HandlerMessage {
   type: string;
   data: Record<string,any>
@@ -125,6 +129,10 @@ const Optimove = {
    */
   setUserId: (userId: string): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userId)){
+        reject("Invalid user id");
+        return;
+      }
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "setUserId", [userId]);
     });
   },
@@ -137,6 +145,11 @@ const Optimove = {
    */
   setUserEmail: (userEmail: string): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userEmail)) {
+        reject("Invalid user email");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "setUserEmail", [
         userEmail,
       ]);
@@ -150,6 +163,11 @@ const Optimove = {
    */
   reportEvent: (eventName: string, eventParams: Record<string,any>): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(eventName)) {
+        reject("Invalid event name");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "reportEvent", [
         eventName,
         eventParams,
@@ -163,9 +181,19 @@ const Optimove = {
    */
   reportScreenVisit: (
     screenName: string,
-    screenCategory: string
+    screenCategory?: string
   ): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(screenName)) {
+        reject("Invalid screen name");
+        return;
+      }
+
+      if (screenCategory !== undefined && !isNonEmptyString(screenName)){
+        reject("Invalid screen category");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "reportScreenVisit", [
         screenName,
         screenCategory,
@@ -182,6 +210,16 @@ const Optimove = {
    */
   registerUser: (userId: string, userEmail: string): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userId)) {
+        reject("Invalid user id");
+        return;
+      }
+
+      if (!isNonEmptyString(userEmail)) {
+        reject("Invalid user user email");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "registerUser", [
         userId,
         userEmail,
