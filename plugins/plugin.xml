@@ -1,14 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="optimove-cordova-plugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>OptimoveSDKPlugin</name>
+    <js-module name="OptimoveCore" src="www/OptimoveCore.js"/>
     <js-module name="Optimove" src="www/Optimove.js">
         <clobbers target="window.Optimove" />
     </js-module>
-     <hook type="before_prepare" src="scripts/inject-config.js" />
+    <hook type="before_prepare" src="scripts/inject-config.js" />
     <platform name="ios">
+        <resource-file src="scripts/optimove.plist" target="optimove.plist" />
         <config-file target="config.xml" parent="/*">
             <feature name="OptimoveSDKPlugin">
-                <param name="ios-package" value="Optimove" />
+                <param name="ios-package" value="Optimove_Cordova" />
             </feature>
         </config-file>
         <source-file src="src/ios/OptimoveSDKPlugin.swift" />
@@ -31,9 +33,9 @@
                 <param name="android-package" value="com.optimove.android.cordova.OptimoveSDKPlugin" />
             </feature>
             <preference name="AndroidXEnabled" value="true" />
-        </config-file>
+        </config-file >
         <config-file parent="/manifest/application" target="AndroidManifest.xml">
-                     <!-- Optimove FCM handler -->
+            <!-- Optimove FCM handler -->
             <service android:name="com.optimove.android.optimobile.FirebaseMessagingService" android:exported="false">
                 <intent-filter>
                     <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -48,13 +50,13 @@
                     <action android:name="com.optimove.push.BUTTON_CLICKED" />
                 </intent-filter>
             </receiver>
-            <!-- Optimove initProvider-->    
-            <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />        
+            <!-- Optimove initProvider-->
+            <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />
         </config-file>
         <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
             <manifest xmlns:tools="http://schemas.android.com/tools" />
         </edit-config>
-    
+
         <edit-config file="AndroidManifest.xml" target="/manifest/" mode="merge">
             <manifest xmlns:tools="http://schemas.android.com/tools" />
         </edit-config>

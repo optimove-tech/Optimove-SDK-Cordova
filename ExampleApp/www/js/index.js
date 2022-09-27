@@ -26,10 +26,11 @@ var items;
 function onDeviceReady() {
   // Cordova is now initialized. Have fun!
   console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
-  Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHanler);
+  Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHandler);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
   Optimove.setPushOpenedHandler(pushOpenedHandler);
+  Optimove.setDeepLinkHandler(deepLinkHandler);
 }
 
 function success(successMessage = "Success!") {
@@ -40,20 +41,27 @@ function error(errorMessage) {
   console.error(errorMessage);
 }
 
+function deepLinkHandler(deepLink) {
+  setOutput("deepLinkHandler: " + JSON.stringify(deepLink));
+ }
 function pushReceivedHandler(pushMessage) {
-  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
+  setOutput("pushReceivedHandler: " + JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
-  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
+  setOutput("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {
-  console.log("pushOpenedHandler: " + JSON.stringify(deepLinkData));
+  setOutput("inAppDeepLinkHandler: " + JSON.stringify(deepLinkData));
 }
 
-function onInboxUpdatedHanler() {
-  console.log("onInboxUpdatedHanler");
+function onInboxUpdatedHandler() {
+  console.log("onInboxUpdatedHandler");
+}
+
+function setOutput(output){
+  document.getElementById("text-area-output").value = output;
 }
 
 document
@@ -142,7 +150,7 @@ document
 
 function getVisitorId() {
   Optimove.getVisitorId().then((visitorId) => {
-    document.getElementById("text-area-visitor-id").value = visitorId;
+    alert(visitorId);
   }, error);
 }
 
@@ -182,7 +190,11 @@ function inAppGetInboxItems() {
 function flattenInboxItemObject(inboxItemsArray) {
   flattendItemsList = [];
   for (item of inboxItemsArray) {
-    flattendItemsList.push({ id: item.id, isRead: item.isRead });
+    flattendItemsList.push({
+      id: item.id,
+      isRead: item.isRead,
+      sentAt: item.sentAt.toISOString()
+    });
   }
   return flattendItemsList;
 }
@@ -200,9 +212,14 @@ document
   .addEventListener("click", inAppMarkAsRead);
 
 function getInboxItemForTesting() {
-  var id = document.getElementById("text-area-in-app-inbox-item").value;
+  var id = parseInt(document.getElementById("text-area-in-app-inbox-item").value);
+  if (isNaN(id)){
+    alert("item id is required");
+    return;
+  }
+
   var item = {
-    id: parseInt(id),
+    id: id,
   };
 
   return item;
@@ -228,8 +245,8 @@ document
 
 function inAppPresentInboxMessage() {
   Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
-    success,
-    error
+      () => {},
+      error
   );
 }
 
@@ -243,12 +260,4 @@ function inAppDeleteMessageFromInbox() {
     error
   );
 }
-document
-  .getElementById("get-visitor-id-button")
-  .addEventListener("click", getVisitorId);
 
-function getVisitorId() {
-  Optimove.getVisitorId().then((visitorId) => {
-    document.getElementById("text-area-visitor-id").value = visitorId;
-  }, error);
-}

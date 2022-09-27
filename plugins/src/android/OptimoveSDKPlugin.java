@@ -1,6 +1,7 @@
 package com.optimove.android.cordova;
 
 import android.content.Context;
+
 import androidx.annotation.Nullable;
 
 import java.net.URL;
@@ -45,6 +46,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String IN_APP_DELETE_INBOX_MESSAGE = "inAppDeleteMessageFromInbox";
     private static final String CHECK_IF_PENDING_PUSH_EXISTS = "checkIfPendingPushExists";
     private static final String CLEAR_CONTEXT = "clearContext";
+    private static final String CHECK_IF_PENDING_DDL_EXISTS = "checkIfPendingDDLExists";
+
     @Nullable
     static CallbackContext jsCallbackContext;
     @Nullable
@@ -52,13 +55,14 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     @Nullable
     static String pendingActionId;
     static CordovaInterface sCordova;
+    static JSONObject pendingDDL;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         switch (action) {
 
         case SET_HANDLERS_CALLBACK_CONTEXT:
-            setHandlersCallBackContext(callbackContext);
+            setHandlersCallBackContext(args, callbackContext);
             return true;
 
         case SET_USER_ID:
@@ -128,9 +132,22 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         case CLEAR_CONTEXT:
             this.clearJsContext();
             return true;
+        case CHECK_IF_PENDING_DDL_EXISTS:
+            this.checkIfPendingDDLExists(callbackContext);
+            return true;
         }
 
         return false;
+    }
+
+    private void checkIfPendingDDLExists(CallbackContext callbackContext) {
+        if (jsCallbackContext == null) {
+            jsCallbackContext = callbackContext;
+        }
+        if (null != pendingDDL) {
+            OptimoveSDKPlugin.sendMessageToJs("deepLink", pendingDDL);
+            pendingDDL = null;
+        }
     }
 
     private void clearJsContext() {
@@ -286,8 +303,22 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
-    private void setHandlersCallBackContext(CallbackContext callbackContext) {
+    private void setHandlersCallBackContext(JSONArray args, CallbackContext callbackContext) {
         jsCallbackContext = callbackContext;
+        try {
+            boolean checkForPendingPush = args.getBoolean(0);
+            boolean checkForPendingDDL = args.getBoolean(1);
+            if (checkForPendingPush) {
+                checkIfPendingPushExists(callbackContext);
+            }
+            if (checkForPendingDDL) {
+                checkIfPendingDDLExists(callbackContext);
+            }
+
+        } catch (JSONException e) {
+            // noop
+        }
+
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
@@ -305,9 +336,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
-    static boolean sendMessageToJs(String type, JSONObject data) {
+    static void sendMessageToJs(String type, JSONObject data) {
         if (null == jsCallbackContext) {
-            return false;
+            return;
         }
 
         JSONObject message = new JSONObject();
@@ -316,14 +347,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             message.put("data", data);
         } catch (JSONException e) {
             e.printStackTrace();
-            return false;
+            return;
         }
 
         PluginResult result = new PluginResult(PluginResult.Status.OK, message);
         result.setKeepCallback(true);
         jsCallbackContext.sendPluginResult(result);
-
-        return true;
     }
 
     private void pushRegister(CallbackContext callbackContext) {
@@ -369,25 +398,27 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 Date availableFrom = item.getAvailableFrom();
                 Date availableTo = item.getAvailableTo();
                 Date dismissedAt = item.getDismissedAt();
-                mapped.put("data", item.getData());
+
+                JSONObject data = item.getData();
+                mapped.put("data", data == null ? JSONObject.NULL : data);
 
                 URL imageUrl = item.getImageUrl();
-                mapped.put("imageUrl", imageUrl == null ? null : imageUrl.toString());
+                mapped.put("imageUrl", imageUrl == null ? JSONObject.NULL : imageUrl.toString());
 
                 if (null == availableFrom) {
-                    mapped.put("availableFrom", "");
+                    mapped.put("availableFrom", JSONObject.NULL);
                 } else {
                     mapped.put("availableFrom", formatter.format(availableFrom));
                 }
 
                 if (null == availableTo) {
-                    mapped.put("availableTo", "");
+                    mapped.put("availableTo", JSONObject.NULL);
                 } else {
                     mapped.put("availableTo", formatter.format(availableTo));
                 }
 
                 if (null == dismissedAt) {
-                    mapped.put("dismissedAt", "");
+                    mapped.put("dismissedAt", JSONObject.NULL);
                 } else {
                     mapped.put("dismissedAt", formatter.format(dismissedAt));
                 }
@@ -429,7 +460,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
         @Override
         public void handle(Context context, InAppButtonPress buttonPress) {
-            sendMessageToJs("inAppDeepLink", buttonPress.getDeepLinkData());
+            JSONObject inAppButtonPress = new JSONObject();
+            try {
+                inAppButtonPress.put("deepLinkData", buttonPress.getDeepLinkData());
+                inAppButtonPress.put("messageId", buttonPress.getMessageId());
+                JSONObject messageData = buttonPress.getMessageData();
+                inAppButtonPress.put("messageData", messageData == null ? JSONObject.NULL : messageData);
+            } catch (JSONException e) {
+                // noop
+            }
+            sendMessageToJs("inAppDeepLink", inAppButtonPress);
         }
     }
 
