@@ -336,9 +336,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
-    static boolean sendMessageToJs(String type, JSONObject data) {
+    static void sendMessageToJs(String type, JSONObject data) {
         if (null == jsCallbackContext) {
-            return false;
+            return;
         }
 
         JSONObject message = new JSONObject();
@@ -347,14 +347,12 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             message.put("data", data);
         } catch (JSONException e) {
             e.printStackTrace();
-            return false;
+            return;
         }
 
         PluginResult result = new PluginResult(PluginResult.Status.OK, message);
         result.setKeepCallback(true);
         jsCallbackContext.sendPluginResult(result);
-
-        return true;
     }
 
     private void pushRegister(CallbackContext callbackContext) {
@@ -400,25 +398,27 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 Date availableFrom = item.getAvailableFrom();
                 Date availableTo = item.getAvailableTo();
                 Date dismissedAt = item.getDismissedAt();
-                mapped.put("data", item.getData());
+
+                JSONObject data = item.getData();
+                mapped.put("data", data == null ? JSONObject.NULL : data);
 
                 URL imageUrl = item.getImageUrl();
-                mapped.put("imageUrl", imageUrl == null ? null : imageUrl.toString());
+                mapped.put("imageUrl", imageUrl == null ? JSONObject.NULL : imageUrl.toString());
 
                 if (null == availableFrom) {
-                    mapped.put("availableFrom", null);
+                    mapped.put("availableFrom", JSONObject.NULL);
                 } else {
                     mapped.put("availableFrom", formatter.format(availableFrom));
                 }
 
                 if (null == availableTo) {
-                    mapped.put("availableTo", null);
+                    mapped.put("availableTo", JSONObject.NULL);
                 } else {
                     mapped.put("availableTo", formatter.format(availableTo));
                 }
 
                 if (null == dismissedAt) {
-                    mapped.put("dismissedAt", null);
+                    mapped.put("dismissedAt", JSONObject.NULL);
                 } else {
                     mapped.put("dismissedAt", formatter.format(dismissedAt));
                 }
@@ -464,7 +464,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             try {
                 inAppButtonPress.put("deepLinkData", buttonPress.getDeepLinkData());
                 inAppButtonPress.put("messageId", buttonPress.getMessageId());
-                inAppButtonPress.put("messageData", buttonPress.getMessageData());
+                JSONObject messageData = buttonPress.getMessageData();
+                inAppButtonPress.put("messageData", messageData == null ? JSONObject.NULL : messageData);
             } catch (JSONException e) {
                 // noop
             }

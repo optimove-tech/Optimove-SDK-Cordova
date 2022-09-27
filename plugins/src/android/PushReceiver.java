@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+
 import androidx.core.app.TaskStackBuilder;
 
 import com.optimove.android.Optimove;
@@ -24,27 +26,25 @@ public class PushReceiver extends PushBroadcastReceiver {
     }
 
     static JSONObject pushMessageToJsonObject(PushMessage pushMessage, String actionId) {
-        JSONObject message = new JSONObject();
+        JSONObject result = new JSONObject();
 
+        String title = pushMessage.getTitle();
+        String message = pushMessage.getMessage();
+        Uri uri = pushMessage.getUrl();
+        JSONObject data = pushMessage.getData();
         try {
-            message.put("id", pushMessage.getId());
-            message.put("title", pushMessage.getTitle());
-            message.put("message", pushMessage.getMessage());
+            result.put("id", pushMessage.getId());
+            result.put("title", title == null ? JSONObject.NULL : title);
+            result.put("message", message == null ? JSONObject.NULL : message);
+            result.put("url", uri == null ? JSONObject.NULL : uri.toString());
+            result.put("actionId", actionId == null ? JSONObject.NULL : actionId);
+            result.put("data", data == null ? JSONObject.NULL : data);
 
-            if (null != pushMessage.getUrl()) {
-                message.put("url", pushMessage.getUrl().toString());
-            }
-
-            if (actionId != null) {
-                message.put("actionId", actionId);
-            }
-
-            message.put("data", pushMessage.getData());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return message;
+        return result;
     }
 
     @Override

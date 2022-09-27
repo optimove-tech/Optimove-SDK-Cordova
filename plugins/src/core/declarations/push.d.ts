@@ -4,4 +4,5 @@ export interface PushNotification {
     message: string | null;
     data: Record<string, any> | null;
     url: string | null;
+    actionId: string | null;
 }
