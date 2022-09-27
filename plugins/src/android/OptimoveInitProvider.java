@@ -71,7 +71,7 @@ public class OptimoveInitProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
-            @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         return null;
     }
 
@@ -94,11 +94,12 @@ public class OptimoveInitProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
-            @Nullable String[] selectionArgs) {
+                      @Nullable String[] selectionArgs) {
         return 0;
     }
 
-    private @Nullable String getStringConfigValue(String packageName, Resources resources, String key) {
+    private @Nullable
+    String getStringConfigValue(String packageName, Resources resources, String key) {
         int resId = resources.getIdentifier(key, "string", packageName);
         if (0 == resId) {
             return null;

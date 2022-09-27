@@ -34,7 +34,7 @@ declare const Optimove: {
      * @param {string} screenName - the screen name
      * @param {string} screenCategory - optional to add a screen category
      */
-    reportScreenVisit: (screenName: string, screenCategory: string) => Promise<void>;
+    reportScreenVisit: (screenName: string, screenCategory?: string) => Promise<void>;
     /**
      * Method that performs both the {setUserId} and the {setUserEmail} flows from a single call.
      *

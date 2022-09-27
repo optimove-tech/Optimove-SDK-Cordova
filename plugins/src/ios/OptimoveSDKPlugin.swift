@@ -316,9 +316,7 @@ enum InAppConsentStrategy: String {
             let inboxItems = OptimoveInApp.getInboxItems()
             var items = [[String : Any?]]()
 
-            let formatter = DateFormatter()
-            formatter.timeStyle = .full
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+            let formatter = ISO8601DateFormatter()
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
 
             for item in inboxItems {
