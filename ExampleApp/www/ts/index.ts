@@ -1,11 +1,5 @@
 declare var Optimove: Optimove;
 
-import { DeepLink } from "optimove-cordova-plugin/src/core/ddl";
-import {
-  InAppButtonPress,
-  InAppInboxItem,
-} from "optimove-cordova-plugin/src/core/inApp";
-import { PushNotification } from "optimove-cordova-plugin/src/core/push";
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
