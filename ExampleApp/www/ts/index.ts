@@ -1,4 +1,5 @@
-import Optimove from "optimove-cordova-plugin";
+declare var Optimove: Optimove;
+
 import { DeepLink } from "optimove-cordova-plugin/src/core/ddl";
 import {
   InAppButtonPress,
@@ -86,7 +87,7 @@ function reportEvent(): void {
   let eventParamsRec: Record<string, any>;
   if (eventParams === "") {
     eventParamsRec = null;
-  } else { 
+  } else {
     let eventParamsJson: JSON = JSON.parse(eventParams);
     for (let key in eventParamsJson) {
       eventParamsRec[key] = eventParamsJson[key];

@@ -9,7 +9,7 @@
       },
 
       "files": [
-          "./node_modules/optimove-cordova-plugin/src/core/declarations/index.d.ts",
+          "./node_modules/optimove-cordova-plugin/src/core/declarations/entry.d.ts",
       ],
        "include":[
           "./www/ts/*.ts"
