@@ -2,9 +2,8 @@
   "name": "optimove-cordova-plugin",
   "displayName": "Optimove Cordova plugin",
   "version": "1.0.0",
-  "types": "./src/core/index.d.ts",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "main": "index.js",
+  "types": "./src/core/declarations/index.d.ts",
   "scripts": {
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"

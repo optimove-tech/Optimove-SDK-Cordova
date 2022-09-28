@@ -1,5 +1,4 @@
 import Optimove from "optimove-cordova-plugin";
-import * as cordova from "cordova";
 import { DeepLink } from "optimove-cordova-plugin/src/core/ddl";
 import {
   InAppButtonPress,
@@ -25,14 +24,9 @@ import { PushNotification } from "optimove-cordova-plugin/src/core/push";
  * under the License.
  */
 
-// Wait for the deviceready event before using any of Cordova's device APIs.
-// See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-  // Cordova is now initialized. Have fun!
-  console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
   Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHandler);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
