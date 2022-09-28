@@ -1,15 +1,19 @@
 export interface DeepLinkContent {
-  title?: string;
-  description?: string;
+  title: string | null;
+  description: string | null;
 }
-export interface DeepLinkData {
-  data: JSON;
-  content: DeepLinkContent;
-  url: string;
-}
- 
+
 export interface DeepLink {
-  link: string;
-  resolution: string;
-  data: DeepLinkData;
+  resolution: DeepLinkResolution;
+  url: string;
+  content: DeepLinkContent | null;
+  linkData: Record<string,any> | null;
+}
+
+export enum DeepLinkResolution {
+  LOOKUP_FAILED = "LOOKUP_FAILED",
+  LINK_NOT_FOUND = "LINK_NOT_FOUND",
+  LINK_EXPIRED = "LINK_EXPIRED",
+  LINK_LIMIT_EXCEEDED = "LINK_LIMIT_EXCEEDED",
+  LINK_MATCHED = "LINK_MATCHED",
 }

@@ -1,11 +1,13 @@
-import * as cordova from "cordova";
 import {
-  PushNotificationHandler,
+  DeepLinkHandler,
   InAppDeepLinkHandler,
   InAppInboxUpdatedHandler,
-  DeepLinkHandler,
+  PushNotificationHandler,
 } from "./handlers";
-import { InAppInboxItem, InAppInboxSummary} from "./inApp";
+import { InAppInboxItem, InAppInboxItemRaw, InAppInboxSummary } from "./inApp";
+
+import cordova from "cordova";
+
 export interface OptimoveConfig{
   pushReceivedHandler: PushNotificationHandler | null;
   pushOpenedHandler: PushNotificationHandler | null;
@@ -54,13 +56,16 @@ function clearContext() {
 }
 
 function setHandlersCallBackContext() {
+  let checkForPendingPush: boolean = currentConfig["pushOpenedHandler"] !== null;
+  let checkForPendingDDL: boolean = currentConfig["deepLinkHandler"] !== null;
+
   return new Promise((resolve, reject) => {
     cordova.exec(
       nativeMessageHandler,
       reject,
       "OptimoveSDKPlugin",
       "setHandlersCallBackContext",
-      []
+      [checkForPendingPush, checkForPendingDDL]
     );
   });
 }
@@ -106,13 +111,13 @@ function nativeMessageHandler(message : HandlerMessage | string) {
   }
 }
 
-export interface EventParams {
-  [key: string]: any;
+function isNonEmptyString(val: string) {
+  return typeof val === "string" && val !== "";
 }
 
-export interface HandlerMessage {
+interface HandlerMessage {
   type: string;
-  data: JSON;
+  data: Record<string,any>
  }
 const Optimove = {
   /**
@@ -124,6 +129,10 @@ const Optimove = {
    */
   setUserId: (userId: string): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userId)){
+        reject("Invalid user id");
+        return;
+      }
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "setUserId", [userId]);
     });
   },
@@ -136,6 +145,11 @@ const Optimove = {
    */
   setUserEmail: (userEmail: string): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userEmail)) {
+        reject("Invalid user email");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "setUserEmail", [
         userEmail,
       ]);
@@ -145,10 +159,15 @@ const Optimove = {
   /**
    * Reports a custom analytics event
    * @param {string} eventName - the custom event name
-   * @param {EventParams} eventParams - optional to add parameters of the event
+   * @param {Record<string,any>} eventParams - optional to add parameters of the event
    */
-  reportEvent: (eventName: string, eventParams: EventParams): Promise<void> => {
+  reportEvent: (eventName: string, eventParams: Record<string,any>): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(eventName)) {
+        reject("Invalid event name");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "reportEvent", [
         eventName,
         eventParams,
@@ -162,9 +181,19 @@ const Optimove = {
    */
   reportScreenVisit: (
     screenName: string,
-    screenCategory: string
+    screenCategory?: string
   ): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(screenName)) {
+        reject("Invalid screen name");
+        return;
+      }
+
+      if (screenCategory !== undefined && !isNonEmptyString(screenName)){
+        reject("Invalid screen category");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "reportScreenVisit", [
         screenName,
         screenCategory,
@@ -181,6 +210,16 @@ const Optimove = {
    */
   registerUser: (userId: string, userEmail: string): Promise<void> => {
     return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(userId)) {
+        reject("Invalid user id");
+        return;
+      }
+
+      if (!isNonEmptyString(userEmail)) {
+        reject("Invalid user user email");
+        return;
+      }
+
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "registerUser", [
         userId,
         userEmail,
@@ -231,8 +270,24 @@ const Optimove = {
         "OptimoveSDKPlugin",
         "inAppGetInboxItems",
         []
-      );
-    });
+       );
+    }).then((rawItems: InAppInboxItemRaw[]) =>
+        rawItems.map((rawItem: InAppInboxItemRaw) => (
+          {
+            id: rawItem.id,
+            title: rawItem.title,
+            subtitle: rawItem.subtitle,
+            availableFrom: rawItem.availableFrom === null ? null : new Date(rawItem.availableFrom),
+            availableTo: rawItem.availableFrom === null ? null : new Date(rawItem.availableTo),
+            dismissedAt: rawItem.availableFrom === null ? null : new Date(rawItem.dismissedAt),
+            sentAt: new Date(rawItem.sentAt),
+            data: rawItem.data,
+            isRead: rawItem.isRead,
+            imageUrl: rawItem.imageUrl,
+          })
+        )
+    );
+
   },
 
   /**

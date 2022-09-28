@@ -42,22 +42,26 @@ function error(errorMessage) {
 }
 
 function deepLinkHandler(deepLink) {
-  alert("deepLinkHandler: " + JSON.stringify(deepLink));
-}
+  setOutput("deepLinkHandler: " + JSON.stringify(deepLink));
+ }
 function pushReceivedHandler(pushMessage) {
-  console.log("pushReceivedHandler: " + JSON.stringify(pushMessage));
+  setOutput("pushReceivedHandler: " + JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage) {
-  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
+  setOutput("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
 function inAppDeepLinkHandler(deepLinkData) {
-  console.log("inAppDeepLinkHandler: " + JSON.stringify(deepLinkData));
+  setOutput("inAppDeepLinkHandler: " + JSON.stringify(deepLinkData));
 }
 
 function onInboxUpdatedHandler() {
   console.log("onInboxUpdatedHandler");
+}
+
+function setOutput(output){
+  document.getElementById("text-area-output").value = output;
 }
 
 document
@@ -186,7 +190,11 @@ function inAppGetInboxItems() {
 function flattenInboxItemObject(inboxItemsArray) {
   flattendItemsList = [];
   for (item of inboxItemsArray) {
-    flattendItemsList.push({ id: item.id, isRead: item.isRead });
+    flattendItemsList.push({
+      id: item.id,
+      isRead: item.isRead,
+      sentAt: item.sentAt.toISOString()
+    });
   }
   return flattendItemsList;
 }
@@ -204,9 +212,14 @@ document
   .addEventListener("click", inAppMarkAsRead);
 
 function getInboxItemForTesting() {
-  var id = document.getElementById("text-area-in-app-inbox-item").value;
+  var id = parseInt(document.getElementById("text-area-in-app-inbox-item").value);
+  if (isNaN(id)){
+    alert("item id is required");
+    return;
+  }
+
   var item = {
-    id: parseInt(id),
+    id: id,
   };
 
   return item;
@@ -232,8 +245,8 @@ document
 
 function inAppPresentInboxMessage() {
   Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
-    success,
-    error
+      () => {},
+      error
   );
 }
 

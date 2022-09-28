@@ -1,15 +1,14 @@
 export interface InAppInboxItem {
   id: number;
   title: string;
-  subtitle: String;
-  availableFrom: string | null;
-  availableTo: string | null;
-  dismissedAt: string | null;
-  readAt: string | null;
-  sentAt: string;
-  data: JSON | null;
-  imagePath: string | null;
+  subtitle: string;
+  availableFrom: Date | null;
+  availableTo: Date | null;
+  dismissedAt: Date | null;
+  sentAt: Date;
+  data: Record<string,any> | null;
   isRead: boolean;
+  imageUrl: string | null;
 }
 
 export interface InAppInboxSummary {
@@ -17,8 +16,22 @@ export interface InAppInboxSummary {
   unreadCount: number;
 }
 
-export interface InAppButtonPress{
-    deepLinkData:  JSON;
-        messageId: number;
-       messageData: JSON | null;
+export interface InAppButtonPress {
+  deepLinkData: Record<string,any>;
+  messageId: number;
+  messageData: Record<string,any> | null;
+}
+
+// internal
+export interface InAppInboxItemRaw {
+  id: number;
+  title: string;
+  subtitle: string;
+  availableFrom: string | null;
+  availableTo: string | null;
+  dismissedAt: string | null;
+  sentAt: string;
+  data: Record<string,any> | null;
+  isRead: boolean;
+  imageUrl: string | null;
 }

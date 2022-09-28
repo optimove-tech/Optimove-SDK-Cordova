@@ -3,9 +3,8 @@
         "target": "es2015",
         "allowSyntheticDefaultImports": true,
         "declaration": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "rootDir": "./src/",
+        "outDir": "./src/core/declarations",
+        "rootDir": "./src/core",
         "module": "esnext",
         "moduleResolution": "node"
     },
@@ -13,6 +12,6 @@
         "src/core/**/*.ts"
     ],
     "exclude": [
-        "src/core/*.d.ts"
+        "src/core/declarations/*.d.ts"
     ]
 }
