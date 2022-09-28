@@ -3,14 +3,11 @@ const path = require("path");
 module.exports = {
   mode: "production",
   entry: "./www/ts/index.ts",
-  externals: {
-    cordova: "cordova",
-  },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts"],
   },
   output: {
-    path: path.resolve(__dirname, "www","js"),
+    path: path.resolve(__dirname, "www"),
     filename: "index.js",
     library: {
         type: "commonjs2"
