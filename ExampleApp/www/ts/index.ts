@@ -40,7 +40,8 @@ function onDeviceReady() {
   Optimove.setDeepLinkHandler(deepLinkHandler);
 }
 
-function success(successMessage: string = "Success!"): void {
+function success(): void {
+ let successMessage: string = "Success!";
   alert(successMessage);
 }
 
@@ -88,12 +89,19 @@ function reportEvent(): void {
   var eventParams: string = (<HTMLInputElement>(
     document.getElementById("text-area-event-params")
   )).value;
+  let eventParamsRec: Record<string, any>;
   if (eventParams === "") {
-    eventParams = null;
+    eventParamsRec = null;
+  } else { 
+    let eventParamsJson: JSON = JSON.parse(eventParams);
+    for (let key in eventParamsJson) {
+      eventParamsRec[key] = eventParamsJson[key];
+     }
   }
+
   Optimove.reportEvent(
     (<HTMLInputElement>document.getElementById("text-area-event")).value,
-    eventParams
+    eventParamsRec
   ).then(() => {
     (<HTMLInputElement>document.getElementById("text-area-event")).value = "";
     (<HTMLInputElement>(
@@ -222,12 +230,21 @@ document
   .getElementById("in-app-mark-inbox-item-as-read-button")
   .addEventListener("click", inAppMarkAsRead);
 
-function getInboxItemForTesting(): Object {
+function getInboxItemForTesting(): InAppInboxItem {
   var id = (<HTMLInputElement>(
     document.getElementById("text-area-in-app-inbox-item")
   )).value;
-  var item: Object = {
+  var item: InAppInboxItem = {
     id: parseInt(id),
+    title: "test",
+  subtitle: "test",
+  availableFrom: null,
+  availableTo: null,
+  dismissedAt:  null,
+  data: null,
+  isRead: false,
+  imageUrl:  null,
+  sentAt: new Date(""),
   };
 
   return item;
