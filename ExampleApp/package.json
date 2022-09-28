@@ -17,7 +17,10 @@
     "cordova-android": "^10.1.2",
     "cordova-ios": "^6.2.0",
     "optimove-cordova-plugin": "file:../plugins",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.10.0",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.8.3",
+    "webpack": "^5.74.0"
   },
   "cordova": {
     "platforms": [
@@ -26,8 +29,5 @@
     "plugins": {
       "optimove-cordova-plugin": {}
     }
-  },
-  "dependencies": {
-    "webpack": "^5.74.0"
   }
 }
