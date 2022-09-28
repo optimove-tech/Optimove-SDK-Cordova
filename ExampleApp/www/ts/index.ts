@@ -1,7 +1,10 @@
-declare var Optimove: Optimove;
+import Optimove from "optimove-cordova-plugin";
 import * as cordova from "cordova";
 import { DeepLink } from "optimove-cordova-plugin/src/core/ddl";
-import { InAppButtonPress, InAppInboxItem } from "optimove-cordova-plugin/src/core/inApp";
+import {
+  InAppButtonPress,
+  InAppInboxItem,
+} from "optimove-cordova-plugin/src/core/inApp";
 import { PushNotification } from "optimove-cordova-plugin/src/core/push";
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -37,30 +40,30 @@ function onDeviceReady() {
   Optimove.setDeepLinkHandler(deepLinkHandler);
 }
 
-function success(successMessage : string = "Success!") : void {
+function success(successMessage: string = "Success!"): void {
   alert(successMessage);
 }
 
-function error(errorMessage : string) : void {
+function error(errorMessage: string): void {
   console.error(errorMessage);
 }
 
-function deepLinkHandler(deepLink: DeepLink) : void {
+function deepLinkHandler(deepLink: DeepLink): void {
   alert("deepLinkHandler: " + JSON.stringify(deepLink));
 }
-function pushReceivedHandler(pushMessage: PushNotification) : void {
+function pushReceivedHandler(pushMessage: PushNotification): void {
   console.log("pushReceivedHandler: " + JSON.stringify(pushMessage));
 }
 
-function pushOpenedHandler(pushMessage: PushNotification) : void {
+function pushOpenedHandler(pushMessage: PushNotification): void {
   console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
 }
 
-function inAppDeepLinkHandler(inAppButtonPress : InAppButtonPress) : void {
+function inAppDeepLinkHandler(inAppButtonPress: InAppButtonPress): void {
   console.log("inAppDeepLinkHandler: " + JSON.stringify(inAppButtonPress));
 }
 
-function onInboxUpdatedHandler() : void {
+function onInboxUpdatedHandler(): void {
   console.log("inbox Updated");
 }
 
@@ -68,11 +71,11 @@ document
   .getElementById("set-user-id-button")
   .addEventListener("click", setUserId);
 
-function setUserId() : void {
+function setUserId(): void {
   Optimove.setUserId(
     (<HTMLInputElement>document.getElementById("text-area-user-id")).value
   ).then(() => {
-   (<HTMLInputElement>document.getElementById("text-area-user-id")).value = "";
+    (<HTMLInputElement>document.getElementById("text-area-user-id")).value = "";
     success();
   }, error);
 }
@@ -81,8 +84,10 @@ document
   .getElementById("report-event-button")
   .addEventListener("click", reportEvent);
 
-function reportEvent() : void {
-  var eventParams: string = (<HTMLInputElement>document.getElementById("text-area-event-params")).value;
+function reportEvent(): void {
+  var eventParams: string = (<HTMLInputElement>(
+    document.getElementById("text-area-event-params")
+  )).value;
   if (eventParams === "") {
     eventParams = null;
   }
@@ -91,7 +96,9 @@ function reportEvent() : void {
     eventParams
   ).then(() => {
     (<HTMLInputElement>document.getElementById("text-area-event")).value = "";
-    (<HTMLInputElement>document.getElementById("text-area-event-params")).value = "";
+    (<HTMLInputElement>(
+      document.getElementById("text-area-event-params")
+    )).value = "";
     success();
   }, error);
 }
@@ -100,11 +107,12 @@ document
   .getElementById("set-user-email-button")
   .addEventListener("click", setUserEmail);
 
-function setUserEmail() : void {
+function setUserEmail(): void {
   Optimove.setUserEmail(
     (<HTMLInputElement>document.getElementById("text-area-user-email")).value
   ).then(() => {
-    (<HTMLInputElement>document.getElementById("text-area-user-email")).value = "";
+    (<HTMLInputElement>document.getElementById("text-area-user-email")).value =
+      "";
     success();
   }, error);
 }
@@ -113,9 +121,9 @@ document
   .getElementById("report-screen-visit-button")
   .addEventListener("click", reportScreenVisit);
 
-function reportScreenVisit() : void {
-  var screenCategory = (<HTMLInputElement>document.getElementById(
-    "text-area-screen-category"
+function reportScreenVisit(): void {
+  var screenCategory = (<HTMLInputElement>(
+    document.getElementById("text-area-screen-category")
   )).value;
   if (screenCategory === "") {
     screenCategory = null;
@@ -124,8 +132,11 @@ function reportScreenVisit() : void {
     (<HTMLInputElement>document.getElementById("text-area-screen-name")).value,
     screenCategory
   ).then(() => {
-    (<HTMLInputElement>document.getElementById("text-area-screen-name")).value = "";
-    (<HTMLInputElement>document.getElementById("text-area-screen-category")).value = "";
+    (<HTMLInputElement>document.getElementById("text-area-screen-name")).value =
+      "";
+    (<HTMLInputElement>(
+      document.getElementById("text-area-screen-category")
+    )).value = "";
     success();
   }, error);
 }
@@ -139,7 +150,8 @@ function registerUser() {
     (<HTMLInputElement>document.getElementById("text-area-user-email")).value
   ).then(() => {
     (<HTMLInputElement>document.getElementById("text-area-user-id")).value = "";
-    (<HTMLInputElement>document.getElementById("text-area-user-email")).value = "";
+    (<HTMLInputElement>document.getElementById("text-area-user-email")).value =
+      "";
     success();
   }, error);
 }
@@ -147,7 +159,7 @@ document
   .getElementById("get-visitor-id-button")
   .addEventListener("click", getVisitorId);
 
-function getVisitorId() : void {
+function getVisitorId(): void {
   Optimove.getVisitorId().then((visitorId) => {
     alert(visitorId);
   }, error);
@@ -157,14 +169,14 @@ document
   .getElementById("push-register-button")
   .addEventListener("click", pushRegister);
 
-function pushRegister() : void {
+function pushRegister(): void {
   Optimove.pushRegister().then(success, error);
 }
 document
   .getElementById("in-app-consent-true")
   .addEventListener("click", inAppUpdateConsentTrue);
 
-function inAppUpdateConsentTrue() : void {
+function inAppUpdateConsentTrue(): void {
   Optimove.inAppUpdateConsent(true).then(success, error);
 }
 
@@ -180,18 +192,18 @@ document
   .getElementById("in-app-get-inbox-items-button")
   .addEventListener("click", inAppGetInboxItems);
 
-function inAppGetInboxItems() : void {
+function inAppGetInboxItems(): void {
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
     alert(JSON.stringify(flattenInboxItemObject(inboxItemsArray)));
   }, error);
 }
 interface flattendInboxItem {
-    id: number;
-    isRead: boolean;
+  id: number;
+  isRead: boolean;
 }
-function flattenInboxItemObject(inboxItemsArray : InAppInboxItem[]) {
-    let flattendItemsList: flattendInboxItem[] = [];
-    let item: InAppInboxItem;
+function flattenInboxItemObject(inboxItemsArray: InAppInboxItem[]) {
+  let flattendItemsList: flattendInboxItem[] = [];
+  let item: InAppInboxItem;
   for (item of inboxItemsArray) {
     flattendItemsList.push({ id: item.id, isRead: item.isRead });
   }
@@ -202,7 +214,7 @@ document
   .getElementById("in-app-mark-all-inbox-items-as-read-button")
   .addEventListener("click", inAppMarkAllInboxItemsAsRead);
 
-function inAppMarkAllInboxItemsAsRead() : void {
+function inAppMarkAllInboxItemsAsRead(): void {
   Optimove.inAppMarkAllInboxItemsAsRead().then(success, error);
 }
 
@@ -210,16 +222,18 @@ document
   .getElementById("in-app-mark-inbox-item-as-read-button")
   .addEventListener("click", inAppMarkAsRead);
 
-function getInboxItemForTesting() : Object {
-  var id = (<HTMLInputElement>document.getElementById("text-area-in-app-inbox-item")).value;
-  var item : Object = {
+function getInboxItemForTesting(): Object {
+  var id = (<HTMLInputElement>(
+    document.getElementById("text-area-in-app-inbox-item")
+  )).value;
+  var item: Object = {
     id: parseInt(id),
   };
 
   return item;
 }
 
-function inAppMarkAsRead() : void {
+function inAppMarkAsRead(): void {
   Optimove.inAppMarkAsRead(getInboxItemForTesting()).then(success, error);
 }
 
@@ -227,7 +241,7 @@ document
   .getElementById("in-app-get-inbox-summary-button")
   .addEventListener("click", inAppGetInboxSummary);
 
-function inAppGetInboxSummary() : void {
+function inAppGetInboxSummary(): void {
   Optimove.inAppGetInboxSummary().then((inboxSummary) => {
     alert(JSON.stringify(inboxSummary));
   }, error);
@@ -237,7 +251,7 @@ document
   .getElementById("in-app-present-inbox-message-button")
   .addEventListener("click", inAppPresentInboxMessage);
 
-function inAppPresentInboxMessage() : void {
+function inAppPresentInboxMessage(): void {
   Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
     success,
     error
@@ -248,10 +262,9 @@ document
   .getElementById("in-app-delete-inbox-message-button")
   .addEventListener("click", inAppDeleteMessageFromInbox);
 
-function inAppDeleteMessageFromInbox()  : void {
+function inAppDeleteMessageFromInbox(): void {
   Optimove.inAppDeleteMessageFromInbox(getInboxItemForTesting()).then(
     success,
     error
   );
 }
-
