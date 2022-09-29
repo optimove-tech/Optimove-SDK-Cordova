@@ -191,20 +191,25 @@ document
 
 function inAppGetInboxItems(): void {
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
-    alert(JSON.stringify(flattenInboxItemObject(inboxItemsArray)));
+    alert(JSON.stringify(getInboxItemsForPrinting(inboxItemsArray)));
   }, error);
 }
-interface flattendInboxItem {
+interface InboxItemSubset {
   id: number;
   isRead: boolean;
+  sentAt: string;
 }
-function flattenInboxItemObject(inboxItemsArray: InAppInboxItem[]) {
-  let flattendItemsList: flattendInboxItem[] = [];
+function getInboxItemsForPrinting(inboxItemsArray: InAppInboxItem[]) {
+  let subsetItemsList: InboxItemSubset[] = [];
   let item: InAppInboxItem;
   for (item of inboxItemsArray) {
-    flattendItemsList.push({ id: item.id, isRead: item.isRead });
+    subsetItemsList.push({
+      id: item.id,
+      isRead: item.isRead,
+      sentAt: item.sentAt.toISOString()
+    });
   }
-  return flattendItemsList;
+  return subsetItemsList;
 }
 
 document
