@@ -225,23 +225,27 @@ document
   .addEventListener("click", inAppMarkAsRead);
 
 function getInboxItemForTesting(): InAppInboxItem {
-  var id = (<HTMLInputElement>(
+  var id = parseInt((<HTMLInputElement>(
     document.getElementById("text-area-in-app-inbox-item")
-  )).value;
-  var item: InAppInboxItem = {
-    id: parseInt(id),
-    title: "test",
-  subtitle: "test",
-  availableFrom: null,
-  availableTo: null,
-  dismissedAt:  null,
-  data: null,
-  isRead: false,
-  imageUrl:  null,
-  sentAt: new Date(""),
-  };
+  )).value);
 
-  return item;
+  if (isNaN(id)){
+    alert("item id is required");
+    return;
+  }
+
+  return {
+    id: id,
+    title: "test",
+    subtitle: "test",
+    availableFrom: null,
+    availableTo: null,
+    dismissedAt:  null,
+    data: null,
+    isRead: false,
+    imageUrl:  null,
+    sentAt: new Date(),
+  };
 }
 
 function inAppMarkAsRead(): void {
