@@ -20,7 +20,9 @@ declare var Optimove: Optimove;
  */
 
 document.addEventListener("deviceready", onDeviceReady, false);
-
+let outputBox: HTMLTextAreaElement = <HTMLTextAreaElement>
+  document.getElementById("text-area-output");
+  
 function onDeviceReady() {
   Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHandler);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
@@ -35,26 +37,44 @@ function success(): void {
 }
 
 function error(errorMessage: string): void {
-  console.error(errorMessage);
+  alert(errorMessage);
 }
 
 function deepLinkHandler(deepLink: DeepLink): void {
-  alert("deepLinkHandler: " + JSON.stringify(deepLink));
+  outputBox.value =
+    outputBox.value + "\n" + "deepLinkHandler: " + JSON.stringify(deepLink);
+  outputBox.rows = outputBox.rows + 1;
 }
 function pushReceivedHandler(pushMessage: PushNotification): void {
-  console.log("pushReceivedHandler: " + JSON.stringify(pushMessage));
+  outputBox.value =
+  outputBox.value +
+  "\n" + "pushReceivedHandler: " +
+  JSON.stringify(pushMessage);
+  outputBox.rows = outputBox.rows + 1;
 }
 
 function pushOpenedHandler(pushMessage: PushNotification): void {
-  console.log("pushOpenedHandler: " + JSON.stringify(pushMessage));
+  outputBox.value =
+    outputBox.value +
+    "\n" +
+    "pushOpenedHandler: " +
+    JSON.stringify(pushMessage);
+  outputBox.rows = outputBox.rows + 1;
 }
 
 function inAppDeepLinkHandler(inAppButtonPress: InAppButtonPress): void {
-  console.log("inAppDeepLinkHandler: " + JSON.stringify(inAppButtonPress));
+  outputBox.value =
+    outputBox.value +
+    "\n" +
+    "inAppDeepLinkHandler: " +
+    JSON.stringify(inAppButtonPress);
+  outputBox.rows = outputBox.rows + 1;
 }
 
 function onInboxUpdatedHandler(): void {
-  console.log("inbox Updated");
+  outputBox.value =
+    outputBox.value + "\n" + "inboxUpdated"
+  outputBox.rows = outputBox.rows + 1;
 }
 
 document
@@ -158,7 +178,9 @@ document
 
 function getVisitorId(): void {
   Optimove.getVisitorId().then((visitorId) => {
-    alert(visitorId);
+    outputBox.value =
+      outputBox.value + "\n" + "visitor id:" + visitorId;
+    outputBox.rows = outputBox.rows + 1;
   }, error);
 }
 
@@ -191,7 +213,11 @@ document
 
 function inAppGetInboxItems(): void {
   Optimove.inAppGetInboxItems().then((inboxItemsArray) => {
-    alert(JSON.stringify(getInboxItemsForPrinting(inboxItemsArray)));
+    outputBox.value =
+      outputBox.value +
+      "\n" + "inbox items: "
+    JSON.stringify(getInboxItemsForPrinting(inboxItemsArray));
+    outputBox.rows = outputBox.rows + 1;
   }, error);
 }
 interface InboxItemSubset {
@@ -258,7 +284,8 @@ document
 
 function inAppGetInboxSummary(): void {
   Optimove.inAppGetInboxSummary().then((inboxSummary) => {
-    alert(JSON.stringify(inboxSummary));
+    outputBox.value = outputBox.value + "\n" + JSON.stringify(inboxSummary);
+    outputBox.rows = outputBox.rows + 1;
   }, error);
 }
 
