@@ -72,6 +72,7 @@ declare enum DeepLinkResolution {
     LINK_MATCHED = "LINK_MATCHED"
 }
 
+
 interface Optimove {
     /**
      * Sets the User ID of the current user.
@@ -182,4 +183,3 @@ interface Optimove {
      */
     setDeepLinkHandler(deepLinkHandler: DeepLinkHandler): void;
 }
-

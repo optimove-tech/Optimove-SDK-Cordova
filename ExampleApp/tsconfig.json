@@ -2,14 +2,11 @@
     "compilerOptions": {
           "target": "es2015",
           "allowSyntheticDefaultImports": true,
-          "rootDir": "./",
           "module": "esnext",
           "moduleResolution": "node",
-          "esModuleInterop": true
       },
-
       "files": [
-          "./node_modules/optimove-cordova-plugin/src/core/declarations/entry.d.ts",
+          "./node_modules/optimove-cordova-plugin/src/core/ambient/interfaces.d.ts",
       ],
        "include":[
           "./www/ts/*.ts"
