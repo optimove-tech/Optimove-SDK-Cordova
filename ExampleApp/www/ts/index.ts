@@ -22,27 +22,13 @@ declare var Optimove: Optimove;
 document.addEventListener("deviceready", onDeviceReady, false);
 let outputBox: HTMLTextAreaElement = <HTMLTextAreaElement>
   document.getElementById("text-area-output");
-  
+
 function onDeviceReady() {
   Optimove.setOnInboxUpdatedHandler(onInboxUpdatedHandler);
   Optimove.setPushReceivedHandler(pushReceivedHandler);
   Optimove.setInAppDeepLinkHandler(inAppDeepLinkHandler);
   Optimove.setPushOpenedHandler(pushOpenedHandler);
   Optimove.setDeepLinkHandler(deepLinkHandler);
-}
-function showMessage(message: string) { 
-   outputBox.value =
-     outputBox.value + "\n" + message;
-   outputBox.rows = outputBox.rows + 1;
-}
-
-function success(): void {
- let successMessage: string = "Success!";
-  alert(successMessage);
-}
-
-function error(errorMessage: string): void {
-  alert(errorMessage);
 }
 
 function deepLinkHandler(deepLink: DeepLink): void {
@@ -235,7 +221,7 @@ document
   .getElementById("in-app-mark-inbox-item-as-read-button")
   .addEventListener("click", inAppMarkAsRead);
 
-function getInboxItemForTesting(): InAppInboxItem {
+function getInboxItemForTesting(): InAppInboxItem | null {
   var id = parseInt((<HTMLInputElement>(
     document.getElementById("text-area-in-app-inbox-item")
   )).value);
@@ -260,7 +246,11 @@ function getInboxItemForTesting(): InAppInboxItem {
 }
 
 function inAppMarkAsRead(): void {
-  Optimove.inAppMarkAsRead(getInboxItemForTesting()).then(success, error);
+  let item = getInboxItemForTesting();
+  if (item === null){
+    return;
+  }
+  Optimove.inAppMarkAsRead(item).then(success, error);
 }
 
 document
@@ -268,7 +258,7 @@ document
   .addEventListener("click", inAppGetInboxSummary);
 
 function inAppGetInboxSummary(): void {
-  Optimove.inAppGetInboxSummary().then((inboxSummary) => {
+  Optimove.inAppGetInboxSummary().then((inboxSummary: InAppInboxSummary) => {
     showMessage(JSON.stringify(inboxSummary));
   }, error);
 }
@@ -278,7 +268,11 @@ document
   .addEventListener("click", inAppPresentInboxMessage);
 
 function inAppPresentInboxMessage(): void {
-  Optimove.inAppPresentInboxMessage(getInboxItemForTesting()).then(
+  let item = getInboxItemForTesting();
+  if (item === null){
+    return;
+  }
+  Optimove.inAppPresentInboxMessage(item).then(
     success,
     error
   );
@@ -289,8 +283,38 @@ document
   .addEventListener("click", inAppDeleteMessageFromInbox);
 
 function inAppDeleteMessageFromInbox(): void {
-  Optimove.inAppDeleteMessageFromInbox(getInboxItemForTesting()).then(
+  let item = getInboxItemForTesting();
+  if (item === null){
+    return;
+  }
+  Optimove.inAppDeleteMessageFromInbox(item).then(
     success,
     error
   );
 }
+
+// HELPERS
+document
+.getElementById("text-area-clear")
+.addEventListener("click", clearOutput);
+
+function clearOutput(){
+ let outputBox: HTMLTextAreaElement = <HTMLTextAreaElement>
+   document.getElementById("text-area-output");
+   outputBox.value = "";
+}
+
+function showMessage(message: string) {
+  outputBox.value =
+    outputBox.value + "\n" + message;
+  outputBox.rows = outputBox.rows + 1;
+}
+
+function success(): void {
+  let successMessage: string = "Success!";
+   alert(successMessage);
+ }
+
+ function error(errorMessage: string): void {
+   alert(errorMessage);
+ }
