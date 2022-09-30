@@ -28,7 +28,7 @@ declare const Optimove: {
      * @param {string} eventName - the custom event name
      * @param {Record<string,any>} eventParams - optional to add parameters of the event
      */
-    reportEvent: (eventName: string, eventParams: Record<string, any>) => Promise<void>;
+    reportEvent: (eventName: string, eventParams: Record<string, any> | null) => Promise<void>;
     /**
      * Reports a visit in a given screen
      * @param {string} screenName - the screen name

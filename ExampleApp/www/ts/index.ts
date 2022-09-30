@@ -71,27 +71,23 @@ document
   .addEventListener("click", reportEvent);
 
 function reportEvent(): void {
-  var eventParams: string = (<HTMLInputElement>(
+  const paramsInput: string = (<HTMLInputElement>(
     document.getElementById("text-area-event-params")
   )).value;
-  let eventParamsRec: Record<string, any>;
-  if (eventParams === "") {
-    eventParamsRec = null;
-  } else {
-    let eventParamsJson: JSON = JSON.parse(eventParams);
-    for (let key in eventParamsJson) {
-      eventParamsRec[key] = eventParamsJson[key];
-     }
+
+  var params: Record<string, any> | null = null;
+  if (paramsInput !== ""){
+    params = JSON.parse(paramsInput);
   }
 
+  const eventType = (<HTMLInputElement>document.getElementById("text-area-event")).value;
+
   Optimove.reportEvent(
-    (<HTMLInputElement>document.getElementById("text-area-event")).value,
-    eventParamsRec
+    eventType,
+    params
   ).then(() => {
     (<HTMLInputElement>document.getElementById("text-area-event")).value = "";
-    (<HTMLInputElement>(
-      document.getElementById("text-area-event-params")
-    )).value = "";
+    (<HTMLInputElement>( document.getElementById("text-area-event-params"))).value = "";
     success();
   }, error);
 }
@@ -115,21 +111,18 @@ document
   .addEventListener("click", reportScreenVisit);
 
 function reportScreenVisit(): void {
-  var screenCategory = (<HTMLInputElement>(
-    document.getElementById("text-area-screen-category")
-  )).value;
+  const screenName = (<HTMLInputElement>document.getElementById("text-area-screen-name")).value;
+  var screenCategory = (<HTMLInputElement>(document.getElementById("text-area-screen-category"))).value;
   if (screenCategory === "") {
     screenCategory = null;
   }
+
   Optimove.reportScreenVisit(
-    (<HTMLInputElement>document.getElementById("text-area-screen-name")).value,
+    screenName,
     screenCategory
   ).then(() => {
-    (<HTMLInputElement>document.getElementById("text-area-screen-name")).value =
-      "";
-    (<HTMLInputElement>(
-      document.getElementById("text-area-screen-category")
-    )).value = "";
+    (<HTMLInputElement>document.getElementById("text-area-screen-name")).value ="";
+    (<HTMLInputElement>(document.getElementById("text-area-screen-category"))).value = "";
     success();
   }, error);
 }
