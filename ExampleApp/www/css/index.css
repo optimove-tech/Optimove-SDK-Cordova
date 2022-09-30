@@ -110,3 +110,9 @@ button {
 #text-area-output {
     width:100%;
 }
+
+#text-area-clear {
+    right: 0;
+    position: absolute;
+    margin: 0;
+}

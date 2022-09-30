@@ -26,3 +26,7 @@ node_modules/
 .vscode/
 plugins/src/android/.idea/
 plugins/src/android/android.iml
+ExampleApp/optimove.json
+ExampleApp/google-services.json
+ExampleApp/platforms/
+ExampleApp/plugins/

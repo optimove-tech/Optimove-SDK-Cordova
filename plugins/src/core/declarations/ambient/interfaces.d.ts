@@ -1,13 +1,79 @@
-import { DeepLinkHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, PushNotificationHandler } from "./handlers";
-import { InAppInboxItem, InAppInboxSummary } from "./inApp";
-export interface OptimoveConfig {
-    pushReceivedHandler: PushNotificationHandler | null;
-    pushOpenedHandler: PushNotificationHandler | null;
-    inAppDeepLinkHandler: InAppDeepLinkHandler | null;
-    inAppInboxUpdatedHandler: InAppInboxUpdatedHandler | null;
-    deepLinkHandler: DeepLinkHandler | null;
+interface InAppInboxItem {
+    id: number;
+    title: string;
+    subtitle: string;
+    availableFrom: Date | null;
+    availableTo: Date | null;
+    dismissedAt: Date | null;
+    sentAt: Date;
+    data: Record<string, any> | null;
+    isRead: boolean;
+    imageUrl: string | null;
 }
-declare const Optimove: {
+interface InAppInboxSummary {
+    totalCount: number;
+    unreadCount: number;
+}
+interface InAppButtonPress {
+    deepLinkData: Record<string, any>;
+    messageId: number;
+    messageData: Record<string, any> | null;
+}
+interface InAppInboxItemRaw {
+    id: number;
+    title: string;
+    subtitle: string;
+    availableFrom: string | null;
+    availableTo: string | null;
+    dismissedAt: string | null;
+    sentAt: string;
+    data: Record<string, any> | null;
+    isRead: boolean;
+    imageUrl: string | null;
+}
+
+interface PushNotificationHandler {
+    (notification: PushNotification): void;
+}
+interface InAppDeepLinkHandler {
+    (data: InAppButtonPress): void;
+}
+interface InAppInboxUpdatedHandler {
+    (): void;
+}
+interface DeepLinkHandler {
+    (deepLink: DeepLink): void;
+}
+
+interface PushNotification {
+    id: number;
+    title: string | null;
+    message: string | null;
+    data: Record<string, any> | null;
+    url: string | null;
+    actionId: string | null;
+}
+
+interface DeepLinkContent {
+    title: string | null;
+    description: string | null;
+}
+interface DeepLink {
+    resolution: DeepLinkResolution;
+    url: string;
+    content: DeepLinkContent | null;
+    linkData: Record<string, any> | null;
+}
+declare enum DeepLinkResolution {
+    LOOKUP_FAILED = "LOOKUP_FAILED",
+    LINK_NOT_FOUND = "LINK_NOT_FOUND",
+    LINK_EXPIRED = "LINK_EXPIRED",
+    LINK_LIMIT_EXCEEDED = "LINK_LIMIT_EXCEEDED",
+    LINK_MATCHED = "LINK_MATCHED"
+}
+
+
+interface Optimove {
     /**
      * Sets the User ID of the current user.
      * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
@@ -116,5 +182,4 @@ declare const Optimove: {
      * @param {DeepLinkHandler} deepLinkHandler - deep link event handler
      */
     setDeepLinkHandler(deepLinkHandler: DeepLinkHandler): void;
-};
-export default Optimove;
+}

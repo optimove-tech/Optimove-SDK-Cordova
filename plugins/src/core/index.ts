@@ -161,7 +161,7 @@ const Optimove = {
    * @param {string} eventName - the custom event name
    * @param {Record<string,any>} eventParams - optional to add parameters of the event
    */
-  reportEvent: (eventName: string, eventParams: Record<string,any>): Promise<void> => {
+  reportEvent: (eventName: string, eventParams: Record<string,any> | null): Promise<void> => {
     return new Promise((resolve, reject) => {
       if (!isNonEmptyString(eventName)) {
         reject("Invalid event name");
