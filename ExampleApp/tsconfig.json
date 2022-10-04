@@ -6,7 +6,7 @@
           "moduleResolution": "node",
       },
       "files": [
-          "./node_modules/optimove-cordova-plugin/src/core/declarations/ambient/interfaces.d.ts",
+          "./node_modules/optimove-cordova-plugin/index.d.ts",
       ],
        "include":[
           "./www/ts/*.ts"
