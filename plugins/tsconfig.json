@@ -3,7 +3,7 @@
         "target": "es2015",
         "allowSyntheticDefaultImports": true,
         "declaration": true,
-        "outDir": "./src/core/declarations/module",
+        "outDir": "./src/core/declarations",
         "rootDir": "./src/core",
         "module": "esnext",
         "moduleResolution": "node"

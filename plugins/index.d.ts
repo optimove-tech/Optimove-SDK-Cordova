@@ -72,8 +72,7 @@ declare enum DeepLinkResolution {
     LINK_MATCHED = "LINK_MATCHED"
 }
 
-
-interface Optimove {
+interface OptimoveSdk {
     /**
      * Sets the User ID of the current user.
      * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
@@ -183,3 +182,5 @@ interface Optimove {
      */
     setDeepLinkHandler(deepLinkHandler: DeepLinkHandler): void;
 }
+
+declare const Optimove: OptimoveSdk;
