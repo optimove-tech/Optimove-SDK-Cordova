@@ -20,14 +20,19 @@ enum InAppConsentStrategy: String {
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
 
+    private static let sdkVersion = "1.0.0"
+    private static let sdkTypeOptimoveCordova = 106
+    private static let runtimeTypeCordova = 3
+
     // ========================== INITIALIZATION ==========================
 
     override func pluginInitialize() {
         OptimoveSDKPlugin.optimovePluginInstance = self
     }
 
-    @objc(didFinishLaunching:)
-    static func didFinishLaunching(notification: Notification) {
+    @objc(didFinishLaunching:cdvVersion:)
+    static func didFinishLaunching(notification: Notification, cdvVersion: String) {
+
         let configPath = Bundle.main.path(forResource: "optimove", ofType: "plist")
 
         guard let configPath = configPath else {
@@ -99,6 +104,8 @@ enum InAppConsentStrategy: String {
             }
         }
 
+        overrideInstallInfo(builder: builder, cdvVersion:cdvVersion)
+
         let config = builder.build()
 
         Optimove.initialize(with: config)
@@ -106,6 +113,27 @@ enum InAppConsentStrategy: String {
         OptimoveInApp.setOnInboxUpdated(inboxUpdatedHandlerBlock: {
             OptimoveSDKPlugin.optimovePluginInstance?.sendMessageToJs(type: "inAppInboxUpdated", data: nil)
         })
+    }
+
+    static func overrideInstallInfo(builder: OptimoveConfigBuilder, cdvVersion: String) -> Void {
+        let runtimeInfo: [String : AnyObject] = [
+            "id": runtimeTypeCordova as AnyObject,
+            "version": cdvVersion as AnyObject,
+        ]
+
+        let sdkInfo: [String : AnyObject] = [
+            "id": sdkTypeOptimoveCordova as AnyObject,
+            "version": sdkVersion as AnyObject,
+        ]
+
+        builder.setRuntimeInfo(runtimeInfo: runtimeInfo);
+        builder.setSdkInfo(sdkInfo: sdkInfo);
+
+        var isRelease = true
+        #if DEBUG
+            isRelease = false
+        #endif
+        builder.setTargetType(isRelease: isRelease);
     }
 
     static func getConfigBuilder(configValues: [String: String]) -> OptimoveConfigBuilder? {

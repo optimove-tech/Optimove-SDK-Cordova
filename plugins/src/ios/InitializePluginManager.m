@@ -14,7 +14,7 @@
 }
 
 + (void) didFinishLaunching: (NSNotification*) n {
-    [Optimove_Cordova didFinishLaunching:n];
+    [Optimove_Cordova didFinishLaunching:n cdvVersion: CDV_VERSION];
 }
 
 @end
