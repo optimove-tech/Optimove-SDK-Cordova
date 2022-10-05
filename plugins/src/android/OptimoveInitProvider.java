@@ -18,7 +18,9 @@ import com.optimove.android.optimobile.DeferredDeepLinkHandlerInterface;
 import com.optimove.android.optimobile.DeferredDeepLinkHelper;
 import com.optimove.android.optimobile.OptimoveInApp;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.cordova.CordovaWebView;
 
 public class OptimoveInitProvider extends ContentProvider {
     private static final String KEY_OPTIMOVE_CREDENTIALS = "optimoveCredentials";
@@ -29,6 +31,10 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
+
+    private static final String SDK_VERSION = "1.0.0";
+    private static final int RUNTIME_TYPE = 3;
+    private static final int SDK_TYPE = 106;
 
     @Override
     public boolean onCreate() {
@@ -57,6 +63,8 @@ public class OptimoveInitProvider extends ContentProvider {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
         }
 
+        overrideInstallInfo(configBuilder);
+
         Optimove.initialize(app, configBuilder.build());
 
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
@@ -66,6 +74,23 @@ public class OptimoveInitProvider extends ContentProvider {
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
         OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
         return true;
+    }
+
+    private void overrideInstallInfo(OptimoveConfig.Builder configBuilder) {
+        JSONObject sdkInfo = new JSONObject();
+        JSONObject runtimeInfo = new JSONObject();
+
+        try {
+            sdkInfo.put("id", SDK_TYPE);
+            sdkInfo.put("version", SDK_VERSION);
+            runtimeInfo.put("id", RUNTIME_TYPE);
+            runtimeInfo.put("version", CordovaWebView.CORDOVA_VERSION);
+
+            configBuilder.setSdkInfo(sdkInfo);
+            configBuilder.setRuntimeInfo(runtimeInfo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Nullable
