@@ -32,7 +32,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
 
-    private static final String SDK_VERSION = "1.0.0";
+    private static final String SDK_VERSION = "1.0.1";
     private static final int RUNTIME_TYPE = 3;
     private static final int SDK_TYPE = 106;
 
