@@ -28,7 +28,7 @@ Release:
 -   [ ] Delete branch once merged
 -   [ ] Create tag from master matching chosen version
 -   [ ] Fill out release notes
--   [ ] Run `npm publish`
+-   [ ] Run `npm publish --access public`
 
 Update wiki:
 
