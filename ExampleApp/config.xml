@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.optimove.cordova.ExampleApp"
+	version="1.0.0"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns="http://www.w3.org/ns/widgets"
+	xmlns:cdv="http://cordova.apache.org/ns/1.0">
+	<name>ExampleApp</name>
+	<description>Sample Apache Cordova App</description>
+	<author email="dev@cordova.apache.org" href="https://cordova.apache.org">
+        Apache Cordova Team
+    </author>
+	<content src="index.html" />
+	<allow-intent href="http://*/*" />
+	<allow-intent href="https://*/*" />
+
+	<platform name="android">
+		<preference name="android-targetSdkVersion" value="31" />
+
+		<config-file parent="/manifest/application/activity" target="AndroidManifest.xml">
+			<intent-filter android:label="deepLabel" android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="https" android:host="cordova-example-optimove.lnk.click"/>
+			</intent-filter>
+		</config-file>
+
+		<edit-config file="AndroidManifest.xml" target="/manifest/application/activity/intent-filter/category/[@android:name='android.intent.category.LAUNCHER']/../.." mode="merge">
+			<activity android:name="OptimoveMainActivity"/>
+		</edit-config>
+	</platform>
+</widget>
