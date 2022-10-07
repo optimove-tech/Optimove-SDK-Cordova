@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+          "target": "es2015",
+          "allowSyntheticDefaultImports": true,
+          "module": "esnext",
+          "moduleResolution": "node",
+      },
+      "files": [
+          "./node_modules/@optimove-inc/cordova-sdk/index.d.ts",
+      ],
+       "include":[
+          "./www/ts/*.ts"
+      ],
+      "exclude": [
+
+      ]
+  }

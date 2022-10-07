@@ -1,0 +1,57 @@
+android {
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+     packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+    }
+
+}
+dependencies{
+    implementation 'com.optimove.android:optimove-android:6.+'
+}
+
+// Application of google services plugin based on
+// https://github.com/chemerisuk/cordova-support-google-services
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.8'
+
+
+    }
+}
+
+// use postBuildExtras to make sure the plugin is applied after
+// cdvPluginPostBuildExtras. Therefore if googleServices is added
+// to cdvPluginPostBuildExtras somewhere else, the plugin execution
+// will be skipped and project build will be successfull
+ext.postBuildExtras = {
+    if (file("./google-services.json").exists()) {
+        if (project.extensions.findByName('googleServices') == null) {
+            // apply plugin: 'com.google.gms.google-services'
+            // class must be used instead of id(string) to be able to apply plugin from non-root gradle file
+            apply plugin: com.google.gms.googleservices.GoogleServicesPlugin
+        }
+    }
+
+    def firebaseBomVersion = '28.2.0'
+
+    dependencies {
+        if (project.hasProperty('OptimoveFirebaseBoMVersion')){
+            firebaseBomVersion = project.ext.get("OptimoveFirebaseBoMVersion")
+        }
+        implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
+        implementation 'com.google.firebase:firebase-messaging'
+    
+    }
+}
