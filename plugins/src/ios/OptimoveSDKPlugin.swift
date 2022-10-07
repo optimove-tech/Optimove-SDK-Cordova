@@ -199,8 +199,8 @@ enum InAppConsentStrategy: String {
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
-    @objc(getVisitorID:)
-    func getVisitorID(command: CDVInvokedUrlCommand) {
+    @objc(getVisitorId:)
+    func getVisitorId(command: CDVInvokedUrlCommand) {
         let pluginResult = CDVPluginResult(status: .ok, messageAs: Optimove.getVisitorID())
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
