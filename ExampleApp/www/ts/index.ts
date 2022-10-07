@@ -33,7 +33,7 @@ function deepLinkHandler(deepLink: DeepLink): void {
  showMessage("deepLinkHandler: " + JSON.stringify(deepLink));
 }
 function pushReceivedHandler(pushMessage: PushNotification): void {
-  showMessage(JSON.stringify(pushMessage));
+  showMessage("pushReceivedHandler: " + JSON.stringify(pushMessage));
 }
 
 function pushOpenedHandler(pushMessage: PushNotification): void {
@@ -75,7 +75,7 @@ function reportEvent(): void {
 
   var params: Record<string, any> | null = null;
   if (paramsInput !== ""){
-    params = JSON.parse(paramsInput);
+      params = JSON.parse(paramsInput);
   }
 
   const eventType = (<HTMLInputElement>document.getElementById("text-area-event")).value;
@@ -89,6 +89,7 @@ function reportEvent(): void {
     success();
   }, error);
 }
+
 
 document
   .getElementById("set-user-email-button")
