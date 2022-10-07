@@ -28,7 +28,7 @@
       "android"
     ],
     "plugins": {
-      "cordova-sdk": {}
+      "optimove-cordova-sdk": {}
     }
   }
 }
