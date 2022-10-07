@@ -15,7 +15,7 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@optimove-inc/cordova-sdk": "file:../plugins",
+    "@optimove-inc/cordova-sdk": "file:../cordova-sdk",
     "cordova-android": "^10.1.2",
     "cordova-ios": "^6.2.0",
     "ts-loader": "^9.3.1",

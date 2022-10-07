@@ -10,10 +10,10 @@
 
 Prepare:
 
--   [ ] `cd plugins` and `npm run build` to produce minified artifacts
+-   [ ] `cd cordova-sdk` and `npm run build` to produce minified artifacts
 -   [ ] `cd ExampleApp` and `npm run build` to update `index.js`
 -   [ ] Detail any breaking changes. Breaking changes require a new major version number
--   [ ] Update type declarations in `plugins/index.d.ts`
+-   [ ] Update type declarations in `cordova-sdk/index.d.ts`
 
 Bump versions in:
 
