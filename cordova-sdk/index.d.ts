@@ -19,7 +19,7 @@ interface InAppButtonPress {
     messageId: number;
     messageData: Record<string, any> | null;
 }
-export declare enum OptimoveInAppPresentationResult {
+declare enum OptimoveInAppPresentationResult {
     PRESENTED = 0,
     EXPIRED = 1,
     FAILED = 2

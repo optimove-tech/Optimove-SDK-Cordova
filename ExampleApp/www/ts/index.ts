@@ -17,6 +17,7 @@
  * under the License.
  */
 
+
 document.addEventListener("deviceready", onDeviceReady, false);
 let outputBox: HTMLTextAreaElement = <HTMLTextAreaElement>
   document.getElementById("text-area-output");
@@ -274,7 +275,19 @@ function inAppPresentInboxMessage(): void {
     return;
   }
   Optimove.inAppPresentInboxMessage(item).then(
-    success,
+    (presentationResult) => {
+      switch(presentationResult){
+        case OptimoveInAppPresentationResult.PRESENTED:
+          showMessage("inAppPresentationResult: presented");
+          break;
+        case OptimoveInAppPresentationResult.EXPIRED:
+          showMessage("inAppPresentationResult: expired");
+          break;
+        case OptimoveInAppPresentationResult.FAILED:
+          showMessage("inAppPresentationResult: failed");
+          break;
+      }
+    },
     error
   );
 }
