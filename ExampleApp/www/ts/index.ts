@@ -161,10 +161,10 @@ function getVisitorId(): void {
 
 document
   .getElementById("push-register-button")
-  .addEventListener("click", pushRegister);
+  .addEventListener("click", pushRequestDeviceToken);
 
-function pushRegister(): void {
-  Optimove.pushRegister().then(success, error);
+function pushRequestDeviceToken(): void {
+  Optimove.pushRequestDeviceToken().then(success, error);
 }
 document
   .getElementById("in-app-consent-true")

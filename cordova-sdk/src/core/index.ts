@@ -246,11 +246,11 @@ const Optimove = {
   },
 
   /**
-   * Used to register the device installation with FCM to receive push notifications
+   * Used to register the device installation with FCM to receive push notifications. Prompts a notification permission request
    */
-  pushRegister: (): Promise<void> => {
+  pushRequestDeviceToken: (): Promise<void> => {
     return new Promise((resolve, reject) => {
-      cordova.exec(resolve, reject, "OptimoveSDKPlugin", "pushRegister", []);
+      cordova.exec(resolve, reject, "OptimoveSDKPlugin", "pushRequestDeviceToken", []);
     });
   },
 

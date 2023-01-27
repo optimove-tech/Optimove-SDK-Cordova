@@ -37,7 +37,7 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String GET_VISITOR_ID = "getVisitorId";
     private static final String SIGN_OUT_USER = "signOutUser";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
-    private static final String PUSH_REGISTER = "pushRegister";
+    private static final String PUSH_REQUEST_DEVICE_TOKEN = "pushRequestDeviceToken";
     private static final String PUSH_UNREGISTER = "pushUnregister";
     private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateConsent";
     private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
@@ -98,8 +98,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
                 this.getCurrentUserIdentifier(callbackContext);
                 return true;
 
-            case PUSH_REGISTER:
-                this.pushRegister(callbackContext);
+            case PUSH_REQUEST_DEVICE_TOKEN:
+                this.pushRequestDeviceToken(callbackContext);
                 return true;
             case PUSH_UNREGISTER:
                 this.pushUnregister(callbackContext);
@@ -373,9 +373,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         jsCallbackContext.sendPluginResult(result);
     }
 
-    private void pushRegister(CallbackContext callbackContext) {
+    private void pushRequestDeviceToken(CallbackContext callbackContext) {
         try {
-            Optimove.getInstance().pushRegister();
+            Optimove.getInstance().pushRequestDeviceToken();
             callbackContext.success();
         } catch (Exception e) {
             callbackContext.error(e.getMessage());

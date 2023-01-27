@@ -119,9 +119,9 @@ interface OptimoveSdk {
      */
     signOutUser: () => Promise<void>;
     /**
-     * Used to register the device installation with FCM to receive push notifications
+     * Used to register the device installation with FCM to receive push notifications. Prompts a notification permission request
      */
-    pushRegister: () => Promise<void>;
+    pushRequestDeviceToken: () => Promise<void>;
     /**
      * Used to unregister the current installation from receiving push notifications
      */

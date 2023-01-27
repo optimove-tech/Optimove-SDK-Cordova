@@ -330,8 +330,8 @@ enum InAppConsentStrategy: String {
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
-    @objc(pushRegister:)
-    func pushRegister(command: CDVInvokedUrlCommand) {
+    @objc(pushRequestDeviceToken:)
+    func pushRequestDeviceToken(command: CDVInvokedUrlCommand) {
         Optimove.shared.pushRequestDeviceToken()
 
         self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
