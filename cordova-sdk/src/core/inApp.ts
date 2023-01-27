@@ -23,9 +23,9 @@ export interface InAppButtonPress {
 }
 
 export enum OptimoveInAppPresentationResult {
-  PRESENTED = 0,
+  FAILED = 0,
   EXPIRED = 1,
-  FAILED = 2
+  PRESENTED = 2,
 }
 
 // internal

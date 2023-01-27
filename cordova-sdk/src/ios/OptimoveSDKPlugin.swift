@@ -397,7 +397,15 @@ enum InAppConsentStrategy: String {
                 }
             }
 
-            var pluginResult = CDVPluginResult.init(status: .ok, messageAs: presentationResult.rawValue)
+            var res: Int64 = 0
+            switch presentationResult {
+                case .PRESENTED:
+                    res = 2
+                case .EXPIRED:
+                    res = 1
+            }
+
+            var pluginResult = CDVPluginResult.init(status: .ok, messageAs: res)
 
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         })

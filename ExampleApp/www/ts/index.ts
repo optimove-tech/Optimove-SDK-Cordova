@@ -275,18 +275,8 @@ function inAppPresentInboxMessage(): void {
     return;
   }
   Optimove.inAppPresentInboxMessage(item).then(
-    (presentationResult) => {
-      switch(presentationResult){
-        case OptimoveInAppPresentationResult.PRESENTED:
-          showMessage("inAppPresentationResult: presented");
-          break;
-        case OptimoveInAppPresentationResult.EXPIRED:
-          showMessage("inAppPresentationResult: expired");
-          break;
-        case OptimoveInAppPresentationResult.FAILED:
-          showMessage("inAppPresentationResult: failed");
-          break;
-      }
+    (presentationResult: OptimoveInAppPresentationResult) => {
+      showMessage("inAppPresentationResult: " + presentationResult);
     },
     error
   );
