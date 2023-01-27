@@ -389,20 +389,15 @@ enum InAppConsentStrategy: String {
             let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
-            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found or not available")
+            var presentationResult: InAppMessagePresentationResult = .FAILED
             for msg in inboxItems {
-                if (msg.id != messageId){
-                    continue
+                if (msg.id == messageId){
+                    presentationResult = OptimoveInApp.presentInboxMessage(item: msg)
+                    break
                 }
-
-                let result = OptimoveInApp.presentInboxMessage(item: msg)
-                if (result == .PRESENTED){
-                    pluginResult = CDVPluginResult.init(status: .ok)
-                }
-
-                break;
-
             }
+
+            var pluginResult = CDVPluginResult.init(status: .ok, messageAs: presentationResult.rawValue)
 
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         })

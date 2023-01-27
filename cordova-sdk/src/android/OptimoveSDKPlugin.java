@@ -179,17 +179,14 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     private void inAppPresentInboxMessage(JSONArray args, CallbackContext callbackContext) {
         int messageId = args.optInt(0, -1);
+
         InAppInboxItem item = getInboxItemById(messageId);
         if (item == null) {
-            callbackContext.error("Message not found or not available");
+            callbackContext.success(OptimoveInApp.InboxMessagePresentationResult.FAILED.ordinal());
             return;
         }
         OptimoveInApp.InboxMessagePresentationResult result = OptimoveInApp.getInstance().presentInboxMessage(item);
-        if (result == OptimoveInApp.InboxMessagePresentationResult.PRESENTED) {
-            callbackContext.success();
-        } else {
-            callbackContext.error("Failed to present message");
-        }
+        callbackContext.success(result.ordinal());
     }
 
     private void inAppGetInboxSummary(CallbackContext callbackContext) {

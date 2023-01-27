@@ -19,6 +19,11 @@ interface InAppButtonPress {
     messageId: number;
     messageData: Record<string, any> | null;
 }
+export declare enum OptimoveInAppPresentationResult {
+    PRESENTED = 0,
+    EXPIRED = 1,
+    FAILED = 2
+}
 interface InAppInboxItemRaw {
     id: number;
     title: string;
@@ -158,7 +163,7 @@ interface OptimoveSdk {
      * Presents the given in-app message to the user from the inbox
      * @param {InAppInboxItem} inAppInboxItem the item that holds the message that will be presented
      */
-    inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<void>;
+    inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<OptimoveInAppPresentationResult>;
     /**
      * Deletes a specified inAppInboxItem from inbox
      * @param inAppInboxItem the item to be deleted

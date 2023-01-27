@@ -4,7 +4,7 @@ import {
   InAppInboxUpdatedHandler,
   PushNotificationHandler,
 } from "./handlers";
-import { InAppInboxItem, InAppInboxItemRaw, InAppInboxSummary } from "./inApp";
+import { InAppInboxItem, InAppInboxItemRaw, InAppInboxSummary, OptimoveInAppPresentationResult } from "./inApp";
 
 import cordova from "cordova";
 
@@ -354,7 +354,7 @@ const Optimove = {
    * Presents the given in-app message to the user from the inbox
    * @param {InAppInboxItem} inAppInboxItem the item that holds the message that will be presented
    */
-  inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem): Promise<void> => {
+  inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem): Promise<OptimoveInAppPresentationResult> => {
     return new Promise((resolve, reject) => {
       cordova.exec(
         resolve,
@@ -363,7 +363,20 @@ const Optimove = {
         "inAppPresentInboxMessage",
         [inAppInboxItem.id]
       );
-    });
+    })
+    .then((result: number) => {
+      const convertedResult: OptimoveInAppPresentationResult = result;
+      switch(convertedResult){
+        case OptimoveInAppPresentationResult.PRESENTED:
+        case OptimoveInAppPresentationResult.EXPIRED:
+        case OptimoveInAppPresentationResult.FAILED:
+          return result;
+        default:
+          console.error("Unknown presentation result");
+          return OptimoveInAppPresentationResult.FAILED;
+      }
+    })
+
   },
   /**
    * Deletes a specified inAppInboxItem from inbox

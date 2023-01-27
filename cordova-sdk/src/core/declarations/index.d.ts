@@ -1,5 +1,5 @@
 import { DeepLinkHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, PushNotificationHandler } from "./handlers";
-import { InAppInboxItem, InAppInboxSummary } from "./inApp";
+import { InAppInboxItem, InAppInboxSummary, OptimoveInAppPresentationResult } from "./inApp";
 export interface OptimoveConfig {
     pushReceivedHandler: PushNotificationHandler | null;
     pushOpenedHandler: PushNotificationHandler | null;
@@ -93,7 +93,7 @@ declare const Optimove: {
      * Presents the given in-app message to the user from the inbox
      * @param {InAppInboxItem} inAppInboxItem the item that holds the message that will be presented
      */
-    inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<void>;
+    inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<OptimoveInAppPresentationResult>;
     /**
      * Deletes a specified inAppInboxItem from inbox
      * @param inAppInboxItem the item to be deleted
