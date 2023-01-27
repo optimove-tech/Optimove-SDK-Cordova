@@ -111,9 +111,9 @@ document
 
 function reportScreenVisit(): void {
   const screenName = (<HTMLInputElement>document.getElementById("text-area-screen-name")).value;
-  var screenCategory = (<HTMLInputElement>(document.getElementById("text-area-screen-category"))).value;
+  var screenCategory: string | undefined =  (<HTMLInputElement>(document.getElementById("text-area-screen-category"))).value;
   if (screenCategory === "") {
-    screenCategory = null;
+    screenCategory = undefined;
   }
 
   Optimove.reportScreenVisit(
@@ -220,7 +220,7 @@ function getInboxItemForTesting(): InAppInboxItem | null {
 
   if (isNaN(id)){
     alert("item id is required");
-    return;
+    return null;
   }
 
   return {
