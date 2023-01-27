@@ -237,6 +237,15 @@ const Optimove = {
   },
 
   /**
+   * Clears the user id, undoing the last setUserId call
+   */
+  signOutUser: (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, "OptimoveSDKPlugin", "signOutUser", []);
+    });
+  },
+
+  /**
    * Used to register the device installation with FCM to receive push notifications
    */
   pushRegister: (): Promise<void> => {
@@ -244,6 +253,16 @@ const Optimove = {
       cordova.exec(resolve, reject, "OptimoveSDKPlugin", "pushRegister", []);
     });
   },
+
+  /**
+   * Used to unregister the current installation from receiving push notifications
+   */
+  pushUnregister: (): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      cordova.exec(resolve, reject, "OptimoveSDKPlugin", "pushUnregister", []);
+    });
+  },
+
   /**
    * Opts the user in or out of in-app messaging
    *

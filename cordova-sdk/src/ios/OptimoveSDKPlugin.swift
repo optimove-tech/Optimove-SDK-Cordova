@@ -233,6 +233,13 @@ enum InAppConsentStrategy: String {
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
+    @objc(signOutUser:)
+    func signOutUser(command: CDVInvokedUrlCommand) {
+        Optimove.shared.signOutUser()
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
     @objc(setUserEmail:)
     func setUserEmail(command: CDVInvokedUrlCommand) {
         guard let email = command.arguments.first as? String else {
@@ -326,6 +333,13 @@ enum InAppConsentStrategy: String {
     @objc(pushRegister:)
     func pushRegister(command: CDVInvokedUrlCommand) {
         Optimove.shared.pushRequestDeviceToken()
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
+    @objc(pushUnregister:)
+    func pushUnregister(command: CDVInvokedUrlCommand) {
+        Optimove.shared.pushUnregister()
 
         self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
     }

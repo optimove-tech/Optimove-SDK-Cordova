@@ -35,8 +35,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
     private static final String REPORT_SCREEN_VISIT = "reportScreenVisit";
     private static final String REGISTER_USER = "registerUser";
     private static final String GET_VISITOR_ID = "getVisitorId";
+    private static final String SIGN_OUT_USER = "signOutUser";
     private static final String GET_CURRENT_USER_IDENTIFIER = "getCurrentUserIdentifier";
     private static final String PUSH_REGISTER = "pushRegister";
+    private static final String PUSH_UNREGISTER = "pushUnregister";
     private static final String IN_APP_UPDATE_CONSENT = "inAppUpdateConsent";
     private static final String IN_APP_GET_INBOX_ITEMS = "inAppGetInboxItems";
     private static final String IN_APP_MARK_ALL_INBOX_ITEMS_AS_READ = "inAppMarkAllInboxItemsAsRead";
@@ -88,6 +90,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             case GET_VISITOR_ID:
                 this.getVisitorId(callbackContext);
                 return true;
+            case SIGN_OUT_USER:
+                this.signOutUser(callbackContext);
+                return true;
 
             case GET_CURRENT_USER_IDENTIFIER:
                 this.getCurrentUserIdentifier(callbackContext);
@@ -95,6 +100,9 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
             case PUSH_REGISTER:
                 this.pushRegister(callbackContext);
+                return true;
+            case PUSH_UNREGISTER:
+                this.pushUnregister(callbackContext);
                 return true;
 
             case IN_APP_UPDATE_CONSENT:
@@ -294,6 +302,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
+    private void signOutUser(CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().signOutUser();
+            callbackContext.success();
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private void getCurrentUserIdentifier(CallbackContext callbackContext) {
         String currentUserIdentifier = Optimove.getInstance().getCurrentUserIdentifier();
         if (currentUserIdentifier != null) {
@@ -363,7 +381,16 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
             callbackContext.error(e.getMessage());
             e.printStackTrace();
         }
+    }
 
+    private void pushUnregister(CallbackContext callbackContext) {
+        try {
+            Optimove.getInstance().pushUnregister();
+            callbackContext.success();
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void inAppUpdateConsent(JSONArray args, CallbackContext callbackContext) {

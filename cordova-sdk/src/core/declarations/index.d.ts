@@ -50,9 +50,17 @@ declare const Optimove: {
      */
     getVisitorId: () => Promise<string>;
     /**
+     * Clears the user id, undoing the last setUserId call
+     */
+    signOutUser: () => Promise<void>;
+    /**
      * Used to register the device installation with FCM to receive push notifications
      */
     pushRegister: () => Promise<void>;
+    /**
+     * Used to unregister the current installation from receiving push notifications
+     */
+    pushUnregister: () => Promise<void>;
     /**
      * Opts the user in or out of in-app messaging
      *
