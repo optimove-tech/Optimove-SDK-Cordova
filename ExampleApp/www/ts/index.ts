@@ -140,6 +140,15 @@ function registerUser() {
     success();
   }, error);
 }
+
+document
+  .getElementById("sign-out-user-button")
+  .addEventListener("click", signOutUser);
+
+function signOutUser() {
+  Optimove.signOutUser().then(success, error);
+}
+
 document
   .getElementById("get-visitor-id-button")
   .addEventListener("click", getVisitorId);
