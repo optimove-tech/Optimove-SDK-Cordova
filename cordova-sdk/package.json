@@ -25,7 +25,6 @@
     ]
   },
   "devDependencies": {
-    "@optimove-inc/cordova-sdk": "file:../cordova-sdk",
     "cordova-ios": "^6.2.0",
     "ts-loader": "^9.3.1",
     "typescript": "^4.8.3",
