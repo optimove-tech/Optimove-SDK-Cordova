@@ -20,7 +20,7 @@ enum InAppConsentStrategy: String {
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
 
-    private static let sdkVersion = "1.0.1"
+    private static let sdkVersion = "2.0.0"
     private static let sdkTypeOptimoveCordova = 106
     private static let runtimeTypeCordova = 3
 
@@ -233,6 +233,13 @@ enum InAppConsentStrategy: String {
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
+    @objc(signOutUser:)
+    func signOutUser(command: CDVInvokedUrlCommand) {
+        Optimove.shared.signOutUser()
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
     @objc(setUserEmail:)
     func setUserEmail(command: CDVInvokedUrlCommand) {
         guard let email = command.arguments.first as? String else {
@@ -323,9 +330,16 @@ enum InAppConsentStrategy: String {
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
     }
 
-    @objc(pushRegister:)
-    func pushRegister(command: CDVInvokedUrlCommand) {
+    @objc(pushRequestDeviceToken:)
+    func pushRequestDeviceToken(command: CDVInvokedUrlCommand) {
         Optimove.shared.pushRequestDeviceToken()
+
+        self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
+    }
+
+    @objc(pushUnregister:)
+    func pushUnregister(command: CDVInvokedUrlCommand) {
+        Optimove.shared.pushUnregister()
 
         self.commandDelegate.send(CDVPluginResult(status: .ok), callbackId: command.callbackId)
     }
@@ -375,20 +389,25 @@ enum InAppConsentStrategy: String {
             let messageId = command.arguments[0] as! Int64
             let inboxItems = OptimoveInApp.getInboxItems()
 
-            var pluginResult = CDVPluginResult.init(status: .error, messageAs: "Message not found or not available")
+            var presentationResult: InAppMessagePresentationResult = .FAILED
             for msg in inboxItems {
-                if (msg.id != messageId){
-                    continue
+                if (msg.id == messageId){
+                    presentationResult = OptimoveInApp.presentInboxMessage(item: msg)
+                    break
                 }
-
-                let result = OptimoveInApp.presentInboxMessage(item: msg)
-                if (result == .PRESENTED){
-                    pluginResult = CDVPluginResult.init(status: .ok)
-                }
-
-                break;
-
             }
+
+            var res: Int32 = 0
+            switch presentationResult {
+                case .PRESENTED:
+                    res = 2
+                case .EXPIRED:
+                    res = 1
+                default:
+                    res = 0
+            }
+
+            let pluginResult = CDVPluginResult.init(status: .ok, messageAs: res)
 
             self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
         })

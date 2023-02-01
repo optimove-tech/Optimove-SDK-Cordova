@@ -1,5 +1,5 @@
 import { DeepLinkHandler, InAppDeepLinkHandler, InAppInboxUpdatedHandler, PushNotificationHandler } from "./handlers";
-import { InAppInboxItem, InAppInboxSummary } from "./inApp";
+import { InAppInboxItem, InAppInboxSummary, OptimoveInAppPresentationResult } from "./inApp";
 export interface OptimoveConfig {
     pushReceivedHandler: PushNotificationHandler | null;
     pushOpenedHandler: PushNotificationHandler | null;
@@ -50,9 +50,17 @@ declare const Optimove: {
      */
     getVisitorId: () => Promise<string>;
     /**
-     * Used to register the device installation with FCM to receive push notifications
+     * Clears the user id, undoing the last setUserId call
      */
-    pushRegister: () => Promise<void>;
+    signOutUser: () => Promise<void>;
+    /**
+     * Used to register the device installation with FCM to receive push notifications. Prompts a notification permission request
+     */
+    pushRequestDeviceToken: () => Promise<void>;
+    /**
+     * Used to unregister the current installation from receiving push notifications
+     */
+    pushUnregister: () => Promise<void>;
     /**
      * Opts the user in or out of in-app messaging
      *
@@ -85,7 +93,7 @@ declare const Optimove: {
      * Presents the given in-app message to the user from the inbox
      * @param {InAppInboxItem} inAppInboxItem the item that holds the message that will be presented
      */
-    inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<void>;
+    inAppPresentInboxMessage: (inAppInboxItem: InAppInboxItem) => Promise<OptimoveInAppPresentationResult>;
     /**
      * Deletes a specified inAppInboxItem from inbox
      * @param inAppInboxItem the item to be deleted

@@ -1,7 +1,7 @@
 {
   "name": "@optimove-inc/cordova-sdk",
   "displayName": "Optimove Cordova plugin",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
   "scripts": {
     "build": "webpack",

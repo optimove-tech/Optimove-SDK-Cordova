@@ -13,7 +13,7 @@ android {
 
 }
 dependencies{
-    implementation 'com.optimove.android:optimove-android:6.+'
+    implementation 'com.optimove.android:optimove-android:7.0.1'
 }
 
 // Application of google services plugin based on
@@ -52,6 +52,6 @@ ext.postBuildExtras = {
         }
         implementation platform("com.google.firebase:firebase-bom:$firebaseBomVersion")
         implementation 'com.google.firebase:firebase-messaging'
-    
+
     }
 }

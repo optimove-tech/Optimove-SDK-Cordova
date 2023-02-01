@@ -19,6 +19,11 @@ export interface InAppButtonPress {
     messageId: number;
     messageData: Record<string, any> | null;
 }
+export declare enum OptimoveInAppPresentationResult {
+    FAILED = 0,
+    EXPIRED = 1,
+    PRESENTED = 2
+}
 export interface InAppInboxItemRaw {
     id: number;
     title: string;

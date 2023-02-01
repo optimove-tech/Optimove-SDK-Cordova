@@ -17,6 +17,7 @@
  * under the License.
  */
 
+
 document.addEventListener("deviceready", onDeviceReady, false);
 let outputBox: HTMLTextAreaElement = <HTMLTextAreaElement>
   document.getElementById("text-area-output");
@@ -111,9 +112,9 @@ document
 
 function reportScreenVisit(): void {
   const screenName = (<HTMLInputElement>document.getElementById("text-area-screen-name")).value;
-  var screenCategory = (<HTMLInputElement>(document.getElementById("text-area-screen-category"))).value;
+  var screenCategory: string | undefined =  (<HTMLInputElement>(document.getElementById("text-area-screen-category"))).value;
   if (screenCategory === "") {
-    screenCategory = null;
+    screenCategory = undefined;
   }
 
   Optimove.reportScreenVisit(
@@ -140,6 +141,15 @@ function registerUser() {
     success();
   }, error);
 }
+
+document
+  .getElementById("sign-out-user-button")
+  .addEventListener("click", signOutUser);
+
+function signOutUser() {
+  Optimove.signOutUser().then(success, error);
+}
+
 document
   .getElementById("get-visitor-id-button")
   .addEventListener("click", getVisitorId);
@@ -152,10 +162,10 @@ function getVisitorId(): void {
 
 document
   .getElementById("push-register-button")
-  .addEventListener("click", pushRegister);
+  .addEventListener("click", pushRequestDeviceToken);
 
-function pushRegister(): void {
-  Optimove.pushRegister().then(success, error);
+function pushRequestDeviceToken(): void {
+  Optimove.pushRequestDeviceToken().then(success, error);
 }
 document
   .getElementById("in-app-consent-true")
@@ -220,7 +230,7 @@ function getInboxItemForTesting(): InAppInboxItem | null {
 
   if (isNaN(id)){
     alert("item id is required");
-    return;
+    return null;
   }
 
   return {
@@ -265,7 +275,9 @@ function inAppPresentInboxMessage(): void {
     return;
   }
   Optimove.inAppPresentInboxMessage(item).then(
-    success,
+    (presentationResult: OptimoveInAppPresentationResult) => {
+      showMessage("inAppPresentationResult: " + presentationResult);
+    },
     error
   );
 }
