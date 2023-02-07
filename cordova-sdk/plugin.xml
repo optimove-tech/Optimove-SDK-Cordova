@@ -54,14 +54,6 @@
             <provider android:authorities="${applicationId}.optimoveinitprovider" android:name="com.optimove.android.cordova.OptimoveInitProvider" android:exported="false" />
         </config-file>
 
-        <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
-            <manifest xmlns:tools="http://schemas.android.com/tools" />
-        </edit-config>
-
-        <edit-config file="AndroidManifest.xml" target="/manifest/" mode="merge">
-            <manifest xmlns:tools="http://schemas.android.com/tools" />
-        </edit-config>
-
         <source-file src="src/android/OptimoveSDKPlugin.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/OptimoveInitProvider.java" target-dir="src/com/optimove/android/cordova" />
         <source-file src="src/android/JsonUtils.java" target-dir="src/com/optimove/android/cordova" />
