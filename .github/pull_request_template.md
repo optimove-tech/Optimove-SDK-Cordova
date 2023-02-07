@@ -24,9 +24,9 @@ Bump versions in:
 
 Release:
 
--   [ ] Squash and merge to master
+-   [ ] Squash and merge to main
 -   [ ] Delete branch once merged
--   [ ] Create tag from master matching chosen version
+-   [ ] Create tag from main matching chosen version
 -   [ ] Fill out release notes
 -   [ ] Run `npm publish --access public`
 
