@@ -54,6 +54,11 @@ public class OptimoveInitProvider extends ContentProvider {
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
                 optimoveMobileCredentials);
 
+        if (optimoveMobileCredentials == null){
+            Optimove.initialize(app, configBuilder.build());
+            return;
+        }
+
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
@@ -73,6 +78,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
         OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
+
         return true;
     }
 
