@@ -54,7 +54,7 @@ public class OptimoveInitProvider extends ContentProvider {
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
                 optimoveMobileCredentials);
 
-        if (optimoveMobileCredentials == null){
+        if (optimoveMobileCredentials == null) {
             Optimove.initialize(app, configBuilder.build());
             return true;
         }
