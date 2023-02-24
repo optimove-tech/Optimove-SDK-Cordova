@@ -49,6 +49,13 @@ enum InAppConsentStrategy: String {
             return
         };
 
+
+        if (configValues[optimoveMobileCredentialsKey] == nil) {
+            Optimove.initialize(with: builder.build())
+
+            return
+        }
+
         builder.setPushOpenedHandler(pushOpenedHandlerBlock: { notification in
             guard let pluginInstance = OptimoveSDKPlugin.optimovePluginInstance, let _ = OptimoveSDKPlugin.cordovaCommand else {
                 pendingPush = notification
