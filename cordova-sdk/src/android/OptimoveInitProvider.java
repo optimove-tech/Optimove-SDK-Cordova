@@ -5,9 +5,12 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +34,8 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
+    private static final String NOTIFICATION_ICON_KEY = "com.optimove.android.cordova.OptimoveInitProvider.notification_icon";
+    private static final String TAG = "OptimoveInitProvider";
 
     private static final String SDK_VERSION = "2.0.1";
     private static final int RUNTIME_TYPE = 3;
@@ -61,6 +66,25 @@ public class OptimoveInitProvider extends ContentProvider {
         }
         if (Boolean.parseBoolean(enableDeferredDeepLinking)) {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
+        }
+
+        /**
+        * Get notification icon from AndroidManifest metaData
+        * Cordova config.xml example:
+        *   <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application">
+        *     <meta-data
+        *       android:name="com.optimove.android.cordova.OptimoveInitProvider.notification_icon"
+        *       android:resource="@drawable/notification" />
+        *   </config-file>
+        */
+        try {
+            ApplicationInfo ai = app.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            int smallIconId = ai.metaData.getInt(NOTIFICATION_ICON_KEY, ai.icon);
+            configBuilder.setPushSmallIconId(smallIconId);
+        }  catch (PackageManager.NameNotFoundException e) {
+            Log.d(TAG, "Failed to load package metaData", e);
+        } catch(Resources.NotFoundException e) {
+            Log.d(TAG, "Failed to load notification icon", e);
         }
 
         overrideInstallInfo(configBuilder);
