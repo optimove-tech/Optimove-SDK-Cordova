@@ -47,8 +47,7 @@ public class OptimoveInitProvider extends ContentProvider {
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
         String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,
-                KEY_OPTIMOVE_MOBILE_CREDENTIALS);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
@@ -56,8 +55,7 @@ public class OptimoveInitProvider extends ContentProvider {
                     "error: Invalid credentials! \n please provide at least one set of credentials");
         }
 
-        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
-                optimoveMobileCredentials);
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
 
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
