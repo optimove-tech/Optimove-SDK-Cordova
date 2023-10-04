@@ -68,24 +68,7 @@ public class OptimoveInitProvider extends ContentProvider {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
         }
 
-        /**
-        * Get notification icon from AndroidManifest metaData
-        * Cordova config.xml example:
-        *   <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application">
-        *     <meta-data
-        *       android:name="com.optimove.android.cordova.OptimoveInitProvider.notification_icon"
-        *       android:resource="@drawable/notification" />
-        *   </config-file>
-        */
-        try {
-            ApplicationInfo ai = app.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-            int smallIconId = ai.metaData.getInt(NOTIFICATION_ICON_KEY, ai.icon);
-            configBuilder.setPushSmallIconId(smallIconId);
-        }  catch (PackageManager.NameNotFoundException e) {
-            Log.d(TAG, "Failed to load package metaData", e);
-        } catch(Resources.NotFoundException e) {
-            Log.d(TAG, "Failed to load notification icon", e);
-        }
+        setNotificationSmallIconIfAvailable(app, configBuilder);
 
         overrideInstallInfo(configBuilder);
 
@@ -98,6 +81,24 @@ public class OptimoveInitProvider extends ContentProvider {
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
         OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
         return true;
+    }
+
+
+    /**
+     * Trying to find and set a push notification small icon from AndroidManifest metaData.
+     * @param app
+     * @param configBuilder
+     */
+    private void setNotificationSmallIconIfAvailable(Application app, OptimoveConfig.Builder configBuilder) {
+        try {
+            ApplicationInfo ai = app.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            int smallIconId = ai.metaData.getInt(NOTIFICATION_ICON_KEY, ai.icon);
+            configBuilder.setPushSmallIconId(smallIconId);
+        }  catch (PackageManager.NameNotFoundException e) {
+            Log.d(TAG, "Failed to load package metaData", e);
+        } catch(Resources.NotFoundException e) {
+            Log.d(TAG, "Failed to load notification icon", e);
+        }
     }
 
     private void overrideInstallInfo(OptimoveConfig.Builder configBuilder) {
