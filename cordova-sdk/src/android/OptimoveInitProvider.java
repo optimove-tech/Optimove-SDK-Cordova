@@ -86,6 +86,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
     /**
      * Trying to find and set a push notification small icon from AndroidManifest metaData.
+     * See documentation: https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/Push-Advanced
      * @param app
      * @param configBuilder
      */
