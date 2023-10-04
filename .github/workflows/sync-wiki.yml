@@ -1,0 +1,33 @@
+name: Sync Wiki
+
+on:
+  push:
+    paths:
+      - '.wiki/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Checkout wiki repo
+        run: |
+          git clone https://github.com/${{ github.repository }}.wiki.git tmp-wiki-repo
+
+      - name: Copy wiki files
+        run: |
+          cp -r .wiki/* tmp-wiki-repo
+        
+      - name: Commit wiki changes
+        run: |
+          cd tmp-wiki-repo
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add .
+          git commit -m "Sync wiki"
+          git push https://${{ secrets.WIKI_TOKEN }}@github.com/${{ github.repository }}.wiki.git
