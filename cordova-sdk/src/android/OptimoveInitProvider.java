@@ -37,7 +37,7 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String NOTIFICATION_ICON_KEY = "com.optimove.android.cordova.OptimoveInitProvider.notification_icon";
     private static final String TAG = "OptimoveInitProvider";
 
-    private static final String SDK_VERSION = "2.0.1";
+    private static final String SDK_VERSION = "2.1.0";
     private static final int RUNTIME_TYPE = 3;
     private static final int SDK_TYPE = 106;
 
