@@ -46,29 +46,30 @@ public class OptimoveInitProvider extends ContentProvider {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
-        ApplicationInfo applicationInfo = getApplicationInfo(packageName);
 
         String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
         String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
-        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
-            throw new IllegalArgumentException(
-                    "error: Invalid credentials! \n please provide at least one set of credentials");
+            throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
         }
-
         OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
-
+        
+        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
         }
+
+        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
         if (Boolean.parseBoolean(enableDeferredDeepLinking)) {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
         }
 
-        setNotificationSmallIconIfAvailable(applicationInfo, configBuilder);
+        ApplicationInfo applicationInfo = getApplicationInfo(packageName);
+        if  (applicationInfo != null) {
+            setNotificationSmallIconIfAvailable(applicationInfo, configBuilder);
+        }
 
         overrideInstallInfo(configBuilder);
 
@@ -99,15 +100,12 @@ public class OptimoveInitProvider extends ContentProvider {
     }
 
     /**
-     * Trying to find and set a push notification small icon from AndroidManifest metaData.
+     * Trying to get the notification icon from the application info.
      * See documentation: https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/Push-Advanced
      * @param ai the application info
      * @param configBuilder the config builder
      */
-    private void setNotificationSmallIconIfAvailable(@Nullable ApplicationInfo ai, OptimoveConfig.Builder configBuilder) {
-        if (ai == null) {
-            return;
-        }
+    private void setNotificationSmallIconIfAvailable(ApplicationInfo ai, OptimoveConfig.Builder configBuilder) {
         try {
             int smallIconId = ai.metaData.getInt(NOTIFICATION_ICON_KEY, ai.icon);
             configBuilder.setPushSmallIconId(smallIconId);
