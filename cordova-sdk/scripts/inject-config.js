@@ -131,8 +131,8 @@ function prepareAndroid(context, config) {
   }
 
   if (!isEmpty(config.ANDROID_PUSH_NOTIFICATION_ICON)){
-    copyPushNotificationIcon(context, config);
-    injectPushIconMetaData(context, config);
+    copyPushNotificationIcons(context, config);
+    updatePushNotificationIconMetaData(context, config);
   }
 
   writeGoogleServicesJson(context);
@@ -238,7 +238,7 @@ function writeGoogleServicesJson(context){
   }
 }
 
-function copyPushNotificationIcon(context, config) {
+function copyPushNotificationIcons(context, config) {
   const densities = [
     "drawable-hdpi", 
     "drawable-mdpi", 
@@ -305,11 +305,12 @@ function copyPushNotificationIcon(context, config) {
   });
 }
 
+function updatePushNotificationIconMetaData(context, config) {
   const metaDataName = 'com.optimove.android.cordova.OptimoveInitProvider.notification_icon';
   const metaDataResource = `@drawable/${config.ANDROID_PUSH_NOTIFICATION_ICON}`;
 
+  // read the xml
   const plugin_xml = path.join(context.opts.plugin.dir, 'plugin.xml');
-
   const data = fs.readFileSync(plugin_xml).toString();
   const etree = elementtree.parse(data);
 
@@ -319,15 +320,17 @@ function copyPushNotificationIcon(context, config) {
     return;
   }
 
+  // find or create a config-file tag for the manifest
   const manifestConfigs = etree.findall(`*/config-file/[@target="app/src/main/AndroidManifest.xml"]`);
   if (manifestConfigs.length == 0) {
     console.info('Optimove: config file not found, creating');
-  const configFile = elementtree.SubElement(platform, 'config-file');
-  configFile.set('target', 'app/src/main/AndroidManifest.xml');
-  configFile.set('parent', '/manifest/application');
+    const configFile = elementtree.SubElement(platform, 'config-file');
+    configFile.set('target', 'app/src/main/AndroidManifest.xml');
+    configFile.set('parent', '/manifest/application');
     manifestConfigs.push(configFile);
   }
 
+  // remove any existing meta-data tags with the same name
   manifestConfigs
     .forEach(configFile => {
       configFile
@@ -337,14 +340,15 @@ function copyPushNotificationIcon(context, config) {
         });
   });
 
+  // add the new meta-data tag
   const metaData = elementtree.SubElement(manifestConfigs[0], 'meta-data');
   metaData.set('android:name', metaDataName);
   metaData.set('android:resource', metaDataResource);
 
+  // write the updated xml
   const xml = etree.write({'xml_declaration': true, 'indent': 4});
   fs.writeFileSync(plugin_xml, xml, { encoding: "utf-8" });
 }
-
 
 // ===================== IOS SPECIFIC ======================
 
