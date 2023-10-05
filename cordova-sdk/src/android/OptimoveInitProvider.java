@@ -5,12 +5,9 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,8 +31,7 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
-    private static final String NOTIFICATION_ICON_KEY = "com.optimove.android.cordova.OptimoveInitProvider.notification_icon";
-    private static final String TAG = "OptimoveInitProvider";
+    private static final String ANDROID_PUSH_NOTIFICATION_ICON_NAME = "android.pushNotificationIconName";
 
     private static final String SDK_VERSION = "2.0.1";
     private static final int RUNTIME_TYPE = 3;
@@ -66,9 +62,10 @@ public class OptimoveInitProvider extends ContentProvider {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
         }
 
-        ApplicationInfo applicationInfo = getApplicationInfo(packageName);
-        if  (applicationInfo != null) {
-            setNotificationSmallIconIfAvailable(applicationInfo, configBuilder);
+        final String pushNotificationIconName = getStringConfigValue(packageName, resources, ANDROID_PUSH_NOTIFICATION_ICON_NAME);
+        if (pushNotificationIconName != null && !pushNotificationIconName.isEmpty()) {
+            final int iconResource = resources.getIdentifier(pushNotificationIconName, "drawable", packageName);
+            configBuilder.setPushSmallIconId(iconResource);
         }
 
         overrideInstallInfo(configBuilder);
@@ -82,36 +79,6 @@ public class OptimoveInitProvider extends ContentProvider {
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
         OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
         return true;
-    }
-
-    /**
-     * Trying to get the application info from the package name.
-     * @param packageName the package name of the application
-     * @return ApplicationInfo or null if not found
-     */
-    @Nullable
-    private ApplicationInfo getApplicationInfo(String packageName) {
-        try {
-            return getContext().getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.d(TAG, "Failed to load package metaData", e);
-            return null;
-        }
-    }
-
-    /**
-     * Trying to get the notification icon from the application info.
-     * See documentation: https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/Push-Advanced
-     * @param ai the application info
-     * @param configBuilder the config builder
-     */
-    private void setNotificationSmallIconIfAvailable(ApplicationInfo ai, OptimoveConfig.Builder configBuilder) {
-        try {
-            int smallIconId = ai.metaData.getInt(NOTIFICATION_ICON_KEY, ai.icon);
-            configBuilder.setPushSmallIconId(smallIconId);
-        } catch(Resources.NotFoundException e) {
-            Log.d(TAG, "Failed to load notification icon", e);
-        }
     }
 
     private void overrideInstallInfo(OptimoveConfig.Builder configBuilder) {
