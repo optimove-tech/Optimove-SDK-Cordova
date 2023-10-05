@@ -321,7 +321,7 @@ function injectPushIconMetaData(context, config){
   metaData.set('android:name', 'com.optimove.android.cordova.OptimoveInitProvider.notification_icon');
   metaData.set('android:resource', `@drawable/${config.ANDROID_PUSH_NOTIFICATION_ICON}`);
 
-  const xml = etree.write({'xml_declaration': false});
+  const xml = etree.write({'xml_declaration': true, 'indent': 4});
   fs.writeFileSync(plugin_xml, xml, { encoding: "utf-8" });
 }
 
