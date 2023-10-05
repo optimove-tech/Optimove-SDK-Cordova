@@ -314,6 +314,10 @@ function copyPushNotificationIcon(context, config) {
   const etree = elementtree.parse(data);
 
   const platform = etree.findall('./platform/[@name="android"]')[0];
+  if (!platform) {
+    console.error('Optimove: android platform tag not found, aborting push icon injection');
+    return;
+  }
 
   const manifestConfigs = etree.findall(`*/config-file/[@target="app/src/main/AndroidManifest.xml"]`);
   if (manifestConfigs.length == 0) {
