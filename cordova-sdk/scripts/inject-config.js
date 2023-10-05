@@ -239,14 +239,6 @@ function writeGoogleServicesJson(context){
 }
 
 function copyPushNotificationIcons(context, config) {
-  const densities = [
-    "drawable-hdpi", 
-    "drawable-mdpi", 
-    "drawable-xhdpi", 
-    "drawable-xxhdpi", 
-    "drawable-xxxhdpi"
-  ];
-
   const androidResourcesSrc = path.join(
     context.opts.projectRoot,
     "android-push-notification-icon"
@@ -258,6 +250,8 @@ function copyPushNotificationIcons(context, config) {
     );
     return;
   }
+
+  var folders = fs.readdirSync(androidResourcesSrc);
 
   const androidResourceDest = path.join(
     context.opts.projectRoot,
@@ -271,23 +265,23 @@ function copyPushNotificationIcons(context, config) {
 
   const fileName = `${config.ANDROID_PUSH_NOTIFICATION_ICON}.png`;
 
-  densities.forEach(density => {
+  folders.forEach(folder => {
     const iconDensitySrc = path.join(
       androidResourcesSrc,
-      density,
+      folder,
       fileName,
     );
 
     if (!fs.existsSync(iconDensitySrc)) {
       console.warn(
-        `Optimove: ${iconDensitySrc} file was not found. Skipping push icon for ${density} density.`
+        `Optimove: ${iconDensitySrc} file was not found. Skipping push icon for ${folder} folder.`
       );
       return;
     };
 
     const iconDensityDest = path.join(
       androidResourceDest,
-      density,
+      folder,
       fileName,
     );
     
