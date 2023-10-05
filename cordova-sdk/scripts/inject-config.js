@@ -130,11 +130,6 @@ function prepareAndroid(context, config) {
     createOptimoveMainActivity(context);
   }
 
-  if (!isEmpty(config.ANDROID_PUSH_NOTIFICATION_ICON)){
-    copyPushNotificationIcons(context, config);
-    updatePushNotificationIconMetaData(context, config);
-  }
-
   writeGoogleServicesJson(context);
 }
 
@@ -183,7 +178,7 @@ function writeOptimoveXml(context, config){
       "optimove.xml",
       config
     );
-
+    
     fs.writeFileSync(dest, realisedTemplate, { encoding: "utf-8" });
 }
 
@@ -236,108 +231,6 @@ function writeGoogleServicesJson(context){
       "Optimove: google-services.json was not found, skipping FCM configuration"
     );
   }
-}
-
-function copyPushNotificationIcons(context, config) {
-  const androidResourcesSrc = path.join(
-    context.opts.projectRoot,
-    "android-push-notification-icon"
-  );
-
-  if (!fs.existsSync(androidResourcesSrc)) {
-    console.warn(
-      `Optimove: ${androidResourcesSrc} path was not found, skipping push icon configuration`
-    );
-    return;
-  }
-
-  var folders = fs.readdirSync(androidResourcesSrc);
-
-  const androidResourceDest = path.join(
-    context.opts.projectRoot,
-    "platforms",
-    "android",
-    "app",
-    "src",
-    "main",
-    "res",
-  );
-
-  const fileName = `${config.ANDROID_PUSH_NOTIFICATION_ICON}.png`;
-
-  folders.forEach(folder => {
-    const iconDensitySrc = path.join(
-      androidResourcesSrc,
-      folder,
-      fileName,
-    );
-
-    if (!fs.existsSync(iconDensitySrc)) {
-      console.warn(
-        `Optimove: ${iconDensitySrc} file was not found. Skipping push icon for ${folder} folder.`
-      );
-      return;
-    };
-
-    const iconDensityDest = path.join(
-      androidResourceDest,
-      folder,
-      fileName,
-    );
-    
-    fs.cp(iconDensitySrc, iconDensityDest, { recursive: true }, (err) => {
-      if (err) {
-        console.error(
-          `Optimove: failed to copy ${iconDensitySrc} to ${iconDensityDest}`, err
-        );
-      }
-    });
-  });
-}
-
-function updatePushNotificationIconMetaData(context, config) {
-  const metaDataName = 'com.optimove.android.cordova.OptimoveInitProvider.notification_icon';
-  const metaDataResource = `@drawable/${config.ANDROID_PUSH_NOTIFICATION_ICON}`;
-
-  // read the xml
-  const plugin_xml = path.join(context.opts.plugin.dir, 'plugin.xml');
-  const data = fs.readFileSync(plugin_xml).toString();
-  const etree = elementtree.parse(data);
-
-  const platform = etree.findall('./platform/[@name="android"]')[0];
-  if (!platform) {
-    console.error('Optimove: android platform tag not found, aborting push icon injection');
-    return;
-  }
-
-  // find or create a config-file tag for the manifest
-  const manifestConfigs = etree.findall(`*/config-file/[@target="app/src/main/AndroidManifest.xml"]`);
-  if (manifestConfigs.length == 0) {
-    console.info('Optimove: config file not found, creating');
-    const configFile = elementtree.SubElement(platform, 'config-file');
-    configFile.set('target', 'app/src/main/AndroidManifest.xml');
-    configFile.set('parent', '/manifest/application');
-    manifestConfigs.push(configFile);
-  }
-
-  // remove any existing meta-data tags with the same name
-  manifestConfigs
-    .forEach(configFile => {
-      configFile
-        .findall(`meta-data/[@android:name="${metaDataName}"]`)
-        .forEach(metaData => {
-          configFile.remove(metaData);
-        });
-  });
-
-  // add the new meta-data tag
-  const metaData = elementtree.SubElement(manifestConfigs[0], 'meta-data');
-  metaData.set('android:name', metaDataName);
-  metaData.set('android:resource', metaDataResource);
-
-  // write the updated xml
-  const xml = etree.write({'xml_declaration': true, 'indent': 4});
-  fs.writeFileSync(plugin_xml, xml, { encoding: "utf-8" });
 }
 
 // ===================== IOS SPECIFIC ======================
