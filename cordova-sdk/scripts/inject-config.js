@@ -132,6 +132,7 @@ function prepareAndroid(context, config) {
 
   if (!isEmpty(config.ANDROID_PUSH_NOTIFICATION_ICON)){
     copyPushNotificationIcon(context, config);
+    injectPushIconMetaData(context, config);
   }
 
   writeGoogleServicesJson(context);
@@ -268,11 +269,13 @@ function copyPushNotificationIcon(context, config) {
     "res",
   );
 
+  const fileName = `${config.ANDROID_PUSH_NOTIFICATION_ICON}.png`;
+
   densities.forEach(density => {
     const iconDensitySrc = path.join(
       androidResourcesSrc,
       density,
-      config.ANDROID_PUSH_NOTIFICATION_ICON,
+      fileName,
     );
 
     if (!fs.existsSync(iconDensitySrc)) {
@@ -285,7 +288,7 @@ function copyPushNotificationIcon(context, config) {
     const iconDensityDest = path.join(
       androidResourceDest,
       density,
-      config.ANDROID_PUSH_NOTIFICATION_ICON,
+      fileName,
     );
     
     fs.cp(iconDensitySrc, iconDensityDest, { recursive: true }, (err) => {
@@ -301,6 +304,27 @@ function copyPushNotificationIcon(context, config) {
     });
   });
 }
+
+function injectPushIconMetaData(context, config){
+  const plugin_xml = path.join(context.opts.plugin.dir, 'plugin.xml');
+
+  const data = fs.readFileSync(plugin_xml).toString();
+  const etree = elementtree.parse(data);
+
+  const platform = etree.findall('./platform/[@name="android"]')[0];
+
+  const configFile = elementtree.SubElement(platform, 'config-file');
+  configFile.set('target', 'app/src/main/AndroidManifest.xml');
+  configFile.set('parent', '/manifest/application');
+
+  const metaData = elementtree.SubElement(configFile, 'meta-data');
+  metaData.set('android:name', 'com.optimove.android.cordova.OptimoveInitProvider.notification_icon');
+  metaData.set('android:resource', `@drawable/${config.ANDROID_PUSH_NOTIFICATION_ICON}`);
+
+  const xml = etree.write({'xml_declaration': false});
+  fs.writeFileSync(plugin_xml, xml, { encoding: "utf-8" });
+}
+
 
 // ===================== IOS SPECIFIC ======================
 
