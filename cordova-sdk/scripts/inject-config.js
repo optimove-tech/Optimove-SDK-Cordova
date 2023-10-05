@@ -296,10 +296,6 @@ function copyPushNotificationIcons(context, config) {
         console.error(
           `Optimove: failed to copy ${iconDensitySrc} to ${iconDensityDest}`, err
         );
-      } else {
-        console.info(
-          `Optimove: successfully copied ${density}/${config.ANDROID_PUSH_NOTIFICATION_ICON}`
-        )
       }
     });
   });
