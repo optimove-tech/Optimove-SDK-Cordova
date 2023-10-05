@@ -15,7 +15,8 @@ module.exports = function injectOptimoveConfig(context) {
     optimoveConfig.optimoveCredentials,
     optimoveConfig.optimoveMobileCredentials,
     optimoveConfig.inAppConsentStrategy,
-    optimoveConfig.enableDeferredDeepLinking
+    optimoveConfig.enableDeferredDeepLinking,
+    optimoveConfig.androidPushNotificationIconName
   );
 
   if (hasPlatform(context, 'android')) {
@@ -129,10 +130,19 @@ function prepareAndroid(context, config) {
     createOptimoveMainActivity(context);
   }
 
+  if (!isEmpty(config.ANDROID_PUSH_NOTIFICATION_ICON)){
+    copyPushNotificationIcon(context, config);
+  }
+
   writeGoogleServicesJson(context);
 }
 
-function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy, enableDeferredDeepLinking) {
+function createJsonWithDefaultValues(
+  optimoveCredentials, 
+  optimoveMobileCredentials , 
+  inAppConsentStrategy, 
+  enableDeferredDeepLinking,
+  androidPushNotificationIconName) {
   return {
     OPTIMOVE_CREDENTIALS:
       !isEmpty(optimoveCredentials) &&
@@ -146,7 +156,12 @@ function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredenti
         : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
     ENABLE_DEFERRED_DEEP_LINKING:
-      enableDeferredDeepLinking === true
+      enableDeferredDeepLinking === true,
+    ANDROID_PUSH_NOTIFICATION_ICON: 
+      !isEmpty(androidPushNotificationIconName) &&
+      isString(androidPushNotificationIconName)
+        ? androidPushNotificationIconName
+        : ""
  }
 }
 
@@ -222,6 +237,70 @@ function writeGoogleServicesJson(context){
   }
 }
 
+function copyPushNotificationIcon(context, config) {
+  const densities = [
+    "drawable-hdpi", 
+    "drawable-mdpi", 
+    "drawable-xhdpi", 
+    "drawable-xxhdpi", 
+    "drawable-xxxhdpi"
+  ];
+
+  const androidResourcesSrc = path.join(
+    context.opts.projectRoot,
+    "android-push-notification-icon"
+  );
+
+  if (!fs.existsSync(androidResourcesSrc)) {
+    console.warn(
+      `Optimove: ${androidResourcesSrc} path was not found, skipping push icon configuration`
+    );
+    return;
+  }
+
+  const androidResourceDest = path.join(
+    context.opts.projectRoot,
+    "platforms",
+    "android",
+    "app",
+    "src",
+    "main",
+    "res",
+  );
+
+  densities.forEach(density => {
+    const iconDensitySrc = path.join(
+      androidResourcesSrc,
+      density,
+      config.ANDROID_PUSH_NOTIFICATION_ICON,
+    );
+
+    if (!fs.existsSync(iconDensitySrc)) {
+      console.warn(
+        `Optimove: ${iconDensitySrc} file was not found. Skipping push icon for ${density} density.`
+      );
+      return;
+    };
+
+    const iconDensityDest = path.join(
+      androidResourceDest,
+      density,
+      config.ANDROID_PUSH_NOTIFICATION_ICON,
+    );
+    
+    fs.cp(iconDensitySrc, iconDensityDest, { recursive: true }, (err) => {
+      if (err) {
+        console.error(
+          `Optimove: failed to copy ${iconDensitySrc} to ${iconDensityDest}`, err
+        );
+      } else {
+        console.info(
+          `Optimove: successfully copied ${density}/${config.ANDROID_PUSH_NOTIFICATION_ICON}`
+        )
+      }
+    });
+  });
+}
 
 // ===================== IOS SPECIFIC ======================
 
