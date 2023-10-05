@@ -154,6 +154,7 @@ function createJsonWithDefaultValues(
     ENABLE_DEFERRED_DEEP_LINKING:
       enableDeferredDeepLinking === true,
     ANDROID_PUSH_NOTIFICATION_ICON_NAME: 
+      !isEmpty(android) &&
       !isEmpty(android.pushNotificationIconName) &&
       isString(android.pushNotificationIconName)
         ? android.pushNotificationIconName
