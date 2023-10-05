@@ -305,7 +305,9 @@ function copyPushNotificationIcon(context, config) {
   });
 }
 
-function injectPushIconMetaData(context, config){
+  const metaDataName = 'com.optimove.android.cordova.OptimoveInitProvider.notification_icon';
+  const metaDataResource = `@drawable/${config.ANDROID_PUSH_NOTIFICATION_ICON}`;
+
   const plugin_xml = path.join(context.opts.plugin.dir, 'plugin.xml');
 
   const data = fs.readFileSync(plugin_xml).toString();
@@ -313,13 +315,27 @@ function injectPushIconMetaData(context, config){
 
   const platform = etree.findall('./platform/[@name="android"]')[0];
 
+  const manifestConfigs = etree.findall(`*/config-file/[@target="app/src/main/AndroidManifest.xml"]`);
+  if (manifestConfigs.length == 0) {
+    console.info('Optimove: config file not found, creating');
   const configFile = elementtree.SubElement(platform, 'config-file');
   configFile.set('target', 'app/src/main/AndroidManifest.xml');
   configFile.set('parent', '/manifest/application');
+    manifestConfigs.push(configFile);
+  }
 
-  const metaData = elementtree.SubElement(configFile, 'meta-data');
-  metaData.set('android:name', 'com.optimove.android.cordova.OptimoveInitProvider.notification_icon');
-  metaData.set('android:resource', `@drawable/${config.ANDROID_PUSH_NOTIFICATION_ICON}`);
+  manifestConfigs
+    .forEach(configFile => {
+      configFile
+        .findall(`meta-data/[@android:name="${metaDataName}"]`)
+        .forEach(metaData => {
+          configFile.remove(metaData);
+        });
+  });
+
+  const metaData = elementtree.SubElement(manifestConfigs[0], 'meta-data');
+  metaData.set('android:name', metaDataName);
+  metaData.set('android:resource', metaDataResource);
 
   const xml = etree.write({'xml_declaration': true, 'indent': 4});
   fs.writeFileSync(plugin_xml, xml, { encoding: "utf-8" });
