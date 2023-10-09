@@ -16,6 +16,12 @@
 	<platform name="android">
 		<preference name="android-targetSdkVersion" value="31" />
 
+		<resource-file src="www/res/drawable-hdpi/ic_notification.png" target="app/src/main/res/drawable-hdpi/ic_notification.png" />
+		<resource-file src="www/res/drawable-mdpi/ic_notification.png" target="app/src/main/res/drawable-mdpi/ic_notification.png" />
+		<resource-file src="www/res/drawable-xhdpi/ic_notification.png" target="app/src/main/res/drawable-xhdpi/ic_notification.png" />
+		<resource-file src="www/res/drawable-xxhdpi/ic_notification.png" target="app/src/main/res/drawable-xxhdpi/ic_notification.png" />
+		<resource-file src="www/res/drawable-xxxhdpi/ic_notification.png" target="app/src/main/res/drawable-xxxhdpi/ic_notification.png" />
+
 		<config-file parent="/manifest/application/activity" target="AndroidManifest.xml">
 			<intent-filter android:label="deepLabel" android:autoVerify="true">
 				<action android:name="android.intent.action.VIEW" />

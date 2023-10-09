@@ -5,12 +5,9 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,8 +31,7 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
-    private static final String NOTIFICATION_ICON_KEY = "com.optimove.android.cordova.OptimoveInitProvider.notification_icon";
-    private static final String TAG = "OptimoveInitProvider";
+    private static final String ANDROID_PUSH_NOTIFICATION_ICON_NAME = "android.pushNotificationIconName";
 
     private static final String SDK_VERSION = "2.0.2";
     private static final int RUNTIME_TYPE = 3;
@@ -46,50 +42,36 @@ public class OptimoveInitProvider extends ContentProvider {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
+
         String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,
-                KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
-        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
-            throw new IllegalArgumentException(
-                    "error: Invalid credentials! \n please provide at least one set of credentials");
+            throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
         }
 
-        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
-                optimoveMobileCredentials);
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
 
         if (optimoveMobileCredentials == null) {
             Optimove.initialize(app, configBuilder.build());
             return true;
         }
 
+        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
         }
+
+        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
         if (Boolean.parseBoolean(enableDeferredDeepLinking)) {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
         }
 
-        /**
-        * Get notification icon from AndroidManifest metaData
-        * Cordova config.xml example:
-        *   <config-file target="app/src/main/AndroidManifest.xml" parent="/manifest/application">
-        *     <meta-data
-        *       android:name="com.optimove.android.cordova.OptimoveInitProvider.notification_icon"
-        *       android:resource="@drawable/notification" />
-        *   </config-file>
-        */
-        try {
-            ApplicationInfo ai = app.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-            int smallIconId = ai.metaData.getInt(NOTIFICATION_ICON_KEY, ai.icon);
-            configBuilder.setPushSmallIconId(smallIconId);
-        }  catch (PackageManager.NameNotFoundException e) {
-            Log.d(TAG, "Failed to load package metaData", e);
-        } catch(Resources.NotFoundException e) {
-            Log.d(TAG, "Failed to load notification icon", e);
+        final String pushNotificationIconName = getStringConfigValue(packageName, resources, ANDROID_PUSH_NOTIFICATION_ICON_NAME);
+        if (pushNotificationIconName != null) {
+            final int iconResource = resources.getIdentifier(pushNotificationIconName, "drawable", packageName);
+            configBuilder.setPushSmallIconId(iconResource);
         }
 
         overrideInstallInfo(configBuilder);

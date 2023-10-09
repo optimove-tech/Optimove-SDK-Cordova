@@ -15,6 +15,9 @@ In this guide we will discuss the steps to implement the Optimove Cordova SDK fo
 ### Mobile Messaging
 
 1. [Push Setup](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/push-setup)
+
+    a. [Push Advanced Setup](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/Push-Advanced)
+
 2. [In-App Setup](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/in-app)
 3. [Deferred Deep Linking](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/deferred-deep-linking)
 4. [Testing](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/testing-troubleshooting)

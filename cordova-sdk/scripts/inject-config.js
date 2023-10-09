@@ -15,7 +15,8 @@ module.exports = function injectOptimoveConfig(context) {
     optimoveConfig.optimoveCredentials,
     optimoveConfig.optimoveMobileCredentials,
     optimoveConfig.inAppConsentStrategy,
-    optimoveConfig.enableDeferredDeepLinking
+    optimoveConfig.enableDeferredDeepLinking,
+    optimoveConfig.android
   );
 
   if (hasPlatform(context, 'android')) {
@@ -132,7 +133,12 @@ function prepareAndroid(context, config) {
   writeGoogleServicesJson(context);
 }
 
-function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredentials , inAppConsentStrategy, enableDeferredDeepLinking) {
+function createJsonWithDefaultValues(
+  optimoveCredentials, 
+  optimoveMobileCredentials , 
+  inAppConsentStrategy, 
+  enableDeferredDeepLinking,
+  android) {
   return {
     OPTIMOVE_CREDENTIALS:
       !isEmpty(optimoveCredentials) &&
@@ -146,7 +152,13 @@ function createJsonWithDefaultValues(optimoveCredentials, optimoveMobileCredenti
         : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
     ENABLE_DEFERRED_DEEP_LINKING:
-      enableDeferredDeepLinking === true
+      enableDeferredDeepLinking === true,
+    ANDROID_PUSH_NOTIFICATION_ICON_NAME: 
+      android !== undefined &&
+      !isEmpty(android.pushNotificationIconName) &&
+      isString(android.pushNotificationIconName)
+        ? android.pushNotificationIconName
+        : ""
  }
 }
 
@@ -163,11 +175,24 @@ function writeOptimoveXml(context, config){
       "optimove.xml"
     );
 
+    // Flatten the config object to a single level. Supports only for one level of nesting.
+    const flattenConfig = Object.keys(config).reduce((acc, key) => {
+      // If values is strictly an dictionary, then concat the key with the nested key with a dot. 
+      if (typeof config[key] === "object" && !Array.isArray(config[key])) {
+        Object.keys(config[key]).forEach((nestedKey) => {
+          acc[`${key}.${nestedKey}`] = config[key][nestedKey];
+        });
+      } else {
+        acc[key] = config[key];
+      }
+      return acc;
+    }, {});
+
     const realisedTemplate = renderTemplate(
       "optimove.xml",
-      config
+      flattenConfig
     );
-
+    
     fs.writeFileSync(dest, realisedTemplate, { encoding: "utf-8" });
 }
 
@@ -221,7 +246,6 @@ function writeGoogleServicesJson(context){
     );
   }
 }
-
 
 // ===================== IOS SPECIFIC ======================
 
