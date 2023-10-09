@@ -63,7 +63,7 @@ public class OptimoveInitProvider extends ContentProvider {
         }
 
         final String pushNotificationIconName = getStringConfigValue(packageName, resources, ANDROID_PUSH_NOTIFICATION_ICON_NAME);
-        if (pushNotificationIconName != null && !pushNotificationIconName.isEmpty()) {
+        if (pushNotificationIconName != null) {
             final int iconResource = resources.getIdentifier(pushNotificationIconName, "drawable", packageName);
             configBuilder.setPushSmallIconId(iconResource);
         }
