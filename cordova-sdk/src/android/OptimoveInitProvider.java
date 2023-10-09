@@ -31,8 +31,9 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
+    private static final String ANDROID_PUSH_NOTIFICATION_ICON_NAME = "android.pushNotificationIconName";
 
-    private static final String SDK_VERSION = "2.0.1";
+    private static final String SDK_VERSION = "2.1.0";
     private static final int RUNTIME_TYPE = 3;
     private static final int SDK_TYPE = 106;
 
@@ -41,26 +42,36 @@ public class OptimoveInitProvider extends ContentProvider {
         Application app = (Application) getContext().getApplicationContext();
         String packageName = app.getPackageName();
         Resources resources = app.getResources();
+
         String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources,
-                KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
-        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
-            throw new IllegalArgumentException(
-                    "error: Invalid credentials! \n please provide at least one set of credentials");
+            throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
         }
 
-        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials,
-                optimoveMobileCredentials);
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
 
+        if (optimoveMobileCredentials == null) {
+            Optimove.initialize(app, configBuilder.build());
+            return true;
+        }
+
+        String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
         } else if (IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.EXPLICIT_BY_USER);
         }
+
+        String enableDeferredDeepLinking = getStringConfigValue(packageName, resources, ENABLE_DEFERRED_DEEP_LINKING);
         if (Boolean.parseBoolean(enableDeferredDeepLinking)) {
             configBuilder = configBuilder.enableDeepLinking(getDDLHandler());
+        }
+
+        final String pushNotificationIconName = getStringConfigValue(packageName, resources, ANDROID_PUSH_NOTIFICATION_ICON_NAME);
+        if (pushNotificationIconName != null) {
+            final int iconResource = resources.getIdentifier(pushNotificationIconName, "drawable", packageName);
+            configBuilder.setPushSmallIconId(iconResource);
         }
 
         overrideInstallInfo(configBuilder);
@@ -73,6 +84,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
         Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
         OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
+
         return true;
     }
 
