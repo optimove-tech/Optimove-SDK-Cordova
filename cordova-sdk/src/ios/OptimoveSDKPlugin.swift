@@ -20,7 +20,7 @@ enum InAppConsentStrategy: String {
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
 
-    private static let sdkVersion = "2.0.1"
+    private static let sdkVersion = "2.0.2"
     private static let sdkTypeOptimoveCordova = 106
     private static let runtimeTypeCordova = 3
 
@@ -48,6 +48,13 @@ enum InAppConsentStrategy: String {
         guard let builder = getConfigBuilder(configValues: configValues) else{
             return
         };
+
+
+        if (configValues[optimoveMobileCredentialsKey] == nil) {
+            Optimove.initialize(with: builder.build())
+
+            return
+        }
 
         builder.setPushOpenedHandler(pushOpenedHandlerBlock: { notification in
             guard let pluginInstance = OptimoveSDKPlugin.optimovePluginInstance, let _ = OptimoveSDKPlugin.cordovaCommand else {
