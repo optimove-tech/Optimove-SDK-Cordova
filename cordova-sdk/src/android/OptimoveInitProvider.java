@@ -49,6 +49,8 @@ public class OptimoveInitProvider extends ContentProvider {
             throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
         }
 
+        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
+
         if (optimoveMobileCredentials == null) {
             Optimove.initialize(app, configBuilder.build());
             return true;
