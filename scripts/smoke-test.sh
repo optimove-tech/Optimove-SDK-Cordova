@@ -16,4 +16,4 @@ cordova platform add ios
 cordova plugin add ../cordova-sdk
 
 # Build the app
-cordova build
+cordova build | xcbeautify
