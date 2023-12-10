@@ -1,10 +1,7 @@
 #!bin/zsh
 
-# Create a cordova app
-cordova create test-app com.example.testapp TestApp
-
 # Change directory to the app
-cd test-app
+cd ExampleApp
 
 # Add the android platform
 cordova platform add android
