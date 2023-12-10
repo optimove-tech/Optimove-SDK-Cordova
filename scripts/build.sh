@@ -2,6 +2,7 @@
 
 # Stop on error
 set -e
+set -o pipefail
 
 # Check if the app name is passed as an argument
 if [ -z "$1" ]; then
@@ -22,4 +23,5 @@ cordova platform add ios
 cordova plugin add ../cordova-sdk
 
 # Build the app
-cordova build | xcbeautify
+cordova build |
+    xcbeautify -q --is-ci
