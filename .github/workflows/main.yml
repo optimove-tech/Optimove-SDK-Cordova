@@ -12,6 +12,6 @@ jobs:
           distribution: "temurin"
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-      - run: sdkmanager "platform-tools" "platforms;android-32"
+      - run: sdkmanager "platform-tools" "platforms;android-32" "build-tools;32.0.0"
       - run: make build
         name: Build
