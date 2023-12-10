@@ -10,7 +10,7 @@
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
             <feature name="OptimoveSDKPlugin">
-                <param name="ios-package" value="OptimoveSDKPlugin" />
+                <param name="ios-package" value="Optimove_Cordova" />
             </feature>
             <preference name="SwiftVersion" value="5" />
             <preference name="deployment-target" value="12.0" />
