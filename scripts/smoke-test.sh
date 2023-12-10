@@ -1,5 +1,8 @@
 #!bin/zsh
 
+# Stop on error
+set -e
+
 # Change directory to the app
 cd ExampleApp
 
