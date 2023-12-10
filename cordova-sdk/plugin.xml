@@ -19,7 +19,7 @@
         <header-file src="src/ios/Bridging-Header.h" type="BridgingHeader" />
         <podspec>
             <config>
-                <source url="https://github.com/CocoaPods/Specs.git"/>
+                <source url="https://cdn.cocoapods.org/"/>
             </config>
             <pods>
                 <pod name="OptimoveCore" spec="~> 5" />
