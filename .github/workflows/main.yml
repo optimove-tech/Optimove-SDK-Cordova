@@ -1,0 +1,9 @@
+name: CI
+on: [push]
+jobs:
+  unit-tests:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v1
+      - run: make test
+        name: Test
