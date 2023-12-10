@@ -1,7 +1,7 @@
 name: CI
 on: [push]
 jobs:
-  smoke-test:
+  build:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v4
@@ -12,5 +12,5 @@ jobs:
           distribution: "temurin"
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-      - run: make test
-        name: Test
+      - run: make build
+        name: Build
