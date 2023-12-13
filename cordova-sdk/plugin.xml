@@ -12,6 +12,8 @@
             <feature name="OptimoveSDKPlugin">
                 <param name="ios-package" value="Optimove_Cordova" />
             </feature>
+            <preference name="SwiftVersion" value="5" />
+            <preference name="deployment-target" value="12.0" />
         </config-file>
         <resource-file src="scripts/optimove.plist" target="optimove.plist" />
         <source-file src="src/ios/OptimoveSDKPlugin.swift" />
