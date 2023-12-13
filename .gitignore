@@ -31,3 +31,4 @@ ExampleApp/google-services.json
 ExampleApp/platforms/
 ExampleApp/plugins/
 .idea
+**/package-lock.json
