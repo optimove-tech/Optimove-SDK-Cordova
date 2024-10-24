@@ -22,10 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.apache.cordova.CordovaWebView;
 
+
 public class OptimoveInitProvider extends ContentProvider {
     private static final String KEY_OPTIMOVE_CREDENTIALS = "optimoveCredentials";
     private static final String KEY_OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
     private static final String KEY_IN_APP_CONSENT_STRATEGY = "optimoveInAppConsentStrategy";
+    private static final String KEY_ENABLE_DELAYED_INITIALIZATION = "optimoveEnableDelayedInitialization";
 
     private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
@@ -45,6 +47,20 @@ public class OptimoveInitProvider extends ContentProvider {
 
         String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
         String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
+        boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_ENABLE_DELAYED_INITIALIZATION));
+
+        if (enableDelayedInitialization) {
+
+        // Dummy parameters
+        OptimoveConfig.Region region = OptimoveConfig.Region.US;
+        OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet().withOptimove().withOptimobile();
+
+        OptimoveConfig config = new OptimoveConfig.Builder(region, featureSet).build();
+        Optimove.initialize(app, config);
+
+            return true;
+        }
+
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
             throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
         }

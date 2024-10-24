@@ -165,6 +165,17 @@ enum InAppConsentStrategy: String {
 
     // ========================== ASSOCIATION AND EVENTS ==========================
 
+    @objc(setCredentials:)
+    func setCredentials(command: CDVInvokedUrlCommand) {
+        let optimoveCredentials = command.arguments[0] as? String
+
+        let optimobileCredentials = command.arguments[1] as? String
+
+        Optimove.setCredentials(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
+
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
         guard let name = command.arguments[0] as? String else {

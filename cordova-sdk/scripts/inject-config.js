@@ -12,11 +12,12 @@ module.exports = function injectOptimoveConfig(context) {
   }
 
   const config = createJsonWithDefaultValues(
-    optimoveConfig.optimoveCredentials,
-    optimoveConfig.optimoveMobileCredentials,
-    optimoveConfig.inAppConsentStrategy,
-    optimoveConfig.enableDeferredDeepLinking,
-    optimoveConfig.android
+      optimoveConfig.optimoveCredentials,
+      optimoveConfig.optimoveMobileCredentials,
+      optimoveConfig.inAppConsentStrategy,
+      optimoveConfig.enableDeferredDeepLinking,
+      optimoveConfig.android,
+      optimoveConfig.enableDelayedInitialization
   );
 
   if (hasPlatform(context, 'android')) {
@@ -134,32 +135,32 @@ function prepareAndroid(context, config) {
 }
 
 function createJsonWithDefaultValues(
-  optimoveCredentials, 
-  optimoveMobileCredentials , 
-  inAppConsentStrategy, 
-  enableDeferredDeepLinking,
-  android) {
+    optimoveCredentials,
+    optimoveMobileCredentials,
+    inAppConsentStrategy,
+    enableDeferredDeepLinking,
+    android,
+    enableDelayedInitialization
+) {
   return {
     OPTIMOVE_CREDENTIALS:
-      !isEmpty(optimoveCredentials) &&
-      isString(optimoveCredentials)
-        ? optimoveCredentials
-        : "",
+        !isEmpty(optimoveCredentials) && isString(optimoveCredentials)
+            ? optimoveCredentials
+            : "",
     OPTIMOVE_MOBILE_CREDENTIALS:
-      !isEmpty(optimoveMobileCredentials) &&
-      isString(optimoveMobileCredentials)
-        ? optimoveMobileCredentials
-        : "",
+        !isEmpty(optimoveMobileCredentials) && isString(optimoveMobileCredentials)
+            ? optimoveMobileCredentials
+            : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
-    ENABLE_DEFERRED_DEEP_LINKING:
-      enableDeferredDeepLinking === true,
-    ANDROID_PUSH_NOTIFICATION_ICON_NAME: 
-      android !== undefined &&
-      !isEmpty(android.pushNotificationIconName) &&
-      isString(android.pushNotificationIconName)
-        ? android.pushNotificationIconName
-        : ""
- }
+    ENABLE_DEFERRED_DEEP_LINKING: enableDeferredDeepLinking === true,
+    ENABLE_DELAYED_INITIALIZATION: enableDelayedInitialization === true,
+    ANDROID_PUSH_NOTIFICATION_ICON_NAME:
+        android !== undefined &&
+        !isEmpty(android.pushNotificationIconName) &&
+        isString(android.pushNotificationIconName)
+            ? android.pushNotificationIconName
+            : ""
+  };
 }
 
 function writeOptimoveXml(context, config){
