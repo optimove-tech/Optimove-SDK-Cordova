@@ -137,7 +137,7 @@ const Optimove = {
         optimobileCredentials
       ]);
     });
-  }
+  },
   /**
    * Sets the User ID of the current user.
    * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL

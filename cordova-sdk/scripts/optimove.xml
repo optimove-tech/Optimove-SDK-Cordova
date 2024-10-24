@@ -4,5 +4,6 @@
     <string name="optimoveMobileCredentials" tools:ignore="TypographyDashes">{{OPTIMOVE_MOBILE_CREDENTIALS}}</string>
     <string name="optimoveInAppConsentStrategy" tools:ignore="TypographyDashes">{{IN_APP_STRATEGY}}</string>
     <string name="optimoveEnableDeferredDeepLinking" tools:ignore="TypographyDashes">{{ENABLE_DEFERRED_DEEP_LINKING}}</string>
+    <string name="optimoveEnableDelayedInitialization" tools:ignore="TypographyDashes">{{ENABLE_DELAYED_INITIALIZATION}}</string>
     <string name="android.pushNotificationIconName" tools:ignore="TypographyDashes">{{ANDROID_PUSH_NOTIFICATION_ICON_NAME}}</string>
 </resources>
