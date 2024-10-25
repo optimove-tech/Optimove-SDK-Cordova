@@ -27,7 +27,9 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String KEY_OPTIMOVE_CREDENTIALS = "optimoveCredentials";
     private static final String KEY_OPTIMOVE_MOBILE_CREDENTIALS = "optimoveMobileCredentials";
     private static final String KEY_IN_APP_CONSENT_STRATEGY = "optimoveInAppConsentStrategy";
-    private static final String KEY_ENABLE_DELAYED_INITIALIZATION = "optimoveEnableDelayedInitialization";
+    private static final String KEY_DELAYED_INITIALIZATION_ENABLE = "delayedInitialization.enable";
+    private static final String KEY_DELAYED_INITIALIZATION_REGION = "delayedInitialization.region";
+
 
     private static final String IN_APP_AUTO_ENROLL = "auto-enroll";
     private static final String IN_APP_EXPLICIT_BY_USER = "explicit-by-user";
@@ -47,11 +49,12 @@ public class OptimoveInitProvider extends ContentProvider {
 
         String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
         String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-        boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_ENABLE_DELAYED_INITIALIZATION));
+        boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_ENABLE));
 
         if (enableDelayedInitialization) {
 
-        OptimoveConfig.Region region = OptimoveConfig.Region.DEV;
+        String optimoveRegion = getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_REGION);
+        OptimoveConfig.Region region = OptimoveConfig.Region.
         OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet().withOptimove().withOptimobile();
 
         OptimoveConfig config = new OptimoveConfig.Builder(region, featureSet).build();

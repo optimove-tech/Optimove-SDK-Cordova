@@ -16,8 +16,8 @@ module.exports = function injectOptimoveConfig(context) {
       optimoveConfig.optimoveMobileCredentials,
       optimoveConfig.inAppConsentStrategy,
       optimoveConfig.enableDeferredDeepLinking,
-      optimoveConfig.android,
-      optimoveConfig.enableDelayedInitialization
+      optimoveConfig.delayedInitialization,
+      optimoveConfig.android
   );
 
   if (hasPlatform(context, 'android')) {
@@ -139,8 +139,8 @@ function createJsonWithDefaultValues(
     optimoveMobileCredentials,
     inAppConsentStrategy,
     enableDeferredDeepLinking,
-    android,
-    enableDelayedInitialization
+    delayedInitialization,
+    android
 ) {
   return {
     OPTIMOVE_CREDENTIALS:
@@ -153,7 +153,10 @@ function createJsonWithDefaultValues(
             : "",
     IN_APP_STRATEGY: inAppConsentStrategy,
     ENABLE_DEFERRED_DEEP_LINKING: enableDeferredDeepLinking === true,
-    ENABLE_DELAYED_INITIALIZATION: enableDelayedInitialization === true,
+    ENABLE_DELAYED_INITIALIZATION: delayedInitialization && delayedInitialization.enable === true,
+    DELAYED_INITIALIZATION_REGION: delayedInitialization && isString(delayedInitialization.region)
+        ? delayedInitialization.region
+        : "",
     ANDROID_PUSH_NOTIFICATION_ICON_NAME:
         android !== undefined &&
         !isEmpty(android.pushNotificationIconName) &&
