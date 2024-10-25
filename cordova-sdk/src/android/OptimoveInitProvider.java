@@ -51,8 +51,7 @@ public class OptimoveInitProvider extends ContentProvider {
 
         if (enableDelayedInitialization) {
 
-        // Dummy parameters
-        OptimoveConfig.Region region = OptimoveConfig.Region.US;
+        OptimoveConfig.Region region = OptimoveConfig.Region.DEV;
         OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet().withOptimove().withOptimobile();
 
         OptimoveConfig config = new OptimoveConfig.Builder(region, featureSet).build();
