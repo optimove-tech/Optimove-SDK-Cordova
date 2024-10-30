@@ -42,38 +42,30 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final int SDK_TYPE = 106;
 
     @Override
-    public boolean onCreate() {
-        Application app = (Application) getContext().getApplicationContext();
-        String packageName = app.getPackageName();
-        Resources resources = app.getResources();
+public boolean onCreate() {
+    Application app = (Application) getContext().getApplicationContext();
+    String packageName = app.getPackageName();
+    Resources resources = app.getResources();
 
-        String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
-        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-        boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_ENABLE));
+    String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
+    String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
+    boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_ENABLE));
 
-        if (enableDelayedInitialization) {
+    OptimoveConfig.Builder configBuilder;
 
+    if (enableDelayedInitialization) {
         String optimoveRegion = getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_REGION);
-        OptimoveConfig.Region region = OptimoveConfig.Region.
+        OptimoveConfig.Region region = OptimoveConfig.Region.valueOf(optimoveRegion.toUpperCase());
         OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet().withOptimove().withOptimobile();
-
-        OptimoveConfig config = new OptimoveConfig.Builder(region, featureSet).build();
-        Optimove.initialize(app, config);
-
-            return true;
-        }
-
+        configBuilder = new OptimoveConfig.Builder(region, featureSet);
+    } else {
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
             throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
         }
+        configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
+    }
 
-        OptimoveConfig.Builder configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
-
-        if (optimoveMobileCredentials == null) {
-            Optimove.initialize(app, configBuilder.build());
-            return true;
-        }
-
+    if (optimoveMobileCredentials != null || enableDelayedInitialization) {
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
@@ -91,20 +83,23 @@ public class OptimoveInitProvider extends ContentProvider {
             final int iconResource = resources.getIdentifier(pushNotificationIconName, "drawable", packageName);
             configBuilder.setPushSmallIconId(iconResource);
         }
-
-        overrideInstallInfo(configBuilder);
-
-        Optimove.initialize(app, configBuilder.build());
-
-        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
-            OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
-        }
-
-        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
-        OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
-
-        return true;
     }
+
+    overrideInstallInfo(configBuilder);
+
+    Optimove.initialize(app, configBuilder.build());
+
+    String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
+    if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+        OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
+    }
+
+    Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
+    OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
+
+    return true;
+}
+
 
     private void overrideInstallInfo(OptimoveConfig.Builder configBuilder) {
         JSONObject sdkInfo = new JSONObject();

@@ -26,8 +26,8 @@
   },
   "cordova": {
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "optimove-cordova-sdk": {}
