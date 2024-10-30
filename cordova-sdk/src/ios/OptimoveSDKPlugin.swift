@@ -16,6 +16,8 @@ enum InAppConsentStrategy: String {
     private static let inAppConsentStrategy = "optimoveInAppConsentStrategy"
     private static let enableDeferredDeepLinking = "optimoveEnableDeferredDeepLinking"
     private static let cname = "optimoveDdlCname"
+    private static let delayedInitializationEnable = "delayedInitialization.enable"
+    private static let delayedInitializationRegion = "delayedInitialization.region"
 
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
@@ -156,6 +158,31 @@ enum InAppConsentStrategy: String {
             if (!val.isEmpty){
                 optimobileCredentials = val;
             }
+        }
+
+        if let enableDelayedInitialization = configValues[delayedInitializationEnable],
+           Bool(enableDelayedInitialization) == true {
+
+            guard let optimoveRegion = configValues[delayedInitializationRegion], !optimoveRegion.isEmpty else {
+                return nil
+            }
+
+            let featureSet: Feature = [.optimove, .optimobile]
+
+            let region: OptimobileConfig.Region
+            switch optimoveRegion {
+            case "DEV":
+                region = .DEV
+            case "EU":
+                region = .EU
+            case "US":
+                region = .US
+            default:
+                print("Invalid region string: \(optimoveRegion)")
+                return nil
+            }
+
+            return OptimoveConfigBuilder(region: region, features: featureSet)
         }
 
         let builder = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)

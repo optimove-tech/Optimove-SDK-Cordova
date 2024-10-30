@@ -10,5 +10,9 @@
 	<string>{{IN_APP_STRATEGY}}</string>
 	<key>optimoveEnableDeferredDeepLinking</key>
 	<string>{{ENABLE_DEFERRED_DEEP_LINKING}}</string>
+	 <key>delayedInitialization.enable</key>
+     <string>{{ENABLE_DELAYED_INITIALIZATION}}</string>
+     <key>delayedInitialization.region</key>
+     <string>{{DELAYED_INITIALIZATION_REGION}}</string>
 </dict>
 </plist>
