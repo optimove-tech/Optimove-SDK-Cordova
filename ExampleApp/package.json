@@ -32,5 +32,8 @@
     "plugins": {
       "optimove-cordova-sdk": {}
     }
+  },
+  "dependencies": {
+    "semver": "^7.6.3"
   }
 }
