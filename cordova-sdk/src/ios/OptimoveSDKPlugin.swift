@@ -18,6 +18,8 @@ enum InAppConsentStrategy: String {
     private static let cname = "optimoveDdlCname"
     private static let delayedInitializationEnable = "delayedInitialization.enable"
     private static let delayedInitializationRegion = "delayedInitialization.region"
+    private static let delayedInitializationOptimove = "delayedInitialization.featureSet.enableOptimove"
+    private static let delayedInitializationOptimobile = "delayedInitialization.featureSet.enableOptimobile"
 
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
@@ -167,7 +169,21 @@ enum InAppConsentStrategy: String {
                 return nil
             }
 
-            let featureSet: Feature = [.optimove, .optimobile]
+            guard let enableOptimove = configValues[delayedInitializationOptimove], !enableOptimove.isEmpty else {
+                return nil
+            }
+            guard let enableOptimobile = configValues[delayedInitializationOptimobile], !enableOptimobile.isEmpty else {
+                return nil
+            }
+
+
+            var featureSet: Feature = []
+            if Bool(enableOptimove) == true {
+                featureSet.insert(.optimove)
+            }
+            if Bool(enableOptimobile) == true {
+                featureSet.insert(.optimobile)
+            }
 
             let region: OptimobileConfig.Region
             switch optimoveRegion {
