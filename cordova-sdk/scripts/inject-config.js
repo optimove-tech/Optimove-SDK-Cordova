@@ -17,6 +17,7 @@ module.exports = function injectOptimoveConfig(context) {
       optimoveConfig.inAppConsentStrategy,
       optimoveConfig.enableDeferredDeepLinking,
       optimoveConfig.delayedInitialization,
+      optimoveConfig.delayedInitialization.featureSet,
       optimoveConfig.android
   );
 
@@ -140,6 +141,7 @@ function createJsonWithDefaultValues(
     inAppConsentStrategy,
     enableDeferredDeepLinking,
     delayedInitialization,
+    featureSet,
     android
 ) {
   return {
@@ -162,7 +164,9 @@ function createJsonWithDefaultValues(
         !isEmpty(android.pushNotificationIconName) &&
         isString(android.pushNotificationIconName)
             ? android.pushNotificationIconName
-            : ""
+            : "",
+    DELAYED_INITIALIZATION_ENABLE_OPTIMOVE: featureSet && featureSet.enableOptimove === true,
+    DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE: featureSet && featureSet.enableOptimobile === true,
   };
 }
 

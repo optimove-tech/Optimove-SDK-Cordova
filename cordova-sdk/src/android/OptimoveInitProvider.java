@@ -36,6 +36,8 @@ public class OptimoveInitProvider extends ContentProvider {
 
     private static final String ENABLE_DEFERRED_DEEP_LINKING = "optimoveEnableDeferredDeepLinking";
     private static final String ANDROID_PUSH_NOTIFICATION_ICON_NAME = "android.pushNotificationIconName";
+    private static final String DELAYED_INITIALIZATION_ENABLE_OPTIMOVE = "delayedInitialization.featureSet.enableOptimove";
+    private static final String DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE = "delayedInitialization.featureSet.enableOptimobile";
 
     private static final String SDK_VERSION = "2.1.0";
     private static final int RUNTIME_TYPE = 3;
@@ -50,13 +52,21 @@ public boolean onCreate() {
     String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
     String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
     boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_ENABLE));
+    boolean enableOptimove = Boolean.parseBoolean(getStringConfigValue(packageName, resources, DELAYED_INITIALIZATION_ENABLE_OPTIMOVE));
+    boolean enableOptimobile = Boolean.parseBoolean(getStringConfigValue(packageName, resources, DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE));
 
     OptimoveConfig.Builder configBuilder;
 
     if (enableDelayedInitialization) {
         String optimoveRegion = getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_REGION);
         OptimoveConfig.Region region = OptimoveConfig.Region.valueOf(optimoveRegion.toUpperCase());
-        OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet().withOptimove().withOptimobile();
+        OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet();
+            if (enableOptimove) {
+                featureSet.withOptimove();
+            }
+            if (enableOptimobile) {
+                featureSet.withOptimobile();
+            }
         configBuilder = new OptimoveConfig.Builder(region, featureSet);
     } else {
         if (optimoveCredentials == null && optimoveMobileCredentials == null) {
@@ -65,7 +75,7 @@ public boolean onCreate() {
         configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
     }
 
-    if (optimoveMobileCredentials != null || enableDelayedInitialization) {
+    if (configBuilder.build().isOptimobileConfigured()) {
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);

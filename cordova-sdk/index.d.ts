@@ -79,7 +79,8 @@ declare enum DeepLinkResolution {
 
 interface OptimoveSdk {
     /**
-     * Used in case a delayed initialization is needed
+     * Initializes the required credentials for Optimove and Optimobile
+     * when they are not known in advance, allowing for delayed setup.
      * @param optimoveCredentials Optimove credentials
      * @param optimobileCredentials Optimobile credentials
      */

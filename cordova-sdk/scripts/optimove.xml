@@ -6,5 +6,7 @@
     <string name="optimoveEnableDeferredDeepLinking" tools:ignore="TypographyDashes">{{ENABLE_DEFERRED_DEEP_LINKING}}</string>
     <string name="delayedInitialization.enable" tools:ignore="TypographyDashes">{{ENABLE_DELAYED_INITIALIZATION}}</string>
     <string name="delayedInitialization.region" tools:ignore="TypographyDashes">{{DELAYED_INITIALIZATION_REGION}}</string>
+    <string name="delayedInitialization.featureSet.enableOptimove" tools:ignore="TypographyDashes">{{DELAYED_INITIALIZATION_ENABLE_OPTIMOVE}}</string>
+    <string name="delayedInitialization.featureSet.enableOptimobile" tools:ignore="TypographyDashes">{{DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE}}</string>
     <string name="android.pushNotificationIconName" tools:ignore="TypographyDashes">{{ANDROID_PUSH_NOTIFICATION_ICON_NAME}}</string>
 </resources>

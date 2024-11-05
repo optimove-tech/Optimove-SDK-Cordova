@@ -14,5 +14,9 @@
      <string>{{ENABLE_DELAYED_INITIALIZATION}}</string>
      <key>delayedInitialization.region</key>
      <string>{{DELAYED_INITIALIZATION_REGION}}</string>
+     <key>delayedInitialization.featureSet.enableOptimove</key>
+     	<string>{{DELAYED_INITIALIZATION_ENABLE_OPTIMOVE}}</string>
+     	<key>delayedInitialization.featureSet.enableOptimobile</key>
+     	<string>{{DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE}}</string>
 </dict>
 </plist>
