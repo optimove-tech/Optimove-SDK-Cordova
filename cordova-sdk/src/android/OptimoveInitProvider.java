@@ -75,7 +75,11 @@ public boolean onCreate() {
         configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
     }
 
-    if (configBuilder.build().isOptimobileConfigured()) {
+    if (!configBuilder.build().isOptimobileConfigured()) {
+            Optimove.initialize(app, configBuilder.build());
+            return true;
+        }
+
         String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
         if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy)) {
             configBuilder = configBuilder.enableInAppMessaging(OptimoveConfig.InAppConsentStrategy.AUTO_ENROLL);
@@ -93,13 +97,11 @@ public boolean onCreate() {
             final int iconResource = resources.getIdentifier(pushNotificationIconName, "drawable", packageName);
             configBuilder.setPushSmallIconId(iconResource);
         }
-    }
 
     overrideInstallInfo(configBuilder);
 
     Optimove.initialize(app, configBuilder.build());
 
-    String inAppConsentStrategy = getStringConfigValue(packageName, resources, KEY_IN_APP_CONSENT_STRATEGY);
     if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
         OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
     }

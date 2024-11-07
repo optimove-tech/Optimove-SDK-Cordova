@@ -54,9 +54,17 @@ enum InAppConsentStrategy: String {
         };
 
 
-        if (configValues[optimoveMobileCredentialsKey] == nil) {
+        // First check: Standard initialization without optimobile
+        if configValues[optimoveMobileCredentialsKey] == nil &&
+           configValues[delayedInitializationEnable] == "false" {
             Optimove.initialize(with: builder.build())
+            return
+        }
 
+        // Second check: Delayed initialization with optimobile disabled
+        if configValues[delayedInitializationEnable] == "true" &&
+           configValues[delayedInitializationOptimobile] == "false" {
+            Optimove.initialize(with: builder.build())
             return
         }
 
