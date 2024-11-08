@@ -79,6 +79,13 @@ declare enum DeepLinkResolution {
 
 interface OptimoveSdk {
     /**
+     * Initializes the required credentials for Optimove and Optimobile
+     * when they are not known in advance, allowing for delayed setup.
+     * @param optimoveCredentials Optimove credentials
+     * @param optimobileCredentials Optimobile credentials
+     */
+    setCredentials: (optimoveCredentials: string, optimobileCredentials: string) => Promise<void>;
+    /**
      * Sets the User ID of the current user.
      * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
      * If you report both the user ID and the email, use {@link Optimove.registerUser(String, String)}

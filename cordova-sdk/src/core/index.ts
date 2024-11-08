@@ -121,6 +121,24 @@ interface HandlerMessage {
  }
 const Optimove = {
   /**
+   * Used in case a delayed initialization is needed
+   * @param optimoveCredentials Optimove credentials
+   * @param optimobileCredentials Optimobile credentials
+   */
+  setCredentials: (optimoveCredentials: string, optimobileCredentials: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      if (!isNonEmptyString(optimoveCredentials) && !isNonEmptyString(optimobileCredentials)) {
+        reject("Invalid credentials");
+        return;
+      }
+
+      cordova.exec(resolve, reject, "OptimoveSDKPlugin", "setCredentials", [
+        optimoveCredentials,
+        optimobileCredentials
+      ]);
+    });
+  },
+  /**
    * Sets the User ID of the current user.
    * Note: The user ID must be the same user ID that is passed to Optimove at the daily ETL
    * If you report both the user ID and the email, use {@link Optimove.registerUser(String, String)}

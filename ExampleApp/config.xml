@@ -35,4 +35,8 @@
 			<activity android:name="OptimoveMainActivity"/>
 		</edit-config>
 	</platform>
+	<platform name="ios">
+		<preference name="deployment-target" value="12.0" />
+		<preference name="SwiftVersion" value="5.0" />
+	</platform>
 </widget>

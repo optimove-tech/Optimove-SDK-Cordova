@@ -297,6 +297,20 @@ function inAppDeleteMessageFromInbox(): void {
   );
 }
 
+document.getElementById("delayed-initialization-button").addEventListener("click", delayedInitialization);
+
+function delayedInitialization(): void {
+  const optimoveCreds = (<HTMLInputElement>document.getElementById("text-area-optimove-creds")).value;
+  const optimobileCreds = (<HTMLInputElement>document.getElementById("text-area-optimobile-creds")).value;
+
+
+
+  Optimove.setCredentials(optimoveCreds, optimobileCreds);
+
+
+  success();
+}
+
 // HELPERS
 document
 .getElementById("text-area-clear")

@@ -29,6 +29,7 @@ import org.json.JSONObject;
 public class OptimoveSDKPlugin extends CordovaPlugin {
 
     private static final String SET_HANDLERS_CALLBACK_CONTEXT = "setHandlersCallBackContext";
+    private static final String SET_CREDENTIALS = "setCredentials";
     private static final String SET_USER_ID = "setUserId";
     private static final String SET_USER_EMAIL = "setUserEmail";
     private static final String REPORT_EVENT = "reportEvent";
@@ -65,6 +66,10 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
             case SET_HANDLERS_CALLBACK_CONTEXT:
                 setHandlersCallBackContext(args, callbackContext);
+                return true;
+
+            case SET_CREDENTIALS:
+                this.setCredentials(args, callbackContext);
                 return true;
 
             case SET_USER_ID:
@@ -158,6 +163,18 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
         }
     }
 
+    private void setCredentials(JSONArray args, CallbackContext callbackContext) {
+        try {
+            String optimoveCredentials = args.getString(0);
+            String optimobileCredentials = args.getString(1);
+
+            Optimove.getInstance().setCredentials(optimoveCredentials, optimobileCredentials);
+            callbackContext.success();
+        } catch (Exception e) {
+            callbackContext.error(e.getMessage());
+            e.printStackTrace();
+        }
+    }
     private void clearJsContext() {
         OptimoveSDKPlugin.jsCallbackContext = null;
     }

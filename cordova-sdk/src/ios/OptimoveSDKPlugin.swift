@@ -16,6 +16,10 @@ enum InAppConsentStrategy: String {
     private static let inAppConsentStrategy = "optimoveInAppConsentStrategy"
     private static let enableDeferredDeepLinking = "optimoveEnableDeferredDeepLinking"
     private static let cname = "optimoveDdlCname"
+    private static let delayedInitializationEnable = "delayedInitialization.enable"
+    private static let delayedInitializationRegion = "delayedInitialization.region"
+    private static let delayedInitializationOptimove = "delayedInitialization.featureSet.enableOptimove"
+    private static let delayedInitializationOptimobile = "delayedInitialization.featureSet.enableOptimobile"
 
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
@@ -50,9 +54,17 @@ enum InAppConsentStrategy: String {
         };
 
 
-        if (configValues[optimoveMobileCredentialsKey] == nil) {
+        // First check: Standard initialization without optimobile
+        if configValues[optimoveMobileCredentialsKey] == nil &&
+           configValues[delayedInitializationEnable] == "false" {
             Optimove.initialize(with: builder.build())
+            return
+        }
 
+        // Second check: Delayed initialization with optimobile disabled
+        if configValues[delayedInitializationEnable] == "true" &&
+           configValues[delayedInitializationOptimobile] == "false" {
+            Optimove.initialize(with: builder.build())
             return
         }
 
@@ -158,12 +170,62 @@ enum InAppConsentStrategy: String {
             }
         }
 
+        if let enableDelayedInitialization = configValues[delayedInitializationEnable],
+           Bool(enableDelayedInitialization) == true {
+
+            guard let optimoveRegion = configValues[delayedInitializationRegion], !optimoveRegion.isEmpty else {
+                return nil
+            }
+
+            guard let enableOptimove = configValues[delayedInitializationOptimove], !enableOptimove.isEmpty else {
+                return nil
+            }
+            guard let enableOptimobile = configValues[delayedInitializationOptimobile], !enableOptimobile.isEmpty else {
+                return nil
+            }
+
+
+            var featureSet: Feature = []
+            if Bool(enableOptimove) == true {
+                featureSet.insert(.optimove)
+            }
+            if Bool(enableOptimobile) == true {
+                featureSet.insert(.optimobile)
+            }
+
+            let region: OptimobileConfig.Region
+            switch optimoveRegion {
+            case "DEV":
+                region = .DEV
+            case "EU":
+                region = .EU
+            case "US":
+                region = .US
+            default:
+                print("Invalid region string: \(optimoveRegion)")
+                return nil
+            }
+
+            return OptimoveConfigBuilder(region: region, features: featureSet)
+        }
+
         let builder = OptimoveConfigBuilder(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
 
         return builder
     }
 
     // ========================== ASSOCIATION AND EVENTS ==========================
+
+    @objc(setCredentials:)
+    func setCredentials(command: CDVInvokedUrlCommand) {
+        let optimoveCredentials = command.arguments[0] as? String
+
+        let optimobileCredentials = command.arguments[1] as? String
+
+        Optimove.setCredentials(optimoveCredentials: optimoveCredentials, optimobileCredentials: optimobileCredentials)
+        let pluginResult = CDVPluginResult(status: .ok)
+        self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
+    }
 
     @objc(reportEvent:)
     func reportEvent(command: CDVInvokedUrlCommand) {
