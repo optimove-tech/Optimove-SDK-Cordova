@@ -39,7 +39,7 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String DELAYED_INITIALIZATION_ENABLE_OPTIMOVE = "delayedInitialization.featureSet.enableOptimove";
     private static final String DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE = "delayedInitialization.featureSet.enableOptimobile";
 
-    private static final String SDK_VERSION = "2.1.0";
+    private static final String SDK_VERSION = "2.2.0";
     private static final int RUNTIME_TYPE = 3;
     private static final int SDK_TYPE = 106;
 
@@ -61,18 +61,21 @@ public boolean onCreate() {
         String optimoveRegion = getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_REGION);
         OptimoveConfig.Region region = OptimoveConfig.Region.valueOf(optimoveRegion.toUpperCase());
         OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet();
+
             if (enableOptimove) {
                 featureSet.withOptimove();
             }
+
             if (enableOptimobile) {
                 featureSet.withOptimobile();
             }
+
         configBuilder = new OptimoveConfig.Builder(region, featureSet);
     } else {
-        if (optimoveCredentials == null && optimoveMobileCredentials == null) {
-            throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
-        }
-        configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
+            if (optimoveCredentials == null && optimoveMobileCredentials == null) {
+                throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
+            }
+            configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
     }
 
     if (!configBuilder.build().isOptimobileConfigured()) {
