@@ -165,8 +165,8 @@ public class OptimoveSDKPlugin extends CordovaPlugin {
 
     private void setCredentials(JSONArray args, CallbackContext callbackContext) {
         try {
-            String optimoveCredentials = args.getString(0);
-            String optimobileCredentials = args.getString(1);
+            String optimoveCredentials = args.getString(0).isEmpty() ? null : args.getString(0);
+            String optimobileCredentials = args.getString(1).isEmpty() ? null : args.getString(1);
 
             Optimove.getInstance().setCredentials(optimoveCredentials, optimobileCredentials);
             callbackContext.success();
