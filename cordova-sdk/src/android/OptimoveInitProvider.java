@@ -44,23 +44,23 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final int SDK_TYPE = 106;
 
     @Override
-public boolean onCreate() {
-    Application app = (Application) getContext().getApplicationContext();
-    String packageName = app.getPackageName();
-    Resources resources = app.getResources();
+    public boolean onCreate() {
+        Application app = (Application) getContext().getApplicationContext();
+        String packageName = app.getPackageName();
+        Resources resources = app.getResources();
 
-    String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
-    String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
-    boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_ENABLE));
-    boolean enableOptimove = Boolean.parseBoolean(getStringConfigValue(packageName, resources, DELAYED_INITIALIZATION_ENABLE_OPTIMOVE));
-    boolean enableOptimobile = Boolean.parseBoolean(getStringConfigValue(packageName, resources, DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE));
+        String optimoveCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_CREDENTIALS);
+        String optimoveMobileCredentials = getStringConfigValue(packageName, resources, KEY_OPTIMOVE_MOBILE_CREDENTIALS);
+        boolean enableDelayedInitialization = Boolean.parseBoolean(getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_ENABLE));
+        boolean enableOptimove = Boolean.parseBoolean(getStringConfigValue(packageName, resources, DELAYED_INITIALIZATION_ENABLE_OPTIMOVE));
+        boolean enableOptimobile = Boolean.parseBoolean(getStringConfigValue(packageName, resources, DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE));
 
-    OptimoveConfig.Builder configBuilder;
+        OptimoveConfig.Builder configBuilder;
 
-    if (enableDelayedInitialization) {
-        String optimoveRegion = getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_REGION);
-        OptimoveConfig.Region region = OptimoveConfig.Region.valueOf(optimoveRegion.toUpperCase());
-        OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet();
+        if (enableDelayedInitialization) {
+            String optimoveRegion = getStringConfigValue(packageName, resources, KEY_DELAYED_INITIALIZATION_REGION);
+            OptimoveConfig.Region region = OptimoveConfig.Region.valueOf(optimoveRegion.toUpperCase());
+            OptimoveConfig.FeatureSet featureSet = new OptimoveConfig.FeatureSet();
 
             if (enableOptimove) {
                 featureSet.withOptimove();
@@ -70,15 +70,15 @@ public boolean onCreate() {
                 featureSet.withOptimobile();
             }
 
-        configBuilder = new OptimoveConfig.Builder(region, featureSet);
-    } else {
+            configBuilder = new OptimoveConfig.Builder(region, featureSet);
+        } else {
             if (optimoveCredentials == null && optimoveMobileCredentials == null) {
                 throw new IllegalArgumentException("error: Invalid credentials! \n please provide at least one set of credentials");
             }
             configBuilder = new OptimoveConfig.Builder(optimoveCredentials, optimoveMobileCredentials);
-    }
+        }
 
-    if (!configBuilder.build().isOptimobileConfigured()) {
+        if (!configBuilder.build().isOptimobileConfigured()) {
             Optimove.initialize(app, configBuilder.build());
             return true;
         }
@@ -101,19 +101,19 @@ public boolean onCreate() {
             configBuilder.setPushSmallIconId(iconResource);
         }
 
-    overrideInstallInfo(configBuilder);
+        overrideInstallInfo(configBuilder);
 
-    Optimove.initialize(app, configBuilder.build());
+        Optimove.initialize(app, configBuilder.build());
 
-    if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
-        OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
+        if (IN_APP_AUTO_ENROLL.equals(inAppConsentStrategy) || IN_APP_EXPLICIT_BY_USER.equals(inAppConsentStrategy)) {
+            OptimoveInApp.getInstance().setDeepLinkHandler(new OptimoveSDKPlugin.InAppDeepLinkHandler());
+        }
+
+        Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
+        OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
+
+        return true;
     }
-
-    Optimove.getInstance().setPushActionHandler(new PushReceiver.PushActionHandler());
-    OptimoveInApp.getInstance().setOnInboxUpdated(new OptimoveSDKPlugin.InboxUpdatedHandler());
-
-    return true;
-}
 
 
     private void overrideInstallInfo(OptimoveConfig.Builder configBuilder) {
