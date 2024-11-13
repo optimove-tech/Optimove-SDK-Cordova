@@ -125,7 +125,7 @@ const Optimove = {
    * @param optimoveCredentials Optimove credentials
    * @param optimobileCredentials Optimobile credentials
    */
-  setCredentials: (optimoveCredentials: string, optimobileCredentials: string): Promise<void> => {
+  setCredentials: (optimoveCredentials: string | null, optimobileCredentials: string | null): Promise<void> => {
     return new Promise((resolve, reject) => {
       if (!isNonEmptyString(optimoveCredentials) && !isNonEmptyString(optimobileCredentials)) {
         reject("Invalid credentials");
