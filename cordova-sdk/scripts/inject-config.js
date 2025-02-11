@@ -163,8 +163,8 @@ function createJsonWithDefaultValues(
         isString(android.pushNotificationIconName)
             ? android.pushNotificationIconName
             : "",
-    DELAYED_INITIALIZATION_ENABLE_OPTIMOVE: delayedInitialization?.featureSet && featureSet.enableOptimove === true,
-    DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE: delayedInitialization?.featureSet && featureSet.enableOptimobile === true,
+    DELAYED_INITIALIZATION_ENABLE_OPTIMOVE: delayedInitialization?.featureSet && delayedInitialization.featureSet.enableOptimove === true,
+    DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE: delayedInitialization?.featureSet && delayedInitialization.featureSet.enableOptimobile === true,
   };
 }
 
