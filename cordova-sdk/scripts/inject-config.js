@@ -63,12 +63,12 @@ function isValidConfig(config) {
     console.error("Optimove: optimove.json not a valid JSON object");
     return false;
   }
-  if (
-    (isEmpty(config.optimoveCredentials) ||
+  if (!config.delayedInitialization &&
+    ((isEmpty(config.optimoveCredentials) ||
       !isString(config.optimoveCredentials)) &&
     (isEmpty(config.optimoveMobileCredentials) ||
-      !isString(config.optimoveMobileCredentials))
-  ) {
+      !isString(config.optimoveMobileCredentials))))
+  {
     console.error(
       "Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json"
     );
