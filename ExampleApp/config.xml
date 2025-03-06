@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.optimove.cordova.ExampleApp"
+<widget id="com.optimove.cordova.Example"
 	version="1.0.0"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns="http://www.w3.org/ns/widgets"
@@ -27,7 +27,7 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="https" android:host="cordova-example-optimove.lnk.click"/>
+				<data android:scheme="https" android:host="opticordova.lnk.click"/>
 			</intent-filter>
 		</config-file>
 
