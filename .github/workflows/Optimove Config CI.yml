@@ -22,7 +22,7 @@ jobs:
   test-configurations:
     name: Test Optimove Configurations
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
