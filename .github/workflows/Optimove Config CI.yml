@@ -1,4 +1,4 @@
-name: Optimove Config CI
+name: Optimove Config Validation
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  validate-config:
     runs-on: ubuntu-latest
     
     steps:
@@ -19,66 +19,42 @@ jobs:
       with:
         node-version: '18'
     
-    - name: Check repository structure
+    - name: Install required dependencies for injection script
       run: |
-        echo "Repository contents:"
-        ls -la
-        if [ -d "ExampleApp" ]; then
-          echo "ExampleApp directory found"
-        else
-          echo "Error: ExampleApp directory not found"
-          exit 1
-        fi
-        
-        if [ -d "cordova-sdk" ]; then
-          echo "cordova-sdk directory found"
-        else  
-          echo "Error: cordova-sdk directory not found"
-          exit 1
-        fi
-        
-    - name: Install Cordova
-      run: npm install -g cordova
-    
-    - name: Install global dependencies
-      run: |
-        npm install -g cordova-cli
-        npm install -g ios-sim  # For iOS platform if needed
+        npm install elementtree
     
     - name: Check for optimove.json
       id: check-optimove-json
       working-directory: ./ExampleApp
       run: |
         if [ -f "optimove.json" ]; then
-          echo "Optimove.json exists, will use the existing file"
+          echo "Optimove.json exists, using existing file"
           echo "optimove_json_exists=true" >> $GITHUB_OUTPUT
         else
-          echo "Optimove.json not found, will create from example"
+          echo "Optimove.json not found, creating from example"
           echo "optimove_json_exists=false" >> $GITHUB_OUTPUT
         fi
     
     - name: Copy from example file if exists
-      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('ExampleApp/Example - optimove.json') != ''
+      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false'
       working-directory: ./ExampleApp
       run: |
-        cp "Example - optimove.json" optimove.json
-        echo "Created optimove.json from example file"
-    
-    - name: Create default optimove.json if no example exists
-      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('ExampleApp/Example - optimove.json') == ''
-      working-directory: ./ExampleApp
-      run: |
-        cat > optimove.json << EOF
-        {
-            "optimoveCredentials": "YOUR_OPTIMOVE_CREDENTIALS",
-            "optimoveMobileCredentials": "YOUR_OPTIMOVE_MOBILE_CREDENTIALS",
-            "inAppConsentStrategy": "in-app-disabled",
-            "android": {
-                "pushNotificationIconName": "ic_notification"
-            }
-        }
-        EOF
-        echo "Created default optimove.json file"
+        if [ -f "Example - optimove.json" ]; then
+          cp "Example - optimove.json" optimove.json
+          echo "Created optimove.json from example file"
+        else
+          cat > optimove.json << EOF
+          {
+              "optimoveCredentials": "TEST_OPTIMOVE_CREDENTIALS",
+              "optimoveMobileCredentials": "TEST_OPTIMOBILE_CREDENTIALS",
+              "inAppConsentStrategy": "in-app-disabled",
+              "android": {
+                  "pushNotificationIconName": "ic_notification"
+              }
+          }
+          EOF
+          echo "Created default optimove.json file"
+        fi
     
     - name: Validate JSON syntax
       working-directory: ./ExampleApp
@@ -90,109 +66,111 @@ jobs:
           exit 1
         fi
     
-    - name: Verify optimove.json content
-      working-directory: ./ExampleApp
+    - name: Create minimal test context for injection
       run: |
-        # Check if at least one credential is present
-        OPTIMOVE_CREDS=$(jq -r '.optimoveCredentials' optimove.json)
-        OPTIMOBILE_CREDS=$(jq -r '.optimoveMobileCredentials' optimove.json)
+        # Create a simple test directory structure
+        mkdir -p test/platforms/android/app/src/main/res/values
+        mkdir -p test/platforms/ios/TestApp/Resources
         
-        if [[ "$OPTIMOVE_CREDS" == "null" || "$OPTIMOVE_CREDS" == "" ]] && [[ "$OPTIMOBILE_CREDS" == "null" || "$OPTIMOBILE_CREDS" == "" ]]; then
-          # Check if delayed initialization is enabled and properly configured
-          DELAYED_INIT=$(jq -r '.delayedInitialization.enable' optimove.json)
+        # Create a minimal test context object
+        cat > test-context.js << EOF
+        module.exports = {
+          opts: {
+            projectRoot: '${GITHUB_WORKSPACE}/test',
+            platforms: ['android', 'ios']
+          }
+        };
+        EOF
+    
+    - name: Run inject-config.js directly
+      run: |
+        # Create a test driver script
+        cat > test-inject.js << EOF
+        const injectConfig = require('./cordova-sdk/scripts/inject-config.js');
+        const context = require('./test-context.js');
+        
+        try {
+          // Copy optimove.json to test directory
+          const fs = require('fs');
+          fs.copyFileSync('ExampleApp/optimove.json', 'test/optimove.json');
           
-          if [[ "$DELAYED_INIT" != "true" ]]; then
-            echo "Error: Neither optimoveCredentials nor optimoveMobileCredentials are provided, and delayed initialization is not enabled"
-            exit 1
-          else
-            echo "Delayed initialization is enabled, checking required fields..."
-            
-            REGION=$(jq -r '.delayedInitialization.region' optimove.json)
-            ENABLE_OPTIMOVE=$(jq -r '.delayedInitialization.featureSet.enableOptimove' optimove.json)
-            ENABLE_OPTIMOBILE=$(jq -r '.delayedInitialization.featureSet.enableOptimobile' optimove.json)
-            
-            if [[ "$REGION" == "null" || "$REGION" == "" ]]; then
-              echo "Error: delayedInitialization.region is required when delayed initialization is enabled"
-              exit 1
-            fi
-            
-            if [[ "$ENABLE_OPTIMOVE" != "true" && "$ENABLE_OPTIMOBILE" != "true" ]]; then
-              echo "Error: At least one feature (optimove or optimobile) must be enabled in delayedInitialization.featureSet"
-              exit 1
-            fi
-            
-            echo "Delayed initialization configuration appears valid"
-          fi
-        else
-          echo "Credentials validation passed"
-        fi
+          // Run the injection script
+          console.log('Running injection script...');
+          const result = injectConfig(context);
+          
+          // Check the result
+          if (result === false) {
+            console.error('Injection script returned false');
+            process.exit(1);
+          }
+          
+          console.log('Injection script completed successfully');
+        } catch (error) {
+          console.error('Error running injection script:', error);
+          process.exit(1);
+        }
+        EOF
         
-        # Validate inAppConsentStrategy if present
-        IN_APP_STRATEGY=$(jq -r '.inAppConsentStrategy' optimove.json)
-        if [[ "$IN_APP_STRATEGY" != "null" && "$IN_APP_STRATEGY" != "" ]]; then
-          if [[ "$IN_APP_STRATEGY" != "auto-enroll" && "$IN_APP_STRATEGY" != "explicit-by-user" && "$IN_APP_STRATEGY" != "in-app-disabled" ]]; then
-            echo "Error: Invalid inAppConsentStrategy: '$IN_APP_STRATEGY'. Valid options are: auto-enroll, explicit-by-user, in-app-disabled"
-            exit 1
-          fi
-        fi
-        
-        echo "optimove.json content validation successful"
-    
-    - name: Check for Google Services JSON
-      working-directory: ./ExampleApp
-      run: |
-        if [ -f "google-services.json" ]; then
-          echo "google-services.json found, FCM will be configured"
-        else
-          echo "Warning: google-services.json not found. Push notifications may not work properly."
-          echo "This is not a failure condition, continuing build..."
-        fi
-    
-    - name: Install ExampleApp dependencies
-      working-directory: ./ExampleApp
-      run: |
-        # Make sure we don't try to install from npm
-        sed -i 's#"@optimove-inc/cordova-sdk": ".*"#"@optimove-inc/cordova-sdk": "file:../cordova-sdk"#g' package.json
-        cat package.json | grep optimove
-        npm install
-    
-    - name: Run Cordova prepare
-      id: cordova-prepare
-      working-directory: ./ExampleApp
-      run: |
-        echo "Running cordova prepare..."
-        cordova prepare
-      continue-on-error: false
+        # Run the test driver
+        node test-inject.js
     
     - name: Verify config files were created
-      working-directory: ./ExampleApp
       run: |
-        if [ -d "platforms/android" ]; then
-          if [ -f "platforms/android/app/src/main/res/values/optimove.xml" ]; then
-            echo "Android platform: Optimove config successfully injected"
-            cat platforms/android/app/src/main/res/values/optimove.xml
-          else
-            echo "Error: Android platform: Optimove config file was not created"
-            ls -la platforms/android/app/src/main/res/values/
-            exit 1
-          fi
+        echo "Checking for Android config..."
+        if [ -f "test/platforms/android/app/src/main/res/values/optimove.xml" ]; then
+          echo "Android: optimove.xml was created successfully"
+          cat test/platforms/android/app/src/main/res/values/optimove.xml
         else
-          echo "Android platform not added yet, skipping check"
+          echo "Error: Android config file was not created"
+          ls -la test/platforms/android/app/src/main/res/values/
+          exit 1
         fi
         
-        if [ -d "platforms/ios" ]; then
-          # Get the iOS project name from directory
-          TARGET_NAME=$(ls -d platforms/ios/*.xcodeproj | sed 's/.xcodeproj//' | sed 's/platforms\/ios\///')
-          if [ -f "platforms/ios/$TARGET_NAME/Resources/optimove.plist" ]; then
-            echo "iOS platform: Optimove config successfully injected"
-            cat "platforms/ios/$TARGET_NAME/Resources/optimove.plist"
-          else
-            echo "Error: iOS platform: Optimove config file was not created"
-            ls -la "platforms/ios/$TARGET_NAME/Resources/"
-            exit 1
-          fi
+        echo "Checking for iOS config..."
+        if [ -f "test/platforms/ios/TestApp/Resources/optimove.plist" ]; then
+          echo "iOS: optimove.plist was created successfully"
+          cat test/platforms/ios/TestApp/Resources/optimove.plist
         else
-          echo "iOS platform not added yet, skipping check"
+          echo "Error: iOS config file was not created"
+          ls -la test/platforms/ios/TestApp/Resources/
+          exit 1
         fi
+    
+    - name: Test with invalid configuration
+      run: |
+        # Create an invalid optimove.json (missing both credentials)
+        cat > test/optimove.json << EOF
+        {
+            "optimoveCredentials": "",
+            "optimoveMobileCredentials": "",
+            "inAppConsentStrategy": "in-app-disabled"
+        }
+        EOF
         
-        echo "Configuration was successfully injected into all platforms"
+        # Create a test script expecting failure
+        cat > test-invalid.js << EOF
+        const injectConfig = require('./cordova-sdk/scripts/inject-config.js');
+        const context = require('./test-context.js');
+        
+        try {
+          // Run the injection script
+          console.log('Running injection script with invalid config...');
+          const result = injectConfig(context);
+          
+          // This should fail, so if we get here, that's unexpected
+          console.error('Injection script succeeded with invalid config!');
+          process.exit(1);
+        } catch (error) {
+          console.log('Expected error occurred:', error.message);
+          // This is expected, so exit with success
+          process.exit(0);
+        }
+        EOF
+        
+        # Run the test script, expecting non-zero exit
+        if node test-invalid.js; then
+          echo "Error: Injection script accepted invalid configuration"
+          exit 1
+        else
+          echo "Success: Injection script correctly rejected invalid configuration"
+        fi
