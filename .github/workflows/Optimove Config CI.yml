@@ -49,7 +49,7 @@ EOT
     
     - name: Create test script for Android only
       run: |
-        cat > test-android-config.js << 'EOT'
+        cat > test-android-config.js << 'EOF'
 const fs = require('fs');
 const path = require('path');
 
@@ -118,7 +118,7 @@ fs.writeFileSync('test-android-simplified.js', simplifiedScript);
 // Run the actual test
 console.log("Running Android config test...");
 require('./test-android-simplified.js');
-EOT
+EOF
 
     - name: Run Android config test
       run: |
