@@ -20,18 +20,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
+          # Removed the cache option since there's no lock file
 
       - name: Install Dependencies
         run: npm install elementtree
 
       - name: Test Android Configuration
-        run: node test-config.js --android
+        run: node test-config.js --android --verbose
         id: android-test
         continue-on-error: true
 
       - name: Test iOS Configuration
-        run: node test-config.js --ios
+        run: node test-config.js --ios --verbose
         id: ios-test
         continue-on-error: true
 
