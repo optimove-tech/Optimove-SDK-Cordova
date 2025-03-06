@@ -18,8 +18,23 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+    
+    - name: Check repository structure
+      run: |
+        echo "Repository contents:"
+        ls -la
+        if [ -d "ExampleApp" ]; then
+          echo "ExampleApp directory found"
+        else
+          echo "Error: ExampleApp directory not found"
+          exit 1
+        fi
         
+    - name: Change to ExampleApp directory
+      run: cd ExampleApp
+      
     - name: Install dependencies
+      working-directory: ./ExampleApp
       run: npm ci || npm install
       
     - name: Install Cordova
@@ -27,6 +42,7 @@ jobs:
     
     - name: Check for optimove.json
       id: check-optimove-json
+      working-directory: ./ExampleApp
       run: |
         if [ -f "optimove.json" ]; then
           echo "Optimove.json exists, will use the existing file"
@@ -37,13 +53,15 @@ jobs:
         fi
     
     - name: Copy from example file if exists
-      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('Example - optimove.json') != ''
+      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('ExampleApp/Example - optimove.json') != ''
+      working-directory: ./ExampleApp
       run: |
         cp "Example - optimove.json" optimove.json
         echo "Created optimove.json from example file"
     
     - name: Create default optimove.json if no example exists
-      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('Example - optimove.json') == ''
+      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('ExampleApp/Example - optimove.json') == ''
+      working-directory: ./ExampleApp
       run: |
         cat > optimove.json << EOF
         {
@@ -58,6 +76,7 @@ jobs:
         echo "Created default optimove.json file"
     
     - name: Validate JSON syntax
+      working-directory: ./ExampleApp
       run: |
         if jq empty optimove.json; then
           echo "optimove.json is valid JSON"
@@ -67,6 +86,7 @@ jobs:
         fi
     
     - name: Verify optimove.json content
+      working-directory: ./ExampleApp
       run: |
         # Check if at least one credential is present
         OPTIMOVE_CREDS=$(jq -r '.optimoveCredentials' optimove.json)
@@ -114,6 +134,7 @@ jobs:
         echo "optimove.json content validation successful"
     
     - name: Check for Google Services JSON
+      working-directory: ./ExampleApp
       run: |
         if [ -f "google-services.json" ]; then
           echo "google-services.json found, FCM will be configured"
@@ -124,11 +145,13 @@ jobs:
     
     - name: Run Cordova prepare
       id: cordova-prepare
+      working-directory: ./ExampleApp
       run: |
         cordova prepare
       continue-on-error: false
     
     - name: Verify config files were created
+      working-directory: ./ExampleApp
       run: |
         if [ -d "platforms/android" ]; then
           if [ -f "platforms/android/app/src/main/res/values/optimove.xml" ]; then
