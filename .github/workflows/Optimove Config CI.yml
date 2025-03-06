@@ -1,0 +1,153 @@
+name: Optimove Config CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm ci || npm install
+      
+    - name: Install Cordova
+      run: npm install -g cordova
+    
+    - name: Check for optimove.json
+      id: check-optimove-json
+      run: |
+        if [ -f "optimove.json" ]; then
+          echo "Optimove.json exists, will use the existing file"
+          echo "optimove_json_exists=true" >> $GITHUB_OUTPUT
+        else
+          echo "Optimove.json not found, will create from example"
+          echo "optimove_json_exists=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Copy from example file if exists
+      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('Example - optimove.json') != ''
+      run: |
+        cp "Example - optimove.json" optimove.json
+        echo "Created optimove.json from example file"
+    
+    - name: Create default optimove.json if no example exists
+      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false' && hashFiles('Example - optimove.json') == ''
+      run: |
+        cat > optimove.json << EOF
+        {
+            "optimoveCredentials": "YOUR_OPTIMOVE_CREDENTIALS",
+            "optimoveMobileCredentials": "YOUR_OPTIMOVE_MOBILE_CREDENTIALS",
+            "inAppConsentStrategy": "in-app-disabled",
+            "android": {
+                "pushNotificationIconName": "ic_notification"
+            }
+        }
+        EOF
+        echo "Created default optimove.json file"
+    
+    - name: Validate JSON syntax
+      run: |
+        if jq empty optimove.json; then
+          echo "optimove.json is valid JSON"
+        else
+          echo "Error: optimove.json is not valid JSON"
+          exit 1
+        fi
+    
+    - name: Verify optimove.json content
+      run: |
+        # Check if at least one credential is present
+        OPTIMOVE_CREDS=$(jq -r '.optimoveCredentials' optimove.json)
+        OPTIMOBILE_CREDS=$(jq -r '.optimoveMobileCredentials' optimove.json)
+        
+        if [[ "$OPTIMOVE_CREDS" == "null" || "$OPTIMOVE_CREDS" == "" ]] && [[ "$OPTIMOBILE_CREDS" == "null" || "$OPTIMOBILE_CREDS" == "" ]]; then
+          # Check if delayed initialization is enabled and properly configured
+          DELAYED_INIT=$(jq -r '.delayedInitialization.enable' optimove.json)
+          
+          if [[ "$DELAYED_INIT" != "true" ]]; then
+            echo "Error: Neither optimoveCredentials nor optimoveMobileCredentials are provided, and delayed initialization is not enabled"
+            exit 1
+          else
+            echo "Delayed initialization is enabled, checking required fields..."
+            
+            REGION=$(jq -r '.delayedInitialization.region' optimove.json)
+            ENABLE_OPTIMOVE=$(jq -r '.delayedInitialization.featureSet.enableOptimove' optimove.json)
+            ENABLE_OPTIMOBILE=$(jq -r '.delayedInitialization.featureSet.enableOptimobile' optimove.json)
+            
+            if [[ "$REGION" == "null" || "$REGION" == "" ]]; then
+              echo "Error: delayedInitialization.region is required when delayed initialization is enabled"
+              exit 1
+            fi
+            
+            if [[ "$ENABLE_OPTIMOVE" != "true" && "$ENABLE_OPTIMOBILE" != "true" ]]; then
+              echo "Error: At least one feature (optimove or optimobile) must be enabled in delayedInitialization.featureSet"
+              exit 1
+            fi
+            
+            echo "Delayed initialization configuration appears valid"
+          fi
+        else
+          echo "Credentials validation passed"
+        fi
+        
+        # Validate inAppConsentStrategy if present
+        IN_APP_STRATEGY=$(jq -r '.inAppConsentStrategy' optimove.json)
+        if [[ "$IN_APP_STRATEGY" != "null" && "$IN_APP_STRATEGY" != "" ]]; then
+          if [[ "$IN_APP_STRATEGY" != "auto-enroll" && "$IN_APP_STRATEGY" != "explicit-by-user" && "$IN_APP_STRATEGY" != "in-app-disabled" ]]; then
+            echo "Error: Invalid inAppConsentStrategy: '$IN_APP_STRATEGY'. Valid options are: auto-enroll, explicit-by-user, in-app-disabled"
+            exit 1
+          fi
+        fi
+        
+        echo "optimove.json content validation successful"
+    
+    - name: Check for Google Services JSON
+      run: |
+        if [ -f "google-services.json" ]; then
+          echo "google-services.json found, FCM will be configured"
+        else
+          echo "Warning: google-services.json not found. Push notifications may not work properly."
+          echo "This is not a failure condition, continuing build..."
+        fi
+    
+    - name: Run Cordova prepare
+      id: cordova-prepare
+      run: |
+        cordova prepare
+      continue-on-error: false
+    
+    - name: Verify config files were created
+      run: |
+        if [ -d "platforms/android" ]; then
+          if [ -f "platforms/android/app/src/main/res/values/optimove.xml" ]; then
+            echo "Android platform: Optimove config successfully injected"
+          else
+            echo "Error: Android platform: Optimove config file was not created"
+            exit 1
+          fi
+        fi
+        
+        if [ -d "platforms/ios" ]; then
+          # Get the iOS project name from directory
+          TARGET_NAME=$(ls -d platforms/ios/*.xcodeproj | sed 's/.xcodeproj//' | sed 's/platforms\/ios\///')
+          if [ -f "platforms/ios/$TARGET_NAME/Resources/optimove.plist" ]; then
+            echo "iOS platform: Optimove config successfully injected"
+          else
+            echo "Error: iOS platform: Optimove config file was not created"
+            exit 1
+          fi
+        fi
+        
+        echo "Configuration was successfully injected into all platforms"
