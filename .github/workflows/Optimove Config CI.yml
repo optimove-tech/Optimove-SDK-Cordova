@@ -30,15 +30,20 @@ jobs:
           exit 1
         fi
         
-    - name: Change to ExampleApp directory
-      run: cd ExampleApp
-      
-    - name: Install dependencies
-      working-directory: ./ExampleApp
-      run: npm ci || npm install
-      
+        if [ -d "cordova-sdk" ]; then
+          echo "cordova-sdk directory found"
+        else  
+          echo "Error: cordova-sdk directory not found"
+          exit 1
+        fi
+        
     - name: Install Cordova
       run: npm install -g cordova
+    
+    - name: Install global dependencies
+      run: |
+        npm install -g cordova-cli
+        npm install -g ios-sim  # For iOS platform if needed
     
     - name: Check for optimove.json
       id: check-optimove-json
@@ -143,10 +148,19 @@ jobs:
           echo "This is not a failure condition, continuing build..."
         fi
     
+    - name: Install ExampleApp dependencies
+      working-directory: ./ExampleApp
+      run: |
+        # Make sure we don't try to install from npm
+        sed -i 's#"@optimove-inc/cordova-sdk": ".*"#"@optimove-inc/cordova-sdk": "file:../cordova-sdk"#g' package.json
+        cat package.json | grep optimove
+        npm install
+    
     - name: Run Cordova prepare
       id: cordova-prepare
       working-directory: ./ExampleApp
       run: |
+        echo "Running cordova prepare..."
         cordova prepare
       continue-on-error: false
     
@@ -156,10 +170,14 @@ jobs:
         if [ -d "platforms/android" ]; then
           if [ -f "platforms/android/app/src/main/res/values/optimove.xml" ]; then
             echo "Android platform: Optimove config successfully injected"
+            cat platforms/android/app/src/main/res/values/optimove.xml
           else
             echo "Error: Android platform: Optimove config file was not created"
+            ls -la platforms/android/app/src/main/res/values/
             exit 1
           fi
+        else
+          echo "Android platform not added yet, skipping check"
         fi
         
         if [ -d "platforms/ios" ]; then
@@ -167,10 +185,14 @@ jobs:
           TARGET_NAME=$(ls -d platforms/ios/*.xcodeproj | sed 's/.xcodeproj//' | sed 's/platforms\/ios\///')
           if [ -f "platforms/ios/$TARGET_NAME/Resources/optimove.plist" ]; then
             echo "iOS platform: Optimove config successfully injected"
+            cat "platforms/ios/$TARGET_NAME/Resources/optimove.plist"
           else
             echo "Error: iOS platform: Optimove config file was not created"
+            ls -la "platforms/ios/$TARGET_NAME/Resources/"
             exit 1
           fi
+        else
+          echo "iOS platform not added yet, skipping check"
         fi
         
         echo "Configuration was successfully injected into all platforms"
