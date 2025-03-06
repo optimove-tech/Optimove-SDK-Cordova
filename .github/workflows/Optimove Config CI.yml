@@ -1,176 +1,79 @@
-name: Optimove Config Validation
+name: Optimove Configuration Tests
 
 on:
   push:
-    branches: [ main, fix/241695-addCI ]
+    branches:
+      - main
+      - master
+    paths:
+      - 'cordova-sdk/scripts/**'
+      - 'ExampleApp/**'
+      - '**.json'
+      - '**.xml'
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+    paths:
+      - 'cordova-sdk/scripts/**'
+      - 'ExampleApp/**'
+      - '**.json'
+      - '**.xml'
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
-  validate-config:
+  test-configurations:
+    name: Test Optimove Configurations
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-    
-    - name: Install required dependencies for injection script
-      run: |
-        npm install elementtree
-    
-    - name: Check for optimove.json
-      id: check-optimove-json
-      working-directory: ./ExampleApp
-      run: |
-        if [ -f "optimove.json" ]; then
-          echo "Optimove.json exists, using existing file"
-          echo "optimove_json_exists=true" >> $GITHUB_OUTPUT
-        else
-          echo "Optimove.json not found, creating from example"
-          echo "optimove_json_exists=false" >> $GITHUB_OUTPUT
-        fi
-    
-    - name: Copy from example file if exists
-      if: steps.check-optimove-json.outputs.optimove_json_exists == 'false'
-      working-directory: ./ExampleApp
-      run: |
-        if [ -f "Example - optimove.json" ]; then
-          cp "Example - optimove.json" optimove.json
-          echo "Created optimove.json from example file"
-        else
-          cat > optimove.json << 'EOT'
-        {
-            "optimoveCredentials": "TEST_OPTIMOVE_CREDENTIALS",
-            "optimoveMobileCredentials": "TEST_OPTIMOBILE_CREDENTIALS",
-            "inAppConsentStrategy": "in-app-disabled",
-            "android": {
-                "pushNotificationIconName": "ic_notification"
-            }
-        }
-        EOT
-          echo "Created default optimove.json file"
-        fi
-    
-    - name: Validate JSON syntax
-      working-directory: ./ExampleApp
-      run: |
-        if jq empty optimove.json; then
-          echo "optimove.json is valid JSON"
-        else
-          echo "Error: optimove.json is not valid JSON"
-          exit 1
-        fi
-    
-    - name: Create minimal test context for injection
-      run: |
-        # Create a simple test directory structure
-        mkdir -p test/platforms/android/app/src/main/res/values
-        mkdir -p test/platforms/ios/TestApp/Resources
-        
-        # Create a minimal test context object
-        cat > test-context.js << EOF
-        module.exports = {
-          opts: {
-            projectRoot: '${GITHUB_WORKSPACE}/test',
-            platforms: ['android', 'ios']
-          }
-        };
-        EOF
-    
-    - name: Run inject-config.js directly
-      run: |
-        # Create a test driver script
-        cat > test-inject.js << EOF
-        const injectConfig = require('./cordova-sdk/scripts/inject-config.js');
-        const context = require('./test-context.js');
-        
-        try {
-          // Copy optimove.json to test directory
-          const fs = require('fs');
-          fs.copyFileSync('ExampleApp/optimove.json', 'test/optimove.json');
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install elementtree
+
+      - name: Test Android Configuration
+        run: node test-config.js --android
+        id: android-test
+        continue-on-error: true
+
+      - name: Test iOS Configuration
+        run: node test-config.js --ios
+        id: ios-test
+        continue-on-error: true
+
+      - name: Generate Test Report
+        run: |
+          echo "## Optimove Configuration Test Results" >> $GITHUB_STEP_SUMMARY
           
-          // Run the injection script
-          console.log('Running injection script...');
-          const result = injectConfig(context);
+          echo "### Android Tests" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.android-test.outcome }}" == "success" ]; then
+            echo "✅ All Android configuration tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Android configuration tests failed" >> $GITHUB_STEP_SUMMARY
+          fi
           
-          // Check the result
-          if (result === false) {
-            console.error('Injection script returned false');
-            process.exit(1);
-          }
+          echo "### iOS Tests" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.ios-test.outcome }}" == "success" ]; then
+            echo "✅ All iOS configuration tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ iOS configuration tests failed" >> $GITHUB_STEP_SUMMARY
+          fi
           
-          console.log('Injection script completed successfully');
-        } catch (error) {
-          console.error('Error running injection script:', error);
-          process.exit(1);
-        }
-        EOF
-        
-        # Run the test driver
-        node test-inject.js
-    
-    - name: Verify config files were created
-      run: |
-        echo "Checking for Android config..."
-        if [ -f "test/platforms/android/app/src/main/res/values/optimove.xml" ]; then
-          echo "Android: optimove.xml was created successfully"
-          cat test/platforms/android/app/src/main/res/values/optimove.xml
-        else
-          echo "Error: Android config file was not created"
-          ls -la test/platforms/android/app/src/main/res/values/
-          exit 1
-        fi
-        
-        echo "Checking for iOS config..."
-        if [ -f "test/platforms/ios/TestApp/Resources/optimove.plist" ]; then
-          echo "iOS: optimove.plist was created successfully"
-          cat test/platforms/ios/TestApp/Resources/optimove.plist
-        else
-          echo "Error: iOS config file was not created"
-          ls -la test/platforms/ios/TestApp/Resources/
-          exit 1
-        fi
-    
-    - name: Test with invalid configuration
-      run: |
-        # Create an invalid optimove.json (missing both credentials)
-        cat > test/optimove.json << EOF
-        {
-            "optimoveCredentials": "",
-            "optimoveMobileCredentials": "",
-            "inAppConsentStrategy": "in-app-disabled"
-        }
-        EOF
-        
-        # Create a test script expecting failure
-        cat > test-invalid.js << EOF
-        const injectConfig = require('./cordova-sdk/scripts/inject-config.js');
-        const context = require('./test-context.js');
-        
-        try {
-          // Run the injection script
-          console.log('Running injection script with invalid config...');
-          const result = injectConfig(context);
-          
-          // This should fail, so if we get here, that's unexpected
-          console.error('Injection script succeeded with invalid config!');
-          process.exit(1);
-        } catch (error) {
-          console.log('Expected error occurred:', error.message);
-          // This is expected, so exit with success
-          process.exit(0);
-        }
-        EOF
-        
-        # Run the test script, expecting non-zero exit
-        if node test-invalid.js; then
-          echo "Error: Injection script accepted invalid configuration"
-          exit 1
-        else
-          echo "Success: Injection script correctly rejected invalid configuration"
-        fi
+          # Overall status
+          if [ "${{ steps.android-test.outcome }}" == "success" ] && [ "${{ steps.ios-test.outcome }}" == "success" ]; then
+            echo "### ✅ All tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ One or more tests failed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Check Test Results
+        run: |
+          if [ "${{ steps.android-test.outcome }}" != "success" ] || [ "${{ steps.ios-test.outcome }}" != "success" ]; then
+            echo "One or more configuration tests failed"
+            exit 1
+          fi
