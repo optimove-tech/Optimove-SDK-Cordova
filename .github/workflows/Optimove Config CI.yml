@@ -43,16 +43,16 @@ jobs:
           cp "Example - optimove.json" optimove.json
           echo "Created optimove.json from example file"
         else
-          cat > optimove.json << EOF
-          {
-              "optimoveCredentials": "TEST_OPTIMOVE_CREDENTIALS",
-              "optimoveMobileCredentials": "TEST_OPTIMOBILE_CREDENTIALS",
-              "inAppConsentStrategy": "in-app-disabled",
-              "android": {
-                  "pushNotificationIconName": "ic_notification"
-              }
-          }
-          EOF
+          cat > optimove.json << 'EOT'
+        {
+            "optimoveCredentials": "TEST_OPTIMOVE_CREDENTIALS",
+            "optimoveMobileCredentials": "TEST_OPTIMOBILE_CREDENTIALS",
+            "inAppConsentStrategy": "in-app-disabled",
+            "android": {
+                "pushNotificationIconName": "ic_notification"
+            }
+        }
+        EOT
           echo "Created default optimove.json file"
         fi
     
