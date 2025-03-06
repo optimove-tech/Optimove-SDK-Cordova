@@ -22,6 +22,19 @@ In this guide we will discuss the steps to implement the Optimove Cordova SDK fo
 3. [Deferred Deep Linking](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/deferred-deep-linking)
 4. [Testing](https://github.com/optimove-tech/Optimove-SDK-Cordova/wiki/testing-troubleshooting)
 
+### Config Testing
+run the following command in the route of the project
+
+`node test-config.js`
+
+the following flags can be added
+
+--android
+--ios
+--no-cleanup
+--clean
+--verbose
+
 > **NOTE**:
 To unlock these capabilities, you will need to have added the relevant OptiMobile channels to your Optimove package. If you can’t see this feature in your Optimove instance, contact your CSM to find out more.
 

@@ -2,7 +2,7 @@ name: Optimove Configuration Tests
 
 on:
   push:
-    branches: [ main, master, fix/241695-addCI ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
