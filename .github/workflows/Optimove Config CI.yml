@@ -2,27 +2,16 @@ name: Optimove Configuration Tests
 
 on:
   push:
-    branches:
-      - main
-      - fix/241695-addCI
-    paths:
-      - 'cordova-sdk/scripts/**'
-      - 'ExampleApp/**'
-      - '**.json'
-      - '**.xml'
+    branches: [ main, master, fix/241695-addCI ]
   pull_request:
-    paths:
-      - 'cordova-sdk/scripts/**'
-      - 'ExampleApp/**'
-      - '**.json'
-      - '**.xml'
-  workflow_dispatch:  # Allow manual triggering
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   test-configurations:
     name: Test Optimove Configurations
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
