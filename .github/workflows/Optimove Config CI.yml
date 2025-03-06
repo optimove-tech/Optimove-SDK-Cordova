@@ -2,9 +2,9 @@ name: Optimove Config CI
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, fix/241695-addCI ]
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
