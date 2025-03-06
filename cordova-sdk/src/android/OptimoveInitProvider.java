@@ -39,7 +39,7 @@ public class OptimoveInitProvider extends ContentProvider {
     private static final String DELAYED_INITIALIZATION_ENABLE_OPTIMOVE = "delayedInitialization.featureSet.enableOptimove";
     private static final String DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE = "delayedInitialization.featureSet.enableOptimobile";
 
-    private static final String SDK_VERSION = "2.2.0";
+    private static final String SDK_VERSION = "2.2.1";
     private static final int RUNTIME_TYPE = 3;
     private static final int SDK_TYPE = 106;
 

@@ -17,7 +17,6 @@ module.exports = function injectOptimoveConfig(context) {
       optimoveConfig.inAppConsentStrategy,
       optimoveConfig.enableDeferredDeepLinking,
       optimoveConfig.delayedInitialization,
-      optimoveConfig.delayedInitialization.featureSet,
       optimoveConfig.android
   );
 
@@ -64,12 +63,12 @@ function isValidConfig(config) {
     console.error("Optimove: optimove.json not a valid JSON object");
     return false;
   }
-  if (
-    (isEmpty(config.optimoveCredentials) ||
+  if (!config.delayedInitialization &&
+    ((isEmpty(config.optimoveCredentials) ||
       !isString(config.optimoveCredentials)) &&
     (isEmpty(config.optimoveMobileCredentials) ||
-      !isString(config.optimoveMobileCredentials))
-  ) {
+      !isString(config.optimoveMobileCredentials))))
+  {
     console.error(
       "Optimove: invalid/missing optimove credentials or optimove mobile credentials entries in optimove.json"
     );
@@ -141,7 +140,6 @@ function createJsonWithDefaultValues(
     inAppConsentStrategy,
     enableDeferredDeepLinking,
     delayedInitialization,
-    featureSet,
     android
 ) {
   return {
@@ -165,8 +163,8 @@ function createJsonWithDefaultValues(
         isString(android.pushNotificationIconName)
             ? android.pushNotificationIconName
             : "",
-    DELAYED_INITIALIZATION_ENABLE_OPTIMOVE: featureSet && featureSet.enableOptimove === true,
-    DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE: featureSet && featureSet.enableOptimobile === true,
+    DELAYED_INITIALIZATION_ENABLE_OPTIMOVE: delayedInitialization?.featureSet && delayedInitialization.featureSet.enableOptimove === true,
+    DELAYED_INITIALIZATION_ENABLE_OPTIMOBILE: delayedInitialization?.featureSet && delayedInitialization.featureSet.enableOptimobile === true,
   };
 }
 
