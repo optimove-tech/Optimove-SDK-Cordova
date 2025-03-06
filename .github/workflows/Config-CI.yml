@@ -1,0 +1,68 @@
+name: Optimove Configuration Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test-configurations:
+    name: Test Optimove Configurations
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Removed the cache option since there's no lock file
+
+      - name: Install Dependencies
+        run: npm install elementtree
+
+      - name: Test Android Configuration
+        run: node test-config.js --android --verbose
+        id: android-test
+        continue-on-error: true
+
+      - name: Test iOS Configuration
+        run: node test-config.js --ios --verbose
+        id: ios-test
+        continue-on-error: true
+
+      - name: Generate Test Report
+        run: |
+          echo "## Optimove Configuration Test Results" >> $GITHUB_STEP_SUMMARY
+          
+          echo "### Android Tests" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.android-test.outcome }}" == "success" ]; then
+            echo "✅ All Android configuration tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Android configuration tests failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "### iOS Tests" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.ios-test.outcome }}" == "success" ]; then
+            echo "✅ All iOS configuration tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ iOS configuration tests failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Overall status
+          if [ "${{ steps.android-test.outcome }}" == "success" ] && [ "${{ steps.ios-test.outcome }}" == "success" ]; then
+            echo "### ✅ All tests passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ❌ One or more tests failed" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Check Test Results
+        run: |
+          if [ "${{ steps.android-test.outcome }}" != "success" ] || [ "${{ steps.ios-test.outcome }}" != "success" ]; then
+            echo "One or more configuration tests failed"
+            exit 1
+          fi
