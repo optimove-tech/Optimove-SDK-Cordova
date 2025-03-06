@@ -68,8 +68,9 @@ jobs:
     
     - name: Create minimal test context for injection
       run: |
-        # Create a simple test directory structure
+        # Create a more complete test directory structure for iOS
         mkdir -p test/platforms/android/app/src/main/res/values
+        mkdir -p test/platforms/ios/TestApp.xcodeproj
         mkdir -p test/platforms/ios/TestApp/Resources
         
         # Create a minimal test context object
@@ -88,11 +89,37 @@ jobs:
         cat > test-inject.js << EOF
         const injectConfig = require('./cordova-sdk/scripts/inject-config.js');
         const context = require('./test-context.js');
+        const fs = require('fs');
+        
+        // Examine the inject-config.js file to understand the error
+        console.log('Examining inject-config.js...');
+        const injectScript = fs.readFileSync('./cordova-sdk/scripts/inject-config.js', 'utf8');
+        
+        // Find the function that's causing the error
+        const prepareIos = injectScript.match(/function prepareIos\([^{]+{[\s\S]+?}/g);
+        if (prepareIos) {
+          console.log('prepareIos function definition:');
+          console.log(prepareIos[0]);
+        }
         
         try {
           // Copy optimove.json to test directory
-          const fs = require('fs');
           fs.copyFileSync('ExampleApp/optimove.json', 'test/optimove.json');
+          
+          // Log the test directory structure
+          console.log('Test directory structure:');
+          function logDir(dir, level = 0) {
+            const files = fs.readdirSync(dir);
+            files.forEach(file => {
+              const path = \`\${dir}/\${file}\`;
+              const stats = fs.statSync(path);
+              console.log(\`\${' '.repeat(level * 2)}\${file}\${stats.isDirectory() ? '/' : ''}\`);
+              if (stats.isDirectory()) {
+                logDir(path, level + 1);
+              }
+            });
+          }
+          logDir('test');
           
           // Run the injection script
           console.log('Running injection script...');
@@ -107,6 +134,10 @@ jobs:
           console.log('Injection script completed successfully');
         } catch (error) {
           console.error('Error running injection script:', error);
+          
+          // Add some debug info about the context
+          console.log('Context object:', JSON.stringify(context, null, 2));
+          
           process.exit(1);
         }
         EOF
