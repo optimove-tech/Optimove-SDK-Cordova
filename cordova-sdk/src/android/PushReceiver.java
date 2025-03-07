@@ -58,6 +58,21 @@ public class PushReceiver extends PushBroadcastReceiver {
         PushReceiver.handlePushOpen(context, pushMessage, null);
     }
 
+    @Override
+    protected Intent getPushOpenActivityIntent(Context context, PushMessage pushMessage) {
+            Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+
+            if (null == launchIntent) {
+                return null;
+            }
+
+            launchIntent.putExtra(PushMessage.EXTRAS_KEY, pushMessage);
+            launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            return launchIntent;
+        }
+
+
     private static void handlePushOpen(Context context, PushMessage pushMessage, String actionId) {
         PushReceiver pr = new PushReceiver();
         Intent launchIntent = pr.getPushOpenActivityIntent(context, pushMessage);
@@ -91,22 +106,6 @@ public class PushReceiver extends PushBroadcastReceiver {
             addDeepLinkExtras(pushMessage, existingIntent);
         }
 
-        if (null != pushMessage.getUrl()) {
-            launchIntent = new Intent(Intent.ACTION_VIEW, pushMessage.getUrl());
-
-            addDeepLinkExtras(pushMessage, launchIntent);
-
-            TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
-            taskStackBuilder.addParentStack(component);
-            taskStackBuilder.addNextIntent(launchIntent);
-            taskStackBuilder.startActivities();
-        } else {
-            launchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-            addDeepLinkExtras(pushMessage, launchIntent);
-
-            context.startActivity(launchIntent);
-        }
 
         if (null == OptimoveSDKPlugin.jsCallbackContext) {
             OptimoveSDKPlugin.pendingPush = pushMessage;
