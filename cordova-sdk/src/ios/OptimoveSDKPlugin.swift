@@ -24,7 +24,7 @@ enum InAppConsentStrategy: String {
     private static var pendingPush: PushNotification? = nil
     private static var pendingDdl: DeepLinkResolution? = nil
 
-    private static let sdkVersion = "2.2.3"
+    private static let sdkVersion = "2.3.0"
     private static let sdkTypeOptimoveCordova = 106
     private static let runtimeTypeCordova = 3
 
